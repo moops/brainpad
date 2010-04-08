@@ -1,0 +1,33 @@
+<p>
+  <b>Name:</b>
+  <%=h @connection.name %>
+</p>
+
+<p>
+  <b>User name:</b>
+  <%=h @connection.user_name %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%=h @connection.password %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%=h @connection.url %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @connection.description %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%=h @connection.person_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_connection_path(@connection) %> |
+<%= link_to 'Back', connections_path %>

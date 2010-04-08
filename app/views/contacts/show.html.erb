@@ -1,0 +1,58 @@
+<p>
+  <b>Name:</b>
+  <%=h @contact.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @contact.email %>
+</p>
+
+<p>
+  <b>Phone home:</b>
+  <%=h @contact.phone_home %>
+</p>
+
+<p>
+  <b>Phone work:</b>
+  <%=h @contact.phone_work %>
+</p>
+
+<p>
+  <b>Phone cell:</b>
+  <%=h @contact.phone_cell %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%=h @contact.address %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%=h @contact.city %>
+</p>
+
+<p>
+  <b>Tags:</b>
+  <%=h @contact.tags %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%=h @contact.comments %>
+</p>
+
+<p>
+  <b>Contact type:</b>
+  <%=h @contact.contact_type %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%=h @contact.person_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_contact_path(@contact) %> |
+<%= link_to 'Back', contacts_path %>

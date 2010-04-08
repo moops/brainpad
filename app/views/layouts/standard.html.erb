@@ -1,0 +1,87 @@
+<%
+@style = "910801"
+@style = session[:style] if session[:style]
+%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
+   "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+    <title>brainpad</title>
+    <%= stylesheet_link_tag 'brainpad','calendar.css', @style %>
+    <%= javascript_include_tag :defaults, 'calendar', 'calendar_setup'%>
+</head>
+
+<body>
+    <div id="header"><%= show_image('/images/headers/' + (Time.now.sec % 13).to_s,700,100) %></div>
+    
+    <div id="navbar">
+        <%= link_to('home',       {:controller => 'link'},                         :class => 'nav' ) %>
+        <%= link_to('contacts',   {:controller => 'contact'},                      :class => 'nav' ) %>
+        <%= link_to('workouts',   {:controller => 'workout',   :action => 'list'}, :class => 'nav' ) %>
+        <%= link_to('money',      {:controller => 'payment'},                      :class => 'nav' ) %>
+        <%= link_to('journal' ,   {:controller => 'journal',   :action => 'list'}, :class => 'nav' ) %>
+        <%= link_to('calendar' ,  {:controller => 'reminder',  :action => 'list'}, :class => 'nav' ) %>
+        <%= link_to('photos' ,  'http://photo.raceweb.ca',   :target => '_blank',  :class => 'nav' ) %>
+        <%= link_to('conn' ,      {:controller => 'connection',:action => 'index'},:class => 'nav' ) %>
+        <%= link_to('milestones', {:controller => 'milestone', :action => 'index'},:class => 'nav' ) %>
+        <div class="clear"></div>
+    </div>
+    
+    <!-- main content -->
+    
+    <div id="content">
+        <%= @content_for_layout %></div>
+    
+    <!-- end main content -->
+    
+    <div id="footer">
+        <div id="styleLinks">
+            <%= link_to(image_tag('910801_link.png', :size => '15x15', :border => 0), :action => 'list', :style => "910801") %>
+            <%= link_to(image_tag('639CCE_link.png', :size => '15x15', :border => 0), :action => 'list', :style => "639ccE") %>
+            <%= link_to(image_tag('677b61_link.png', :size => '15x15', :border => 0), :action => 'list', :style => "677b61") %>
+            <%= link_to(image_tag('ff9933_link.png', :size => '15x15', :border => 0), :action => 'list', :style => "ff9933") %></div>
+        <div id="user">
+            <% if (session[:user_id]) %>
+                logged in as <%= @user.name %>.
+                <%= link_to('log out', :controller => "login", :action => "logout") %>
+                <br/>
+                you've used <%= @user.get_age %> days and have <%= @user.get_days_left %> left.
+            <% end %></div>
+        <div id="copyright">
+            &copy <%= Date.today.year %> raceweb.ca victoria bc<br>
+            all rights reserved<br>
+            email: <a href="mailto:info@raceweb.ca">info@raceweb.ca</a></div>
+    <div class="clear"></div>
+    </div>
+    
+    
+    <div id="search">
+        <form method="get" action="http://www.google.ca/custom" target="_top">
+            <input type="hidden" name="domains" value=""></input>
+            <input type="text" name="q" size="22" maxlength="255" value="" class="text"></input>
+            <input type="hidden" name="client" value="pub-2435759852249095"></input>
+            <input type="hidden" name="forid" value="1"></input>
+            <input type="hidden" name="ie" value="ISO-8859-1"></input>
+            <input type="hidden" name="oe" value="ISO-8859-1"></input>
+            <input type="hidden" name="cof" value="GALT:#0066CC;GL:1;DIV:#999999;VLC:336633;AH:center;BGC:FFFFFF;LBGC:FF9900;ALC:0066CC;LC:0066CC;T:000000;GFNT:666666;GIMP:666666;LH:40;LW:100;L:http://www.raceweb.ca/images/raceweb_logo.gif;S:http://www.raceweb.ca;LP:1;FORID:1;"></input>
+            <input type="hidden" name="hl" value="en"></input>
+            <input type="submit" name="sa" value="google"></input>
+        </form>
+        <form action="http://en.wikipedia.org/wiki/Special:Search" id="searchform">
+            <input id="searchInput" name="search" type="text" accesskey="f" size="22" value="" class="text" />
+            <input type='submit' name="fulltext" class="searchButton" value="wikipedia" />
+        </form>
+        <form name=gs method=GET action=http://www.google.com/custom target="_top">
+            <input type="hidden" name="hl" value="en">
+            <input type="hidden" name="lr" value="">
+            <input type="hidden" name="client" value="google-coop">
+            <input type="hidden" name="cof" value="L:http://vdoogle.com/logo.jpg;LH:30;LP:1;LC:#FF0000;VLC:#663399;GALT:#0000FF;DIV:#000000;AH:left;S:http://www.vdoogle.com;CX:VDoogle%20Shared%20Video%20Search;">
+            <input type="text" name="q" size="22" maxlength="2048" value="" title="Search" class="text">
+            <input type="submit" name="btnG" value="video">
+            <input type="hidden" id="custom" name="cx" value="000107741605447063584:pet3xpnnzve">
+        </form>
+    </div>
+
+</body>
+</html>

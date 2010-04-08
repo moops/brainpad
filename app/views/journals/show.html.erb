@@ -1,0 +1,18 @@
+<p>
+  <b>Entry:</b>
+  <%=h @journal.entry %>
+</p>
+
+<p>
+  <b>Entry on:</b>
+  <%=h @journal.entry_on %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%=h @journal.person_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_journal_path(@journal) %> |
+<%= link_to 'Back', journals_path %>

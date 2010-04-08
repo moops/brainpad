@@ -1,0 +1,47 @@
+#navbar {
+    border:1px solid #f93;
+}
+
+a.nav, a.nav:link, a.nav:visited {
+    color:#f93;
+}
+
+a.nav:hover { 
+    background:#f93;
+    color:#fff;
+}
+
+#content {
+    border:1px solid #f93;
+}
+
+.box {
+    border:1px solid #f93;
+}
+
+.shadedBox {
+    border: 1px solid #f93;
+    background: #ddd;
+    padding: 5px;
+}
+
+a.thumbnail:hover {
+    border: 3px solid #f93;
+}
+
+img.photo {
+    border: 3px solid #f93;
+    padding: 5px;
+}
+
+input.text {
+    border: 1px solid #f93;
+}
+
+select {
+    border: 1px solid #f93;
+}
+
+textarea {
+    border: 1px solid #f93;
+}

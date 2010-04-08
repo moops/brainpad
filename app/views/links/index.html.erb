@@ -1,0 +1,82 @@
+<% if flash[:notice] %>
+    <div class="notice"><%=h flash[:notice] %></div><p/>
+<% end %>
+
+
+<div class="left">
+    <div class="label" style="text-align:left;">most recent</div>
+    <ul class="links">
+    <% for cur_link in @recently_clicked %>
+        <li><%= link_to(cur_link.name[0,15], {:action => "go", :url => cur_link.id}, :title => cur_link.get_description) %></li>
+    <% end %>
+    </ul>
+</div>
+<div class="left">
+    <div class="label" style="text-align:left;">most often</div>
+    <ul class="links">
+    <% for cur_link in @most_often %>
+        <li>(<%=link_to(cur_link.clicks, :action => "edit", :id => cur_link.id) %>)<%=link_to(cur_link.name[0,15], {:action => "go", :url => cur_link.id}, :title => cur_link.get_description) %></li>
+    <% end %>
+    </ul>
+</div>
+
+<div class="left">
+    <div class="label" style="text-align:left;">recently added</div>
+    <ul class="links">
+    <% for cur_link in @recently_added %>
+        <li><%= link_to(cur_link.name[0,15], {:action => "go", :url => cur_link.id}, :title => cur_link.get_description) %></li>
+    <% end %>
+    </ul>
+</div>
+
+<div class="left">
+    <div class="label" style="text-align:left;">random</div>
+    <ul class="links">
+    <% for cur_link in @random %>
+        <li><%= link_to(cur_link.name[0,15], {:action => "go", :url => cur_link.id}, :title => cur_link.get_description) %></li>
+    <% end %>
+    </ul>
+</div>
+
+<div class="left">
+    <div class="label" style="text-align:left;">other stuff</div>
+    <ul class="links">
+    <% if @user.mail_url %>
+        <li><a href="<%=@user.mail_url%>">mail</a></li>
+    <% end %>
+    <% if @user.banking_url %>
+        <li><a href="<%=@user.banking_url%>">banking</a></li>
+    <% end %>
+    <% if @user.map_center %>
+        <li><a href="http://maps.google.ca/maps?ll=<%=@user.map_center%>&spn=0.127157,0.246901&hl=en">maps</a></li>
+    <% end %>
+        <li><a href="http://tvlistings3.zap2it.com/partners/grid.asp?partner_id=097">tv</a></li>
+        <li><a href="javascript:location.href='http://brainpad.raceweb.ca/link/post?url='+encodeURIComponent(location.href)+'&name='+encodeURIComponent(document.title)">poster</a></li>
+        <li><%= link_to('reports', {:controller => 'report', :action => 'index'}) %></li>
+    </ul>
+</div>
+
+<div class="digg_box">
+    <script language="JavaScript" src="http://digg.com/tools/diggjs/front/all/3" type="text/javascript"></script>
+    
+</div>
+
+<div style="clear: left;"></div>
+
+<div>
+    <span class="label" style="text-align:left;">tags</span>
+    <%= link_to('refresh', :action => "refresh_tags") %> |
+    <%= link_to('edit links', :action => "list") %> |
+    <%= link_to('find links', :action => "find") %> |
+    <%= link_to('clean', :action => "clean") %><br/>
+
+    <% for cur_tag in session[:tags] %>
+        
+        <%= link_to_remote(cur_tag,
+                         :url => {:controller => "link", :action => "tag_link_list", :tag => cur_tag}, 
+                         :update => "link_list",
+                         :method => :get) %>,
+    <% end %><p/>
+
+    <div  id="link_list"></div>
+</div>

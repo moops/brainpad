@@ -1,0 +1,38 @@
+<p>
+  <b>Description:</b>
+  <%=h @payment.description %>
+</p>
+
+<p>
+  <b>Tags:</b>
+  <%=h @payment.tags %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%=h @payment.amount %>
+</p>
+
+<p>
+  <b>Payment on:</b>
+  <%=h @payment.payment_on %>
+</p>
+
+<p>
+  <b>Account:</b>
+  <%=h @payment.account_id %>
+</p>
+
+<p>
+  <b>Transfer from:</b>
+  <%=h @payment.transfer_from %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%=h @payment.person_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_payment_path(@payment) %> |
+<%= link_to 'Back', payments_path %>

@@ -1,0 +1,354 @@
+a           { color: #3333ff; text-decoration: none; font-family: verdana; }
+a:visited   { color: #3333ff; text-decoration: none; font-family: verdana; }
+a:active    { color: #3333ff; text-decoration: none; font-family: verdana; }
+a:hover     { color: #3333ff; text-decoration: underline; font-family: verdana; }
+
+body {
+    font-size: 66%;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;  
+    color: #333;
+    background: #fff url(/images/grgrad.gif) repeat-x;
+}
+
+th { 
+    font-weight: bold;
+    text-align: left;
+}
+
+td {
+    text-align: left;
+}
+
+ul {
+    margin: 4px 0px;
+}
+
+textarea, input, select {
+    font-family: Verdana,Helvetica,Arial,sans-serif;
+    font-size: 1em;
+}
+
+#header {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+    width: 700px;
+}
+
+#navbar {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0px;
+    width: 680px;
+    padding: 0px 5px 0px 5px;
+    border: 1px solid #333;
+    -moz-border-radius: 8px;
+}
+
+a.nav, a.nav:link, a.nav:visited {
+    padding: 0px 5px 0px 5px; 
+    height:25px;
+    background:#fff;
+    color: #333;
+    margin-right: 2px; 
+    text-align: center;
+    line-height: 25px; 
+    overflow: hidden;
+    float: left;
+    font-weight: bold;
+}
+
+a.nav:hover {
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff; 
+    background: #eee;
+}
+
+#content {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+
+    width: 700px;
+    -moz-border-radius: 8px
+}
+
+.form {
+    background: #f6f6f6;
+    border: 1px solid #999;
+    padding: 5px 5px 0px 5px;
+    -moz-border-radius: 8px
+}
+
+#footer {
+    font-size: .9em;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+    background: #fff;
+    width: 680px;
+    border: 1px solid #333;
+    -moz-border-radius: 8px;
+    padding: 5px;
+}
+
+#errors li { 
+    font-weight: bold;
+    color: #930;
+    text-align: center;
+}
+
+.notice {  
+    font-weight: bold;
+    color: #930;
+    text-align: center;
+}
+
+.label { 
+    font-weight: bold;
+    color: #666;
+    text-align: right;
+}
+
+.left_label { 
+    font-weight: bold;
+    color: #666;
+}
+
+.labelAbove { 
+    font-weight: bold;
+    color: #333;
+}
+
+.links a {
+    line-height: 140%;
+}
+
+.links {
+    list-style-type: circle;
+    padding-left: 1em;
+    margin-left: 1em;
+}
+
+.dataOn {
+    background-color: #ddd;
+    text-align: center;
+}
+
+.dataOff {
+    background-color: #fff;
+    text-align: center;
+}
+
+.submit {
+    text-align: right;
+}
+.submit input {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#styleLinks {
+    margin-right: 15px;
+    float: left;
+}
+
+#user {
+    float: left;
+} 
+
+#search {
+    font-size: .9em;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5px;
+    background: #fff;
+    width: 700px;
+    text-align: center;
+}
+
+#search form {
+    margin: 2px;
+    display: inline;
+}
+
+#copyright {
+    width: 25%;
+    float: right;
+    text-align: right;
+}
+
+.searchResult {
+}
+
+.reportTable {
+}
+
+.fieldWithErrors input, .fieldWithErrors select {
+    background-color: #ff9;
+}
+
+.overdue {  
+    font-weight: bold;
+    color: #666;
+}
+
+.due {  
+    font-weight: bold;
+    color: #390;
+}
+
+a.thumbnail {
+    float: left;
+    width: 60px;
+    border: 3px solid #eee;
+    margin: 0 15px 15px 0;
+    padding: 5px;
+}
+
+img.photo {
+    border: 3px solid #eee;
+    padding: 5px;
+}
+
+.left {
+    float: left;
+    padding: 1px;
+}
+
+.right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.digg_box {
+    background: #f6f6f6;
+    border: 1px solid #999;
+    -moz-border-radius: 8px;
+    float: left;
+    padding: 1px;
+    margin-left: 4px;
+    width: 57%;
+}
+
+.digg_box ul {
+     padding: 0em 0em 0em 2em;
+     list-style-type: circle;
+}
+
+.summary_data {
+    color: #666;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+#money_summary {
+    margin-bottom: 20px;
+}
+
+#money_left {
+    width: 25%;
+    float: left;
+}
+
+#money_accounts {
+}
+
+#money_by_tag {
+    margin-top:10px;
+}
+
+#money_scheduled {
+    margin-top: 5px;
+}
+
+#money_payment_form {
+
+}
+
+#money_payment_form div.field {
+    float: left;
+    padding-right: 10px; 
+}
+
+#money_upcoming {
+    width: 73%;
+    float: right;
+}
+
+#money_payments {
+    margin-top: 10px;
+    width: 73%;
+    float: right;
+}
+
+.box {
+    border: 1px solid #bbb;
+}
+
+.box_header {
+    border-bottom: 1px solid #bbb;
+    background: #ddd;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 5px;
+}
+
+.box_content {
+    padding: 5px;
+}
+
+.box_buttons {
+    padding: 5px;
+    text-align: right;
+}
+
+.shaded_box {
+    border: 1px solid #bbb;
+    padding: 5px;
+    background: #ddd;
+}
+
+img.calIcon {
+	position: absolute;
+	cursor: pointer;
+}
+
+input.text {
+    height: 1.5em;
+    font-size: 1.2em;
+    color: #666;
+}
+
+select {
+    height: 1.8em;
+    font-size: 1.2em; 
+    color: #666;
+}
+
+.deposit_amount {
+    font-weight: bold;
+}
+
+.expense_amount {
+}
+
+.transfer_amount {
+    font-style: italic;
+}
+
+.milestone_time { 
+  border: 0px;
+  font-size: 30px;
+  background: #fff;
+}
+
+
+

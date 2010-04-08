@@ -1,0 +1,43 @@
+<p>
+  <b>Description:</b>
+  <%=h @reminder.description %>
+</p>
+
+<p>
+  <b>Done:</b>
+  <%=h @reminder.done %>
+</p>
+
+<p>
+  <b>Priority:</b>
+  <%=h @reminder.priority %>
+</p>
+
+<p>
+  <b>Reminder type:</b>
+  <%=h @reminder.reminder_type %>
+</p>
+
+<p>
+  <b>Interval:</b>
+  <%=h @reminder.interval %>
+</p>
+
+<p>
+  <b>Repeat until:</b>
+  <%=h @reminder.repeat_until %>
+</p>
+
+<p>
+  <b>Due:</b>
+  <%=h @reminder.due %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%=h @reminder.person_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_reminder_path(@reminder) %> |
+<%= link_to 'Back', reminders_path %>

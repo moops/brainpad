@@ -1,0 +1,58 @@
+<p>
+  <b>Location:</b>
+  <%=h @workout.location %>
+</p>
+
+<p>
+  <b>Race:</b>
+  <%=h @workout.race %>
+</p>
+
+<p>
+  <b>Route:</b>
+  <%=h @workout.route %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @workout.description %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%=h @workout.duration %>
+</p>
+
+<p>
+  <b>Intensity:</b>
+  <%=h @workout.intensity %>
+</p>
+
+<p>
+  <b>Weight:</b>
+  <%=h @workout.weight %>
+</p>
+
+<p>
+  <b>Distance:</b>
+  <%=h @workout.distance %>
+</p>
+
+<p>
+  <b>Workout type:</b>
+  <%=h @workout.workout_type %>
+</p>
+
+<p>
+  <b>Workout on:</b>
+  <%=h @workout.workout_on %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%=h @workout.person_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_workout_path(@workout) %> |
+<%= link_to 'Back', workouts_path %>

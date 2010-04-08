@@ -1,0 +1,164 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  url: pih.bc.ca/chat/
+  name: pih
+  tags: run
+  comments: local running club
+  clicks: 11
+  last_clicked: 2010-04-08 11:15:47
+
+two:
+  url: www.cyclingnews.com
+  name: cycling news
+  tags: bike
+  comments: all cycling news all the time
+  clicks: 22
+  last_clicked: 2010-04-08 11:26:55
+  
+three:
+  url: www.lifehacker.com
+  name: lifehacker
+  tags: 
+  comments: software and other life hacks
+  clicks: 31
+  last_clicked: 2010-04-08 10:07:00
+  
+four:
+  url: www.cbc.ca
+  name: cbc
+  tags: news
+  comments: national tv and radio network
+  clicks: 39
+  last_clicked: 2010-04-08 08:50:00
+  
+five:
+  url: www.globeandmail.com
+  name: globe and mail
+  tags: news
+  comments: national and financial news
+  clicks: 67
+  last_clicked: 2010-04-08 10:45:15
+  
+six:
+  url: www.imdb.com
+  name: imdb
+  tags: movies
+  comments: everything about every movie
+  clicks: 92
+  last_clicked: 2010-04-08 11:57:00
+  
+seven:
+  url: www.ctv.ca/news
+  name: ctv
+  tags: news
+  comments: the other national news
+  clicks: 94
+  last_clicked: 2010-04-08 10:17:59
+  
+eight:
+  url: www.mountwashington.ca/en/conditions.html?page=alpine_snow_report
+  name: snow report
+  tags: ski
+  comments: mt washington conditions
+  clicks: 99
+  last_clicked: 2010-04-08 09:55:38
+  
+nine:
+  url: www.mytelus.com/movies/theatres.do?prov=BC
+  name: mybc theaters
+  tags: movies
+  comments: what's playing at the theaters
+  clicks: 113
+  last_clicked: 2010-04-08 09:21:44
+  
+ten:
+  url: www.velonews.com
+  name: velo news
+  tags: bike
+  comments: cycling news
+  clicks: 135
+  last_clicked: 2010-04-08 09:59:44
+  
+eleven:
+  url: www.websudoku.com
+  name: web sudoku
+  tags: puzzles
+  comments: online and printable sudoku
+  clicks: 119
+  last_clicked: 2010-04-08 11:21:15
+  
+twelve:
+  url: rubyonrails.org
+  name: ruby on rails
+  tags: rails ruby programming
+  comments: web development framework
+  clicks: 167
+  last_clicked: 2010-04-08 11:02:57
+  
+thirteen:
+  url: www.tsn.ca
+  name: tsn
+  tags: sports
+  comments: sports news
+  clicks: 167
+  last_clicked: 2010-04-08 12:02:51
+  
+fourteen:
+  url: www.canadiancyclist.com
+  name: canadian cyclist
+  tags: bike
+  comments: canadian cycling news
+  clicks: 185
+  last_clicked: 2010-04-07 12:42:51
+  
+fifteen:
+  url: www.onjava.com
+  name: onjava
+  tags: java programming
+  comments: java related articles
+  clicks: 201
+  last_clicked: 2010-04-07 05:11:51
+  
+sixteen:
+  url: www.axiis.org
+  name: axiis
+  tags: flex programming datavis
+  comments: data visualization framework built on degrafa
+  clicks: 288
+  last_clicked: 2010-04-08 12:30:51
+  
+sixteen:
+  url: www.accvi.ca
+  name: alpine club vi
+  tags: hike
+  comments: climbing and hiking club
+  clicks: 314
+  last_clicked: 2010-04-08 06:55:37
+  
+seventeen:
+  url: members.shaw.ca/beyondnootka
+  name: beyond nootka
+  tags: hike
+  comments: history of vancouver island mountains
+  clicks: 359
+  last_clicked: 2010-04-05 10:55:37
+  
+eighteen:
+  url: www.degrafa.org
+  name: degrafa
+  tags: flex programming datavis
+  comments: flex graphics framework
+  clicks: 371
+  last_clicked: 2010-04-06 10:22:33
+  
+nineteen:
+  url: islandhikes.com
+  name: island hikes
+  tags: hike
+  comments: route info for local climbs
+  clicks: 389
+  last_clicked: 2010-04-06 11:48:19
+  
+  
+  

@@ -1,0 +1,1037 @@
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (24.0ms)[0m   [0mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (22.0ms)[0m   [0;1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;35;1mSQL (3.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateLinks (20100408182247)
+  [4;35;1mSQL (11.0ms)[0m   [0mCREATE TABLE `links` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `url` varchar(255), `name` varchar(255), `tags` varchar(255), `comments` varchar(255), `clicks` int(11), `lastClicked` datetime, `expiresOn` datetime, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408182247')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `links`[0m
+  [4;36;1mSQL (10.0ms)[0m   [0;1mSHOW KEYS FROM `links`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateLinks (20100408182247)
+Migrating to CreatePeople (20100408190021)
+  [4;36;1mSQL (30.0ms)[0m   [0;1mCREATE TABLE `people` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `user_name` varchar(255), `password` varchar(255), `mail_url` varchar(255), `banking_url` varchar(255), `map_center` varchar(255), `authority` int(11), `birth_on` date, `last_login_on` datetime, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100408190021')[0m
+Migrating to CreateAccounts (20100408190543)
+  [4;36;1mSQL (6.0ms)[0m   [0;1mCREATE TABLE `accounts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `url` varchar(255), `price_url` varchar(255), `description` varchar(255), `account_type` int(11), `units` float, `price` float, `active` tinyint(1), `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100408190543')[0m
+Migrating to CreatePayments (20100408191558)
+  [4;36;1mSQL (9.0ms)[0m   [0;1mCREATE TABLE `payments` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `description` varchar(255), `tags` varchar(255), `amount` float, `payment_on` date, `account_id` int(11), `transfer_from` int(11), `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100408191558')[0m
+Migrating to CreateConnections (20100408191929)
+  [4;36;1mSQL (19.0ms)[0m   [0;1mCREATE TABLE `connections` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `user_name` varchar(255), `password` varchar(255), `url` varchar(255), `description` text, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100408191929')[0m
+Migrating to CreateContacts (20100408192223)
+  [4;36;1mSQL (4.0ms)[0m   [0;1mCREATE TABLE `contacts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `email` varchar(255), `phone_home` varchar(255), `phone_work` varchar(255), `phone_cell` varchar(255), `address` varchar(255), `city` varchar(255), `tags` varchar(255), `comments` text, `contact_type` int(11), `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100408192223')[0m
+Migrating to CreateJournals (20100408192419)
+  [4;36;1mSQL (17.0ms)[0m   [0;1mCREATE TABLE `journals` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `entry` text, `entry_on` date, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100408192419')[0m
+Migrating to CreateReminders (20100408193240)
+  [4;36;1mSQL (16.0ms)[0m   [0;1mCREATE TABLE `reminders` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `description` text, `done` tinyint(1), `priority` int(11), `reminder_type` int(11), `interval` int(11), `repeat_until` date, `due` date, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100408193240')[0m
+Migrating to CreateWorkouts (20100408193716)
+  [4;36;1mSQL (5.0ms)[0m   [0;1mCREATE TABLE `workouts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `location` varchar(255), `race` varchar(255), `route` varchar(255), `description` text, `duration` int(11), `intensity` int(11), `weight` int(11), `distance` float, `workout_type` int(11), `workout_on` date, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100408193716')[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (3.0ms)[0m   [0mSHOW FIELDS FROM `accounts`[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mdescribe `accounts`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW KEYS FROM `accounts`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `connections`[0m
+  [4;35;1mSQL (5.0ms)[0m   [0mdescribe `connections`[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mSHOW KEYS FROM `connections`[0m
+  [4;35;1mSQL (3.0ms)[0m   [0mSHOW FIELDS FROM `contacts`[0m
+  [4;36;1mSQL (5.0ms)[0m   [0;1mdescribe `contacts`[0m
+  [4;35;1mSQL (3.0ms)[0m   [0mSHOW KEYS FROM `contacts`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `journals`[0m
+  [4;35;1mSQL (13.0ms)[0m   [0mdescribe `journals`[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mSHOW KEYS FROM `journals`[0m
+  [4;35;1mSQL (18.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mdescribe `links`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW KEYS FROM `links`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `payments`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `payments`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW KEYS FROM `payments`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mdescribe `people`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW KEYS FROM `people`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `reminders`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `reminders`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW KEYS FROM `reminders`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `workouts`[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mdescribe `workouts`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW KEYS FROM `workouts`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (9.0ms)[0m   [0;1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateLinks (20100408182247)
+  [4;35;1mSQL (4.0ms)[0m   [0mCREATE TABLE `links` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `url` varchar(255), `name` varchar(255), `tags` varchar(255), `comments` varchar(255), `clicks` int(11), `last_clicked` datetime, `expires_on` datetime, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408182247')[0m
+Migrating to CreatePeople (20100408190021)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `people` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `user_name` varchar(255), `password` varchar(255), `mail_url` varchar(255), `banking_url` varchar(255), `map_center` varchar(255), `authority` int(11), `birth_on` date, `last_login_on` datetime, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408190021')[0m
+Migrating to CreateAccounts (20100408190543)
+  [4;35;1mSQL (20.0ms)[0m   [0mCREATE TABLE `accounts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `url` varchar(255), `price_url` varchar(255), `description` varchar(255), `account_type` int(11), `units` float, `price` float, `active` tinyint(1), `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408190543')[0m
+Migrating to CreatePayments (20100408191558)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `payments` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `description` varchar(255), `tags` varchar(255), `amount` float, `payment_on` date, `account_id` int(11), `transfer_from` int(11), `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408191558')[0m
+Migrating to CreateConnections (20100408191929)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `connections` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `user_name` varchar(255), `password` varchar(255), `url` varchar(255), `description` text, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408191929')[0m
+Migrating to CreateContacts (20100408192223)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `contacts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `email` varchar(255), `phone_home` varchar(255), `phone_work` varchar(255), `phone_cell` varchar(255), `address` varchar(255), `city` varchar(255), `tags` varchar(255), `comments` text, `contact_type` int(11), `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408192223')[0m
+Migrating to CreateJournals (20100408192419)
+  [4;35;1mSQL (4.0ms)[0m   [0mCREATE TABLE `journals` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `entry` text, `entry_on` date, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408192419')[0m
+Migrating to CreateReminders (20100408193240)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `reminders` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `description` text, `done` tinyint(1), `priority` int(11), `reminder_type` int(11), `interval` int(11), `repeat_until` date, `due` date, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408193240')[0m
+Migrating to CreateWorkouts (20100408193716)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `workouts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `location` varchar(255), `race` varchar(255), `route` varchar(255), `description` text, `duration` int(11), `intensity` int(11), `weight` int(11), `distance` float, `workout_type` int(11), `workout_on` date, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408193716')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mSHOW FIELDS FROM `accounts`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `accounts`[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW KEYS FROM `accounts`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `connections`[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mdescribe `connections`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW KEYS FROM `connections`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `contacts`[0m
+  [4;35;1mSQL (3.0ms)[0m   [0mdescribe `contacts`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW KEYS FROM `contacts`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `journals`[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mdescribe `journals`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW KEYS FROM `journals`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `links`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW KEYS FROM `links`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `payments`[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mdescribe `payments`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW KEYS FROM `payments`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `people`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW KEYS FROM `people`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `reminders`[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mdescribe `reminders`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW KEYS FROM `reminders`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `workouts`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `workouts`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW KEYS FROM `workouts`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-08 14:46:22) [GET]
+
+ActionController::RoutingError (No route matches "/images/rails.png" with {:method=>:get}):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-08 14:46:51) [GET]
+
+NameError (uninitialized constant LinkController):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (39.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-08 14:49:50) [GET]
+
+NameError (uninitialized constant LinkController):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (39.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-08 15:21:15) [GET]
+
+NameError (uninitialized constant LinkController):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (67.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 15:24:15) [GET]
+Redirected to http://localhost:3000/login
+Filter chain halted as [:authenticate] rendered_or_redirected.
+Completed in 1713ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#index (for 127.0.0.1 at 2010-04-08 15:24:18) [GET]
+
+ActionView::MissingTemplate (Missing layout layouts/standard.erb in view path app/views):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#index (for 127.0.0.1 at 2010-04-08 15:25:19) [GET]
+Rendering template within layouts/standard
+Rendering login/index
+
+ActionView::TemplateError (undefined method `show_image' for #<ActionView::Base:0x480b900>) on line #16 of app/views/layouts/standard.erb:
+13: </head>
+14: 
+15: <body>
+16:     <div id="header"><%= show_image('/images/headers/' + (Time.now.sec % 13).to_s,700,100) %></div>
+17:     
+18:     <div id="navbar">
+19:         <%= link_to('home',       {:controller => 'link'},                         :class => 'nav' ) %>
+
+    app/views/layouts/standard.erb:16
+    <internal:prelude>:8:in `synchronize'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (60.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#index (for 127.0.0.1 at 2010-04-08 15:26:00) [GET]
+
+ActionView::MissingTemplate (Missing layout layouts/standard.html in view path app/views):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#index (for 127.0.0.1 at 2010-04-08 15:26:28) [GET]
+Rendering template within layouts/standard
+Rendering login/index
+
+ActionView::TemplateError (undefined method `show_image' for #<ActionView::Base:0x4c34d20>) on line #16 of app/views/layouts/standard.html.erb:
+13: </head>
+14: 
+15: <body>
+16:     <div id="header"><%= show_image('/images/headers/' + (Time.now.sec % 13).to_s,700,100) %></div>
+17:     
+18:     <div id="navbar">
+19:         <%= link_to('home',       {:controller => 'link'},                         :class => 'nav' ) %>
+
+    app/views/layouts/standard.html.erb:16
+    <internal:prelude>:8:in `synchronize'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (59.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#index (for 127.0.0.1 at 2010-04-08 15:32:01) [GET]
+Rendering template within layouts/standard
+Rendering login/index
+Completed in 9ms (View: 7, DB: 0) | 200 OK [http://localhost/login]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#authenticate (for 127.0.0.1 at 2010-04-08 15:32:13) [POST]
+  Parameters: {"authenticity_token"=>"VvTRwXWilP//JkHBfr7Pt7H1zYso2fCyRJOsY329OU4=", "person"=>{"user_name"=>"adam", "password"=>"adam"}, "commit"=>"login"}
+  [4;36;1mPerson Load (1.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (user_name = 'adam' and password = 'adam') LIMIT 1[0m
+@user: nil
+Redirected to http://localhost:3000/login
+Completed in 109ms (DB: 1) | 302 Found [http://localhost/login/authenticate]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#index (for 127.0.0.1 at 2010-04-08 15:32:13) [GET]
+Rendering template within layouts/standard
+Rendering login/index
+Completed in 7ms (View: 6, DB: 0) | 200 OK [http://localhost/login]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+WARNING: Can't mass-assign these protected attributes: id
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+WARNING: Can't mass-assign these protected attributes: id
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+WARNING: Can't mass-assign these protected attributes: id
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPerson Create (0.0ms)[0m   [0;1mINSERT INTO `people` (`name`, `user_name`, `password`, `mail_url`, `banking_url`, `map_center`, `authority`, `birth_on`, `last_login_on`, `created_at`, `updated_at`) VALUES('Adam Lawrence', 'adam', 'adam', 'http://mail.google.com/mail', NULL, NULL, 1, '1969-07-09', NULL, '2010-04-08 22:39:05', '2010-04-08 22:39:05')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mPerson Columns (0.0ms)[0m   [0;1mMysql::Error: Table 'brainpad_development.people' doesn't exist: SHOW FIELDS FROM `people`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (32.0ms)[0m   [0;1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateLinks (20100408182247)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `links` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `url` varchar(255), `name` varchar(255), `tags` varchar(255), `comments` varchar(255), `clicks` int(11), `last_clicked` datetime, `expires_on` datetime, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408182247')[0m
+Migrating to CreatePeople (20100408190021)
+  [4;35;1mSQL (4.0ms)[0m   [0mCREATE TABLE `people` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `user_name` varchar(255), `password` varchar(255), `mail_url` varchar(255), `banking_url` varchar(255), `map_center` varchar(255), `authority` int(11), `birth_on` date, `last_login_on` datetime, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408190021')[0m
+Migrating to CreateAccounts (20100408190543)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `accounts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `url` varchar(255), `price_url` varchar(255), `description` varchar(255), `account_type` int(11), `units` float, `price` float, `active` tinyint(1), `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408190543')[0m
+Migrating to CreatePayments (20100408191558)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `payments` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `description` varchar(255), `tags` varchar(255), `amount` float, `payment_on` date, `account_id` int(11), `transfer_from` int(11), `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408191558')[0m
+Migrating to CreateConnections (20100408191929)
+  [4;35;1mSQL (12.0ms)[0m   [0mCREATE TABLE `connections` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `user_name` varchar(255), `password` varchar(255), `url` varchar(255), `description` text, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408191929')[0m
+Migrating to CreateContacts (20100408192223)
+  [4;35;1mSQL (6.0ms)[0m   [0mCREATE TABLE `contacts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `email` varchar(255), `phone_home` varchar(255), `phone_work` varchar(255), `phone_cell` varchar(255), `address` varchar(255), `city` varchar(255), `tags` varchar(255), `comments` text, `contact_type` int(11), `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408192223')[0m
+Migrating to CreateJournals (20100408192419)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `journals` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `entry` text, `entry_on` date, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408192419')[0m
+Migrating to CreateReminders (20100408193240)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `reminders` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `description` text, `done` tinyint(1), `priority` int(11), `reminder_type` int(11), `interval` int(11), `repeat_until` date, `due` date, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408193240')[0m
+Migrating to CreateWorkouts (20100408193716)
+  [4;35;1mSQL (7.0ms)[0m   [0mCREATE TABLE `workouts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `location` varchar(255), `race` varchar(255), `route` varchar(255), `description` text, `duration` int(11), `intensity` int(11), `weight` int(11), `distance` float, `workout_type` int(11), `workout_on` date, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408193716')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mSHOW FIELDS FROM `accounts`[0m
+  [4;35;1mSQL (5.0ms)[0m   [0mdescribe `accounts`[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW KEYS FROM `accounts`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `connections`[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mdescribe `connections`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW KEYS FROM `connections`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `contacts`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `contacts`[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW KEYS FROM `contacts`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `journals`[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mdescribe `journals`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW KEYS FROM `journals`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `links`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW KEYS FROM `links`[0m
+  [4;35;1mSQL (3.0ms)[0m   [0mSHOW FIELDS FROM `payments`[0m
+  [4;36;1mSQL (7.0ms)[0m   [0;1mdescribe `payments`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW KEYS FROM `payments`[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `people`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW KEYS FROM `people`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `reminders`[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mdescribe `reminders`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW KEYS FROM `reminders`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `workouts`[0m
+  [4;35;1mSQL (3.0ms)[0m   [0mdescribe `workouts`[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW KEYS FROM `workouts`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mPerson Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+WARNING: Can't mass-assign these protected attributes: id
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPerson Create (0.0ms)[0m   [0;1mINSERT INTO `people` (`name`, `user_name`, `password`, `mail_url`, `banking_url`, `map_center`, `authority`, `birth_on`, `last_login_on`, `created_at`, `updated_at`) VALUES('Adam Lawrence', 'adam', 'adam', 'http://mail.google.com/mail', NULL, NULL, 1, '1969-07-09', NULL, '2010-04-08 22:42:07', '2010-04-08 22:42:07')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+WARNING: Can't mass-assign these protected attributes: id
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPerson Create (1.0ms)[0m   [0;1mINSERT INTO `people` (`name`, `user_name`, `password`, `mail_url`, `banking_url`, `map_center`, `authority`, `birth_on`, `last_login_on`, `created_at`, `updated_at`) VALUES('Adam Lawrence', 'adam', 'adam', 'http://mail.google.com/mail', NULL, NULL, 1, '1969-07-09', NULL, '2010-04-08 22:43:32', '2010-04-08 22:43:32')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (12.0ms)[0m   [0mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (9.0ms)[0m   [0;1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateLinks (20100408182247)
+  [4;35;1mSQL (17.0ms)[0m   [0mCREATE TABLE `links` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `url` varchar(255), `name` varchar(255), `tags` varchar(255), `comments` varchar(255), `clicks` int(11), `last_clicked` datetime, `expires_on` datetime, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408182247')[0m
+Migrating to CreatePeople (20100408190021)
+  [4;35;1mSQL (18.0ms)[0m   [0mCREATE TABLE `people` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `user_name` varchar(255), `password` varchar(255), `mail_url` varchar(255), `banking_url` varchar(255), `map_center` varchar(255), `authority` int(11), `birth_on` date, `last_login_on` datetime, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408190021')[0m
+Migrating to CreateAccounts (20100408190543)
+  [4;35;1mSQL (19.0ms)[0m   [0mCREATE TABLE `accounts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `url` varchar(255), `price_url` varchar(255), `description` varchar(255), `account_type` int(11), `units` float, `price` float, `active` tinyint(1), `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408190543')[0m
+Migrating to CreatePayments (20100408191558)
+  [4;35;1mSQL (4.0ms)[0m   [0mCREATE TABLE `payments` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `description` varchar(255), `tags` varchar(255), `amount` float, `payment_on` date, `account_id` int(11), `transfer_from` int(11), `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408191558')[0m
+Migrating to CreateConnections (20100408191929)
+  [4;35;1mSQL (11.0ms)[0m   [0mCREATE TABLE `connections` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `user_name` varchar(255), `password` varchar(255), `url` varchar(255), `description` text, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408191929')[0m
+Migrating to CreateContacts (20100408192223)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `contacts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `email` varchar(255), `phone_home` varchar(255), `phone_work` varchar(255), `phone_cell` varchar(255), `address` varchar(255), `city` varchar(255), `tags` varchar(255), `comments` text, `contact_type` int(11), `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408192223')[0m
+Migrating to CreateJournals (20100408192419)
+  [4;35;1mSQL (6.0ms)[0m   [0mCREATE TABLE `journals` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `entry` text, `entry_on` date, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408192419')[0m
+Migrating to CreateReminders (20100408193240)
+  [4;35;1mSQL (4.0ms)[0m   [0mCREATE TABLE `reminders` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `description` text, `done` tinyint(1), `priority` int(11), `reminder_type` int(11), `interval` int(11), `repeat_until` date, `due` date, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408193240')[0m
+Migrating to CreateWorkouts (20100408193716)
+  [4;35;1mSQL (5.0ms)[0m   [0mCREATE TABLE `workouts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `location` varchar(255), `race` varchar(255), `route` varchar(255), `description` text, `duration` int(11), `intensity` int(11), `weight` int(11), `distance` float, `workout_type` int(11), `workout_on` date, `person_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100408193716')[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mSHOW FIELDS FROM `accounts`[0m
+  [4;35;1mSQL (3.0ms)[0m   [0mdescribe `accounts`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSHOW KEYS FROM `accounts`[0m
+  [4;35;1mSQL (3.0ms)[0m   [0mSHOW FIELDS FROM `connections`[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mdescribe `connections`[0m
+  [4;35;1mSQL (3.0ms)[0m   [0mSHOW KEYS FROM `connections`[0m
+  [4;36;1mSQL (5.0ms)[0m   [0;1mSHOW FIELDS FROM `contacts`[0m
+  [4;35;1mSQL (6.0ms)[0m   [0mdescribe `contacts`[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mSHOW KEYS FROM `contacts`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `journals`[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mdescribe `journals`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW KEYS FROM `journals`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `links`[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW KEYS FROM `links`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `payments`[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mdescribe `payments`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW KEYS FROM `payments`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `people`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW KEYS FROM `people`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW FIELDS FROM `reminders`[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mdescribe `reminders`[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mSHOW KEYS FROM `reminders`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW FIELDS FROM `workouts`[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mdescribe `workouts`[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSHOW KEYS FROM `workouts`[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+WARNING: Can't mass-assign these protected attributes: id
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mPerson Create (0.0ms)[0m   [0;1mINSERT INTO `people` (`name`, `user_name`, `password`, `mail_url`, `banking_url`, `map_center`, `authority`, `birth_on`, `last_login_on`, `created_at`, `updated_at`) VALUES('Adam Lawrence', 'adam', 'adam', 'http://mail.google.com/mail', NULL, NULL, 1, '1969-07-09', NULL, '2010-04-08 22:45:07', '2010-04-08 22:45:07')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#index (for 127.0.0.1 at 2010-04-08 15:47:12) [GET]
+Rendering template within layouts/standard
+Rendering login/index
+Completed in 71ms (View: 70, DB: 0) | 200 OK [http://localhost/login]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#authenticate (for 127.0.0.1 at 2010-04-08 15:47:21) [POST]
+  Parameters: {"authenticity_token"=>"VvTRwXWilP//JkHBfr7Pt7H1zYso2fCyRJOsY329OU4=", "person"=>{"user_name"=>"adam", "password"=>"adam"}, "commit"=>"login"}
+  [4;36;1mPerson Load (1.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (user_name = 'adam' and password = 'adam') LIMIT 1[0m
+  [4;35;1mPerson Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+@user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+Redirected to http://localhost:3000/
+Completed in 51ms (DB: 4) | 302 Found [http://localhost/login/authenticate]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 15:47:21) [GET]
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (2.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+session tag list is empty
+
+NameError (undefined local variable or method `getUniqueTags' for #<LinksController:0x4327180>):
+  app/controllers/links_controller.rb:12:in `index'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (46.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 15:55:44) [GET]
+  [4;35;1mPerson Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (3.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+session tag list is empty
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mselect * from links where person_id = 1[0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mMysql::Error: Unknown column 'created_on' in 'order clause': SELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_on desc LIMIT 8[0m
+
+ActiveRecord::StatementInvalid (Mysql::Error: Unknown column 'created_on' in 'order clause': SELECT * FROM `links` WHERE (person_id = 1)  ORDER BY created_on desc LIMIT 8):
+  app/controllers/links_controller.rb:16:in `index'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (54.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 15:57:07) [GET]
+  [4;35;1mPerson Columns (15.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (2.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;35;1mLink Load (23.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.each) on line #14 of app/views/links/index.html.erb:
+11:     <th>Expireson</th>
+12:   </tr>
+13: 
+14: <% @links.each do |link| %>
+15:   <tr>
+16:     <td><%=h link.url %></td>
+17:     <td><%=h link.name %></td>
+
+    app/views/links/index.html.erb:14
+    app/controllers/links_controller.rb:20:in `index'
+    <internal:prelude>:8:in `synchronize'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (93.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 15:59:41) [GET]
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (2.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.each) on line #14 of app/views/links/index.html.erb:
+11:     <th>Expireson</th>
+12:   </tr>
+13: 
+14: <% @links.each do |link| %>
+15:   <tr>
+16:     <td><%=h link.url %></td>
+17:     <td><%=h link.name %></td>
+
+    app/views/links/index.html.erb:14
+    app/controllers/links_controller.rb:20:in `index'
+    <internal:prelude>:8:in `synchronize'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (65.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 15:59:49) [GET]
+  [4;35;1mPerson Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (2.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.each) on line #14 of app/views/links/index.html.erb:
+11:     <th>Expireson</th>
+12:   </tr>
+13: 
+14: <% @links.each do |link| %>
+15:   <tr>
+16:     <td><%=h link.url %></td>
+17:     <td><%=h link.name %></td>
+
+    app/views/links/index.html.erb:14
+    app/controllers/links_controller.rb:20:in `index'
+    <internal:prelude>:8:in `synchronize'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (92.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#index (for 127.0.0.1 at 2010-04-08 16:00:29) [GET]
+Rendering template within layouts/standard
+Rendering login/index
+
+ActionView::TemplateError (undefined method `name' for nil:NilClass) on line #46 of app/views/layouts/standard.html.erb:
+43:             <%= link_to(image_tag('ff9933_link.png', :size => '15x15', :border => 0), :action => 'list', :style => "ff9933") %></div>
+44:         <div id="user">
+45:             <% if (session[:user_id]) %>
+46:                 logged in as <%= @user.name %>.
+47:                 <%= link_to('log out', :controller => "login", :action => "logout") %>
+48:                 <br/>
+49:                 you've used <%= @user.get_age %> days and have <%= @user.get_days_left %> left.
+
+    app/views/layouts/standard.html.erb:46
+    <internal:prelude>:8:in `synchronize'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (59.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 16:00:40) [GET]
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (3.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.each) on line #14 of app/views/links/index.html.erb:
+11:     <th>Expireson</th>
+12:   </tr>
+13: 
+14: <% @links.each do |link| %>
+15:   <tr>
+16:     <td><%=h link.url %></td>
+17:     <td><%=h link.name %></td>
+
+    app/views/links/index.html.erb:14
+    app/controllers/links_controller.rb:20:in `index'
+    <internal:prelude>:8:in `synchronize'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (63.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 16:01:32) [GET]
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+Completed in 140ms (View: 44, DB: 5) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 16:04:00) [GET]
+  [4;35;1mPerson Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (2.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;36;1mLink Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+
+ActionView::TemplateError (undefined method `get_description' for #<Link:0x4256180>) on line #10 of app/views/links/index.html.erb:
+7:     <div class="label" style="text-align:left;">most recent</div>
+8:     <ul class="links">
+9:     <% for cur_link in @recently_clicked %>
+10:         <li><%= link_to(cur_link.name[0,15], {:action => "go", :url => cur_link.id}, :title => cur_link.get_description) %></li>
+11:     <% end %>
+12:     </ul>
+13: </div>
+
+    app/views/links/index.html.erb:10:in `block in _run_erb_app47views47links47index46html46erb'
+    app/views/links/index.html.erb:9:in `each'
+    app/views/links/index.html.erb:9
+    app/controllers/links_controller.rb:20:in `index'
+    <internal:prelude>:8:in `synchronize'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (94.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 16:08:44) [GET]
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 176ms (View: 45, DB: 8) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#logout (for 127.0.0.1 at 2010-04-08 16:09:21) [GET]
+Redirected to http://localhost:3000/login
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/login/logout]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#index (for 127.0.0.1 at 2010-04-08 16:09:24) [GET]
+Rendering template within layouts/standard
+Rendering login/index
+Completed in 15ms (View: 14, DB: 0) | 200 OK [http://localhost/login]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#authenticate (for 127.0.0.1 at 2010-04-08 16:09:30) [POST]
+  Parameters: {"authenticity_token"=>"kEh9+f0FM5EYH1gbdCuf8s/grO/WAfbZyJrJ0gjwU4w=", "person"=>{"user_name"=>"adam", "password"=>"adam"}, "commit"=>"login"}
+  [4;36;1mPerson Load (1.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (user_name = 'adam' and password = 'adam') LIMIT 1[0m
+  [4;35;1mPerson Columns (5.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+@user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+Redirected to http://localhost:3000/link
+Completed in 14ms (DB: 6) | 302 Found [http://localhost/login/authenticate]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-08 16:09:30) [GET]
+
+ActionController::RoutingError (No route matches "/link" with {:method=>:get}):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-08 16:11:00) [GET]
+
+ActionController::RoutingError (No route matches "/link" with {:method=>:get}):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#index (for 127.0.0.1 at 2010-04-08 16:11:04) [GET]
+Rendering template within layouts/standard
+Rendering login/index
+
+ActionView::TemplateError (undefined method `name' for nil:NilClass) on line #46 of app/views/layouts/standard.html.erb:
+43:             <%= link_to(image_tag('ff9933_link.png', :size => '15x15', :border => 0), :action => 'list', :style => "ff9933") %></div>
+44:         <div id="user">
+45:             <% if (session[:user_id]) %>
+46:                 logged in as <%= @user.name %>.
+47:                 <%= link_to('log out', :controller => "login", :action => "logout") %>
+48:                 <br/>
+49:                 you've used <%= @user.get_age %> days and have <%= @user.get_days_left %> left.
+
+    app/views/layouts/standard.html.erb:46
+    <internal:prelude>:8:in `synchronize'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (61.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 16:11:09) [GET]
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (2.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+session tag list is empty
+  [4;35;1mLink Load (0.0ms)[0m   [0mselect * from links where person_id = 1[0m
+  [4;36;1mLink Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+
+NoMethodError (undefined method `each' for "sports":String):
+  app/controllers/links_controller.rb:106:in `block in getUniqueTags'
+  app/controllers/links_controller.rb:105:in `each'
+  app/controllers/links_controller.rb:105:in `getUniqueTags'
+  app/controllers/links_controller.rb:12:in `index'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (72.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 16:15:33) [GET]
+  [4;35;1mPerson Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (2.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+session tag list is empty
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mselect * from links where person_id = 1[0m
+  [4;35;1mLink Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+>>>>>>>> [#<Link id: 21578242, url: "www.tsn.ca", name: "tsn", tags: "sports", comments: "sports news", clicks: 167, last_clicked: "2010-04-08 12:02:51", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 51848956, url: "www.imdb.com", name: "imdb", tags: "movies", comments: "everything about every movie", clicks: 92, last_clicked: "2010-04-08 11:57:00", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 92282751, url: "islandhikes.com", name: "island hikes", tags: "hike", comments: "route info for local climbs", clicks: 389, last_clicked: "2010-04-06 11:48:19", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 113629430, url: "www.lifehacker.com", name: "lifehacker", tags: nil, comments: "software and other life hacks", clicks: 31, last_clicked: "2010-04-08 10:07:00", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 125146708, url: "www.degrafa.org", name: "degrafa", tags: "flex programming datavis", comments: "flex graphics framework", clicks: 371, last_clicked: "2010-04-06 10:22:33", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 241469500, url: "www.canadiancyclist.com", name: "canadian cyclist", tags: "bike", comments: "canadian cycling news", clicks: 185, last_clicked: "2010-04-07 12:42:51", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 281110143, url: "www.cbc.ca", name: "cbc", tags: "news", comments: "national tv and radio network", clicks: 39, last_clicked: "2010-04-08 08:50:00", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 298486374, url: "www.cyclingnews.com", name: "cycling news", tags: "bike", comments: "all cycling news all the time", clicks: 22, last_clicked: "2010-04-08 11:26:55", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 339908452, url: "www.onjava.com", name: "onjava", tags: "java programming", comments: "java related articles", clicks: 201, last_clicked: "2010-04-07 05:11:51", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 374648174, url: "www.ctv.ca/news", name: "ctv", tags: "news", comments: "the other national news", clicks: 94, last_clicked: "2010-04-08 10:17:59", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 457008489, url: "www.websudoku.com", name: "web sudoku", tags: "puzzles", comments: "online and printable sudoku", clicks: 119, last_clicked: "2010-04-08 11:21:15", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 507103779, url: "www.velonews.com", name: "velo news", tags: "bike", comments: "cycling news", clicks: 135, last_clicked: "2010-04-08 09:59:44", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 510532105, url: "members.shaw.ca/beyondnootka", name: "beyond nootka", tags: "hike", comments: "history of vancouver island mountains", clicks: 359, last_clicked: "2010-04-05 10:55:37", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 587967610, url: "rubyonrails.org", name: "ruby on rails", tags: "rails ruby programming", comments: "web development framework", clicks: 167, last_clicked: "2010-04-08 11:02:57", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 638205575, url: "www.mountwashington.ca/en/conditions.html?page=alpi...", name: "snow report", tags: "ski", comments: "mt washington conditions", clicks: 99, last_clicked: "2010-04-08 09:55:38", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 980190962, url: "pih.bc.ca/chat/", name: "pih", tags: "run", comments: "local running club", clicks: 11, last_clicked: "2010-04-08 11:15:47", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 991788158, url: "www.mytelus.com/movies/theatres.do?prov=BC", name: "mybc theaters", tags: "movies", comments: "what's playing at the theaters", clicks: 113, last_clicked: "2010-04-08 09:21:44", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 1018350795, url: "www.globeandmail.com", name: "globe and mail", tags: "news", comments: "national and financial news", clicks: 67, last_clicked: "2010-04-08 10:45:15", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">, #<Link id: 1047793131, url: "www.accvi.ca", name: "alpine club vi", tags: "hike", comments: "climbing and hiking club", clicks: 314, last_clicked: "2010-04-08 06:55:37", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">]
+
+NoMethodError (undefined method `each' for "sports":String):
+  app/controllers/links_controller.rb:107:in `block in getUniqueTags'
+  app/controllers/links_controller.rb:106:in `each'
+  app/controllers/links_controller.rb:106:in `getUniqueTags'
+  app/controllers/links_controller.rb:12:in `index'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (46.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 16:16:54) [GET]
+  [4;36;1mPerson Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (3.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+session tag list is empty
+  [4;35;1mLink Load (0.0ms)[0m   [0mselect * from links where person_id = 1[0m
+  [4;36;1mLink Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+>>>>>>>> #<Link id: 21578242, url: "www.tsn.ca", name: "tsn", tags: "sports", comments: "sports news", clicks: 167, last_clicked: "2010-04-08 12:02:51", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+
+NoMethodError (undefined method `each' for "sports":String):
+  app/controllers/links_controller.rb:107:in `block in getUniqueTags'
+  app/controllers/links_controller.rb:105:in `each'
+  app/controllers/links_controller.rb:105:in `getUniqueTags'
+  app/controllers/links_controller.rb:12:in `index'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (74.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (1.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 16:30:56) [GET]
+  [4;35;1mPerson Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (1.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+session tag list is empty
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mselect * from links where person_id = 1[0m
+  [4;35;1mLink Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+>>>>>>>> #<Link id: 21578242, url: "www.tsn.ca", name: "tsn", tags: "sports", comments: "sports news", clicks: 167, last_clicked: "2010-04-08 12:02:51", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 51848956, url: "www.imdb.com", name: "imdb", tags: "movies", comments: "everything about every movie", clicks: 92, last_clicked: "2010-04-08 11:57:00", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 92282751, url: "islandhikes.com", name: "island hikes", tags: "hike", comments: "route info for local climbs", clicks: 389, last_clicked: "2010-04-06 11:48:19", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 113629430, url: "www.lifehacker.com", name: "lifehacker", tags: nil, comments: "software and other life hacks", clicks: 31, last_clicked: "2010-04-08 10:07:00", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+
+NoMethodError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.split):
+  app/controllers/links_controller.rb:107:in `block in getUniqueTags'
+  app/controllers/links_controller.rb:105:in `each'
+  app/controllers/links_controller.rb:105:in `getUniqueTags'
+  app/controllers/links_controller.rb:12:in `index'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (45.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-08 16:32:31) [GET]
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (2.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+session tag list is empty
+  [4;35;1mLink Load (0.0ms)[0m   [0mselect * from links where person_id = 1[0m
+  [4;36;1mLink Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+>>>>>>>> #<Link id: 21578242, url: "www.tsn.ca", name: "tsn", tags: "sports", comments: "sports news", clicks: 167, last_clicked: "2010-04-08 12:02:51", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 51848956, url: "www.imdb.com", name: "imdb", tags: "movies", comments: "everything about every movie", clicks: 92, last_clicked: "2010-04-08 11:57:00", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 92282751, url: "islandhikes.com", name: "island hikes", tags: "hike", comments: "route info for local climbs", clicks: 389, last_clicked: "2010-04-06 11:48:19", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 113629430, url: "www.lifehacker.com", name: "lifehacker", tags: nil, comments: "software and other life hacks", clicks: 31, last_clicked: "2010-04-08 10:07:00", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 125146708, url: "www.degrafa.org", name: "degrafa", tags: "flex programming datavis", comments: "flex graphics framework", clicks: 371, last_clicked: "2010-04-06 10:22:33", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 241469500, url: "www.canadiancyclist.com", name: "canadian cyclist", tags: "bike", comments: "canadian cycling news", clicks: 185, last_clicked: "2010-04-07 12:42:51", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 281110143, url: "www.cbc.ca", name: "cbc", tags: "news", comments: "national tv and radio network", clicks: 39, last_clicked: "2010-04-08 08:50:00", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 298486374, url: "www.cyclingnews.com", name: "cycling news", tags: "bike", comments: "all cycling news all the time", clicks: 22, last_clicked: "2010-04-08 11:26:55", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 339908452, url: "www.onjava.com", name: "onjava", tags: "java programming", comments: "java related articles", clicks: 201, last_clicked: "2010-04-07 05:11:51", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 374648174, url: "www.ctv.ca/news", name: "ctv", tags: "news", comments: "the other national news", clicks: 94, last_clicked: "2010-04-08 10:17:59", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 457008489, url: "www.websudoku.com", name: "web sudoku", tags: "puzzles", comments: "online and printable sudoku", clicks: 119, last_clicked: "2010-04-08 11:21:15", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 507103779, url: "www.velonews.com", name: "velo news", tags: "bike", comments: "cycling news", clicks: 135, last_clicked: "2010-04-08 09:59:44", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 510532105, url: "members.shaw.ca/beyondnootka", name: "beyond nootka", tags: "hike", comments: "history of vancouver island mountains", clicks: 359, last_clicked: "2010-04-05 10:55:37", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 587967610, url: "rubyonrails.org", name: "ruby on rails", tags: "rails ruby programming", comments: "web development framework", clicks: 167, last_clicked: "2010-04-08 11:02:57", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 638205575, url: "www.mountwashington.ca/en/conditions.html?page=alpi...", name: "snow report", tags: "ski", comments: "mt washington conditions", clicks: 99, last_clicked: "2010-04-08 09:55:38", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 980190962, url: "pih.bc.ca/chat/", name: "pih", tags: "run", comments: "local running club", clicks: 11, last_clicked: "2010-04-08 11:15:47", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 991788158, url: "www.mytelus.com/movies/theatres.do?prov=BC", name: "mybc theaters", tags: "movies", comments: "what's playing at the theaters", clicks: 113, last_clicked: "2010-04-08 09:21:44", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 1018350795, url: "www.globeandmail.com", name: "globe and mail", tags: "news", comments: "national and financial news", clicks: 67, last_clicked: "2010-04-08 10:45:15", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+>>>>>>>> #<Link id: 1047793131, url: "www.accvi.ca", name: "alpine club vi", tags: "hike", comments: "climbing and hiking club", clicks: 314, last_clicked: "2010-04-08 06:55:37", expires_on: nil, person_id: 1, created_at: "2010-04-08 22:44:32", updated_at: "2010-04-08 22:44:32">
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+Completed in 47ms (View: 18, DB: 9) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#show (for 127.0.0.1 at 2010-04-08 16:34:02) [GET]
+  Parameters: {"url"=>"92282751", "id"=>"go"}
+  [4;35;1mPerson Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (2.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mLink Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+  [4;36;1mLink Load (2.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (`links`.`id` = 0) [0m
+
+ActiveRecord::RecordNotFound (Couldn't find Link with ID=go):
+  app/controllers/links_controller.rb:29:in `show'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (47.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (not_found)
