@@ -29,7 +29,10 @@ class LinksController < ApplicationController
     @link = Link.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { 
+        @link.update_attributes({'clicks' => @link.clicks += 1, 'last_clicked' => Time.now})
+        redirect_to "http://#{@link.url}" 
+      }
       format.xml  { render :xml => @link }
     end
   end

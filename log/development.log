@@ -1035,3 +1035,620 @@ ActiveRecord::RecordNotFound (Couldn't find Link with ID=go):
 Rendered rescues/_trace (47.0ms)
 Rendered rescues/_request_and_response (0.0ms)
 Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 13:54:54) [GET]
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (17.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (7.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (3.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (14.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 325ms (View: 115, DB: 49) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 14:25:15) [GET]
+  [4;36;1mPerson Columns (9.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (16.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (3.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (5.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 67ms (View: 22, DB: 33) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#show (for 127.0.0.1 at 2010-04-09 14:25:20) [GET]
+  Parameters: {"id"=>"21578242"}
+  [4;36;1mPerson Columns (5.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (3.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mLink Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+  [4;35;1mLink Load (2.0ms)[0m   [0mSELECT * FROM `links` WHERE (`links`.`id` = 21578242) [0m
+Redirected to http://www.tsn.ca
+Completed in 57ms (DB: 13) | 302 Found [http://localhost/links/21578242]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 14:27:31) [GET]
+  [4;36;1mPerson Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (2.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 55ms (View: 33, DB: 8) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#show (for 127.0.0.1 at 2010-04-09 14:27:41) [GET]
+  Parameters: {"id"=>"92282751"}
+  [4;36;1mPerson Columns (10.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mLink Columns (6.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+  [4;35;1mLink Load (5.0ms)[0m   [0mSELECT * FROM `links` WHERE (`links`.`id` = 92282751) [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mLink Update (5.0ms)[0m   [0mUPDATE `links` SET `clicks` = 390, `last_clicked` = '2010-04-09 21:27:41', `updated_at` = '2010-04-09 21:27:41' WHERE `id` = 92282751[0m
+  [4;36;1mSQL (4.0ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://islandhikes.com
+Completed in 396ms (DB: 31) | 302 Found [http://localhost/links/92282751]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 14:27:46) [GET]
+  [4;35;1mPerson Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (5.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;36;1mLink Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+Completed in 87ms (View: 27, DB: 12) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#show (for 127.0.0.1 at 2010-04-09 14:27:49) [GET]
+  Parameters: {"id"=>"92282751"}
+  [4;35;1mPerson Columns (18.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (4.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mLink Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+  [4;36;1mLink Load (3.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (`links`.`id` = 92282751) [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mLink Update (1.0ms)[0m   [0;1mUPDATE `links` SET `clicks` = 391, `last_clicked` = '2010-04-09 21:27:49', `updated_at` = '2010-04-09 21:27:49' WHERE `id` = 92282751[0m
+  [4;35;1mSQL (3.0ms)[0m   [0mCOMMIT[0m
+Redirected to http://islandhikes.com
+Completed in 45ms (DB: 32) | 302 Found [http://localhost/links/92282751]
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 14:27:53) [GET]
+  [4;36;1mPerson Columns (8.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (3.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 50ms (View: 23, DB: 15) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-09 14:39:28) [GET]
+  Parameters: {"tag"=>"bike", "authenticity_token"=>"kEh9+f0FM5EYH1gbdCuf8s/grO/WAfbZyJrJ0gjwU4w="}
+
+ActionController::RoutingError (No route matches "/link/tag_link_list" with {:method=>:get}):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#show (for 127.0.0.1 at 2010-04-09 14:39:51) [GET]
+  Parameters: {"id"=>"refresh_tags"}
+  [4;36;1mPerson Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (23.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mLink Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+  [4;35;1mLink Load (7.0ms)[0m   [0mSELECT * FROM `links` WHERE (`links`.`id` = 0) [0m
+
+ActiveRecord::RecordNotFound (Couldn't find Link with ID=refresh_tags):
+  app/controllers/links_controller.rb:29:in `show'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (55.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#show (for 127.0.0.1 at 2010-04-09 14:40:17) [GET]
+  Parameters: {"id"=>"list"}
+  [4;36;1mPerson Columns (9.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (2.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mLink Columns (8.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (`links`.`id` = 0) [0m
+
+ActiveRecord::RecordNotFound (Couldn't find Link with ID=list):
+  app/controllers/links_controller.rb:29:in `show'
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (54.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 14:50:44) [GET]
+  [4;36;1mPerson Columns (7.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (21.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (21.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (9.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 105ms (View: 32, DB: 59) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 14:53:47) [GET]
+  [4;36;1mPerson Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (3.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 65ms (View: 38, DB: 12) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 14:54:22) [GET]
+  [4;36;1mPerson Columns (5.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (3.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (2.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (2.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 87ms (View: 60, DB: 15) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 14:54:55) [GET]
+  [4;36;1mPerson Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (3.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 57ms (View: 33, DB: 12) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 14:58:28) [GET]
+  [4;36;1mPerson Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (25.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (5.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 121ms (View: 71, DB: 36) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 14:59:40) [GET]
+  [4;36;1mPerson Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (4.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 66ms (View: 37, DB: 13) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:01:59) [GET]
+  [4;36;1mPerson Columns (5.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (3.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 97ms (View: 70, DB: 12) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:02:20) [GET]
+  [4;36;1mPerson Columns (6.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (1.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (6.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 63ms (View: 35, DB: 14) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:03:23) [GET]
+  [4;36;1mPerson Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (4.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 102ms (View: 73, DB: 14) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:04:11) [GET]
+  [4;36;1mPerson Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (3.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 64ms (View: 37, DB: 12) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:04:26) [GET]
+  [4;36;1mPerson Columns (12.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (3.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;35;1mLink Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `links`[0m
+Completed in 102ms (View: 65, DB: 22) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:10:18) [GET]
+Redirected to http://localhost:3000/login
+Filter chain halted as [:authenticate] rendered_or_redirected.
+Completed in 5027ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#index (for 127.0.0.1 at 2010-04-09 15:10:23) [GET]
+Rendering template within layouts/standard
+Rendering login/index
+Completed in 67ms (View: 65, DB: 0) | 200 OK [http://localhost/login]
+  [4;36;1mSQL (2.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LoginController#authenticate (for 127.0.0.1 at 2010-04-09 15:10:30) [POST]
+  Parameters: {"authenticity_token"=>"dH303M8ETlfE2VM2kzhMsWZGwxNbLVpSibjskT0JyTk=", "person"=>{"user_name"=>"adam", "password"=>"adam"}, "commit"=>"login"}
+  [4;36;1mPerson Load (39.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (user_name = 'adam' and password = 'adam') LIMIT 1[0m
+  [4;35;1mPerson Columns (7.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+@user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+Redirected to http://localhost:3000/
+Completed in 55ms (DB: 48) | 302 Found [http://localhost/login/authenticate]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:10:30) [GET]
+  [4;36;1mPerson Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `people`[0m
+  [4;35;1mPerson Load (2.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+session tag list is empty
+  [4;35;1mLink Load (9.0ms)[0m   [0mselect * from links where person_id = 1[0m
+  [4;36;1mLink Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;35;1mLink Load (3.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;35;1mLink Load (2.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+Completed in 88ms (View: 21, DB: 21) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:12:05) [GET]
+  [4;35;1mPerson Columns (9.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;36;1mLink Columns (8.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+Completed in 65ms (View: 33, DB: 19) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:12:49) [GET]
+  [4;35;1mPerson Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (16.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;36;1mLink Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+Completed in 94ms (View: 57, DB: 25) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:13:17) [GET]
+  [4;35;1mPerson Columns (7.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (3.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;36;1mLink Columns (7.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+Completed in 65ms (View: 32, DB: 19) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:13:36) [GET]
+  [4;35;1mPerson Columns (5.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (2.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;36;1mLink Columns (5.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+Completed in 89ms (View: 62, DB: 14) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:13:53) [GET]
+  [4;35;1mPerson Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (3.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;36;1mLink Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+Completed in 55ms (View: 33, DB: 9) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:14:22) [GET]
+  [4;35;1mPerson Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (0.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;36;1mLink Load (1.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;36;1mLink Columns (5.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+Completed in 71ms (View: 40, DB: 11) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-09 15:19:48) [GET]
+
+ActionController::RoutingError (No route matches "/milestone" with {:method=>:get}):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-09 15:20:33) [GET]
+
+ActionController::RoutingError (No route matches "/reminder/list" with {:method=>:get}):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:30:48) [GET]
+  [4;35;1mPerson Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (11.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;36;1mLink Load (2.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;35;1mLink Load (4.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;36;1mLink Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+Completed in 72ms (View: 34, DB: 23) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-09 15:33:31) [GET]
+
+ActionController::RoutingError (No route matches "/payment" with {:method=>:get}):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-09 15:33:39) [GET]
+
+ActionController::RoutingError (No route matches "/payment" with {:method=>:get}):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing LinksController#index (for 127.0.0.1 at 2010-04-09 15:35:03) [GET]
+  [4;35;1mPerson Columns (8.0ms)[0m   [0mSHOW FIELDS FROM `people`[0m
+  [4;36;1mPerson Load (19.0ms)[0m   [0;1mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `people` WHERE (`people`.`id` = 1) [0m
+index() user: #<Person id: 1, name: "Adam Lawrence", user_name: "adam", password: "adam", mail_url: "http://mail.google.com/mail", banking_url: nil, map_center: nil, authority: 1, birth_on: "1969-07-09", last_login_on: nil, created_at: "2010-04-08 22:45:07", updated_at: "2010-04-08 22:45:07">
+  [4;36;1mLink Load (13.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY last_clicked desc LIMIT 18[0m
+  [4;35;1mLink Load (1.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY created_at desc LIMIT 8[0m
+  [4;36;1mLink Load (0.0ms)[0m   [0;1mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY clicks desc LIMIT 18[0m
+  [4;35;1mLink Load (0.0ms)[0m   [0mSELECT * FROM `links` WHERE (person_id = 1) ORDER BY rand() LIMIT 8[0m
+Rendering template within layouts/standard
+Rendering links/index
+  [4;36;1mLink Columns (7.0ms)[0m   [0;1mSHOW FIELDS FROM `links`[0m
+Completed in 96ms (View: 35, DB: 48) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-09 15:35:07) [GET]
+
+ActionController::RoutingError (No route matches "/payment" with {:method=>:get}):
+  <internal:prelude>:8:in `synchronize'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  C:/Ruby19/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)

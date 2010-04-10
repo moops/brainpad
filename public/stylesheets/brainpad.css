@@ -229,11 +229,11 @@ img.photo {
 }
 
 .digg_box {
-    background: #f6f6f6;
+    background: #eee;
     border: 1px solid #999;
     -moz-border-radius: 8px;
     float: left;
-    padding: 1px;
+    padding: 5px;
     margin-left: 4px;
     width: 57%;
 }
@@ -317,8 +317,8 @@ img.photo {
 }
 
 img.calIcon {
-	position: absolute;
-	cursor: pointer;
+    position: absolute;
+    cursor: pointer;
 }
 
 input.text {

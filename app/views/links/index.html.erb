@@ -7,7 +7,7 @@
     <div class="label" style="text-align:left;">most recent</div>
     <ul class="links">
     <% for cur_link in @recently_clicked %>
-        <li><%= link_to(cur_link.name[0,15], {:action => "go", :url => cur_link.id}, :title => cur_link.get_description) %></li>
+        <li><%= link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
 </div>
@@ -15,7 +15,7 @@
     <div class="label" style="text-align:left;">most often</div>
     <ul class="links">
     <% for cur_link in @most_often %>
-        <li>(<%=link_to(cur_link.clicks, :action => "edit", :id => cur_link.id) %>)<%=link_to(cur_link.name[0,15], {:action => "go", :url => cur_link.id}, :title => cur_link.get_description) %></li>
+        <li>(<%=link_to(cur_link.clicks, :action => "edit", :id => cur_link.id) %>)<%=link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
 </div>
@@ -24,7 +24,7 @@
     <div class="label" style="text-align:left;">recently added</div>
     <ul class="links">
     <% for cur_link in @recently_added %>
-        <li><%= link_to(cur_link.name[0,15], {:action => "go", :url => cur_link.id}, :title => cur_link.get_description) %></li>
+        <li><%= link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
 </div>
@@ -33,7 +33,7 @@
     <div class="label" style="text-align:left;">random</div>
     <ul class="links">
     <% for cur_link in @random %>
-        <li><%= link_to(cur_link.name[0,15], {:action => "go", :url => cur_link.id}, :title => cur_link.get_description) %></li>
+        <li><%= link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
 </div>
@@ -57,8 +57,11 @@
 </div>
 
 <div class="digg_box">
-    <script language="JavaScript" src="http://digg.com/tools/diggjs/front/all/3" type="text/javascript"></script>
-    
+
+<script type="text/javascript" src="http://widgets.digg.com/widgets.js"></script>
+<script type="text/javascript">
+new DiggWidget({id: "digg-widget", layout: 1, colors: {bdyBg: "#eee", lnk: "#3333ff"}, width: 400, requests: [{t: "Popular", p: {count: "10", method: "story.getPopular", topic: ""}}], hide: {thumb: true, diggs: true, footer: true, header: true}, rounded: false, suppressCss: 1});
+</script>
 </div>
 
 <div style="clear: left;"></div>
