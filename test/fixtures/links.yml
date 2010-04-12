@@ -7,6 +7,7 @@ one:
   comments: local running club
   clicks: 11
   last_clicked: 2010-04-08 11:15:47
+  person_id: 1
 
 two:
   url: www.cyclingnews.com
@@ -15,6 +16,7 @@ two:
   comments: all cycling news all the time
   clicks: 22
   last_clicked: 2010-04-08 11:26:55
+  person_id: 1
   
 three:
   url: www.lifehacker.com
@@ -23,6 +25,7 @@ three:
   comments: software and other life hacks
   clicks: 31
   last_clicked: 2010-04-08 10:07:00
+  person_id: 1
   
 four:
   url: www.cbc.ca
@@ -31,6 +34,7 @@ four:
   comments: national tv and radio network
   clicks: 39
   last_clicked: 2010-04-08 08:50:00
+  person_id: 1
   
 five:
   url: www.globeandmail.com
@@ -39,6 +43,7 @@ five:
   comments: national and financial news
   clicks: 67
   last_clicked: 2010-04-08 10:45:15
+  person_id: 1
   
 six:
   url: www.imdb.com
@@ -47,6 +52,7 @@ six:
   comments: everything about every movie
   clicks: 92
   last_clicked: 2010-04-08 11:57:00
+  person_id: 1
   
 seven:
   url: www.ctv.ca/news
@@ -55,6 +61,7 @@ seven:
   comments: the other national news
   clicks: 94
   last_clicked: 2010-04-08 10:17:59
+  person_id: 1
   
 eight:
   url: www.mountwashington.ca/en/conditions.html?page=alpine_snow_report
@@ -63,6 +70,7 @@ eight:
   comments: mt washington conditions
   clicks: 99
   last_clicked: 2010-04-08 09:55:38
+  person_id: 1
   
 nine:
   url: www.mytelus.com/movies/theatres.do?prov=BC
@@ -71,6 +79,7 @@ nine:
   comments: what's playing at the theaters
   clicks: 113
   last_clicked: 2010-04-08 09:21:44
+  person_id: 1
   
 ten:
   url: www.velonews.com
@@ -79,6 +88,7 @@ ten:
   comments: cycling news
   clicks: 135
   last_clicked: 2010-04-08 09:59:44
+  person_id: 1
   
 eleven:
   url: www.websudoku.com
@@ -87,6 +97,7 @@ eleven:
   comments: online and printable sudoku
   clicks: 119
   last_clicked: 2010-04-08 11:21:15
+  person_id: 1
   
 twelve:
   url: rubyonrails.org
@@ -95,6 +106,7 @@ twelve:
   comments: web development framework
   clicks: 167
   last_clicked: 2010-04-08 11:02:57
+  person_id: 1
   
 thirteen:
   url: www.tsn.ca
@@ -103,6 +115,7 @@ thirteen:
   comments: sports news
   clicks: 167
   last_clicked: 2010-04-08 12:02:51
+  person_id: 1
   
 fourteen:
   url: www.canadiancyclist.com
@@ -111,6 +124,7 @@ fourteen:
   comments: canadian cycling news
   clicks: 185
   last_clicked: 2010-04-07 12:42:51
+  person_id: 1
   
 fifteen:
   url: www.onjava.com
@@ -119,6 +133,7 @@ fifteen:
   comments: java related articles
   clicks: 201
   last_clicked: 2010-04-07 05:11:51
+  person_id: 1
   
 sixteen:
   url: www.axiis.org
@@ -127,6 +142,7 @@ sixteen:
   comments: data visualization framework built on degrafa
   clicks: 288
   last_clicked: 2010-04-08 12:30:51
+  person_id: 1
   
 sixteen:
   url: www.accvi.ca
@@ -135,6 +151,7 @@ sixteen:
   comments: climbing and hiking club
   clicks: 314
   last_clicked: 2010-04-08 06:55:37
+  person_id: 1
   
 seventeen:
   url: members.shaw.ca/beyondnootka
@@ -143,6 +160,7 @@ seventeen:
   comments: history of vancouver island mountains
   clicks: 359
   last_clicked: 2010-04-05 10:55:37
+  person_id: 1
   
 eighteen:
   url: www.degrafa.org
@@ -151,6 +169,7 @@ eighteen:
   comments: flex graphics framework
   clicks: 371
   last_clicked: 2010-04-06 10:22:33
+  person_id: 1
   
 nineteen:
   url: islandhikes.com
@@ -159,6 +178,7 @@ nineteen:
   comments: route info for local climbs
   clicks: 389
   last_clicked: 2010-04-06 11:48:19
+  person_id: 1
   
   
   
