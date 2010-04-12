@@ -16,15 +16,15 @@
     <div id="header"><%= show_image('/images/headers/' + (Time.now.sec % 13).to_s,700,100) %></div>
     
     <div id="navbar">
-        <%= link_to('home',       {:controller => 'link'},                         :class => 'nav' ) %>
-        <%= link_to('contacts',   {:controller => 'contact'},                      :class => 'nav' ) %>
-        <%= link_to('workouts',   {:controller => 'workout',   :action => 'list'}, :class => 'nav' ) %>
-        <%= link_to('money',      {:controller => 'payment'},                      :class => 'nav' ) %>
-        <%= link_to('journal' ,   {:controller => 'journal',   :action => 'list'}, :class => 'nav' ) %>
-        <%= link_to('calendar' ,  {:controller => 'reminder',  :action => 'list'}, :class => 'nav' ) %>
+        <%= link_to('home',       links_path,     :class => 'nav' ) %>
+        <%= link_to('contacts',   contacts_path,  :class => 'nav' ) %>
+        <%= link_to('workouts',   workouts_path,  :class => 'nav' ) %>
+        <%= link_to('money',      payments_path,  :class => 'nav' ) %>
+        <%= link_to('journal' ,   journals_path,  :class => 'nav' ) %>
+        <%= link_to('calendar' ,  reminders_path, :class => 'nav' ) %>
         <%= link_to('photos' ,  'http://photo.raceweb.ca',   :target => '_blank',  :class => 'nav' ) %>
-        <%= link_to('conn' ,      {:controller => 'connection',:action => 'index'},:class => 'nav' ) %>
-        <%= link_to('milestones', {:controller => 'milestone', :action => 'index'},:class => 'nav' ) %>
+        <%= link_to('conn' ,      connections_path,:class => 'nav' ) %>
+        <!-- link_to('milestones', milestones_path, :class => 'nav' ) -->
         <div class="clear"></div>
     </div>
     

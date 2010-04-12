@@ -1,34 +1,25 @@
-<h1>Listing reminders</h1>
-
-<table>
-  <tr>
-    <th>Description</th>
-    <th>Done</th>
-    <th>Priority</th>
-    <th>Reminder type</th>
-    <th>Interval</th>
-    <th>Repeat until</th>
-    <th>Due</th>
-    <th>Person</th>
-  </tr>
-
-<% @reminders.each do |reminder| %>
-  <tr>
-    <td><%=h reminder.description %></td>
-    <td><%=h reminder.done %></td>
-    <td><%=h reminder.priority %></td>
-    <td><%=h reminder.reminder_type %></td>
-    <td><%=h reminder.interval %></td>
-    <td><%=h reminder.repeat_until %></td>
-    <td><%=h reminder.due %></td>
-    <td><%=h reminder.person_id %></td>
-    <td><%= link_to 'Show', reminder %></td>
-    <td><%= link_to 'Edit', edit_reminder_path(reminder) %></td>
-    <td><%= link_to 'Destroy', reminder, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% form_tag(:action => 'updater') do %>
+<table width="100% cellpadding="2" cellspacing="0" class="searchResult">
+<% if (@reminders and @reminders.size > 0) %>
+    <tr>
+        <th>date</th>
+        <th>type</th>
+        <th>priority</th>
+        <th>description</th>
+        <th>done</th>
+        <th colspan="3">&nbsp;</th></tr>
 <% end %>
+    <%= render(:partial => 'data_rows', :collection => @reminders) %>
+    <tr>
+        <td colspan="4"><%= will_paginate @reminders %></td>
+        <td><%= submit_tag('>>') %></td>
+        <td colspan="3">&nbsp;</td></tr>
 </table>
+<% end %>
 
-<br />
-
-<%= link_to 'New reminder', new_reminder_path %>
+<p>
+<h3 class="formHeader"><%= @form_header %></h3>
+<div class="form">
+<% form_tag(:action => @form_action) do %>
+<%= render_partial "form" %>
+<% end %></div>

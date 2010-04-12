@@ -2,7 +2,17 @@ class RemindersController < ApplicationController
   # GET /reminders
   # GET /reminders.xml
   def index
-    @reminders = Reminder.all
+    @orderBy = params[:orderBy] ? params[:orderBy] : 'due'
+    @reminders = Reminder.paginate :page => params[:page], :order => @orderBy, :per_page => 10
+    #@reminders = Reminder.find(:all,
+    #                           :conditions => "done = 0 and person_id = #{session[:user_id]}", 
+    #                           :order => @orderBy,
+    #                           :page => {:size => 8, :current => params[:page]})
+    @reminder = Reminder.new #for the 'new' form
+    @reminder.due = Date.today.strftime("%b %d, %Y")
+    @form_header = 'new item'
+    @form_action = 'create'
+    @form_btn_label = 'create'
 
     respond_to do |format|
       format.html # index.html.erb

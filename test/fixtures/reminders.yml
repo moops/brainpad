@@ -1,3 +1,21 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+one:
+  description: test first reminder
+  done: 0
+  priority: 1
+  reminder_type:
+  interval:
+  repeat_until:
+  due: 2010-04-30
+  person_id: 1
 
+two:
+  description: test second reminder
+  done: 0
+  priority: 1
+  reminder_type:
+  interval:
+  repeat_until:
+  due: 2010-04-30
+  person_id: 1
