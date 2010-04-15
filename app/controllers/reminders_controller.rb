@@ -1,9 +1,13 @@
 class RemindersController < ApplicationController
+
+  layout 'standard.html'
+
   # GET /reminders
   # GET /reminders.xml
   def index
+    @user = Person.find(session[:user_id])
     @orderBy = params[:orderBy] ? params[:orderBy] : 'due'
-    @reminders = Reminder.paginate :page => params[:page], :order => @orderBy, :per_page => 10
+    @reminders = Reminder.paginate :page => params[:page], :conditions => "done = 0 and person_id = #{session[:user_id]}", :order => @orderBy, :per_page => 10
     #@reminders = Reminder.find(:all,
     #                           :conditions => "done = 0 and person_id = #{session[:user_id]}", 
     #                           :order => @orderBy,
