@@ -37,7 +37,7 @@ class RemindersController < ApplicationController
   def new
     @reminder = Reminder.new
 
-    respond_to do |format|
+    respond_to do |format|  
       format.html # new.html.erb
       format.xml  { render :xml => @reminder }
     end
@@ -46,7 +46,7 @@ class RemindersController < ApplicationController
   # GET /reminders/1/edit
   def edit
     @reminder = Reminder.find(params[:id])
-    render(:action => 'index')
+    render(:partial => 'form')
   end
 
   # POST /reminders
