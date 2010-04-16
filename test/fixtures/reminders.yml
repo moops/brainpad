@@ -4,7 +4,7 @@ one:
   description: test first reminder
   done: 0
   priority: 1
-  reminder_type:
+  reminder_type: 40
   interval:
   repeat_until:
   due: 2010-04-30
@@ -14,7 +14,7 @@ two:
   description: test second reminder
   done: 0
   priority: 1
-  reminder_type:
+  reminder_type: 41
   interval:
   repeat_until:
   due: 2010-04-30

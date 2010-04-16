@@ -1,43 +1,23 @@
-<p>
-  <b>Description:</b>
-  <%=h @reminder.description %>
-</p>
+<html>
+<head>
+    <title>reminder</title>
+    <%= stylesheet_link_tag 'brainpad' %>
+</head>
 
-<p>
-  <b>Done:</b>
-  <%=h @reminder.done %>
-</p>
+<body style="margin-top: 50px;">
 
-<p>
-  <b>Priority:</b>
-  <%=h @reminder.priority %>
-</p>
-
-<p>
-  <b>Reminder type:</b>
-  <%=h @reminder.reminder_type %>
-</p>
-
-<p>
-  <b>Interval:</b>
-  <%=h @reminder.interval %>
-</p>
-
-<p>
-  <b>Repeat until:</b>
-  <%=h @reminder.repeat_until %>
-</p>
-
-<p>
-  <b>Due:</b>
-  <%=h @reminder.due %>
-</p>
-
-<p>
-  <b>Person:</b>
-  <%=h @reminder.person_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_reminder_path(@reminder) %> |
-<%= link_to 'Back', reminders_path %>
+    <table cellpadding="3" cellspacing="0" border="0" align="center">
+        <tr>
+            <td><div class="label">type</div></td><td><%= Lookup.find_by_id(@reminder.reminder_type).description %></td></tr>
+        <tr>
+            <td><div class="label">priority</div></td><td><%= Lookup.find_by_id(@reminder.priority).description %></td></tr>
+        <tr>
+            <td><div class="label">due</div></td><td><%= @reminder.due.strftime("%a %b %d, %y") %></td></tr>
+        <tr>
+            <td><div class="label" valign="top">description</div></td><td><%= @reminder.description %></td></tr>
+        <tr>
+            <td><div class="label">created on</div></td><td><%= @reminder.created_at.strftime("%a %b %d, %y") %></td></tr>
+    </table>
+  
+  </body>
+</html>

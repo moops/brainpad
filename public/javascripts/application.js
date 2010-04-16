@@ -1,6 +1,6 @@
-function openWindow() {
-  var options = "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,alwaysRaised=yes,width=300,height=300";
-  var w = window.open("","detail",options);
+function openWindow(width, height, name) {
+  var options = "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,alwaysRaised=yes,width="+width+",height="+height;
+  var w = window.open("",name,options);
   if (window.focus) {w.focus()}
 }
 
@@ -22,16 +22,16 @@ function count(id,until) {
     sec = "0" + sec;
   }
   if (yrs > 0) {
-  	val += yrs + (yrs > 1 ? " years " : " year ");
+    val += yrs + (yrs > 1 ? " years " : " year ");
   }
   if (day > 0) {
-  	val += day + (day > 1 ? " days " : " day ");
+    val += day + (day > 1 ? " days " : " day ");
   }
   val += (hr > 0 ? hr + ":" :"");
   val += (min > 0 ? min + ":" :"") + sec;
 
   if (then < now) {
-  	val += " ago";
+    val += " ago";
   }
   document.getElementById(id).value = val;
   setTimeout("count('" + id + "','" + until + "')", 1000);

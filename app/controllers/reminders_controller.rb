@@ -1,17 +1,14 @@
 class RemindersController < ApplicationController
 
-  layout 'standard.html'
+  layout 'standard.html', :except => [:show]
 
   # GET /reminders
   # GET /reminders.xml
   def index
     @user = Person.find(session[:user_id])
-    @orderBy = params[:orderBy] ? params[:orderBy] : 'due'
-    @reminders = Reminder.paginate :page => params[:page], :conditions => "done = 0 and person_id = #{session[:user_id]}", :order => @orderBy, :per_page => 10
-    #@reminders = Reminder.find(:all,
-    #                           :conditions => "done = 0 and person_id = #{session[:user_id]}", 
-    #                           :order => @orderBy,
-    #                           :page => {:size => 8, :current => params[:page]})
+    @order = params[:order] ? params[:order] : 'due'
+    @reminders = Reminder.paginate :page => params[:page], :conditions => "done = 0 and person_id = #{session[:user_id]}", :order => @order, :per_page => 10
+
     @reminder = Reminder.new #for the 'new' form
     @reminder.due = Date.today.strftime("%b %d, %Y")
     @form_header = 'new item'
@@ -49,6 +46,7 @@ class RemindersController < ApplicationController
   # GET /reminders/1/edit
   def edit
     @reminder = Reminder.find(params[:id])
+    render(:action => 'index')
   end
 
   # POST /reminders
@@ -59,7 +57,7 @@ class RemindersController < ApplicationController
     respond_to do |format|
       if @reminder.save
         flash[:notice] = 'Reminder was successfully created.'
-        format.html { redirect_to(@reminder) }
+        format.html { redirect_to(reminders_path) }
         format.xml  { render :xml => @reminder, :status => :created, :location => @reminder }
       else
         format.html { render :action => "new" }
@@ -96,4 +94,5 @@ class RemindersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+ 
 end
