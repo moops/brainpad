@@ -94,5 +94,14 @@ class RemindersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def finish
+    logger.info "finishing: #{params[:reminder].inspect}"
+    params[:reminder].each { |reminder_id, attr|
+      reminder = Reminder.find(reminder_id)
+      reminder.update_attribute(:done,attr[:done])
+    }
+    redirect_to reminders_path
+  end
  
 end
