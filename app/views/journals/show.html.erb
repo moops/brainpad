@@ -1,18 +1,21 @@
-<p>
-  <b>Entry:</b>
-  <%=h @journal.entry %>
-</p>
+<html>
+<head>
+    <title>journal entry</title>
+    <%= stylesheet_link_tag 'brainpad' %>
+</head>
 
-<p>
-  <b>Entry on:</b>
-  <%=h @journal.entry_on %>
-</p>
+<body style="margin-top: 50px;">
 
-<p>
-  <b>Person:</b>
-  <%=h @journal.person_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_journal_path(@journal) %> |
-<%= link_to 'Back', journals_path %>
+    <table cellpadding="3" cellspacing="0" border="0" align="center">
+        <tr>
+            <td><div class="label">type</div></td><td><%= Lookup.find_by_id(@journal.journal_type).description %></td></tr>
+        <tr>
+            <td><div class="label">date</div></td><td><%= @journal.entry_on.strftime("%a %b %d, %y") %></td></tr>
+        <tr>
+            <td><div class="label">entry</div></td><td><%= @journal.entry %></td></tr>
+        <tr>
+            <td><div class="label">created on</div></td><td><%= @journal.created_at.strftime("%a %b %d, %y") %></td></tr>
+    </table>
+  
+  </body>
+</html>

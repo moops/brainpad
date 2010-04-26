@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20100415223218) do
   create_table "journals", :force => true do |t|
     t.text     "entry"
     t.date     "entry_on"
+    t.integer  "journal_type"
     t.integer  "person_id"
     t.datetime "created_at"
     t.datetime "updated_at"

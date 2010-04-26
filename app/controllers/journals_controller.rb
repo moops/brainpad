@@ -1,13 +1,26 @@
 class JournalsController < ApplicationController
+  
+  before_filter :authenticate
+  layout 'standard.html', :except => [:show]
+  
   # GET /journals
   # GET /journals.xml
   def index
-    @journals = Journal.all
+    @user = Person.find(session[:user_id])
+    @journals = Journal.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => @order, :per_page => 10
+
+    @journal = Journal.new #for the 'new' form
+    @journal.entry_on = Date.today.strftime("%b %d, %Y")
+    @form_header = 'new entry'
+    @form_action = 'create'
+    @form_btn_label = 'create'
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @journals }
     end
+    
+    
   end
 
   # GET /journals/1
@@ -35,6 +48,7 @@ class JournalsController < ApplicationController
   # GET /journals/1/edit
   def edit
     @journal = Journal.find(params[:id])
+    render(:partial => 'form')
   end
 
   # POST /journals
@@ -45,7 +59,7 @@ class JournalsController < ApplicationController
     respond_to do |format|
       if @journal.save
         flash[:notice] = 'Journal was successfully created.'
-        format.html { redirect_to(@journal) }
+        format.html { redirect_to(journals_path) }
         format.xml  { render :xml => @journal, :status => :created, :location => @journal }
       else
         format.html { render :action => "new" }

@@ -1,5 +1,6 @@
 class RemindersController < ApplicationController
 
+  before_filter :authenticate
   layout 'standard.html', :except => [:show]
 
   # GET /reminders

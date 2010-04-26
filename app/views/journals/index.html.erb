@@ -1,24 +1,21 @@
-<h1>Listing journals</h1>
+<% if (@journals and @journals.size > 0) %>
+<table width="100% cellpadding="2" cellspacing="0" class="searchResult">
+    <tr>
+        <th>date</th>
+        <th>type</th>
+        <th>entry</th>
+        <th colspan="3">&nbsp;</th></tr>
 
-<table>
-  <tr>
-    <th>Entry</th>
-    <th>Entry on</th>
-    <th>Person</th>
-  </tr>
-
-<% @journals.each do |journal| %>
-  <tr>
-    <td><%=h journal.entry %></td>
-    <td><%=h journal.entry_on %></td>
-    <td><%=h journal.person_id %></td>
-    <td><%= link_to 'Show', journal %></td>
-    <td><%= link_to 'Edit', edit_journal_path(journal) %></td>
-    <td><%= link_to 'Destroy', journal, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+        
+<%= render(:partial => 'data_rows', :collection => @journals) %>
 </table>
+<% end %>
 
-<br />
+<%= will_paginate @journals %>
 
-<%= link_to 'New journal', new_journal_path %>
+<p>
+<h3 class="formHeader"><%= @form_header %></h3>
+<div class="form">
+<% form_tag(:action => @form_action) do %>
+<%= render(:partial => 'form') %>
+<% end %></div>

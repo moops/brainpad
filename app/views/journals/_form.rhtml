@@ -1,0 +1,35 @@
+<% if @journal.id %>
+    <%= hidden_field_tag('journal[id]',@journal.id) %>
+    <%= hidden_field_tag('id',@journal.id) %>
+<% end %>
+<% if session[:user_id] %>
+    <%= hidden_field_tag('journal[person_id]',session[:user_id]) %>
+<% end %>
+<table cellpadding="3" cellspacing="0" border="0">
+    <tr>
+        <td id="errors" colspan="5">
+            <% unless @journal.errors.empty? %>
+                <ul>
+                <% @journal.errors.each_full do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+                </ul>
+            <% end %></td>
+            <% if flash[:notice] %>
+                <div class="notice"><%=h flash[:notice] %></div>
+            <% end %></td></tr>
+    <tr>
+        <td><div class="label">date</div></td>
+        <td><%= calendar('journal','entry_on') %></td>
+        <td><div class="label">type</div></td>
+        <td>
+            <%= select('journal','journal_type', Lookup.find_all_by_category(30).collect {|l| [ l.description, l.id ] }) %></td>
+        <td rowspan="2">&nbsp;</td></tr>    
+    <tr>
+        <td><div class="label">entry</div></td>
+        <td colspan="3" rowspan="2"><%= text_area('journal', 'entry', :cols => 60, :rows => 5) %></td></tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td class="submit">
+            <%= submit_tag(@form_btn_label) %></td></tr>
+</table>
