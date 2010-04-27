@@ -8,13 +8,6 @@
 
 
 Lookup.create({ :id => 1, :category => 1, :code => 'root', :description => 'root' })
-Lookup.create({ :id => 2, :category => 1, :code => 'cont_type', :description => 'contact types' })
-Lookup.create({ :id => 3, :category => 2, :code => '1', :description => 'friend' })
-Lookup.create({ :id => 4, :category => 2, :code => '2', :description => 'work' })
-Lookup.create({ :id => 5, :category => 2, :code => '3', :description => 'workout' })
-Lookup.create({ :id => 6, :category => 2, :code => '4', :description => 'quinn\'s friend' })
-Lookup.create({ :id => 7, :category => 2, :code => '5', :description => 'else\'s friend' })
-Lookup.create({ :id => 8, :category => 2, :code => '6', :description => 'other' })
 Lookup.create({ :id => 9, :category => 1, :code => 'work_type', :description => 'workout types' })
 Lookup.create({ :id => 10, :category => 9, :code => 'run', :description => 'run' })
 Lookup.create({ :id => 11, :category => 9, :code => 'bike', :description => 'bike' })

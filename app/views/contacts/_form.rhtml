@@ -1,0 +1,47 @@
+<% if @contact.id %>
+    <%= hidden_field_tag('contact[id]',@contact.id) %>
+    <%= hidden_field_tag('id',@contact.id) %>
+<% end %>
+<% if session[:user_id] %>
+    <%= hidden_field_tag('contact[person_id]',session[:user_id]) %>
+<% end %>
+<table cellpadding="3" cellspacing="0" border="0">
+    <tr>
+        <td id="errors" colspan="5">
+            <% unless @contact.errors.empty? %>
+                <ul>
+                <% @contact.errors.each_full do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+                </ul>
+            <% end %></td>
+            <% if flash[:notice] %>
+                <div class="notice"><%=h flash[:notice] %></div>
+            <% end %></td></tr>
+    <tr>
+        <td><div class="label">name</div></td>
+        <td><%= text_field('contact', 'name', :class => 'text') %></td>
+        <td><div class="label">email</div></td>
+        <td><%= text_field('contact', 'email', :class => 'text') %></td>
+        <td rowspan="5">&nbsp;</td></tr>
+    <tr>
+        <td><div class="label">address</div></td>
+        <td><%= text_field('contact', 'address', :class => 'text') %></td>
+        <td><div class="label">city</div></td>
+        <td><%= text_field('contact', 'city', :class => 'text') %></td></tr>
+    <tr>
+        <td><div class="label">home</div></td>
+        <td><%= text_field('contact', 'phone_home', :class => 'text') %></td>
+        <td><div class="label">work</div></td>
+        <td><%= text_field('contact', 'phone_work', :class => 'text') %></td></tr>
+    <tr>
+        <td><div class="label">tags</div></td>
+        <td colspan="3"><%= text_field('contact', 'tags', :size => '76', :class => 'text') %></td></tr>
+    <tr>
+        <td><div class="label">comments</div></td>
+        <td colspan="3" rowspan="2"><%= text_area('contact', 'comments', :cols => 73, :rows => 3) %></td></tr>
+    <tr>
+        <td colspan="4">&nbsp;</td>
+        <td class="submit">
+            <%= submit_tag(@form_btn_label) %></td></tr>
+</table>

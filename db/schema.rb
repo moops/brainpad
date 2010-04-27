@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(:version => 20100415223218) do
     t.string   "city"
     t.string   "tags"
     t.text     "comments"
-    t.integer  "contact_type"
     t.integer  "person_id"
     t.datetime "created_at"
     t.datetime "updated_at"

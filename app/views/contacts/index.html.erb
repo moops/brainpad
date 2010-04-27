@@ -1,40 +1,26 @@
-<h1>Listing contacts</h1>
+<% if (@contacts and @contacts.size > 0) %>
+<table width="100% cellpadding="2" cellspacing="0" class="searchResult">
+    <tr>
+        <th>name</th>
+        <th>email</th>
+        <th>home</th>
+        <th>work</th>
+        <th>cell</th>
+        <th colspan="3">&nbsp;</th></tr>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Phone home</th>
-    <th>Phone work</th>
-    <th>Phone cell</th>
-    <th>Address</th>
-    <th>City</th>
-    <th>Tags</th>
-    <th>Comments</th>
-    <th>Contact type</th>
-    <th>Person</th>
-  </tr>
-
-<% @contacts.each do |contact| %>
-  <tr>
-    <td><%=h contact.name %></td>
-    <td><%=h contact.email %></td>
-    <td><%=h contact.phone_home %></td>
-    <td><%=h contact.phone_work %></td>
-    <td><%=h contact.phone_cell %></td>
-    <td><%=h contact.address %></td>
-    <td><%=h contact.city %></td>
-    <td><%=h contact.tags %></td>
-    <td><%=h contact.comments %></td>
-    <td><%=h contact.contact_type %></td>
-    <td><%=h contact.person_id %></td>
-    <td><%= link_to 'Show', contact %></td>
-    <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-    <td><%= link_to 'Destroy', contact, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+    <%= render(:partial => 'data_rows', :collection => @contacts) %>
 </table>
+<%= will_paginate @contacts %>
+<% end %>
 
-<br />
-
-<%= link_to 'New contact', new_contact_path %>
+<p>
+<span class="label">tags</span>
+<%= link_to('refresh', :action => "refresh_tags") %><br/>
+<% for cur_tag in session[:contact_tags] %>
+    <%= link_to(cur_tag, contacts_path, :tag => cur_tag) %>,
+<% end %><p/>
+<h3><%= @form_header %></h3> 
+<div class="form">
+<% form_tag(:action => @form_action) do %>
+<%= render(:partial => 'form') %>
+<% end %></div>

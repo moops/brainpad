@@ -10,7 +10,6 @@ class CreateContacts < ActiveRecord::Migration
       t.string :city
       t.string :tags
       t.text :comments
-      t.integer :contact_type
       t.integer :person_id
 
       t.timestamps
