@@ -9,15 +9,18 @@ class ContactsController < ApplicationController
     @user = Person.find(session[:user_id])
     @order = params[:order] ? params[:order] : 'name'
     
-    unless session[:contact_tags]
-          logger.info "session tag list is empty"
-          session[:contact_tags] = getUniqueTags
+    if session[:contact_tags].empty?
+      logger.info "session contact tag list is empty"
+      session[:contact_tags] = getUniqueTags
     end
     
     conditions = "person_id = #{session[:user_id]}"
     if params[:tag]
+      logger.info "contacts tag[#{params[:tag]}]"
       conditions = "tags like '%#{params[:tag]}%' and person_id = #{session[:user_id]}"
       @tag = params[:tag]
+    else
+      logger.info "no tag param"
     end
     @contacts = Contact.paginate :page => params[:page], :conditions => conditions, :order => @order, :per_page => 10
 
@@ -110,9 +113,9 @@ class ContactsController < ApplicationController
   
     def getUniqueTags
       unique_tags = []
-      all_contacts = Contact.find_by_sql("select * from contacts where person_id = #{session[:user_id]}")
+      all_contacts = Contact.find :all, :conditions => "person_id = #{session[:user_id]}"
       all_contacts.each { |cur_contact|
-        cur_contact.tags.split(seperator = ' ') { |cur_tag|
+        cur_contact.tags.split.each { |cur_tag|
           unique_tags.push(cur_tag.strip)
         }
       }

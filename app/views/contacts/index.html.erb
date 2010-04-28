@@ -17,7 +17,7 @@
 <span class="label">tags</span>
 <%= link_to('refresh', :action => "refresh_tags") %><br/>
 <% for cur_tag in session[:contact_tags] %>
-    <%= link_to(cur_tag, contacts_path, :tag => cur_tag) %>,
+    <%= link_to(cur_tag, :controller => 'contacts', :tag => cur_tag) %>,
 <% end %><p/>
 <h3><%= @form_header %></h3> 
 <div class="form">
