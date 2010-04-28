@@ -1,3 +1,31 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  name: investors group
+  username: javakaiser
+  password: imp
+  url: www.investorsgroup.ca
+  description: investments
+  person_id: 1
 
+two:
+  name: pih
+  username: moops
+  password: imp
+  url: www.pih.ca
+  description: running club
+  person_id: 1
+  
+three:
+  name: imdb
+  username: javakaiser
+  password: imp
+  url: www.imdb.com
+  description: everything about movies and actors
+  person_id: 1
 
+four:
+  name: yahoo
+  username: java_kaiser
+  password: jdev
+  url: www.yahoo.com
+  description: junk mail and alternate search engine/potrtal
+  person_id: 1

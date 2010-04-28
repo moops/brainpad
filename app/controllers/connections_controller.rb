@@ -1,9 +1,21 @@
 class ConnectionsController < ApplicationController
+  
+  before_filter :authenticate
+  layout 'standard', :except => :show
+  
   # GET /connections
   # GET /connections.xml
   def index
-    @connections = Connection.all
+    @user = Person.find(session[:user_id])
+    @order = params[:order] ? params[:order] : 'name'
 
+    @connections = Connection.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => @order, :per_page => 10
+    
+    @connection = Connection.new #for the 'new' form
+    @form_header = 'new connection'
+    @form_action = 'create'
+    @form_btn_label = 'create'
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @connections }
@@ -35,6 +47,7 @@ class ConnectionsController < ApplicationController
   # GET /connections/1/edit
   def edit
     @connection = Connection.find(params[:id])
+    render(:partial => 'form')
   end
 
   # POST /connections
@@ -45,7 +58,7 @@ class ConnectionsController < ApplicationController
     respond_to do |format|
       if @connection.save
         flash[:notice] = 'Connection was successfully created.'
-        format.html { redirect_to(@connection) }
+        format.html { redirect_to(connections_path) }
         format.xml  { render :xml => @connection, :status => :created, :location => @connection }
       else
         format.html { render :action => "new" }

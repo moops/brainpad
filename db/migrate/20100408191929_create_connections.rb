@@ -2,7 +2,7 @@ class CreateConnections < ActiveRecord::Migration
   def self.up
     create_table :connections do |t|
       t.string :name
-      t.string :user_name
+      t.string :username
       t.string :password
       t.string :url
       t.text :description

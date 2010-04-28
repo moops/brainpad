@@ -1,33 +1,23 @@
-<p>
-  <b>Name:</b>
-  <%=h @connection.name %>
-</p>
+<html>
+<head>
+    <title><%= @connection.name %></title>
+    <%= stylesheet_link_tag 'brainpad' %>
+</head>
 
-<p>
-  <b>User name:</b>
-  <%=h @connection.user_name %>
-</p>
+<body style="margin-top: 50px;">
 
-<p>
-  <b>Password:</b>
-  <%=h @connection.password %>
-</p>
-
-<p>
-  <b>Url:</b>
-  <%=h @connection.url %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%=h @connection.description %>
-</p>
-
-<p>
-  <b>Person:</b>
-  <%=h @connection.person_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_connection_path(@connection) %> |
-<%= link_to 'Back', connections_path %>
+    <table cellpadding="3" cellspacing="0" border="0" align="center">
+        <tr>
+            <td><div class="label">name</div></td><td><%= @connection.name %></td></tr>
+        <tr>
+            <td><div class="label">username</div></td><td><%= @connection.username %></td></tr>
+        <tr>
+            <td><div class="label">password</div></td><td><%= @connection.password %></td></tr>
+        <tr>
+            <td><div class="label">url</div></td><td><%= @connection.url %></td></tr>
+        <tr>
+            <td><div class="label">description</div></td><td><%= @connection.description %></td></tr>
+    </table>
+  
+  </body>
+</html>

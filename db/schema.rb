@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20100415223218) do
 
   create_table "connections", :force => true do |t|
     t.string   "name"
-    t.string   "user_name"
+    t.string   "username"
     t.string   "password"
     t.string   "url"
     t.text     "description"

@@ -1,30 +1,22 @@
-<h1>Listing connections</h1>
+<% if (@connections and @connections.size > 0) %>
+<table width="100% cellpadding="2" cellspacing="0" class="searchResult">
+    <tr>
+        <th>name</th>
+        <th>username</th>
+        <th>password</th>
+        <th>url</th>
+        <th colspan="3">&nbsp;</th></tr>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>User name</th>
-    <th>Password</th>
-    <th>Url</th>
-    <th>Description</th>
-    <th>Person</th>
-  </tr>
 
-<% @connections.each do |connection| %>
-  <tr>
-    <td><%=h connection.name %></td>
-    <td><%=h connection.user_name %></td>
-    <td><%=h connection.password %></td>
-    <td><%=h connection.url %></td>
-    <td><%=h connection.description %></td>
-    <td><%=h connection.person_id %></td>
-    <td><%= link_to 'Show', connection %></td>
-    <td><%= link_to 'Edit', edit_connection_path(connection) %></td>
-    <td><%= link_to 'Destroy', connection, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+    <%= render(:partial => 'data_rows',:collection => @connections) %>
 </table>
+<% end %>
 
-<br />
+<%= will_paginate @connections %>
 
-<%= link_to 'New connection', new_connection_path %>
+<p>
+<h3><%= @form_header %></h3>
+<div class="form">
+<% form_tag(:action => @form_action) do %>
+<%= render(:partial => 'form') %>
+<% end %></div>
