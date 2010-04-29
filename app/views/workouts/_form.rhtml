@@ -1,0 +1,53 @@
+<% if @workout.id %>
+    <%= hidden_field_tag('workout[id]',@workout.id) %>
+    <%= hidden_field_tag('id',@workout.id) %>
+<% end %>
+<% if session[:user_id] %>
+    <%= hidden_field_tag('workout[person_id]',session[:user_id]) %>
+<% end %>
+<table cellpadding="3" cellspacing="0" border="0">
+    <tr>
+        <td id="errors" colspan="7">
+            <% unless @workout.errors.empty? %>
+                <ul>
+                <% @workout.errors.each_full do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+                </ul>
+            <% end %></td>
+            <% if flash[:notice] %>
+                <div class="notice"><%=h flash[:notice] %></div>
+            <% end %></td></tr>
+    <tr>
+        <td><div class="label">location</div></td>
+        <td><%= text_field('workout', 'location', :size => '37', :class => 'text') %></td>
+        <td><div class="label">type</div></td>
+        <td>
+            <%= select('workout','workout_type', Lookup.find_all_by_category(9).collect {|l| [ l.description, l.id ] }) %></td></tr>
+    <tr>
+        <td><div class="label">date</div></td>
+        <td ><%= calendar('workout','workout_on') %></td>
+        <td><div class="label">distance</div></td>
+        <td><%= text_field('workout', 'distance', :size => '13', :class => 'text') %></td></tr>
+        
+    <tr>
+        <td><div class="label">race</div></td>
+        <td><%= text_field('workout', 'race', :size => '37', :class => 'text') %></td>
+        <td><div class="label">duration</div></td>
+        <td><%= text_field('workout', 'duration', :size => '13', :class => 'text') %></td></tr>
+    <tr>
+        <td><div class="label">route</div></td>
+        <td><%= select('workout','route', Lookup.find_all_by_category(47).collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %>&nbsp;
+            <span class="label">weight</span>
+            <%= text_field('workout', 'weight', :size => '3', :class => 'text') %></td>
+        <td><div class="label">intensity</div></td>
+        <td><%= select('workout','intensity', [['1',1],['2',2],['3',3],['4',4],['5',5],['6',6],['7',7],['8',8],['9',9],['10',10]]) %></td></tr>
+    <tr>
+        <td><div class="label">description</div></td>
+        <td rowspan="2"><%= text_area('workout', 'description', :cols => 50, :rows => 2) %></td>
+        <td colspan="2">&nbsp;</td></tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td colspan="2" class="submit">
+            <%= submit_tag(@form_btn_label) %></td></tr>
+</table>

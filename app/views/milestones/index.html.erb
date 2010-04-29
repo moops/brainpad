@@ -1,0 +1,20 @@
+<h1>milestones</h1>
+
+<% @milestones.each do |milestone| %>
+
+<table>
+  <tr>
+    <td><%=h milestone.name %></td>
+    <td><input type="text" class="milestone_time" id="<%= milestone.id %>"/></td>
+
+    <td><%= link_to 'Show', milestone %></td>
+    <td><%= link_to 'Edit', edit_milestone_path(milestone) %></td>
+    <td><%= link_to 'Destroy', milestone, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  count('<%= milestone.id %>', '<%= milestone.milestone_at %>');
+</script>
+  
+<% end %>

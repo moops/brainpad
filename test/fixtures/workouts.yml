@@ -1,1 +1,51 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  location: elk lake
+  race:
+  route: 1
+  description: run around the lake with gerry
+  duration: 46
+  intensity: 7
+  weight: 200
+  distance: 10
+  workout_type: 3
+  workout_on: 2010-03-25
+  person_id: 1
+  
+two:
+  location: thetis lake
+  race:
+  route: 
+  description: with the pih group
+  duration: 65
+  intensity: 7
+  weight: 199
+  distance: 14
+  workout_type: 3
+  workout_on: 2010-03-28
+  person_id: 1
+  
+three:
+  location: elk lake
+  race:
+  route: 2
+  description: ride with the burnside group
+  duration: 145
+  intensity: 4
+  weight: 200
+  distance: 106
+  workout_type: 4
+  workout_on: 2010-03-30
+  person_id: 1
+  
+four:
+  location: crystal pool
+  race:
+  route: 
+  description: swim after work
+  duration: 60
+  intensity: 8
+  weight: 
+  distance: 2.5
+  workout_type: 5
+  workout_on: 2010-04-01
+  person_id: 1

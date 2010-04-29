@@ -9,14 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100415223218) do
+ActiveRecord::Schema.define(:version => 20100429213552) do
+
+  create_table "account_prices", :force => true do |t|
+    t.integer  "account_id"
+    t.float    "price"
+    t.date     "price_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
     t.string   "url"
     t.string   "price_url"
     t.string   "description"
-    t.integer  "account_type"
     t.float    "units"
     t.float    "price"
     t.boolean  "active"
@@ -77,6 +84,14 @@ ActiveRecord::Schema.define(:version => 20100415223218) do
     t.integer "category"
     t.string  "code"
     t.string  "description"
+  end
+
+  create_table "milestones", :force => true do |t|
+    t.string   "name"
+    t.date     "milestone_at"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "payments", :force => true do |t|

@@ -2,7 +2,7 @@ one:
   name: investors group
   username: javakaiser
   password: imp
-  url: www.investorsgroup.ca
+  url: http://www.investorsgroup.ca
   description: investments
   person_id: 1
 
@@ -10,7 +10,7 @@ two:
   name: pih
   username: moops
   password: imp
-  url: www.pih.ca
+  url: http://www.pih.ca
   description: running club
   person_id: 1
   
@@ -18,7 +18,7 @@ three:
   name: imdb
   username: javakaiser
   password: imp
-  url: www.imdb.com
+  url: http://www.imdb.com
   description: everything about movies and actors
   person_id: 1
 
@@ -26,6 +26,14 @@ four:
   name: yahoo
   username: java_kaiser
   password: jdev
-  url: www.yahoo.com
+  url: http://www.yahoo.com
   description: junk mail and alternate search engine/potrtal
+  person_id: 1
+  
+five:
+  name: virgin
+  username: cell number
+  password: imp
+  url: http://www.virginmobile.ca
+  description: cell phone
   person_id: 1

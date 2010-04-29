@@ -1,2 +1,39 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  name: chequing
+  url: www.coastcapitalsavings.com
+  price_url: 
+  description: basic chequing account
+  units: 245
+  price: 1
+  active: 1
+  person_id: 1
 
+two:
+  name: visa
+  url: www.visa.ca
+  price_url: www.cibcvisa.com
+  description: credit card
+  units: -1000
+  price: 1
+  active: 1
+  person_id: 1
+  
+three:
+  name: ing
+  url: www.ingdirect.ca
+  price_url: www.ingdirect.ca
+  description: high interest emergency account
+  units: 1006
+  price: 1
+  active: 1
+  person_id: 1
+  
+four:
+  name: investors
+  url: www.investorsgroup.ca
+  price_url: www.globeandmail.com
+  description: basic rrsp account
+  units: 235
+  price: 11.45
+  active: 1
+  person_id: 1

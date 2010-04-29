@@ -1,0 +1,30 @@
+<% if @milestone.id %>
+    <%= hidden_field_tag('milestone[id]',@milestone.id) %>
+    <%= hidden_field_tag('id',@milestone.id) %>
+<% end %>
+<% if session[:user_id] %>
+    <%= hidden_field_tag('milestone[person_id]',session[:user_id]) %>
+<% end %>
+<table cellpadding="3" cellspacing="0" border="0">
+    <tr>
+        <td id="errors" colspan="7">
+            <% unless @milestone.errors.empty? %>
+                <ul>
+                <% @milestone.errors.each_full do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+                </ul>
+            <% end %></td>
+            <% if flash[:notice] %>
+                <div class="notice"><%=h flash[:notice] %></div>
+            <% end %></td></tr>
+    <tr>
+        <td><div class="label">name</div></td>
+        <td><%= text_field('milestone', 'name', :size => '37', :class => 'text') %></td>
+        <td><div class="label">at</div></td>
+        <td ><%= calendar('milestone','milestone_at') %></td></tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td colspan="3" class="submit">
+            <%= submit_tag(@form_btn_label) %></td></tr>
+</table>

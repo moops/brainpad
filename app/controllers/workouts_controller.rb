@@ -1,8 +1,20 @@
 class WorkoutsController < ApplicationController
+  
+  before_filter :authenticate
+  layout 'standard.html', :except => [:show]
+  
   # GET /workouts
   # GET /workouts.xml
-  def index
-    @workouts = Workout.all
+  def index    
+    @user = Person.find(session[:user_id])
+    @order = params[:order] ? params[:order] : 'due'
+    @workouts = Workout.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => @order, :per_page => 10
+
+    @workout = Workout.new #for the 'new' form
+    @workout.workout_on = Date.today.strftime("%b %d, %Y")
+    @form_header = 'new workout'
+    @form_action = 'create'
+    @form_btn_label = 'create'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,6 +47,7 @@ class WorkoutsController < ApplicationController
   # GET /workouts/1/edit
   def edit
     @workout = Workout.find(params[:id])
+    render(:partial => 'form')
   end
 
   # POST /workouts
@@ -45,7 +58,7 @@ class WorkoutsController < ApplicationController
     respond_to do |format|
       if @workout.save
         flash[:notice] = 'Workout was successfully created.'
-        format.html { redirect_to(@workout) }
+        format.html { redirect_to(reminders_path) }
         format.xml  { render :xml => @workout, :status => :created, :location => @workout }
       else
         format.html { render :action => "new" }

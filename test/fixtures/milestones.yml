@@ -1,0 +1,14 @@
+one:
+  name: 40th bitrthday
+  milestone_at: 2009-07-09
+  person_id: 1
+
+two:
+  name: ironman florida
+  milestone_at: 2009-11-06
+  person_id: 1
+  
+three:
+  name: first mountaineering course
+  milestone_at: 2010-07-01
+  person_id: 1

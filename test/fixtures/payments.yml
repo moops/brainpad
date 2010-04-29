@@ -1,3 +1,45 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  description: mcdonalds
+  tags: restaurant
+  amount: -4.34
+  payment_on: 2010-04-03
+  account_id: 1
+  transfer_from:
+  person_id: 1
 
+two:
+  description: cnx salary
+  tags: 
+  amount: 2082.62
+  payment_on: 2010-04-15
+  account_id: 1
+  transfer_from:
+  person_id: 1  
+
+three:
+  description: hiking boots
+  tags: recreation-equip
+  amount: -123.34
+  payment_on: 2010-04-04
+  account_id: 2
+  transfer_from:
+  person_id: 1
+  
+four:
+  description: swimming
+  tags: recreation-fee
+  amount: -15.34
+  payment_on: 2010-04-06
+  account_id: 1
+  transfer_from:
+  person_id: 1
+  
+five:
+  description: groceries
+  tags: groceries
+  amount: -64.77
+  payment_on: 2010-04-07
+  account_id: 2
+  transfer_from:
+  person_id: 1
 

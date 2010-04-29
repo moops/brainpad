@@ -1,6 +1,6 @@
-function openWindow(width, height, name) {
-  var options = "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,alwaysRaised=yes,width="+width+",height="+height;
-  var w = window.open("",name,options);
+function openWindow(inWidth,inHeight,inName) {
+  var options = "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,alwaysRaised=yes,width=" + inWidth + ",height=" + inHeight;
+  var w = window.open("",inName,options);
   if (window.focus) {w.focus()}
 }
 
@@ -14,7 +14,7 @@ function count(id,until) {
   var hr = Math.floor((duration % 86400) / 3600);
   var min = Math.floor((duration % 3600) / 60);
   var sec = Math.floor(duration % 60);
-
+  
   if(min < 10) {
     min = "0" + min;
   }
@@ -33,6 +33,7 @@ function count(id,until) {
   if (then < now) {
     val += " ago";
   }
+  
   document.getElementById(id).value = val;
   setTimeout("count('" + id + "','" + until + "')", 1000);
 }

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :milestones
+
   map.resources :workouts
 
   map.resources :reminders

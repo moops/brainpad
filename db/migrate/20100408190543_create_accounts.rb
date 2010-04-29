@@ -5,7 +5,6 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :url
       t.string :price_url
       t.string :description
-      t.integer :account_type
       t.float :units
       t.float :price
       t.boolean :active
