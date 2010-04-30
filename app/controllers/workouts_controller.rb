@@ -7,7 +7,7 @@ class WorkoutsController < ApplicationController
   # GET /workouts.xml
   def index    
     @user = Person.find(session[:user_id])
-    @order = params[:order] ? params[:order] : 'due'
+    @order = params[:order] ? params[:order] : 'workout_on desc'
     @workouts = Workout.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => @order, :per_page => 10
 
     @workout = Workout.new #for the 'new' form
@@ -58,7 +58,7 @@ class WorkoutsController < ApplicationController
     respond_to do |format|
       if @workout.save
         flash[:notice] = 'Workout was successfully created.'
-        format.html { redirect_to(reminders_path) }
+        format.html { redirect_to(workouts_path) }
         format.xml  { render :xml => @workout, :status => :created, :location => @workout }
       else
         format.html { render :action => "new" }

@@ -1,40 +1,25 @@
-<h1>Listing workouts</h1>
-
-<table>
-  <tr>
-    <th>Location</th>
-    <th>Race</th>
-    <th>Route</th>
-    <th>Description</th>
-    <th>Duration</th>
-    <th>Intensity</th>
-    <th>Weight</th>
-    <th>Distance</th>
-    <th>Workout type</th>
-    <th>Workout on</th>
-    <th>Person</th>
-  </tr>
-
-<% @workouts.each do |workout| %>
-  <tr>
-    <td><%=h workout.location %></td>
-    <td><%=h workout.race %></td>
-    <td><%=h workout.route %></td>
-    <td><%=h workout.description %></td>
-    <td><%=h workout.duration %></td>
-    <td><%=h workout.intensity %></td>
-    <td><%=h workout.weight %></td>
-    <td><%=h workout.distance %></td>
-    <td><%=h workout.workout_type %></td>
-    <td><%=h workout.workout_on %></td>
-    <td><%=h workout.person_id %></td>
-    <td><%= link_to 'Show', workout %></td>
-    <td><%= link_to 'Edit', edit_workout_path(workout) %></td>
-    <td><%= link_to 'Destroy', workout, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+<% if (@workouts and @workouts.size > 0) %>
+<table width="100% cellpadding="2" cellspacing="0" class="searchResult">
+    <tr>
+        <th>date</th>
+        <th>type</th>
+        <th>location</th>
+        <th>distance</th>
+        <th>duration</th>
+        <th colspan="3">&nbsp;</th></tr>
+    
+	<%= render(:partial => 'data_rows', :collection => @workouts) %>
 </table>
+<% end %>
 
-<br />
+<%= will_paginate @workouts %>
 
-<%= link_to 'New workout', new_workout_path %>
+<p>
+<div style="float:right;">
+    <%= link_to("reports", :action => "types_by_time") %></div>
+<h3><%= @form_header %></h3>
+<div class="form">
+<% form_tag(:action => @form_action) do %>
+<%= render(:partial => "form") %>
+<% end %>
+</div>
