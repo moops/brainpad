@@ -7,12 +7,9 @@ class MilestonesController < ApplicationController
   # GET /milestones.xml
   def index    
     @user = Person.find(session[:user_id])
-    @milestones = Milestone.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => 'milestone_at', :per_page => 10
+    @milestones = get_milestones
 
     @milestone = Milestone.new #for the 'new' form
-    @form_header = 'new milestone'
-    @form_action = 'create'
-    @form_btn_label = 'create'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -59,7 +56,10 @@ class MilestonesController < ApplicationController
         format.html { redirect_to(milestones_path) }
         format.xml  { render :xml => @milestone, :status => :created, :location => @milestone }
       else
-        format.html { render :action => "new" }
+        format.html { 
+          @milestones = get_milestones
+          render(:action => 'index') 
+        }
         format.xml  { render :xml => @milestone.errors, :status => :unprocessable_entity }
       end
     end
@@ -73,7 +73,7 @@ class MilestonesController < ApplicationController
     respond_to do |format|
       if @milestone.update_attributes(params[:milestone])
         flash[:notice] = 'Milestone was successfully updated.'
-        format.html { redirect_to(@milestone) }
+        format.html { redirect_to(milestones_path) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -93,4 +93,11 @@ class MilestonesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+  
+  def get_milestones
+    Milestone.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => 'milestone_at', :per_page => 10
+  end
+  
 end

@@ -8,7 +8,7 @@ class RemindersController < ApplicationController
   def index
     @user = Person.find(session[:user_id])
     @order = params[:order] ? params[:order] : 'due'
-    @reminders = Reminder.paginate :page => params[:page], :conditions => "done = 0 and person_id = #{session[:user_id]}", :order => @order, :per_page => 10
+    @reminders = Reminder.paginate :page => params[:page], :conditions => "(done = 0 or done = 'f') and person_id = #{session[:user_id]}", :order => @order, :per_page => 10
 
     @reminder = Reminder.new #for the 'new' form
     @reminder.due = Date.today.strftime("%b %d, %Y")

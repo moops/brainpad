@@ -15,7 +15,10 @@ class LinksController < ApplicationController
     @recently_clicked = Link.find(:all, :limit => 18, :conditions => "person_id = #{session[:user_id]}", :order => 'last_clicked desc')
     @recently_added = Link.find(:all, :limit => 8, :conditions => "person_id = #{session[:user_id]}", :order => 'created_at desc')
     @most_often = Link.find(:all, :limit => 18, :conditions => "person_id = #{session[:user_id]}", :order => 'clicks desc')
-    @random = Link.find(:all, :limit => 8, :conditions => "person_id = #{session[:user_id]}", :order => 'rand()')
+    @random = Link.find(:all, :limit => 8, :conditions => "person_id = #{session[:user_id]}", :order => 'random()')
+    @milestone = Milestone.find(:first, :conditions => "person_id = #{session[:user_id]}")
+    @due_today = Reminder.todays(@user.id)
+    logger.info("reminders due today: #{@due_toady.inspect}")
 
     respond_to do |format|
       format.html # index.html.erb

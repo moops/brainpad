@@ -3,7 +3,7 @@
 one:
   description: test first reminder
   done: 0
-  priority: 1
+  priority: 28
   reminder_type: 40
   interval:
   repeat_until:
@@ -13,9 +13,39 @@ one:
 two:
   description: test second reminder
   done: 0
-  priority: 1
+  priority: 28
   reminder_type: 41
   interval:
   repeat_until:
   due: 2010-04-30
+  person_id: 1
+  
+three:
+  description: test third reminder
+  done: 0
+  priority: 28
+  reminder_type: 41
+  interval:
+  repeat_until:
+  due: 2010-05-02
+  person_id: 1
+  
+four:
+  description: test fourth reminder
+  done: 0
+  priority: 28
+  reminder_type: 41
+  interval:
+  repeat_until:
+  due: 2010-05-02
+  person_id: 1
+  
+five:
+  description: test fifth reminder
+  done: 0
+  priority: 28
+  reminder_type: 41
+  interval:
+  repeat_until:
+  due: 2010-05-04
   person_id: 1

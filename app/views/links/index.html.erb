@@ -83,3 +83,26 @@ new DiggWidget({id: "digg-widget", layout: 1, colors: {bdyBg: "#eee", lnk: "#333
 
     <div  id="link_list"></div>
 </div>
+
+<% unless @due_today.empty? %>
+<h3>due today</h3>
+<table width="100% cellpadding="2" cellspacing="0" class="searchResult">
+	<% for reminder in @due_today %>
+	<tr>
+		<td><%= Lookup.find_by_id(reminder.reminder_type).description %></td>
+		<td><%= Lookup.find_by_id(reminder.priority).description %></td>
+		<td><%= reminder.description[0,40] + (reminder.description.length > 40 ? '...' : '') %></td>
+	</tr>
+	<% end %>
+</table>
+<% end %>
+
+<div>
+	<span class="label">next milestone:</span>	
+	<%=link_to_remote(@milestone.name, :update => 'form', :method => :get, :url => edit_milestone_path(@milestone)) %>
+  	<input type="text" class="milestone_time" id="<%= @milestone.id %>"/>
+	
+	<script type="text/javascript">
+  		count('<%= @milestone.id %>', '<%= @milestone.milestone_at %>');
+	</script>
+</div>

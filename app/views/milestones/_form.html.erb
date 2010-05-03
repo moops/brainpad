@@ -1,7 +1,5 @@
-<% if @milestone.id %>
-    <%= hidden_field_tag('milestone[id]',@milestone.id) %>
-    <%= hidden_field_tag('id',@milestone.id) %>
-<% end %>
+<% form_for(@milestone) do |f| %>
+
 <% if session[:user_id] %>
     <%= hidden_field_tag('milestone[person_id]',session[:user_id]) %>
 <% end %>
@@ -14,17 +12,14 @@
                     <li><%= message %></li>
                 <% end %>
                 </ul>
-            <% end %></td>
-            <% if flash[:notice] %>
-                <div class="notice"><%=h flash[:notice] %></div>
             <% end %></td></tr>
     <tr>
         <td><div class="label">name</div></td>
-        <td><%= text_field('milestone', 'name', :size => '37', :class => 'text') %></td>
+        <td><%= f.text_field(:name, :size => '37', :class => 'text') %></td>
         <td><div class="label">at</div></td>
-        <td ><%= calendar('milestone','milestone_at') %></td></tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td colspan="3" class="submit">
-            <%= submit_tag(@form_btn_label) %></td></tr>
+        <td width="200"><%= calendar('milestone','milestone_at', true) %></td>
+        <td class="submit">
+        	<% btn_label = @milestone.id ? 'update' : 'create' %>
+            <%= f.submit(btn_label) %></td></tr>
 </table>
+<% end %>

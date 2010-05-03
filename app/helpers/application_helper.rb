@@ -13,7 +13,8 @@ module ApplicationHelper
   def calendar(obj, attr, time=false, onupdate=nil)
     #http://www.dynarch.com/demos/jscalendar/doc/html/reference.html#node_sec_5.3.5
     size = time ? 19 : 12
-    val = text_field(obj, attr, :maxlength => 19, :size => size, :class => 'text') + "\n"
+    val = "<div>"
+    val += text_field(obj, attr, :maxlength => 19, :size => size, :class => 'text') + "\n"
     val += "<img src=\"/images/calendar.png\"\n"
     val += "      id=\"#{obj}_#{attr}_tr\"\n"
     val += "      class=\"calIcon\"\n"
@@ -37,6 +38,7 @@ module ApplicationHelper
     val += "      cache          :    true\n"
     val += "      });\n"
     val += "</script>\n"
+    val += "</div>\n"
   end
   
 end

@@ -1,22 +1,19 @@
-<div id="form" class="form">
-<h3><%= @form_header %></h3>
-<% form_tag(:action => @form_action) do %>
-<%= render(:partial => 'form') %>
+<% if flash[:notice] %>
+    <div class="notice"><%=h flash[:notice] %></div>
 <% end %>
+
+<div id="form" class="form">
+	<%= render(:partial => 'form') %>
 </div>
+</p>
 
 <% @milestones.each do |milestone| %>
-
-<table>
-  <tr>
-    <td><%=link_to_remote(milestone.name, :update => 'form', :method => :get, :url => edit_milestone_path(milestone)) %></td>
-    <td><input type="text" class="milestone_time" id="<%= milestone.id %>"/></td>
-
-    <td><%= link_to 'Show', milestone %></td>
-    <td><%= link_to 'Edit', edit_milestone_path(milestone) %></td>
-    <td><%= link_to 'Destroy', milestone, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-</table>
+<div>
+  	<%=link_to_remote(milestone.name, :update => 'form', :method => :get, :url => edit_milestone_path(milestone)) %>
+  	<input type="text" class="milestone_time" id="<%= milestone.id %>"/>
+	<span class="right"><%= link_to(image_tag("delete.png", :size => "15x15", :border => 0), 
+                    milestone_path(milestone), :method => :delete, :confirm => "really delete #{milestone.name}") %></span>
+</div>
 
 <script type="text/javascript">
   count('<%= milestone.id %>', '<%= milestone.milestone_at %>');
