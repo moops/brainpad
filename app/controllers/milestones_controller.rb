@@ -6,7 +6,6 @@ class MilestonesController < ApplicationController
   # GET /milestones
   # GET /milestones.xml
   def index    
-    @user = Person.find(session[:user_id])
     @milestones = get_milestones
 
     @milestone = Milestone.new #for the 'new' form
@@ -49,7 +48,7 @@ class MilestonesController < ApplicationController
   # POST /milestones.xml
   def create
     @milestone = Milestone.new(params[:milestone])
-
+    logger.info("creating milestone: #{@milestone.inspect}")
     respond_to do |format|
       if @milestone.save
         flash[:notice] = 'Milestone was successfully created.'
@@ -99,5 +98,5 @@ class MilestonesController < ApplicationController
   def get_milestones
     Milestone.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => 'milestone_at', :per_page => 10
   end
-  
+   
 end

@@ -2,13 +2,13 @@
     border: 1px solid #639cce;
 }
 
-a.nav, a.nav:link, a.nav:visited {
-    color: #639cce;
+a.nav_off {
+    color:#639cce;
 }
 
-a.nav:hover { 
-    background: #639cce;
-    color: #fff;
+a.nav_off:hover, a.nav_on, a.nav_on:visited, a.nav_on:hover { 
+    background:#639cce;
+    color:#fff;
 }
 
 #content {

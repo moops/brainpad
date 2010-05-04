@@ -14,17 +14,16 @@
 
 <body>
     <div id="header"><%= show_image('/images/headers/' + (Time.now.sec % 13).to_s,700,100) %></div>
-    
     <div id="navbar">
-        <%= link_to('home',       links_path,     :class => 'nav' ) %>
-        <%= link_to('contacts',   contacts_path,  :class => 'nav' ) %>
-        <%= link_to('workouts',   workouts_path,  :class => 'nav' ) %>
-        <%= link_to('money',      payments_path,  :class => 'nav' ) %>
-        <%= link_to('journal' ,   journals_path,  :class => 'nav' ) %>
-        <%= link_to('calendar' ,  reminders_path, :class => 'nav' ) %>
-        <%= link_to('photos' ,  'http://photo.raceweb.ca',   :target => '_blank',  :class => 'nav' ) %>
-        <%= link_to('conn' ,      connections_path,:class => 'nav' ) %>
-        <%= link_to('milestones', milestones_path, :class => 'nav' ) %>
+        <%= link_to('home',       links_path,     :class => (params[:controller] == 'links' ? 'nav_on' : 'nav_off') ) %>
+        <%= link_to('contacts',   contacts_path,  :class => (params[:controller] == 'contacts' ? 'nav_on' : 'nav_off') ) %>
+        <%= link_to('workouts',   workouts_path,  :class => (params[:controller] == 'workouts' ? 'nav_on' : 'nav_off') ) %>
+        <%= link_to('money',      payments_path,  :class => (params[:controller] == 'payments' ? 'nav_on' : 'nav_off') ) %>
+        <%= link_to('journal' ,   journals_path,  :class => (params[:controller] == 'journals' ? 'nav_on' : 'nav_off') ) %>
+        <%= link_to('calendar' ,  reminders_path, :class => (params[:controller] == 'reminders' ? 'nav_on' : 'nav_off') ) %>
+        <%= link_to('photos' ,  'http://photo.raceweb.ca',   :target => '_blank',  :class => 'nav_off' ) %>
+        <%= link_to('conn' ,      connections_path,:class => (params[:controller] == 'connections' ? 'nav_on' : 'nav_off') ) %>
+        <%= link_to('milestones', milestones_path, :class => (params[:controller] == 'milestones' ? 'nav_on' : 'nav_off') ) %>
         <div class="clear"></div>
     </div>
     
@@ -37,10 +36,10 @@
     
     <div id="footer">
         <div id="styleLinks">
-            <%= link_to(image_tag('910801_link.png', :size => '15x15', :border => 0), :action => 'list', :style => "910801") %>
-            <%= link_to(image_tag('639CCE_link.png', :size => '15x15', :border => 0), :action => 'list', :style => "639ccE") %>
-            <%= link_to(image_tag('677b61_link.png', :size => '15x15', :border => 0), :action => 'list', :style => "677b61") %>
-            <%= link_to(image_tag('ff9933_link.png', :size => '15x15', :border => 0), :action => 'list', :style => "ff9933") %></div>
+            <%= link_to(image_tag('910801_link.png', :size => '15x15', :border => 0), :action => 'index', :style => "910801") %>
+            <%= link_to(image_tag('639CCE_link.png', :size => '15x15', :border => 0), :action => 'index', :style => "639ccE") %>
+            <%= link_to(image_tag('677b61_link.png', :size => '15x15', :border => 0), :action => 'index', :style => "677b61") %>
+            <%= link_to(image_tag('ff9933_link.png', :size => '15x15', :border => 0), :action => 'index', :style => "ff9933") %></div>
         <div id="user">
             <% if (session[:user_id]) %>
                 logged in as <%= @user.name %>.

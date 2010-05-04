@@ -9,7 +9,7 @@ class ContactsController < ApplicationController
     @user = Person.find(session[:user_id])
     @order = params[:order] ? params[:order] : 'name'
     
-    if session[:contact_tags].empty?
+    if !session[:contact_tags] or session[:contact_tags].empty?
       logger.info "session contact tag list is empty"
       session[:contact_tags] = getUniqueTags
     end

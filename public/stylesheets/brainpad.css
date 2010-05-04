@@ -48,7 +48,8 @@ textarea, input, select {
     -moz-border-radius: 8px;
 }
 
-a.nav, a.nav:link, a.nav:visited {
+a.nav_off, a.nav_on:visited {
+    text-decoration: none;
     padding: 0px 5px 0px 5px; 
     height:25px;
     background:#fff;
@@ -59,13 +60,6 @@ a.nav, a.nav:link, a.nav:visited {
     overflow: hidden;
     float: left;
     font-weight: bold;
-}
-
-a.nav:hover {
-    text-decoration: none;
-    font-weight: bold;
-    color: #fff; 
-    background: #eee;
 }
 
 #content {
@@ -347,7 +341,7 @@ select {
 
 .milestone_time { 
   border: 0px;
-  font-size: 1.8em;
+  font-size: 1.4em;
   background: #fff;
 }
 

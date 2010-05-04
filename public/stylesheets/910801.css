@@ -2,11 +2,11 @@
     border:1px solid #910801;
 }
 
-a.nav, a.nav:link, a.nav:visited {
+a.nav_off {
     color:#910801;
 }
 
-a.nav:hover { 
+a.nav_off:hover, a.nav_on, a.nav_on:visited, a.nav_on:hover { 
     background:#910801;
     color:#fff;
 }
