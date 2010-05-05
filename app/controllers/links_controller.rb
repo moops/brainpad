@@ -6,20 +6,16 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.xml
   def index
-    @user = Person.find(session[:user_id])
     unless session[:tags]
-      logger.info "session tag list is empty"
       session[:tags] = getUniqueTags
     end
-    logger.info "index() user: #{@user.inspect}"
-    @all = Link.find(:all, :limit => 18, :conditions => "person_id = #{session[:user_id]}")
+    @all = Link.find(:all, :conditions => "person_id = #{session[:user_id]}")
     @recently_clicked = @all.sort { |a,b| b.last_clicked<=>(a.last_clicked) }[0,8]
     @recently_added = @all.sort { |a,b| b.created_at<=>(a.created_at) }[0,8]
     @most_often = @all.sort { |a,b| b.clicks<=>a.clicks}[0,18]
     @random = @all.sort_by { rand }[0,8]
     @milestone = Milestone.find(:first, :conditions => "person_id = #{session[:user_id]}")
     @due_today = Reminder.todays(@user.id)
-    logger.info("reminders due today: #{@due_toady.inspect}")
 
     respond_to do |format|
       format.html # index.html.erb
