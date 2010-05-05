@@ -2,20 +2,20 @@
     <div class="notice"><%=h flash[:notice] %></div><p/>
 <% end %>
 
+<div class="left">
+    <div class="label" style="text-align:left;">most often</div>
+    <ul class="links">
+    <% for cur_link in @most_often %>
+        <li>(<%=link_to(cur_link.clicks, :action => "edit", :id => cur_link.id) %>)<%=link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
+    <% end %>
+    </ul>
+</div>
 
 <div class="left">
     <div class="label" style="text-align:left;">most recent</div>
     <ul class="links">
     <% for cur_link in @recently_clicked %>
         <li><%= link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
-    <% end %>
-    </ul>
-</div>
-<div class="left">
-    <div class="label" style="text-align:left;">most often</div>
-    <ul class="links">
-    <% for cur_link in @most_often %>
-        <li>(<%=link_to(cur_link.clicks, :action => "edit", :id => cur_link.id) %>)<%=link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
 </div>

@@ -12,10 +12,11 @@ class LinksController < ApplicationController
       session[:tags] = getUniqueTags
     end
     logger.info "index() user: #{@user.inspect}"
-    @recently_clicked = Link.find(:all, :limit => 18, :conditions => "person_id = #{session[:user_id]}", :order => 'last_clicked desc')
-    @recently_added = Link.find(:all, :limit => 8, :conditions => "person_id = #{session[:user_id]}", :order => 'created_at desc')
-    @most_often = Link.find(:all, :limit => 18, :conditions => "person_id = #{session[:user_id]}", :order => 'clicks desc')
-    @random = Link.find(:all, :limit => 8, :conditions => "person_id = #{session[:user_id]}", :order => 'rand()')
+    @all = Link.find(:all, :limit => 18, :conditions => "person_id = #{session[:user_id]}")
+    @recently_clicked = @all.sort { |a,b| b.last_clicked<=>(a.last_clicked) }[0,8]
+    @recently_added = @all.sort { |a,b| b.created_at<=>(a.created_at) }[0,8]
+    @most_often = @all.sort { |a,b| b.clicks<=>a.clicks}[0,18]
+    @random = @all.sort_by { rand }[0,8]
     @milestone = Milestone.find(:first, :conditions => "person_id = #{session[:user_id]}")
     @due_today = Reminder.todays(@user.id)
     logger.info("reminders due today: #{@due_toady.inspect}")
