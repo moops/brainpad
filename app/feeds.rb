@@ -9,7 +9,8 @@ module Feeds
       'http://feeds.digg.com/digg/popular.rss', 
       'http://feeds2.feedburner.com/cyclingnews/news']
     feeds = Array.new
-    feed_urls.each do |name, url|
+    for url in feed_urls
+      puts('url = ' + url)
       open(url) do |http|
         response = http.read
         result = RSS::Parser.parse(response, false)

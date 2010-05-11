@@ -12,16 +12,15 @@ class LinksController < ApplicationController
       session[:tags] = getUniqueTags
     end
     @all = Link.find(:all, :conditions => "person_id = #{session[:user_id]}")
-    @recently_clicked_1 = @all.sort { |a,b| b.last_clicked<=>(a.last_clicked) }[0,8]
-    @recently_clicked_2 = @all.sort { |a,b| b.last_clicked<=>(a.last_clicked) }[9,16]
-    @recently_added = @all.sort { |a,b| b.created_at<=>(a.created_at) }[0,8]
-    @most_often = @all.sort { |a,b| b.clicks<=>a.clicks}[0,18]
-    @random = @all.sort_by { rand }[0,8]
+    @recently_clicked = @all.sort { |a,b| b.last_clicked<=>(a.last_clicked) }[0,9]
+    @recently_added = @all.sort { |a,b| b.created_at<=>(a.created_at) }[0,9]
+    @most_often_1 = @all.sort { |a,b| b.clicks<=>a.clicks}[0,9]
+    @most_often_2 = @all.sort { |a,b| b.clicks<=>a.clicks}[9,14]
+    @random = @all.sort_by { rand }[0,9]
     @milestone = Milestone.find(:first, :conditions => "person_id = #{session[:user_id]}")
     @due_today = Reminder.todays(@user.id)
     @feeds = Feeds.get_feeds
-    logger.info('feeds: ' + @feeds[2].inspect)
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @links }

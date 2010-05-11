@@ -3,10 +3,6 @@ class Link < ActiveRecord::Base
   belongs_to :person
 
   def get_description
-    description = self.name
-    if self.comments
-      description << " - #{self.comments}"
-    end
-    description
+    self.name + (self.comments ? " - #{self.comments}" : '')
   end
 end
