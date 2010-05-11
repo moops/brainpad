@@ -20,7 +20,7 @@ class LinksController < ApplicationController
     @milestone = Milestone.find(:first, :conditions => "person_id = #{session[:user_id]}")
     @due_today = Reminder.todays(@user.id)
     @feeds = Feeds.get_feeds
-    logger.info('feeds: ' + @feeds.inspect)
+    logger.info('feeds: ' + @feeds[2].inspect)
 
     respond_to do |format|
       format.html # index.html.erb
