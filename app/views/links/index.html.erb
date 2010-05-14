@@ -60,28 +60,23 @@
         <li><a href="http://maps.google.ca/maps?ll=<%=@user.map_center%>&spn=0.127157,0.246901&hl=en">maps</a></li>
     <% end %>
         <li><a href="http://tvlistings3.zap2it.com/partners/grid.asp?partner_id=097">tv</a></li>
-        <li><a href="javascript:location.href='http://brainpad.raceweb.ca/link/post?url='+encodeURIComponent(location.href)+'&name='+encodeURIComponent(document.title)">poster</a></li>
+        <li><a href="javascript:location.href='http://localhost:3000/links/new?url='+encodeURIComponent(location.href)+'&name='+encodeURIComponent(document.title)">poster</a></li>
         <li><%= link_to('reports', {:controller => 'report', :action => 'index'}) %></li>
     </ul>
 </div>
 
 <div style="clear: left;"></div>
 
-<div>
-    <span class="label" style="text-align:left;">tags</span>
-    <%= link_to('refresh', :action => "refresh_tags") %> |
-    <%= link_to('edit links', :action => "list") %> |
-    <%= link_to('find links', :action => "find") %> |
-    <%= link_to('clean', :action => "clean") %><br/>
+<div id="tags">
+    <span class="label" style="text-align:left;">tags</span>       
+    <%= link_to_remote('refresh', :url => refresh_tags_links_path, :update => "tags") %> |
+    <%= link_to('clean', clean_links_path) %><br/>
 
     <% for cur_tag in session[:tags] %>
-        
-        <%= link_to_remote(cur_tag,
-                         :url => find_links_url(:tag => cur_tag), 
-                         :update => "found_links") %>,
+        <%= link_to_remote(cur_tag, :url => find_links_url(:tag => cur_tag), :update => "found_links") %>,
     <% end %><p/>
 
-    <div  id="found_links"></div>
+    <div id="found_links"></div>
 </div>
 
 <div style="clear: left;"></div>

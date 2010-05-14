@@ -1,0 +1,36 @@
+<% if (@links and @links.size > 0) %>
+
+<table width="100% cellpadding="2" cellspacing="0" class="searchResult">
+    <tr>
+        <th>name</th>
+        <th>tags</th>
+        <th>last clicked</th>
+        <th>clicks</th>
+        <th>url</th>
+        <th>&nbsp;</th></tr>
+
+    <% @links.each_with_index { |cur_link,i| %>   
+        
+    <tr class="<%= i.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
+        <td><%= link_to(cur_link.name[0,15], link_path(cur_link), :title => cur_link.get_description) %></td>
+        <td><%= cur_link.tags %></td>
+        
+        <% if cur_link.last_clicked %>
+            <td><%= cur_link.last_clicked.strftime(DATE_FORMAT) %></td>
+        <% else %>
+            <td>never</td>
+        <% end %>
+        
+        <td><%= cur_link.clicks %></td>
+        <td><%= cur_link.url[0,25] + (cur_link.url.length > 25 ? '...' : '') %></td>
+        <td><%= link_to(image_tag('delete.png', :size => '15x15', :border => 0), 
+                    link_path(cur_link), :method => :delete,
+                    :confirm => "really delete #{cur_link.name}?") %></td></tr>
+    <% } %>             
+</table>
+
+<% else %>
+    no links found
+<% end %>
+        
+<%= will_paginate @links %>

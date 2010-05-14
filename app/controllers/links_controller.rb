@@ -44,7 +44,15 @@ class LinksController < ApplicationController
   # GET /links/new
   # GET /links/new.xml
   def new
-    @link = Link.new
+    @link = Link.find_by_url(params[:url].sub('http://',''))
+    if @link
+      flash[:notice] = "#{@link.url} already exists"
+      redirect_to(links_path)
+    end
+    @link = Link.new unless @link 
+    @link.name = params[:name].downcase
+    @link.url = params[:url]
+    @link.url.sub!('http://','')
 
     respond_to do |format|
       format.html # new.html.erb
@@ -60,12 +68,12 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.xml
   def create
-    @link = Link.new(params[:link])
-
+    @link = Link.new(params[:link])   
+    
     respond_to do |format|
       if @link.save
         flash[:notice] = 'Link was successfully created.'
-        format.html { redirect_to(@link) }
+        format.html { redirect_to(links_path) }
         format.xml  { render :xml => @link, :status => :created, :location => @link }
       else
         format.html { render :action => "new" }
@@ -112,6 +120,16 @@ class LinksController < ApplicationController
       format.html { render :partial => 'found_links' }
       format.xml  { render :xml => @found_links }
     end
+  end
+  
+  # GET /links/clean
+  def clean
+    @links = Link.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => :name, :per_page => 15
+  end
+  
+  # GET /link/refresh_tags
+  def refresh_tags
+    session[:tags] = getUniqueTags
   end
   
   private
