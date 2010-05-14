@@ -171,6 +171,10 @@ a.nav_off, a.nav_on:visited {
     display: inline;
 }
 
+#found_links {
+    padding-bottom: 10px;
+}
+
 #copyright {
     width: 25%;
     float: right;
