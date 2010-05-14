@@ -7,7 +7,8 @@ module Feeds
     feed_urls = [
       'http://feeds.feedburner.com/TechCrunch', 
       'http://feeds.digg.com/digg/popular.rss', 
-      'http://feeds2.feedburner.com/cyclingnews/news']
+      'http://feeds2.feedburner.com/cyclingnews/news',
+      'http://feeds.wired.com/wired/index?format=xml']
     feeds = Array.new
     for url in feed_urls
       puts('url = ' + url)

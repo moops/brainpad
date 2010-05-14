@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="left">
-    <div class="label" style="text-align:left;">most often</div>
+    <div class="label" style="text-align:left;">often</div>
     <ul class="links">
     <% for cur_link in @most_often_1 %>
         <li>(<%=link_to(cur_link.clicks, :action => "edit", :id => cur_link.id) %>)<%=link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
@@ -21,7 +21,7 @@
 </div>
 
 <div class="left">
-    <div class="label" style="text-align:left;">most recent</div>
+    <div class="label" style="text-align:left;">recent</div>
     <ul class="links">
     <% for cur_link in @recently_clicked %>
         <li><%= link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
@@ -30,7 +30,7 @@
 </div>
 
 <div class="left">
-    <div class="label" style="text-align:left;">recently added</div>
+    <div class="label" style="text-align:left;">new</div>
     <ul class="links">
     <% for cur_link in @recently_added %>
         <li><%= link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
@@ -48,7 +48,7 @@
 </div>
 
 <div class="left">
-    <div class="label" style="text-align:left;">other stuff</div>
+    <div class="label" style="text-align:left;">other</div>
     <ul class="links">
     <% if @user.mail_url %>
         <li><a href="<%=@user.mail_url%>">mail</a></li>
@@ -88,12 +88,12 @@
 <div style="clear: left;"></div>
 
 <% @feeds.each do |feed| %>
-<div class="left">
+<div style="width:48%;" class="left">
     <div class="label" style="text-align:left;"><%= feed.channel.title %></div>
     <ul class="links">
     <% feed.items.each_with_index { |cur_item,i| %>
-        <% if i < 10 %>
-        <li><a href="<%= cur_item.link %>" title="<%= clean_feed_description(cur_item.description) %>"><%= cur_item.title[0,33] %></a></li>
+        <% if i < 6 %>
+        <li><a href="<%= cur_item.link %>" title="<%= clean_feed_description(cur_item.description) %>"><%= cur_item.title[0,50] %></a></li>
         <% end %>
     <% } %>
     </ul>
