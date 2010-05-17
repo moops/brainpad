@@ -12,8 +12,11 @@
     <% @links.each_with_index { |cur_link,i| %>   
         
     <tr class="<%= i.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
-        <td><%= link_to(cur_link.name[0,15], link_path(cur_link), :title => cur_link.get_description) %></td>
-        <td><%= cur_link.tags %></td>
+        <td><span id=""><%= link_to(cur_link.name[0,15], link_path(cur_link), :title => cur_link.get_description) %></span></td>
+        <td><span id="tag_<%=i.to_s%>"><%= cur_link.tags %></span>
+            <script type="text/javascript">
+                new Ajax.InPlaceEditor('tag_<%=i.to_s%>', '/links/update_tags/<%=cur_link.id%>');
+            </script></td>
         
         <% if cur_link.last_clicked %>
             <td><%= cur_link.last_clicked.strftime(DATE_FORMAT) %></td>

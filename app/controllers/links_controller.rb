@@ -13,10 +13,10 @@ class LinksController < ApplicationController
     end
     @all = Link.find(:all, :conditions => "person_id = #{session[:user_id]}")
     
-    @recently_clicked = @all.sort { |a,b| (a.last_clicked and b.last_clicked ? b.last_clicked<=>(a.last_clicked) : 0)}[0,9]
+    @recently_clicked = @all.sort { |a,b| (a.last_clicked and b.last_clicked) ? b.last_clicked<=>(a.last_clicked) : 0 }[0,9]
     @recently_added = @all.sort { |a,b| b.created_at<=>(a.created_at) }[0,9]
-    @most_often_1 = @all.sort { |a,b| (b.clicks and a.clicks ? b.clicks<=>a.clicks : 0)}[0,9]
-    @most_often_2 = @all.sort { |a,b| (b.clicks and a.clicks ? b.clicks<=>a.clicks : 0)}[9,9]
+    @most_often_1 = @all.sort { |a,b| (b.clicks and a.clicks) ? b.clicks<=>a.clicks : 0 }[0,9]
+    @most_often_2 = @all.sort { |a,b| (b.clicks and a.clicks) ? b.clicks<=>a.clicks : 0 }[9,9]
     @random = @all.sort_by { rand }[0,9]
     @milestone = Milestone.find(:first, :conditions => "person_id = #{session[:user_id]}")
     @due_today = Reminder.todays(@user.id)
@@ -35,7 +35,8 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       format.html { 
-        @link.update_attributes({'clicks' => @link.clicks += 1, 'last_clicked' => Time.now})
+        clicks = @link.clicks ? @link.clicks += 1 : 1
+        @link.update_attributes({'clicks' => clicks, 'last_clicked' => Time.now})
         redirect_to "http://#{@link.url}" 
       }
       format.xml  { render :xml => @link }
@@ -135,6 +136,13 @@ class LinksController < ApplicationController
   def refresh_tags
     session[:tags] = getUniqueTags
     render(:partial => 'tags')
+  end
+  
+  def update_tags
+    logger.info('params: ' + params.inspect)
+    link = Link.find(params[:id])
+    link.update_attribute('tags', params['value'])
+    render(:text => params['value'])
   end
   
   private
