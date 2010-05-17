@@ -67,14 +67,13 @@
 
 <div style="clear: left;"></div>
 
-<div id="tags">
+<div>
     <span class="label" style="text-align:left;">tags</span>       
     <%= link_to_remote('refresh', :url => refresh_tags_links_path, :update => "tags") %> |
     <%= link_to('clean', clean_links_path) %><br/>
-
-    <% for cur_tag in session[:tags] %>
-        <%= link_to_remote(cur_tag, :url => find_links_url(:tag => cur_tag), :update => "found_links") %>,
-    <% end %><p/>
+	<div id="tags">
+		<%= render(:partial => 'tags') %>
+	</div>
 
     <div id="found_links"></div>
 </div>

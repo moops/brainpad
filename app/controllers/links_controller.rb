@@ -12,10 +12,11 @@ class LinksController < ApplicationController
       session[:tags] = getUniqueTags
     end
     @all = Link.find(:all, :conditions => "person_id = #{session[:user_id]}")
-    @recently_clicked = @all.sort { |a,b| b.last_clicked<=>(a.last_clicked) }[0,9]
+    
+    @recently_clicked = @all.sort { |a,b| (a.last_clicked and b.last_clicked ? b.last_clicked<=>(a.last_clicked) : 0)}[0,9]
     @recently_added = @all.sort { |a,b| b.created_at<=>(a.created_at) }[0,9]
-    @most_often_1 = @all.sort { |a,b| b.clicks<=>a.clicks}[0,9]
-    @most_often_2 = @all.sort { |a,b| b.clicks<=>a.clicks}[9,9]
+    @most_often_1 = @all.sort { |a,b| (b.clicks and a.clicks ? b.clicks<=>a.clicks : 0)}[0,9]
+    @most_often_2 = @all.sort { |a,b| (b.clicks and a.clicks ? b.clicks<=>a.clicks : 0)}[9,9]
     @random = @all.sort_by { rand }[0,9]
     @milestone = Milestone.find(:first, :conditions => "person_id = #{session[:user_id]}")
     @due_today = Reminder.todays(@user.id)
@@ -68,7 +69,10 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.xml
   def create
-    @link = Link.new(params[:link])   
+    logger.info('create called')
+    @link = Link.new(params[:link])
+    @link.person = @user
+    logger.info('@link: ' + @link.inspect)
     
     respond_to do |format|
       if @link.save
@@ -130,6 +134,7 @@ class LinksController < ApplicationController
   # GET /link/refresh_tags
   def refresh_tags
     session[:tags] = getUniqueTags
+    render(:partial => 'tags')
   end
   
   private

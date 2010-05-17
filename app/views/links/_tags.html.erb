@@ -1,0 +1,3 @@
+<% for cur_tag in session[:tags] %>
+    <%= link_to_remote(cur_tag, :url => find_links_url(:tag => cur_tag), :update => "found_links") %>,
+<% end %><p/>
