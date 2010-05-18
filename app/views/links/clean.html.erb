@@ -9,23 +9,29 @@
         <th>url</th>
         <th>&nbsp;</th></tr>
 
-    <% @links.each_with_index { |cur_link,i| %>   
+    <% @links.each_with_index { |cur_link,i| %> 
+    
+    <% highlight = i.modulo(2).nonzero? ? "#dddddd" : "#ffffff" %>
         
     <tr class="<%= i.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
-        <td><span id=""><%= link_to(cur_link.name[0,15], link_path(cur_link), :title => cur_link.get_description) %></span></td>
-        <td><span id="tag_<%=i.to_s%>"><%= cur_link.tags %></span>
-            <script type="text/javascript">
-                new Ajax.InPlaceEditor('tag_<%=i.to_s%>', '/links/update_tags/<%=cur_link.id%>');
-            </script></td>
-        
+        <td>
+            <%= inline_edit("name_#{i.to_s}", cur_link.name, "/links/update_field/#{cur_link.id}", 12, highlight, 'name') %></td>
+        <td>
+            <%= inline_edit("tag_#{i.to_s}", cur_link.tags, "/links/update_field/#{cur_link.id}", 25, highlight, 'tags') %></td>
+            
         <% if cur_link.last_clicked %>
-            <td><%= cur_link.last_clicked.strftime(DATE_FORMAT) %></td>
+            <td>
+                <%= inline_edit("clicked_#{i.to_s}", cur_link.last_clicked.strftime(DATE_FORMAT), "/links/update_field/#{cur_link.id}", 12, highlight, 'last_clicked') %></td>
         <% else %>
             <td>never</td>
         <% end %>
         
-        <td><%= cur_link.clicks %></td>
-        <td><%= cur_link.url[0,25] + (cur_link.url.length > 25 ? '...' : '') %></td>
+        <td>
+            <%= inline_edit("clicks_#{i.to_s}", cur_link.clicks, "/links/update_field/#{cur_link.id}", 4, highlight, 'clicks') %></td>
+        <td>
+            <% display = cur_link.url[0,25] + (cur_link.url.length > 25 ? '...' : '') %>
+            <%= inline_edit("url_#{i.to_s}", display, "/links/update_field/#{cur_link.id}", 25, highlight, 'url') %></td>
+        
         <td><%= link_to(image_tag('delete.png', :size => '15x15', :border => 0), 
                     link_path(cur_link), :method => :delete,
                     :confirm => "really delete #{cur_link.name}?") %></td></tr>

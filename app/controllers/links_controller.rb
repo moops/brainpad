@@ -138,12 +138,13 @@ class LinksController < ApplicationController
     render(:partial => 'tags')
   end
   
-  def update_tags
-    logger.info('params: ' + params.inspect)
+  # non-restfull inline editors
+  def update_field
     link = Link.find(params[:id])
-    link.update_attribute('tags', params['value'])
-    render(:text => params['value'])
+    link.update_attribute(params[:field], params[:value])
+    render(:text => params[:value])
   end
+  # end non-restfull inline editors
   
   private
   
