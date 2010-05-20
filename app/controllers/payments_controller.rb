@@ -1,8 +1,18 @@
 class PaymentsController < ApplicationController
+  
+  before_filter :authenticate
+  layout 'standard.html', :except => [:show]
+  
   # GET /payments
   # GET /payments.xml
-  def index
-    @payments = Payment.all
+  def index    
+    @upcoming_payments = Payment.find_upcoming(@user)
+    @payments = Payment.find_recent(@user,31)
+    @payment_types = %w{ expense deposit transfer }
+    @money_summary = MoneySummary.new(@user,31)
+    @accounts = @user.active_accounts
+    @tags = Payment.user_tags(@user)
+    @expenses_by_tag = Payment.expenses_by_tag(@user,31)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -82,4 +92,25 @@ class PaymentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+end
+
+class MoneySummary
+
+  attr_reader :buy_nothing_days, :per_expense, :per_day, :days_with_expenses, :balance, :total
+
+  def initialize(user,days)
+    expenses = Payment.recent_expenses(user,days)
+    @total = 0
+    for exp in expenses
+      @total += exp.amount.abs
+    end
+    @per_expense = @total/expenses.length if expenses.length > 0
+    @per_day     = @total/days if days > 0
+    @buy_nothing_days = days - Payment.days_with_expenses?(user,days)
+    @balance = 0
+    for account in user.active_accounts
+      @balance += account.price * account.units
+    end
+  end
+    
 end

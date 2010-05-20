@@ -26,10 +26,6 @@ class Person < ActiveRecord::Base
     accounts.reject { |a| not a.active }
   end
   
-  def active_schedules
-    schedules.reject { |s| s.start_on > Date.today or s.end_on < Date.today }
-  end
-  
   def payments
     p = Array.new
     for a in active_accounts

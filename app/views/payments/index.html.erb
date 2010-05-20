@@ -1,32 +1,57 @@
-<h1>Listing payments</h1>
-
-<table>
-  <tr>
-    <th>Description</th>
-    <th>Tags</th>
-    <th>Amount</th>
-    <th>Payment on</th>
-    <th>Account</th>
-    <th>Transfer from</th>
-    <th>Person</th>
-  </tr>
-
-<% @payments.each do |payment| %>
-  <tr>
-    <td><%=h payment.description %></td>
-    <td><%=h payment.tags %></td>
-    <td><%=h payment.amount %></td>
-    <td><%=h payment.payment_on %></td>
-    <td><%=h payment.account_id %></td>
-    <td><%=h payment.transfer_from %></td>
-    <td><%=h payment.person_id %></td>
-    <td><%= link_to 'Show', payment %></td>
-    <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
-    <td><%= link_to 'Destroy', payment, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% if @money_summary %>
+    <div id="money_summary" class="shaded_box">
+        <table width="100%" border="0">
+            <tr>
+                <td>last 30 days:</td>
+                <td><div class="summary_data"><%= number_to_currency @money_summary.per_expense %></div>per expense</td>
+                <td><div class="summary_data"><%= number_to_currency @money_summary.per_day %></div>per day</td>
+                <td><div class="summary_data"><%= @money_summary.buy_nothing_days %></div>buy nothing days</td>
+                <td><div class="summary_data"><%= number_to_currency @money_summary.balance %></div>net worth</td></tr>
+        </table>
+    </div>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New payment', new_payment_path %>
+    <div id="money_payment_form">
+        <% action = @payment.id ? 'update' : 'create' %>
+        <% form_tag(:action => action) do %>
+        <%= render_partial 'form' %>
+        <% end %>
+    </div> <!-- end money_payment_form -->
+    
+    <div id="money_left">
+        <div id="money_accounts" class="box">
+            <div class="box_header">accounts</div>
+            <div class="box_content">
+                <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                <%= render :partial => 'account/account', :collection => @accounts %>
+                </table>
+            </div>
+            <div class="box_buttons">
+                <%= link_to('new account', :controller => 'account', :action => 'new' ) %>
+            </div>
+        </div> <!-- end money_accounts -->
+        <%= render :partial => 'expenses_by_tag' %>
+    </div> <!-- end money_left -->
+    
+    <% if not @upcoming_payments.empty? %>
+    <div id="money_upcoming" class="box">
+        <div class="box_header">upcoming</div>
+        <div class="box_content">
+            <table width="100%" border="0" cellspacing="0" cellpadding="2">
+            <%= render :partial => 'upcoming', :collection => @upcoming_payments %>
+            </table>
+        </div>
+    </div> <!-- end money_upcoming -->
+    <div>&nbsp</div>
+    <% end %>
+    
+    <div id="money_payments" class="box">
+        <div class="box_header">transactions</div>
+        <div class="box_content">
+            <table width="100%" border="0" cellspacing="0" cellpadding="2">
+            <%= render :partial => 'payment', :collection => @payments %>
+            </table>
+        </div>
+    </div> <!-- end money_payments -->
+    
+    <div class="clear">&nbsp;</div>
