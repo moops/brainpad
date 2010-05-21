@@ -5,8 +5,9 @@ class PaymentsController < ApplicationController
   
   # GET /payments
   # GET /payments.xml
-  def index    
-    @upcoming_payments = Payment.find_upcoming(@user)
+  def index  
+    @payment = params[:id] ? Payment.find(params[:id]) : Payment.new
+    # @upcoming_payments = Payment.find_upcoming(@user)
     @payments = Payment.find_recent(@user,31)
     @payment_types = %w{ expense deposit transfer }
     @money_summary = MoneySummary.new(@user,31)
