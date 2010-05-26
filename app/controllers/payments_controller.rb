@@ -46,6 +46,10 @@ class PaymentsController < ApplicationController
   # GET /payments/1/edit
   def edit
     @payment = Payment.find(params[:id])
+    @payment_types = %w{ expense deposit transfer }
+    @accounts = @user.active_accounts
+    @tags = Payment.user_tags(@user)
+    render(:partial => 'form')
   end
 
   # POST /payments
@@ -56,10 +60,10 @@ class PaymentsController < ApplicationController
     respond_to do |format|
       if @payment.save
         flash[:notice] = 'Payment was successfully created.'
-        format.html { redirect_to(@payment) }
+        format.html { redirect_to(payments_path) }
         format.xml  { render :xml => @payment, :status => :created, :location => @payment }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to(payments_path)  }
         format.xml  { render :xml => @payment.errors, :status => :unprocessable_entity }
       end
     end
@@ -73,10 +77,10 @@ class PaymentsController < ApplicationController
     respond_to do |format|
       if @payment.update_attributes(params[:payment])
         flash[:notice] = 'Payment was successfully updated.'
-        format.html { redirect_to(@payment) }
+        format.html { redirect_to(payments_path)  }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { redirect_to(payments_path) }
         format.xml  { render :xml => @payment.errors, :status => :unprocessable_entity }
       end
     end

@@ -1,0 +1,43 @@
+<% form_for(@reminder) do |f| %>
+
+<% if session[:user_id] %>
+    <%= hidden_field_tag('reminder[person_id]',session[:user_id]) %>
+<% end %>
+<table cellpadding="3" cellspacing="0" border="0">
+    <tr>
+        <td id="errors" colspan="4">
+            <% unless @reminder.errors.empty? %>
+                <ul>
+                <% @reminder.errors.each_full do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+                </ul>
+            <% end %>
+            <% if flash[:notice] %>
+                <div class="notice"><%=h flash[:notice] %></div>
+            <% end %></td></tr>
+    <tr>
+        <td><div class="label">type</div></td>
+        <td>
+            <%= f.select('reminder_type', Lookup.find_all_by_category(39).collect {|l| [ l.description, l.id ] }) %></td>
+        <td><div class="label">done</div></td>
+        <td><%= f.check_box('done') %></td></tr>
+    <tr>
+        <td><div class="label">priority</div></td>
+        <td>
+            <%= f.select('priority', Lookup.find_all_by_category(34).collect {|l| [ l.description, l.id ] }) %></td>
+        <td><div class="label">date</div></td>
+        <td><%= calendar('reminder','due',true) %></td></tr>
+    <tr>
+        <td><div class="label">every</div></td>
+        <td>
+            <%= f.select('interval', Lookup.find_all_by_category(54).collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %></td>
+        <td><div class="label">until</div></td>
+        <td><%= calendar('reminder','repeat_until') %></td></tr>
+    <tr>
+        <td><div class="label">description</div></td>
+        <td colspan="3" rowspan="2"><%= text_area('reminder', 'description', :cols => 63, :rows => 3) %>
+        <span class="submit"><%= f.submit(@form_btn_label) %></span></td></tr>
+</table>
+
+<% end %>

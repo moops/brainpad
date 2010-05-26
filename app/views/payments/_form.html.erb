@@ -23,38 +23,36 @@
     }
 </script>
 
-<% if @payment %>
-    <%= hidden_field_tag('payment[id]',@payment.id) %>
-<% end %>
+<% form_for(@payment) do |f| %>
+
 <div class="field">
     <div class="left_label">type</div>
-    <%= select('payment','payment_type', @payment_types, {}, :onchange => 'paymentType()') %></div>
+    <%= f.select('payment_type', @payment_types, {}, :onchange => 'paymentType()') %></div>
 <div class="field" id="transferFrom" style="display:none;">
     <div class="left_label">from</div>
-    <%= select('payment','transfer_from', @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %></div>
+    <%= f.select('transfer_from', @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %></div>
 <script type="text/javascript">paymentType();</script>
 <div class="field">
     <div class="left_label">account</div>
-    <%= select('payment','account_id', @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %></div>
+    <%= f.select('account_id', @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %></div>
 <div class="field">
     <div class="left_label">date</div>
     <%= calendar('payment','payment_on') %></div>
 <div class="field" style="margin-left: 20px;">
     <div class="left_label">amount</div>
-    <%= text_field('payment', 'amount', :size => '7', :class => 'text') %></div>
+    <%= f.text_field('amount', :size => '7', :class => 'text') %></div>
 <div class="field">
     <div class="left_label">name</div>
-    <%= text_field('payment', 'description', :size => '25', :class => 'text') %></div>
+    <%= f.text_field('description', :size => '25', :class => 'text') %></div>
 <div class="clear">&nbsp;</div>
 <div class="field">
     <div class="left_label">tags</div>
     <%= select_tag('tags', options_for_select(@tags), :onchange => 'addTag()') %></div>
 <div class="field">
     <div class="left_label">tags</div>
-    <%= text_field('payment', 'tags', :size => '30', :class => 'text') %></div>
+    <%= f.text_field('tags', :size => '30', :class => 'text') %></div>
 <div class="field">
-    <div class="left_label">schedule</div>
-    <%= select('payment', 'schedule_id', @schedules.collect {|s| [s.name, s.id] }, {:include_blank => true}, :onchange => 'addSchedule()') %></div>
-<div class="field">
-    <%= submit_tag('go', :style => 'height:3.5em;') %></div>
+    <%= f.submit('go', :style => 'height:3.5em;') %></div>
 <div class="clear">&nbsp;</div>
+
+<% end %>

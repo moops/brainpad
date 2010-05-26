@@ -61,7 +61,7 @@ class RemindersController < ApplicationController
         format.html { redirect_to(reminders_path) }
         format.xml  { render :xml => @reminder, :status => :created, :location => @reminder }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to(reminders_path) }
         format.xml  { render :xml => @reminder.errors, :status => :unprocessable_entity }
       end
     end
@@ -75,10 +75,10 @@ class RemindersController < ApplicationController
     respond_to do |format|
       if @reminder.update_attributes(params[:reminder])
         flash[:notice] = 'Reminder was successfully updated.'
-        format.html { redirect_to(@reminder) }
+        format.html { redirect_to(reminders_path) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { redirect_to(reminders_path) }
         format.xml  { render :xml => @reminder.errors, :status => :unprocessable_entity }
       end
     end

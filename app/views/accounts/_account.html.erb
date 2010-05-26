@@ -1,0 +1,16 @@
+<tr class="<%= account_counter.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
+    <td>
+        <% if account.url && account.url.length > 0 %>
+            <a href="<%= account.url %>" target="_blank">
+                <%= account.name %></a>
+        <% else %>
+            <%= account.name %>
+        <% end %></td>
+    <td>
+        <% if account.price_url && account.price_url.length > 0 %>
+            <a href="<%= account.price_url %>" target="_blank">
+                <%= number_to_currency(account.units * account.price) %></a>
+        <% else %>
+            <%= number_to_currency(account.units * account.price) %>
+        <% end %></td>
+    <td><%= link_to('edit', :controller => "account", :action => "edit", :id => account.id) %></td></tr>

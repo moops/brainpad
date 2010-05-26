@@ -86,7 +86,7 @@
     <ul class="links">
     <% feed.items.each_with_index { |cur_item,i| %>
         <% if i < 6 %>
-        <li><a href="<%= cur_item.link %>" title="<%= clean_feed_description(cur_item.description) %>"><%= cur_item.title[0,50] %></a></li>
+        <li><a href="<%= cur_item.link %>" title="<%= clean_feed_description(cur_item.description) %>"><%= cur_item.title[0,48] %></a></li>
         <% end %>
     <% } %>
     </ul>
