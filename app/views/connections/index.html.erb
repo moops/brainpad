@@ -14,9 +14,7 @@
 
 <%= will_paginate @connections %>
 
-<p>
 <h3><%= @form_header %></h3>
-<div class="form">
-<% form_tag(:action => @form_action) do %>
-<%= render(:partial => 'form') %>
-<% end %></div>
+<div id="form"class="form">
+    <%= render(:partial => 'form') %>
+</div>

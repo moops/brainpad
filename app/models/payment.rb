@@ -96,7 +96,7 @@ class Payment < ActiveRecord::Base
     tags = []
     payments = Payment.find(:all, :conditions => "account_id in(select id from accounts where person_id = #{user.id})")
     payments.each { |p|
-      p.tags.each(seperator = ' ') { |t|
+      p.tags.split.each { |t|
         tags.push(t.strip)
       }
     }

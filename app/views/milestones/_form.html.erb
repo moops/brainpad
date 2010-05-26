@@ -14,12 +14,12 @@
                 </ul>
             <% end %></td></tr>
     <tr>
-        <td><div class="label">name</div></td>
+        <td><%= f.label(:name) %></td>
         <td><%= f.text_field(:name, :size => '37', :class => 'text') %></td>
-        <td><div class="label">at</div></td>
+        <td><%= f.label(:at) %></td>
         <td width="200"><%= calendar('milestone','milestone_at', true) %></td>
         <td class="submit">
-        	<% btn_label = @milestone.id ? 'update' : 'create' %>
+            <% btn_label = @milestone.id ? 'update' : 'create' %>
             <%= f.submit(btn_label) %></td></tr>
 </table>
 <% end %>

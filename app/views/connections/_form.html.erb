@@ -17,24 +17,24 @@
                 <div class="notice"><%=h flash[:notice] %></div>
             <% end %></td></tr>
     <tr>
-        <td><div class="label">name</div></td>
+        <td><%= f.label(:name) %></td>
         <td colspan="3"><%= f.text_field('name', :size => '25', :class => 'text') %></td></tr>
     <tr>
-        <td><div class="label">username</div></td>
+        <td><%= f.label(:username) %></td>
         <td><%= f.text_field('username', :size => '30', :class => 'text') %></td>
-        <td><div class="label">password</div></td>
+        <td><%= f.label(:password) %></td>
         <td><%= f.text_field('password', :size => '30', :class => 'text') %></td></tr>
     <tr>
-        <td><div class="label">url</div></td>
+        <td><%= f.label(:url) %></td>
         <td colspan="3"><%= f.text_field('url', :size => '78', :class => 'text') %></td></tr>
     <tr>
-        <td><div class="label">description</div></td>
+        <td><%= f.label(:description) %></td>
         <td colspan="3"><%= f.text_area('description', :cols => '75', :rows => '2') %></td></tr>
     <tr>
         <td>&nbsp;</td>
         <td class="submit" colspan="3">
             <% btn_label = @connection.id ? 'update' : 'create' %>
-			<%= f.submit(btn_label) %></td></tr>
+            <%= f.submit(btn_label) %></td></tr>
 </table>
 
 <% end %>

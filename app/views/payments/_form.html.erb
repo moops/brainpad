@@ -25,34 +25,38 @@
 
 <% form_for(@payment) do |f| %>
 
-<div class="field">
-    <div class="left_label">type</div>
-    <%= f.select('payment_type', @payment_types, {}, :onchange => 'paymentType()') %></div>
-<div class="field" id="transferFrom" style="display:none;">
-    <div class="left_label">from</div>
-    <%= f.select('transfer_from', @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %></div>
-<script type="text/javascript">paymentType();</script>
-<div class="field">
-    <div class="left_label">account</div>
-    <%= f.select('account_id', @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %></div>
-<div class="field">
-    <div class="left_label">date</div>
-    <%= calendar('payment','payment_on') %></div>
-<div class="field" style="margin-left: 20px;">
-    <div class="left_label">amount</div>
-    <%= f.text_field('amount', :size => '7', :class => 'text') %></div>
-<div class="field">
-    <div class="left_label">name</div>
-    <%= f.text_field('description', :size => '25', :class => 'text') %></div>
-<div class="clear">&nbsp;</div>
-<div class="field">
-    <div class="left_label">tags</div>
-    <%= select_tag('tags', options_for_select(@tags), :onchange => 'addTag()') %></div>
-<div class="field">
-    <div class="left_label">tags</div>
-    <%= f.text_field('tags', :size => '30', :class => 'text') %></div>
-<div class="field">
-    <%= f.submit('go', :style => 'height:3.5em;') %></div>
-<div class="clear">&nbsp;</div>
+<table cellpadding="3" cellspacing="0" border="0">
+    <tr>
+        <td>
+            <%= f.label(:type) %>
+            <%= f.select('payment_type', @payment_types, {}, :onchange => 'paymentType()') %></td>
+        <td>
+            <div id="transferFrom" style="display:none;">
+                <%= f.label(:from) %>
+                <%= f.select('transfer_from', @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %>
+            </div>
+            <script type="text/javascript">paymentType();</script></td></tr>
+    <tr>
+        <td>
+            <%= f.label(:account) %>
+            <%= f.select('account_id', @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %></td>
+        <td>
+            <%= label(:payment, :payment_on, "Date") %>
+            <%= calendar('payment','payment_on') %></td></tr>
+    <tr>
+        <td>
+            <%= f.label(:amount) %>
+            <%= f.text_field('amount', :size => '7', :class => 'text') %></td>
+        <td>
+            <%= f.label(:name) %>
+            <%= f.text_field('description', :size => '25', :class => 'text') %></td></tr>
+
+    <tr>
+        <td colspan="2">
+            <%= f.label(:tags) %>
+            <%= select_tag('tags', options_for_select(@tags), :onchange => 'addTag()') %>
+            <%= f.text_field('tags', :size => '30', :class => 'text') %>
+            <%= f.submit('go', :style => 'height:3.0em;') %></td></tr>
+</table>
 
 <% end %>

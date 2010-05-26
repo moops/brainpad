@@ -103,20 +103,11 @@ a.nav_off, a.nav_on:visited {
     padding: 10px 5px 10px 5px;
 }
 
-.label { 
-    font-weight: bold;
-    color: #666;
+label { 
     text-align: right;
-}
-
-.left_label { 
     font-weight: bold;
     color: #666;
-}
-
-.labelAbove { 
-    font-weight: bold;
-    color: #333;
+    
 }
 
 .links a {
@@ -269,12 +260,7 @@ img.photo {
 }
 
 #money_payment_form {
-
-}
-
-#money_payment_form div.field {
-    float: left;
-    padding-right: 10px; 
+    display: none;
 }
 
 #money_upcoming {
@@ -347,6 +333,13 @@ select {
   border: 0px;
   font-size: 1.4em;
   background: #fff;
+}
+
+label { 
+    text-align: right;
+    font-weight: bold;
+    color: #666;
+    
 }
 
 

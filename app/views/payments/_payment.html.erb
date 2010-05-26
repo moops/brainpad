@@ -3,4 +3,4 @@
     <td class="<%= payment.payment_type? %>_amount"><%= number_to_currency(payment.amount.abs) %></td>
     <td><%= payment.account.name %></td>
     <td><%= payment.payment_on.strftime("%b %d") %></td>
-    <td><%= link_to_remote('edit', :update => 'money_payment_form', :method => :get, :url => edit_payment_path(payment)) %></td></tr>
+    <td><%= link_to_remote('edit', :update => 'form', :method => :get, :url => edit_payment_path(payment)) %></td></tr>

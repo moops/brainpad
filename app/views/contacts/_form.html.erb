@@ -17,26 +17,26 @@
                 <div class="notice"><%=h flash[:notice] %></div>
             <% end %></td></tr>
     <tr>
-        <td><div class="label">name</div></td>
+        <td><%= f.label(:name) %></td>
         <td><%= f.text_field(:name, :class => 'text') %></td>
-        <td><div class="label">email</div></td>
+        <td><%= f.label(:email) %></td>
         <td><%= f.text_field(:email, :class => 'text') %></td>
         <td rowspan="5">&nbsp;</td></tr>
     <tr>
-        <td><div class="label">address</div></td>
+        <td><%= f.label(:address) %></td>
         <td><%= f.text_field(:address, :class => 'text') %></td>
-        <td><div class="label">city</div></td>
+        <td><%= f.label(:city) %></td>
         <td><%= f.text_field(:city, :class => 'text') %></td></tr>
     <tr>
-        <td><div class="label">home</div></td>
+        <td><%= f.label(:home) %></td>
         <td><%= f.text_field(:phone_home, :class => 'text') %></td>
-        <td><div class="label">work</div></td>
+        <td><%= f.label(:work) %></td>
         <td><%= f.text_field(:phone_work, :class => 'text') %></td></tr>
     <tr>
-        <td><div class="label">tags</div></td>
+        <td><%= f.label(:tags) %></td>
         <td colspan="3"><%= f.text_field(:tags, :size => '70', :class => 'text') %></td></tr>
     <tr>
-        <td><div class="label">comments</div></td>
+        <td><%= f.label(:comments) %></td>
         <td colspan="3" rowspan="2"><%= f.text_area(:comments, :cols => 73, :rows => 3) %></td></tr>
     <tr>
         <td colspan="4">&nbsp;</td>

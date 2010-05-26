@@ -11,35 +11,34 @@
     </div>
 <% end %>
 
-    <div id="money_payment_form">
-        <% action = @payment.id ? 'update' : 'create' %>
-        <% form_tag(:action => action) do %>
-        <%= render(:partial => 'form') %>
-        <% end %>
-    </div> <!-- end money_payment_form -->
-    
-    <div id="money_left">
-        <div id="money_accounts" class="box">
-            <div class="box_header">accounts</div>
-            <div class="box_content">
-                <table width="100%" border="0" cellspacing="0" cellpadding="2">
-                <%= render :partial => 'accounts/account.html', :collection => @accounts %>
-                </table>
-            </div>
-            <div class="box_buttons">
-                <%= link_to('new account', :controller => 'account', :action => 'new' ) %>
-            </div>
-        </div> <!-- end money_accounts -->
-        <%= render :partial => 'expenses_by_tag' %>
-    </div> <!-- end money_left -->
-    
-    <div id="money_payments" class="box">
-        <div class="box_header">transactions</div>
+<div id="form" style="display:none;">
+    <%= render(:partial => 'form') %>
+</div>
+
+<a href="#" onClick="Effect.BlindDown('form', { duration: 0.5 }); return false;">create new</a>
+
+<div id="money_left">
+    <div id="money_accounts" class="box">
+        <div class="box_header">accounts</div>
         <div class="box_content">
             <table width="100%" border="0" cellspacing="0" cellpadding="2">
-            <%= render :partial => 'payment', :collection => @payments %>
+            <%= render :partial => 'accounts/account.html', :collection => @accounts %>
             </table>
         </div>
-    </div> <!-- end money_payments -->
-    
-    <div class="clear">&nbsp;</div>
+        <div class="box_buttons">
+            <%= link_to('new account', :controller => 'account', :action => 'new' ) %>
+        </div>
+    </div> <!-- end money_accounts -->
+    <%= render :partial => 'expenses_by_tag' %>
+</div> <!-- end money_left -->
+
+<div id="money_payments" class="box">
+    <div class="box_header">transactions</div>
+    <div class="box_content">
+        <table width="100%" border="0" cellspacing="0" cellpadding="2">
+        <%= render :partial => 'payment', :collection => @payments %>
+        </table>
+    </div>
+</div> <!-- end money_payments -->
+
+<div class="clear">&nbsp;</div>

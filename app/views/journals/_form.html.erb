@@ -17,14 +17,14 @@
                 <div class="notice"><%=h flash[:notice] %></div>
             <% end %></td></tr>
     <tr>
-        <td><div class="label">date</div></td>
+        <td><%= label(:journal, :entry_on, 'Date') %></td>
         <td><%= calendar('journal','entry_on') %></td>
-        <td><div class="label">type</div></td>
+        <td><%= f.label(:type) %></td>
         <td>
             <%= f.select('journal_type', Lookup.find_all_by_category(30).collect {|l| [ l.description, l.id ] }) %></td>
         <td rowspan="2">&nbsp;</td></tr>    
     <tr>
-        <td><div class="label">entry</div></td>
+        <td><%= f.label(:entry) %></td>
         <td colspan="3" rowspan="2"><%= f.text_area('entry', :cols => 60, :rows => 5) %></td></tr>
     <tr>
         <td>&nbsp;</td>
