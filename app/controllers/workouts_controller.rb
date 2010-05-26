@@ -61,7 +61,7 @@ class WorkoutsController < ApplicationController
         format.html { redirect_to(workouts_path) }
         format.xml  { render :xml => @workout, :status => :created, :location => @workout }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to(workouts_path) }
         format.xml  { render :xml => @workout.errors, :status => :unprocessable_entity }
       end
     end
@@ -75,10 +75,10 @@ class WorkoutsController < ApplicationController
     respond_to do |format|
       if @workout.update_attributes(params[:workout])
         flash[:notice] = 'Workout was successfully updated.'
-        format.html { redirect_to(@workout) }
+        format.html { redirect_to(workouts_path) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { redirect_to(workouts_path) }
         format.xml  { render :xml => @workout.errors, :status => :unprocessable_entity }
       end
     end

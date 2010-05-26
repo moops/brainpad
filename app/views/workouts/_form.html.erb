@@ -1,0 +1,55 @@
+<h3><%= @form_header %></h3>
+
+<% form_for(@workout) do |f| %>
+
+<% if session[:user_id] %>
+    <%= hidden_field_tag('workout[person_id]',session[:user_id]) %>
+<% end %>
+<table cellpadding="3" cellspacing="0" border="0">
+    <tr>
+        <td id="errors" colspan="7">
+            <% unless @workout.errors.empty? %>
+                <ul>
+                <% @workout.errors.each_full do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+                </ul>
+            <% end %></td>
+            <% if flash[:notice] %>
+                <div class="notice"><%=h flash[:notice] %></div>
+            <% end %></td></tr>
+    <tr>
+        <td><div class="label">location</div></td>
+        <td><%= f.text_field('location', :size => '37', :class => 'text') %></td>
+        <td><div class="label">type</div></td>
+        <td>
+            <%= f.select('workout_type', Lookup.find_all_by_category(9).collect {|l| [ l.description, l.id ] }) %></td></tr>
+    <tr>
+        <td><div class="label">date</div></td>
+        <td ><%= calendar('workout','workout_on') %></td>
+        <td><div class="label">distance</div></td>
+        <td><%= f.text_field('distance', :size => '13', :class => 'text') %></td></tr>
+        
+    <tr>
+        <td><div class="label">race</div></td>
+        <td><%= f.text_field('race', :size => '37', :class => 'text') %></td>
+        <td><div class="label">duration</div></td>
+        <td><%= f.text_field('duration', :size => '13', :class => 'text') %></td></tr>
+    <tr>
+        <td><div class="label">route</div></td>
+        <td><%= f.select('route', Lookup.find_all_by_category(47).collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %>&nbsp;
+            <span class="label">weight</span>
+            <%= f.text_field('weight', :size => '3', :class => 'text') %></td>
+        <td><div class="label">intensity</div></td>
+        <td><%= f.select('intensity', [['1',1],['2',2],['3',3],['4',4],['5',5],['6',6],['7',7],['8',8],['9',9],['10',10]]) %></td></tr>
+    <tr>
+        <td><div class="label">description</div></td>
+        <td rowspan="2"><%= f.text_area('description', :cols => 50, :rows => 2) %></td>
+        <td colspan="2">&nbsp;</td></tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td colspan="2" class="submit">
+            <%= f.submit(@form_btn_label) %></td></tr>
+</table>
+
+<% end %>

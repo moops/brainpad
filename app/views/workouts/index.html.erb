@@ -19,8 +19,5 @@
     <%= link_to("reports", :action => "types_by_time") %></div>
 
 <div id="form" class="form">
-<h3><%= @form_header %></h3>
-<% form_tag(:action => @form_action) do %>
-<%= render(:partial => "form") %>
-<% end %>
+	<%= render(:partial => "form") %>
 </div>
