@@ -9,10 +9,7 @@ class ContactsController < ApplicationController
     @user = Person.find(session[:user_id])
     @order = params[:order] ? params[:order] : 'name'
     
-    if !session[:contact_tags] or session[:contact_tags].empty?
-      logger.info "session contact tag list is empty"
-      session[:contact_tags] = getUniqueTags
-    end
+    session[:contact_tags] = getUniqueTags
     
     conditions = "person_id = #{session[:user_id]}"
     if params[:tag]
@@ -46,20 +43,10 @@ class ContactsController < ApplicationController
     end
   end
 
-  # GET /contacts/new
-  # GET /contacts/new.xml
-  def new
-    @contact = Contact.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @contact }
-    end
-  end
-
   # GET /contacts/1/edit
   def edit
     @contact = Contact.find(params[:id])
+    @form_btn_label = 'update'
     render(:partial => 'form')
   end
 
@@ -88,10 +75,10 @@ class ContactsController < ApplicationController
     respond_to do |format|
       if @contact.update_attributes(params[:contact])
         flash[:notice] = 'Contact was successfully updated.'
-        format.html { redirect_to(@contact) }
+        format.html { redirect_to(contacts_path) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { redirect_to(contacts_path) }
         format.xml  { render :xml => @contact.errors, :status => :unprocessable_entity }
       end
     end
@@ -113,7 +100,7 @@ class ContactsController < ApplicationController
   
     def getUniqueTags
       unique_tags = []
-      all_contacts = Contact.find :all, :conditions => "person_id = #{session[:user_id]}"
+      all_contacts = Contact.find(:all, :conditions => "person_id = #{session[:user_id]}")
       all_contacts.each { |cur_contact|
         cur_contact.tags.split.each { |cur_tag|
           unique_tags.push(cur_tag.strip)
