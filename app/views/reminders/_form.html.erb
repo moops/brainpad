@@ -37,7 +37,10 @@
     <tr>
         <td><div class="label">description</div></td>
         <td colspan="3" rowspan="2"><%= text_area('reminder', 'description', :cols => 63, :rows => 3) %>
-        <span class="submit"><%= f.submit(@form_btn_label) %></span></td></tr>
+        <span class="submit">
+        	<% btn_label = @reminder.id ? 'update' : 'create' %>
+        	<%= f.submit(btn_label) %>
+		</span></td></tr>
 </table>
 
 <% end %>

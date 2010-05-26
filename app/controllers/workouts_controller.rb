@@ -14,7 +14,6 @@ class WorkoutsController < ApplicationController
     @workout.workout_on = Date.today.strftime("%b %d, %Y")
     @form_header = 'new workout'
     @form_action = 'create'
-    @form_btn_label = 'create'
 
     respond_to do |format|
       format.html # index.html.erb

@@ -48,7 +48,9 @@ class JournalsController < ApplicationController
 
   # GET /journals/1/edit
   def edit
+    logger.info('editing a journal')
     @journal = Journal.find(params[:id])
+    @form_btn_label = 'update'
     render(:partial => 'form')
   end
 
@@ -56,14 +58,14 @@ class JournalsController < ApplicationController
   # POST /journals.xml
   def create
     @journal = Journal.new(params[:journal])
-
+    
     respond_to do |format|
       if @journal.save
         flash[:notice] = 'Journal was successfully created.'
         format.html { redirect_to(journals_path) }
         format.xml  { render :xml => @journal, :status => :created, :location => @journal }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to(journals_path) }
         format.xml  { render :xml => @journal.errors, :status => :unprocessable_entity }
       end
     end
@@ -72,15 +74,16 @@ class JournalsController < ApplicationController
   # PUT /journals/1
   # PUT /journals/1.xml
   def update
+    logger.info('updating a journal')
     @journal = Journal.find(params[:id])
 
     respond_to do |format|
       if @journal.update_attributes(params[:journal])
         flash[:notice] = 'Journal was successfully updated.'
-        format.html { redirect_to(@journal) }
+        format.html { redirect_to(journals_path) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { redirect_to(journals_path) }
         format.xml  { render :xml => @journal.errors, :status => :unprocessable_entity }
       end
     end

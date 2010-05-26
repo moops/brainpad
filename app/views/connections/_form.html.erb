@@ -1,0 +1,40 @@
+<% form_for(@connection) do |f| %>
+
+<% if session[:user_id] %>
+    <%= hidden_field_tag('connection[person_id]',session[:user_id]) %>
+<% end %>
+<table cellpadding="3" cellspacing="0" border="0">
+    <tr>
+        <td id="errors" colspan="7">
+            <% unless @connection.errors.empty? %>
+                <ul>
+                <% @connection.errors.each_full do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+                </ul>
+            <% end %></td>
+            <% if flash[:notice] %>
+                <div class="notice"><%=h flash[:notice] %></div>
+            <% end %></td></tr>
+    <tr>
+        <td><div class="label">name</div></td>
+        <td colspan="3"><%= f.text_field('name', :size => '25', :class => 'text') %></td></tr>
+    <tr>
+        <td><div class="label">username</div></td>
+        <td><%= f.text_field('username', :size => '30', :class => 'text') %></td>
+        <td><div class="label">password</div></td>
+        <td><%= f.text_field('password', :size => '30', :class => 'text') %></td></tr>
+    <tr>
+        <td><div class="label">url</div></td>
+        <td colspan="3"><%= f.text_field('url', :size => '78', :class => 'text') %></td></tr>
+    <tr>
+        <td><div class="label">description</div></td>
+        <td colspan="3"><%= f.text_area('description', :cols => '75', :rows => '2') %></td></tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td class="submit" colspan="3">
+            <% btn_label = @connection.id ? 'update' : 'create' %>
+			<%= f.submit(btn_label) %></td></tr>
+</table>
+
+<% end %>

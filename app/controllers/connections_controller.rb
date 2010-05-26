@@ -14,7 +14,6 @@ class ConnectionsController < ApplicationController
     @connection = Connection.new #for the 'new' form
     @form_header = 'new connection'
     @form_action = 'create'
-    @form_btn_label = 'create'
     
     respond_to do |format|
       format.html # index.html.erb
@@ -61,7 +60,7 @@ class ConnectionsController < ApplicationController
         format.html { redirect_to(connections_path) }
         format.xml  { render :xml => @connection, :status => :created, :location => @connection }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to(connections_path) }
         format.xml  { render :xml => @connection.errors, :status => :unprocessable_entity }
       end
     end
@@ -75,10 +74,10 @@ class ConnectionsController < ApplicationController
     respond_to do |format|
       if @connection.update_attributes(params[:connection])
         flash[:notice] = 'Connection was successfully updated.'
-        format.html { redirect_to(@connection) }
+        format.html { redirect_to(connections_path) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { redirect_to(connections_path) }
         format.xml  { render :xml => @connection.errors, :status => :unprocessable_entity }
       end
     end

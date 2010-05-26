@@ -48,7 +48,6 @@ class MilestonesController < ApplicationController
   # POST /milestones.xml
   def create
     @milestone = Milestone.new(params[:milestone])
-    logger.info("creating milestone: #{@milestone.inspect}")
     respond_to do |format|
       if @milestone.save
         flash[:notice] = 'Milestone was successfully created.'
@@ -75,7 +74,7 @@ class MilestonesController < ApplicationController
         format.html { redirect_to(milestones_path) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { redirect_to(milestones_path) }
         format.xml  { render :xml => @milestone.errors, :status => :unprocessable_entity }
       end
     end
