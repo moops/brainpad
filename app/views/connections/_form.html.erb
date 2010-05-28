@@ -18,23 +18,23 @@
             <% end %></td></tr>
     <tr>
         <td><%= f.label(:name) %></td>
-        <td colspan="3"><%= f.text_field('name', :size => '25', :class => 'text') %></td></tr>
+        <td colspan="3">
+        	<%= f.text_field(:name, :size => '25', :class => 'text') %></td></tr>
     <tr>
         <td><%= f.label(:username) %></td>
-        <td><%= f.text_field('username', :size => '30', :class => 'text') %></td>
+        <td><%= f.text_field(:username, :size => '30', :class => 'text') %></td>
         <td><%= f.label(:password) %></td>
-        <td><%= f.text_field('password', :size => '30', :class => 'text') %></td></tr>
+        <td><%= f.text_field(:password, :size => '30', :class => 'text') %></td></tr>
     <tr>
         <td><%= f.label(:url) %></td>
-        <td colspan="3"><%= f.text_field('url', :size => '78', :class => 'text') %></td></tr>
+        <td colspan="3"><%= f.text_field(:url, :size => '78', :class => 'text') %></td></tr>
     <tr>
         <td><%= f.label(:description) %></td>
-        <td colspan="3"><%= f.text_area('description', :cols => '75', :rows => '2') %></td></tr>
+        <td colspan="3"><%= f.text_area(:description, :cols => '75', :rows => '2') %></td></tr>
     <tr>
         <td>&nbsp;</td>
         <td class="submit" colspan="3">
-            <% btn_label = @connection.id ? 'update' : 'create' %>
-            <%= f.submit(btn_label) %></td></tr>
+            <%= f.submit(@connection.id ? 'update' : 'create') %></td></tr>
 </table>
 
 <% end %>

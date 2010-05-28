@@ -28,9 +28,9 @@
         <td><%= f.label(:city) %></td>
         <td><%= f.text_field(:city, :class => 'text') %></td></tr>
     <tr>
-        <td><%= f.label(:home) %></td>
+        <td><%= f.label(:phone_home, 'Phone') %></td>
         <td><%= f.text_field(:phone_home, :class => 'text') %></td>
-        <td><%= f.label(:work) %></td>
+        <td><%= f.label(:phone_work, 'Work') %></td>
         <td><%= f.text_field(:phone_work, :class => 'text') %></td></tr>
     <tr>
         <td><%= f.label(:tags) %></td>
@@ -41,7 +41,7 @@
     <tr>
         <td colspan="4">&nbsp;</td>
         <td class="submit">
-            <%= f.submit(@form_btn_label) %></td></tr>
+            <%= f.submit(@contact.id ? 'update' : 'create') %></td></tr>
 </table>
 
 <% end %>

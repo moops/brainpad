@@ -56,7 +56,8 @@ class PaymentsController < ApplicationController
   # POST /payments.xml
   def create
     @payment = Payment.new(params[:payment])
-
+    @payment.amount *= -1 if @payment.payment_type.eql?('expense')
+    @payment.apply_to_account
     respond_to do |format|
       if @payment.save
         flash[:notice] = 'Payment was successfully created.'

@@ -29,7 +29,7 @@
     <tr>
         <td>&nbsp;</td>
         <td class="submit">
-            <%= f.submit(@form_btn_label) %></td></tr>
+            <%= f.submit(@journal.id ? 'update' : 'create') %></td></tr>
 </table>
 
 <% end %>

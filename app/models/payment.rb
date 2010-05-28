@@ -108,7 +108,9 @@ class Payment < ActiveRecord::Base
 
   def self.expenses_by_tag(user,days)
     result_hash = Hash.new
+    logger.info('expenses_by_tag')
     for p in recent_expenses(user,days)
+      logger.info('recent_expenses: ' + p.inspect)
       unless p.tags.nil?
         logger.info("p.tags: #{p.tags.inspect}")
         for t in p.tags.split

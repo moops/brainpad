@@ -13,8 +13,6 @@ class JournalsController < ApplicationController
     @journal = Journal.new #for the 'new' form
     @journal.entry_on = Date.today.strftime("%b %d, %Y")
     @form_header = 'new entry'
-    @form_action = 'create'
-    @form_btn_label = 'create'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -50,7 +48,6 @@ class JournalsController < ApplicationController
   def edit
     logger.info('editing a journal')
     @journal = Journal.find(params[:id])
-    @form_btn_label = 'update'
     render(:partial => 'form')
   end
 

@@ -19,38 +19,37 @@
                 <div class="notice"><%=h flash[:notice] %></div>
             <% end %></td></tr>
     <tr>
-        <td><div class="label">location</div></td>
+        <td><%= f.label(:location) %></div></td>
         <td><%= f.text_field('location', :size => '37', :class => 'text') %></td>
-        <td><div class="label">type</div></td>
+        <td><%= f.label(:workout_type, 'type') %></div></td>
         <td>
             <%= f.select('workout_type', Lookup.find_all_by_category(9).collect {|l| [ l.description, l.id ] }) %></td></tr>
     <tr>
-        <td><div class="label">date</div></td>
+        <td><%= f.label(:workout_on, 'date') %></td>
         <td ><%= calendar('workout','workout_on') %></td>
-        <td><div class="label">distance</div></td>
+        <td><%= f.label(:distance) %></td>
         <td><%= f.text_field('distance', :size => '13', :class => 'text') %></td></tr>
         
     <tr>
-        <td><div class="label">race</div></td>
+        <td><%= f.label(:race) %></td>
         <td><%= f.text_field('race', :size => '37', :class => 'text') %></td>
-        <td><div class="label">duration</div></td>
+        <td><%= f.label(:duration) %></td>
         <td><%= f.text_field('duration', :size => '13', :class => 'text') %></td></tr>
     <tr>
-        <td><div class="label">route</div></td>
+        <td><%= f.label(:route) %></td>
         <td><%= f.select('route', Lookup.find_all_by_category(47).collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %>&nbsp;
-            <span class="label">weight</span>
+            <%= f.label(:weight) %>
             <%= f.text_field('weight', :size => '3', :class => 'text') %></td>
-        <td><div class="label">intensity</div></td>
+        <td><%= f.label(:intensity) %></td>
         <td><%= f.select('intensity', [['1',1],['2',2],['3',3],['4',4],['5',5],['6',6],['7',7],['8',8],['9',9],['10',10]]) %></td></tr>
     <tr>
-        <td><div class="label">description</div></td>
+        <td><%= f.label(:description) %></td>
         <td rowspan="2"><%= f.text_area('description', :cols => 50, :rows => 2) %></td>
         <td colspan="2">&nbsp;</td></tr>
     <tr>
         <td>&nbsp;</td>
         <td colspan="2" class="submit">
-        	<% btn_label = @workout.id ? 'update' : 'create' %>
-            <%= f.submit(btn_label) %></td></tr>
+            <%= f.submit(@workout.id ? 'update' : 'create') %></td></tr>
 </table>
 
 <% end %>

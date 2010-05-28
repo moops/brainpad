@@ -23,8 +23,6 @@ class ContactsController < ApplicationController
 
     @contact = Contact.new #for the 'new' form
     @form_header = 'new contact'
-    @form_action = 'create'
-    @form_btn_label = 'create'
     
     respond_to do |format|
       format.html # index.html.erb
@@ -46,7 +44,6 @@ class ContactsController < ApplicationController
   # GET /contacts/1/edit
   def edit
     @contact = Contact.find(params[:id])
-    @form_btn_label = 'update'
     render(:partial => 'form')
   end
 

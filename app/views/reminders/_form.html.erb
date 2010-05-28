@@ -17,29 +17,28 @@
                 <div class="notice"><%=h flash[:notice] %></div>
             <% end %></td></tr>
     <tr>
-        <td><div class="label">type</div></td>
+        <td><%= f.label(:reminder_type, 'Type') %></td>
         <td>
             <%= f.select('reminder_type', Lookup.find_all_by_category(39).collect {|l| [ l.description, l.id ] }) %></td>
-        <td><div class="label">done</div></td>
+        <td><%= f.label(:done) %></td>
         <td><%= f.check_box('done') %></td></tr>
     <tr>
-        <td><div class="label">priority</div></td>
+        <td><%= f.label(:priority) %></td>
         <td>
             <%= f.select('priority', Lookup.find_all_by_category(34).collect {|l| [ l.description, l.id ] }) %></td>
-        <td><div class="label">date</div></td>
+        <td><%= f.label(:due, 'Date') %></td>
         <td><%= calendar('reminder','due',true) %></td></tr>
     <tr>
-        <td><div class="label">every</div></td>
+        <td><%= f.label(:interval, 'Every') %></td>
         <td>
             <%= f.select('interval', Lookup.find_all_by_category(54).collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %></td>
-        <td><div class="label">until</div></td>
+        <td><%= f.label(:repeat_until, 'Until') %></td>
         <td><%= calendar('reminder','repeat_until') %></td></tr>
     <tr>
-        <td><div class="label">description</div></td>
+        <td><%= f.label(:description) %></td>
         <td colspan="3" rowspan="2"><%= text_area('reminder', 'description', :cols => 63, :rows => 3) %>
         <span class="submit">
-        	<% btn_label = @reminder.id ? 'update' : 'create' %>
-        	<%= f.submit(btn_label) %>
+        	<%= f.submit(@reminder.id ? 'update' : 'create') %>
 		</span></td></tr>
 </table>
 

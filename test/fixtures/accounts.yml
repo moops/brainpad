@@ -1,4 +1,5 @@
 one:
+  id: 1
   name: chequing
   url: www.coastcapitalsavings.com
   price_url: 
@@ -9,6 +10,7 @@ one:
   person_id: 1
 
 two:
+  id: 2
   name: visa
   url: www.visa.ca
   price_url: www.cibcvisa.com
@@ -19,6 +21,7 @@ two:
   person_id: 1
   
 three:
+  id: 3
   name: ing
   url: www.ingdirect.ca
   price_url: www.ingdirect.ca
@@ -29,6 +32,7 @@ three:
   person_id: 1
   
 four:
+  id: 4
   name: investors
   url: www.investorsgroup.ca
   price_url: www.globeandmail.com

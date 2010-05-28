@@ -13,7 +13,6 @@ class ConnectionsController < ApplicationController
     
     @connection = Connection.new #for the 'new' form
     @form_header = 'new connection'
-    @form_action = 'create'
     
     respond_to do |format|
       format.html # index.html.erb
