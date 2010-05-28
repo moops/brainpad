@@ -15,28 +15,31 @@
     <%= render(:partial => 'form') %>
 </div>
 
-<a href="#" onClick="Effect.BlindDown('form', { duration: 0.5 }); return false;">create new</a>
-
 <div id="money_left">
     <div id="money_accounts" class="box">
         <div class="box_header">accounts</div>
         <div class="box_content">
             <table width="100%" border="0" cellspacing="0" cellpadding="2">
-            <%= render :partial => 'accounts/account.html', :collection => @accounts %>
+            <%= render(:partial => 'accounts/account.html', :collection => @accounts) %>
             </table>
         </div>
         <div class="box_buttons">
-            <%= link_to('new account', :controller => 'account', :action => 'new' ) %>
+            <%= link_to('new account', new_account_path ) %>
         </div>
     </div> <!-- end money_accounts -->
-    <%= render :partial => 'expenses_by_tag' %>
+    <%= render(:partial => 'expenses_by_tag') %>
 </div> <!-- end money_left -->
 
 <div id="money_payments" class="box">
-    <div class="box_header">transactions</div>
+    <div class="box_header">
+        transactions
+        <span style="float:right">
+            <%= link_to(image_tag('edit.png', :size => '15x15', :border => 0), '#', {:onclick => "showForm('form'); return false;"}) %>
+        </span>
+    </div>
     <div class="box_content">
         <table width="100%" border="0" cellspacing="0" cellpadding="2">
-        <%= render :partial => 'payment', :collection => @payments %>
+        <%= render(:partial => 'payment', :collection => @payments) %>
         </table>
     </div>
 </div> <!-- end money_payments -->

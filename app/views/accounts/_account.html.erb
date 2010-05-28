@@ -13,4 +13,4 @@
         <% else %>
             <%= number_to_currency(account.units * account.price) %>
         <% end %></td>
-    <td><%= link_to('edit', :controller => "account", :action => "edit", :id => account.id) %></td></tr>
+    <td><%= link_to('edit', edit_account_path(account)) %></td></tr>

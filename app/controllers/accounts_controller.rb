@@ -1,4 +1,8 @@
 class AccountsController < ApplicationController
+  
+  before_filter :authenticate
+  layout 'standard', :except => :show
+  
   # GET /accounts
   # GET /accounts.xml
   def index
@@ -45,10 +49,10 @@ class AccountsController < ApplicationController
     respond_to do |format|
       if @account.save
         flash[:notice] = 'Account was successfully created.'
-        format.html { redirect_to(@account) }
+        format.html { redirect_to(accounts_path) }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to(accounts_path) }
         format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
       end
     end
@@ -62,10 +66,10 @@ class AccountsController < ApplicationController
     respond_to do |format|
       if @account.update_attributes(params[:account])
         flash[:notice] = 'Account was successfully updated.'
-        format.html { redirect_to(@account) }
+        format.html { redirect_to(accounts_path) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { redirect_to(accounts_path) }
         format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
       end
     end

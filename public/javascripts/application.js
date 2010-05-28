@@ -37,3 +37,17 @@ function count(id,until) {
   document.getElementById(id).value = val;
   setTimeout("count('" + id + "','" + until + "')", 1000);
 }
+
+function showForm(id) {
+    var el = $(id);
+    if (!el.visible()) {
+        Effect.BlindDown(id, { duration: 0.5 });
+    }
+}
+
+function hideForm(id) {
+    var el = $(id);
+    if (el.visible()) {
+        Effect.BlindUp(id, { duration: 0.5 });
+    }
+}

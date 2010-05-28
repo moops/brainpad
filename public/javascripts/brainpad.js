@@ -5,7 +5,6 @@ function openWindow(inWidth,inHeight,inName) {
 }
 
 function count(id,until) {
-  alert('counting ' + id + '-' + until);
   var val = "";
   var now = new Date();
   var then = new Date(until);
@@ -34,6 +33,7 @@ function count(id,until) {
   if (then < now) {
     val += " ago";
   }
+  
   document.getElementById(id).value = val;
   setTimeout("count('" + id + "','" + until + "')", 1000);
 }

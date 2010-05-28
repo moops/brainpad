@@ -10,7 +10,7 @@
                 <% end %></td>
     <td><%= data_rows['distance'] %></td>
     <td><%= data_rows['duration'] %></td>
-    <td><%= link_to(image_tag('detail.png', :size => '15x15', :border => 0),{:action => 'show', :id => data_rows['id']},{:target => 'detail', :onClick => "openWindow(300,300,'detail');"}) %></td>
+    <td><%= link_to(image_tag('detail.png', :size => '15x15', :border => 0),workout_path(data_rows),{:target => 'detail', :onClick => "openWindow(300,300,'detail');"}) %></td>
     <td><%= link_to_remote(image_tag('edit.png', :size => '15x15', :border => 0), :update => 'form', :method => :get, :url => edit_workout_path(data_rows)) %></td>
     <td><%= link_to(image_tag('delete.png', :size => '15x15', :border => 0), 
                     {:action => 'delete', :id => data_rows['id']},
