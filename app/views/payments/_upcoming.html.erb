@@ -1,0 +1,5 @@
+<tr class="<%= upcoming_counter.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
+    <td><%= upcoming.description[0,25] + (upcoming.description.length > 25 ? '...' : '') %></td>
+    <td class="<%= upcoming.payment_type? %>_amount"><%= number_to_currency(upcoming.amount.abs) %></td>
+    <td><%= upcoming.account.name %></td>
+    <td>in <%= upcoming.payment_on - Date.today %> days</td></tr>

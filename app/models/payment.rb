@@ -2,8 +2,8 @@ class Payment < ActiveRecord::Base
 
   belongs_to :person
   belongs_to :account
-  belongs_to :schedule
   belongs_to :transfer_account, :class_name => 'Account', :foreign_key => 'transfer_from'
+  belongs_to :frequency, :class_name => 'Lookup', :foreign_key => 'repeat'
 
   attr_accessor :payment_type
 
@@ -49,27 +49,6 @@ class Payment < ActiveRecord::Base
     Payment.find_by_sql([query,user.id,Date.today()- days])
   end
 
-  def self.find_and_update_scheduled(user)
-    query = "select p.* from payments p, accounts a, schedules s where p.schedule_id is not null and p.account_id = a.id and a.active = 1 and p.schedule_id = s.id and s.end_on >= NOW()and a.person_id = ? and p.payment_on = (select max(payment_on) from payments where schedule_id = p.schedule_id)"
-    most_recents = Payment.find_by_sql([query,user.id])
-    created_something = false
-    for p in most_recents
-      next_on = p.schedule.due?(p.payment_on)
-      while next_on <= Date.today
-        if p.schedule.still_effective?(next_on)
-          created_something = true
-          new_payment = p.clone
-          new_payment.payment_on = next_on
-          new_payment.save
-          new_payment.apply_to_account # only if not in the future
-        end
-        next_on = p.schedule.due?(next_on)
-      end
-    end
-    most_recents = Payment.find_by_sql([query,user.id]) if created_something
-    most_recents
-  end
-
   def self.find_upcoming(user)
     upcoming = Array.new
     for p in find_and_update_scheduled(user)
@@ -96,9 +75,11 @@ class Payment < ActiveRecord::Base
     tags = []
     payments = Payment.find(:all, :conditions => "account_id in(select id from accounts where person_id = #{user.id})")
     payments.each { |p|
-      p.tags.split.each { |t|
-        tags.push(t.strip)
-      }
+      if p.tags 
+        p.tags.split.each { |t|
+          tags.push(t.strip)
+        }
+      end
     }
     tags.push('')
     tags.uniq!
@@ -108,14 +89,11 @@ class Payment < ActiveRecord::Base
 
   def self.expenses_by_tag(user,days)
     result_hash = Hash.new
-    logger.info('expenses_by_tag')
-    for p in recent_expenses(user,days)
-      logger.info('recent_expenses: ' + p.inspect)
-      unless p.tags.nil?
-        logger.info("p.tags: #{p.tags.inspect}")
-        for t in p.tags.split
-          result_hash[t] ||= 0
-          result_hash[t] = result_hash[t] + p.amount.abs
+    for exp in recent_expenses(user,days)
+      unless exp.tags.nil?
+        for tag in exp.tags.split
+          result_hash[tag] ||= 0
+          result_hash[tag] = result_hash[tag] + exp.amount.abs
         end
       end
     end
@@ -123,5 +101,44 @@ class Payment < ActiveRecord::Base
     logger.info("result_array: #{result_array.inspect}")
     result_array.first(8)
   end
+  
+  
+  
+    def self.find_and_update_scheduled(user)
+      query = "select p.* from payments p where p.repeat is not null and p.person_id = ?"
+      repeating = Payment.find_by_sql([query,user.id])
+      for p in repeating
+        if p.account.active?
+        
+          next_on = p.due?
+          while next_on <= Date.today
+            
+            new_payment = p.clone
+            new_payment.payment_on = next_on
+            new_payment.save
+            new_payment.apply_to_account # only if not in the future
+
+            next_on = new_payment.due?
+          end
+          
+        end
+      end
+      most_recents = Payment.find_by_sql([query,user.id]) if created_something
+      most_recents
+    end
+
+    def due?
+      frequency = Lookup.find(repeat).code.to_i
+      if (frequency < 15) # daily, weekly or biweekly
+        due = payment_on + f
+      elsif (frequency == 15) # twice monthly
+        due = payment_on.day < 16 ? payment_on + (15 - payment_on.day) : Date.civil(payment_on.year, payment_on.month, -1)
+      elsif (frequency == 30) # monthly
+        due = payment_on>>(1)
+      elsif (frequency == 365)
+        due = payment_on>>(12)
+      end
+      due
+    end
   
 end

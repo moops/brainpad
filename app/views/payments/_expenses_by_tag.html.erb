@@ -3,7 +3,7 @@
     <div class="box_content">
         <% for e in @expenses_by_tag %>
             <% percentage = ((e[1] / @money_summary.total) * 100).to_i.to_s %>
-            <%= e[0] %> <%= percentage %>%<br/>
+            <%= "#{e[0]} #{number_to_currency(e[1])} [#{percentage}%]" %><br/>
             <% percentage = '1' if percentage.eql?'0' %>
             <%= image_tag('redbar.gif', :size => "#{percentage.to_i * 2}x12") %><br/>
         <% end %>

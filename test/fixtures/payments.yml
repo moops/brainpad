@@ -2,7 +2,7 @@ one:
   description: mcdonalds
   tags: restaurant
   amount: -4.34
-  payment_on: 2010-04-03
+  payment_on: 2010-05-26
   account_id: 1
   transfer_from:
   person_id: 1
@@ -11,7 +11,7 @@ two:
   description: cnx salary
   tags: 
   amount: 2082.62
-  payment_on: 2010-04-15
+  payment_on: 2010-05-26
   account_id: 1
   transfer_from:
   person_id: 1  
@@ -20,7 +20,7 @@ three:
   description: hiking boots
   tags: recreation-equip
   amount: -123.34
-  payment_on: 2010-04-04
+  payment_on: 2010-05-22
   account_id: 2
   transfer_from:
   person_id: 1
@@ -29,7 +29,7 @@ four:
   description: swimming
   tags: recreation-fee
   amount: -15.34
-  payment_on: 2010-04-06
+  payment_on: 2010-05-25
   account_id: 1
   transfer_from:
   person_id: 1
@@ -38,8 +38,29 @@ five:
   description: groceries
   tags: groceries
   amount: -64.77
-  payment_on: 2010-04-07
+  payment_on: 2010-05-09
   account_id: 2
   transfer_from:
   person_id: 1
-
+  
+six:
+  description: rent
+  tags: rent
+  amount: -845.00
+  payment_on: 2010-04-01
+  repeat: 46
+  until: 2011-06-02
+  account_id: 1
+  transfer_from:
+  person_id: 1
+  
+seven:
+  description: cnx-salary
+  tags:
+  amount: 2062.82
+  payment_on: 2010-04-15
+  repeat: 45
+  until: 2011-06-02
+  account_id: 1
+  transfer_from:
+  person_id: 1

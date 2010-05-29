@@ -5,14 +5,21 @@ class PaymentsController < ApplicationController
   
   # GET /payments
   # GET /payments.xml
-  def index  
-    @payment = params[:id] ? Payment.find(params[:id]) : Payment.new
-    # @upcoming_payments = Payment.find_upcoming(@user)
+  def index
+    
+    if params[:id]
+      @payment = Payment.find(params[:id])
+      @payment.amount = @payment.amount.abs
+    else
+      @payment = Payment.new
+      @payment.payment_type = 'expense'
+      @payment.payment_on = Date.today.strftime("%b %d, %Y")
+    end
+    
+    @upcoming_payments = Payment.find_upcoming(@user)
     @payments = Payment.find_recent(@user,31)
-    @payment_types = %w{ expense deposit transfer }
+    get_stuff_for_form
     @money_summary = MoneySummary.new(@user,31)
-    @accounts = @user.active_accounts
-    @tags = Payment.user_tags(@user)
     @expenses_by_tag = Payment.expenses_by_tag(@user,31)
 
     respond_to do |format|
@@ -32,23 +39,11 @@ class PaymentsController < ApplicationController
     end
   end
 
-  # GET /payments/new
-  # GET /payments/new.xml
-  def new
-    @payment = Payment.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @payment }
-    end
-  end
-
   # GET /payments/1/edit
   def edit
     @payment = Payment.find(params[:id])
-    @payment_types = %w{ expense deposit transfer }
-    @accounts = @user.active_accounts
-    @tags = Payment.user_tags(@user)
+    @payment.amount = @payment.amount.abs
+    get_stuff_for_form
     render(:partial => 'form')
   end
 
@@ -74,7 +69,8 @@ class PaymentsController < ApplicationController
   # PUT /payments/1.xml
   def update
     @payment = Payment.find(params[:id])
-
+    @payment.amount *= -1 if @payment.payment_type.eql?('expense')
+    @payment.apply_to_account
     respond_to do |format|
       if @payment.update_attributes(params[:payment])
         flash[:notice] = 'Payment was successfully updated.'
@@ -98,6 +94,15 @@ class PaymentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+    
+    def get_stuff_for_form
+      @payment_types = %w{ expense deposit transfer }
+      @accounts = @user.active_accounts
+      @tags = Payment.user_tags(@user)
+  end
+  
 end
 
 class MoneySummary

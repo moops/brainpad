@@ -30,6 +30,18 @@
     <%= render(:partial => 'expenses_by_tag') %>
 </div> <!-- end money_left -->
 
+<% unless @upcoming_payments.empty? %>
+    <div id="money_upcoming" class="box">
+        <div class="box_header">upcoming</div>
+        <div class="box_content">
+            <table width="100%" border="0" cellspacing="0" cellpadding="2">
+            <%= render :partial => 'upcoming', :collection => @upcoming_payments %>
+            </table>
+        </div>
+    </div> <!-- end money_upcoming -->
+    &nbsp;
+<% end %>
+
 <div id="money_payments" class="box">
     <div class="box_header">
         transactions

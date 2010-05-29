@@ -5,6 +5,8 @@ class CreatePayments < ActiveRecord::Migration
       t.string :tags
       t.float :amount
       t.date :payment_on
+      t.string :repeat
+      t.date :until
       t.integer :account_id
       t.integer :transfer_from
       t.integer :person_id
