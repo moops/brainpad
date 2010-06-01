@@ -11,7 +11,9 @@ two:
   description: cnx salary
   tags: 
   amount: 2082.62
-  payment_on: 2010-05-26
+  payment_on: 2010-03-01
+  repeat: 45
+  until: 2011-06-02
   account_id: 1
   transfer_from:
   person_id: 1  
@@ -53,14 +55,4 @@ six:
   account_id: 1
   transfer_from:
   person_id: 1
-  
-seven:
-  description: cnx-salary
-  tags:
-  amount: 2062.82
-  payment_on: 2010-04-15
-  repeat: 45
-  until: 2011-06-02
-  account_id: 1
-  transfer_from:
-  person_id: 1
+

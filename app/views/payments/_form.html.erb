@@ -25,37 +25,48 @@
 
 <% form_for(@payment) do |f| %>
 
-<table cellpadding="3" cellspacing="0" border="0">
+<% if session[:user_id] %>
+    <%= hidden_field_tag('payment[person_id]',session[:user_id]) %>
+<% end %>
+
+<table cellpadding="3" cellspacing="0" border="1">
     <tr>
         <td>
             <%= f.label(:type) %>
-            <%= f.select('payment_type', @payment_types, {}, :onchange => 'paymentType()') %></td>
+            <%= f.select(:payment_type, @payment_types, {}, :onchange => 'paymentType()') %></td>
+		<td>
+            <%= f.label(:account) %>
+            <%= f.select(:account_id, @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %></td>
         <td>
             <div id="transferFrom" style="display:none;">
                 <%= f.label(:from) %>
-                <%= f.select('transfer_from', @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %>
+                <%= f.select(:transfer_from, @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %>
             </div>
             <script type="text/javascript">paymentType();</script></td></tr>
     <tr>
         <td>
-            <%= f.label(:account) %>
-            <%= f.select('account_id', @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %></td>
+            <%= f.label(:amount) %>
+            <%= f.text_field(:amount, :size => '7', :class => 'text') %></td>
         <td>
             <%= label(:payment, :payment_on, "Date") %>
-            <%= calendar('payment','payment_on') %></td></tr>
-    <tr>
-        <td>
-            <%= f.label(:amount) %>
-            <%= f.text_field('amount', :size => '7', :class => 'text') %></td>
+            <%= calendar('payment','payment_on') %></td>
         <td>
             <%= f.label(:name) %>
-            <%= f.text_field('description', :size => '25', :class => 'text') %></td></tr>
-
+            <%= f.text_field(:description, :size => '25', :class => 'text') %></td></tr>
+	<tr>
+		<td>
+			<%= f.label(:repeat) %>
+            <%= f.select(:repeat, Lookup.get_list('freq').collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %></td>
+		<td>
+			<%= label(:payment, :until) %>
+            <%= calendar('payment','until') %></td>
+		<td>&nbsp;</td></tr>
     <tr>
         <td colspan="2">
             <%= f.label(:tags) %>
             <%= select_tag('tags', options_for_select(@tags), :onchange => 'addTag()') %>
-            <%= f.text_field('tags', :size => '30', :class => 'text') %>
+            <%= f.text_field('tags', :size => '30', :class => 'text') %></td>
+		<td>
             <%= f.submit('go', :style => 'height:3.0em;') %></td></tr>
 </table>
 

@@ -50,12 +50,22 @@ class Payment < ActiveRecord::Base
   end
 
   def self.find_upcoming(user)
+    query = "select p.* from payments p where p.repeat is not null and p.person_id = ?"
+    repeating = Payment.find_by_sql([query,user.id])
     upcoming = Array.new
-    for p in find_and_update_scheduled(user)
-      next_on = p.schedule.due?(p.payment_on)
-      next_payment = p.clone
-      next_payment.payment_on = next_on
-      upcoming<<(next_payment)
+    for p in repeating
+      next_due_on = p.next_due
+      # build required payments until next_due is in the future
+      while next_due_on < Date.today
+        new_payment = p.clone
+        new_payment.payment_on = next_due_on
+        new_payment.save
+        next_due_on = new_payment.next_due
+        p.repeat = nil
+        p.save
+        p = new_payment
+      end
+      upcoming<<(p)
     end
     upcoming.sort! {|x,y| x.payment_on <=> y.payment_on }
   end
@@ -98,47 +108,28 @@ class Payment < ActiveRecord::Base
       end
     end
     result_array = result_hash.sort{|a,b| b[1]<=>a[1]}
-    logger.info("result_array: #{result_array.inspect}")
     result_array.first(8)
   end
-  
-  
-  
-    def self.find_and_update_scheduled(user)
-      query = "select p.* from payments p where p.repeat is not null and p.person_id = ?"
-      repeating = Payment.find_by_sql([query,user.id])
-      for p in repeating
-        if p.account.active?
-        
-          next_on = p.due?
-          while next_on <= Date.today
-            
-            new_payment = p.clone
-            new_payment.payment_on = next_on
-            new_payment.save
-            new_payment.apply_to_account # only if not in the future
 
-            next_on = new_payment.due?
-          end
-          
-        end
-      end
-      most_recents = Payment.find_by_sql([query,user.id]) if created_something
-      most_recents
-    end
-
-    def due?
-      frequency = Lookup.find(repeat).code.to_i
-      if (frequency < 15) # daily, weekly or biweekly
-        due = payment_on + f
-      elsif (frequency == 15) # twice monthly
-        due = payment_on.day < 16 ? payment_on + (15 - payment_on.day) : Date.civil(payment_on.year, payment_on.month, -1)
-      elsif (frequency == 30) # monthly
+  def next_due
+    frequency = Lookup.find(repeat).code.to_i
+    if (frequency < 15) # daily, weekly or biweekly
+      due = payment_on + frequency
+    elsif (frequency == 15) # twice monthly
+      last_day_of_month = Date.civil(payment_on.year, payment_on.month, -1).day
+      if payment_on.day == last_day_of_month
         due = payment_on>>(1)
-      elsif (frequency == 365)
-        due = payment_on>>(12)
+        due = Date.civil(due.year, due.month, 15)
+      else
+        day = payment_on.day < 15 ? 15 : -1
+        due = Date.civil(payment_on.year, payment_on.month, day)
       end
-      due
+    elsif (frequency == 30) # monthly
+      due = payment_on>>(1)
+    elsif (frequency == 365)
+      due = payment_on>>(12)
     end
+    due
+  end
   
 end
