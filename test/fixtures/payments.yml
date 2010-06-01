@@ -12,7 +12,7 @@ two:
   tags: 
   amount: 2082.62
   payment_on: 2010-03-01
-  repeat: 45
+  frequency: 45
   until: 2011-06-02
   account_id: 1
   transfer_from:
@@ -50,7 +50,7 @@ six:
   tags: rent
   amount: -845.00
   payment_on: 2010-04-01
-  repeat: 46
+  frequency: 46
   until: 2011-06-02
   account_id: 1
   transfer_from:

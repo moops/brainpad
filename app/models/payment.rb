@@ -3,7 +3,6 @@ class Payment < ActiveRecord::Base
   belongs_to :person
   belongs_to :account
   belongs_to :transfer_account, :class_name => 'Account', :foreign_key => 'transfer_from'
-  belongs_to :frequency, :class_name => 'Lookup', :foreign_key => 'repeat'
 
   attr_accessor :payment_type
 
@@ -25,13 +24,41 @@ class Payment < ActiveRecord::Base
       return 'expense'
     end
   end
-
-  def update_and_adjust_account(attributes)
-    old_amount = amount
-    self.attributes=(attributes)
-    self.amount = -self.amount if self.payment_type.eql?('expense')
-    account.adjust!(old_amount,amount)
-    return self.save
+  
+  def build_repeat
+    if frequency and next_due <= Date.today
+      # repeating and due
+      new_payment = self.clone
+      new_payment.payment_on = next_due
+      new_payment.save
+      new_payment.apply_to_account
+      # recursion
+      new_payment.build_repeat
+      self.frequency = nil
+      self.until = nil
+      self.save
+    end
+  end
+  
+  def next_due
+    freq_code = Lookup.find(frequency).code.to_i
+    if (freq_code < 15) # daily, weekly or biweekly
+      due = payment_on + freq_code
+    elsif (freq_code == 15) # twice monthly
+      last_day_of_month = Date.civil(payment_on.year, payment_on.month, -1).day
+      if payment_on.day == last_day_of_month
+        due = payment_on>>(1)
+        due = Date.civil(due.year, due.month, 15)
+      else
+        day = payment_on.day < 15 ? 15 : -1
+        due = Date.civil(payment_on.year, payment_on.month, day)
+      end
+    elsif (freq_code == 30) # monthly
+      due = payment_on>>(1)
+    elsif (freq_code == 365)
+      due = payment_on>>(12)
+    end
+    due
   end
 
   def self.recent_expenses(user, days)
@@ -48,33 +75,24 @@ class Payment < ActiveRecord::Base
     query = "select p.* from payments p, accounts a where p.account_id = a.id and a.active = 1 and a.person_id = ? and p.transfer_from is null and p.amount > 0 and payment_on > ?"
     Payment.find_by_sql([query,user.id,Date.today()- days])
   end
-
-  def self.find_upcoming(user)
-    query = "select p.* from payments p where p.repeat is not null and p.person_id = ?"
-    repeating = Payment.find_by_sql([query,user.id])
-    upcoming = Array.new
-    for p in repeating
-      next_due_on = p.next_due
-      # build required payments until next_due is in the future
-      while next_due_on < Date.today
-        new_payment = p.clone
-        new_payment.payment_on = next_due_on
-        new_payment.save
-        next_due_on = new_payment.next_due
-        p.repeat = nil
-        p.save
-        p = new_payment
-      end
-      upcoming<<(p)
-    end
-    upcoming.sort! {|x,y| x.payment_on <=> y.payment_on }
-  end
-
+  
   def self.find_recent(user, days)
     all = recent_expenses(user, days)
     all += recent_transfers(user, days)
     all += recent_deposits(user, days)
     all.sort!{|x,y| y.payment_on <=> x.payment_on }
+  end
+  
+  def self.find_upcoming(user)
+    query = "select p.* from payments p where p.frequency is not null and p.person_id = ?"
+    repeating = Payment.find_by_sql([query,user.id])
+    logger.info("repeating: #{repeating.inspect}")
+    for p in repeating
+      p.build_repeat
+    end
+    upcoming = Payment.find_by_sql([query,user.id])
+    logger.info("upcoming: #{upcoming.inspect}")
+    upcoming.sort! {|x,y| x.payment_on <=> y.payment_on }
   end
 
   def self.days_with_expenses?(user,days)
@@ -109,27 +127,6 @@ class Payment < ActiveRecord::Base
     end
     result_array = result_hash.sort{|a,b| b[1]<=>a[1]}
     result_array.first(8)
-  end
-
-  def next_due
-    frequency = Lookup.find(repeat).code.to_i
-    if (frequency < 15) # daily, weekly or biweekly
-      due = payment_on + frequency
-    elsif (frequency == 15) # twice monthly
-      last_day_of_month = Date.civil(payment_on.year, payment_on.month, -1).day
-      if payment_on.day == last_day_of_month
-        due = payment_on>>(1)
-        due = Date.civil(due.year, due.month, 15)
-      else
-        day = payment_on.day < 15 ? 15 : -1
-        due = Date.civil(payment_on.year, payment_on.month, day)
-      end
-    elsif (frequency == 30) # monthly
-      due = payment_on>>(1)
-    elsif (frequency == 365)
-      due = payment_on>>(12)
-    end
-    due
   end
   
 end

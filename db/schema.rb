@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20100429213552) do
     t.string   "tags"
     t.float    "amount"
     t.date     "payment_on"
-    t.string   "repeat"
+    t.integer  "frequency"
     t.date     "until"
     t.integer  "account_id"
     t.integer  "transfer_from"

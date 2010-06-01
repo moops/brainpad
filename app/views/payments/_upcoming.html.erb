@@ -2,4 +2,4 @@
     <td><%= upcoming.description[0,25] + (upcoming.description.length > 25 ? '...' : '') %></td>
     <td class="<%= upcoming.payment_type? %>_amount"><%= number_to_currency(upcoming.amount.abs) %></td>
     <td><%= upcoming.account.name %></td>
-    <td>in <%= upcoming.next_due - Date.today %> days</td></tr>
+    <td>in <%= (upcoming.next_due - Date.today).to_i %> days</td></tr>

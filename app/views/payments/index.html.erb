@@ -35,6 +35,7 @@
         <div class="box_header">upcoming</div>
         <div class="box_content">
             <table width="100%" border="0" cellspacing="0" cellpadding="2">
+            <% logger.info("@upcoming_payments from ui: #{@upcoming_payments.inspect}") %>
             <%= render :partial => 'upcoming', :collection => @upcoming_payments %>
             </table>
         </div>

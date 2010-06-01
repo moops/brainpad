@@ -6,7 +6,6 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.xml
   def index
-    logger.info('payment_controller.index ')
     if params[:id]
       @payment = Payment.find(params[:id])
       @payment.amount = @payment.amount.abs
