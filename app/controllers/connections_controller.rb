@@ -8,11 +8,8 @@ class ConnectionsController < ApplicationController
   def index
     @user = Person.find(session[:user_id])
     @order = params[:order] ? params[:order] : 'name'
-
     @connections = Connection.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => @order, :per_page => 10
-    
     @connection = Connection.new #for the 'new' form
-    @form_header = 'new connection'
     
     respond_to do |format|
       format.html # index.html.erb

@@ -12,8 +12,6 @@ class RemindersController < ApplicationController
 
     @reminder = Reminder.new #for the 'new' form
     @reminder.due = Date.today.strftime("%b %d, %Y")
-    @form_header = 'new item'
-    @form_action = 'create'
 
     respond_to do |format|
       format.html # index.html.erb

@@ -20,9 +20,7 @@ class ContactsController < ApplicationController
       logger.info "no tag param"
     end
     @contacts = Contact.paginate :page => params[:page], :conditions => conditions, :order => @order, :per_page => 10
-
     @contact = Contact.new #for the 'new' form
-    @form_header = 'new contact'
     
     respond_to do |format|
       format.html # index.html.erb

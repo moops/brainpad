@@ -18,7 +18,7 @@
 <% for cur_tag in session[:contact_tags] %>
     <%= link_to(cur_tag, :controller => 'contacts', :tag => cur_tag) %>,
 <% end %><p/>
-<h3><%= @form_header %></h3> 
+ 
 <div id="form" class="form">
     <%= render(:partial => 'form') %>
 </div>

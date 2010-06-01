@@ -12,7 +12,6 @@ class JournalsController < ApplicationController
 
     @journal = Journal.new #for the 'new' form
     @journal.entry_on = Date.today.strftime("%b %d, %Y")
-    @form_header = 'new entry'
 
     respond_to do |format|
       format.html # index.html.erb

@@ -12,8 +12,6 @@ class WorkoutsController < ApplicationController
 
     @workout = Workout.new #for the 'new' form
     @workout.workout_on = Date.today.strftime("%b %d, %Y")
-    @form_header = 'new workout'
-    @form_action = 'create'
 
     respond_to do |format|
       format.html # index.html.erb
