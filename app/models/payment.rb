@@ -62,17 +62,17 @@ class Payment < ActiveRecord::Base
   end
 
   def self.recent_expenses(user, days)
-    query = "select p.* from payments p, accounts a where p.account_id = a.id and a.active = 1 and a.person_id = ? and p.amount < 0 and payment_on > ?"
+    query = "select p.* from payments p, accounts a where p.account_id = a.id and a.active and a.person_id = ? and p.amount < 0 and payment_on > ?"
     Payment.find_by_sql([query,user.id,Date.today()- days])
   end
 
   def self.recent_transfers(user, days)
-    query = "select p.* from payments p, accounts a where p.account_id = a.id and a.active = 1 and a.person_id = ? and p.transfer_from is not null and payment_on > ?"
+    query = "select p.* from payments p, accounts a where p.account_id = a.id and a.active and a.person_id = ? and p.transfer_from is not null and payment_on > ?"
     Payment.find_by_sql([query,user.id,Date.today()- days])
   end
 
   def self.recent_deposits(user, days)
-    query = "select p.* from payments p, accounts a where p.account_id = a.id and a.active = 1 and a.person_id = ? and p.transfer_from is null and p.amount > 0 and payment_on > ?"
+    query = "select p.* from payments p, accounts a where p.account_id = a.id and a.active and a.person_id = ? and p.transfer_from is null and p.amount > 0 and payment_on > ?"
     Payment.find_by_sql([query,user.id,Date.today()- days])
   end
   
