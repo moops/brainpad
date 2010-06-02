@@ -1,4 +1,6 @@
--- lookups
+insert into `brainpad_development`.`lookups` (category,code,description)
+select l.category, l.code, l.description
+from `brainpad`.`lookups` l;
 
 insert into `brainpad_development`.`people` (name,user_name,password,mail_url,banking_url,map_center,authority,born_on,last_login_at,created_at,updated_at)
 select p.name, p.user_name, p.password, p.mail_url, p.banking_url, p.map_center, p.authority, p.birth_on, p.last_login_on, p.created_on, p.updated_on
@@ -21,7 +23,7 @@ select concat(c.first_name, ' ', c.last_name) , c.email, c.phone, null, c.phone_
 from `brainpad`.`contacts` c;
 
 insert into `brainpad_development`.`journals` (entry,entry_on,journal_type,person_id,created_at,updated_at)
-select j.entry, j.entry_on, j.journal_type, j.person_id, j.created_on, c.updated_on
+select j.entry, j.entry_on, j.journal_type, j.person_id, j.created_on, j.updated_on
 from `brainpad`.`journal` j;
 
 insert into `brainpad_development`.`links` (url,name,tags,comments,last_clicked,expires_on,person_id,created_at,updated_at)
@@ -32,7 +34,7 @@ insert into `brainpad_development`.`payments` (description,tags,amount,payment_o
 select p.description, p.tags, p.amount, p.payment_on, null, null, p.account_id, p.transfer_from, 1, p.created_at, p.updated_at
 from `brainpad`.`payments` p;
 
-insert into `brainpad_development`.`reminders` (description,done,priority,reminder_type,interval,repeat_until,due_on,person_id,created_at,updated_at)
+insert into `brainpad_development`.`reminders` (description,done,priority,reminder_type,`interval`,repeat_until,due_on,person_id,created_at,updated_at)
 select r.description, r.done, r.priority, r.reminder_type, r.interval, r.repeat_until, r.due_date, r.person_id, r.created_on, r.updated_on
 from `brainpad`.`reminders` r;
 

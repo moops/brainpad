@@ -21,7 +21,7 @@
         <td><%= f.text_field('location', :size => '37', :class => 'text') %></td>
         <td><%= f.label(:workout_type, 'type') %></div></td>
         <td>
-            <%= f.select('workout_type', Lookup.find_all_by_category(9).collect {|l| [ l.description, l.id ] }) %></td></tr>
+            <%= f.select('workout_type', Lookup.get_list('work_type').collect {|l| [ l.description, l.id ] }) %></td></tr>
     <tr>
         <td><%= f.label(:workout_on, 'date') %></td>
         <td ><%= calendar('workout','workout_on') %></td>
@@ -35,7 +35,7 @@
         <td><%= f.text_field('duration', :size => '13', :class => 'text') %></td></tr>
     <tr>
         <td><%= f.label(:route) %></td>
-        <td><%= f.select('route', Lookup.find_all_by_category(47).collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %>&nbsp;
+        <td><%= f.select('route', Lookup.get_list('route').collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %>&nbsp;
             <%= f.label(:weight) %>
             <%= f.text_field('weight', :size => '3', :class => 'text') %></td>
         <td><%= f.label(:intensity) %></td>

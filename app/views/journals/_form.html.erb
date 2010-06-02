@@ -21,7 +21,7 @@
         <td><%= calendar('journal','entry_on') %></td>
         <td><%= f.label(:type) %></td>
         <td>
-            <%= f.select('journal_type', Lookup.find_all_by_category(30).collect {|l| [ l.description, l.id ] }) %></td>
+            <%= f.select('journal_type', Lookup.get_list('jour_type').collect {|l| [ l.description, l.id ] }) %></td>
         <td rowspan="2">&nbsp;</td></tr>    
     <tr>
         <td><%= f.label(:entry) %></td>
