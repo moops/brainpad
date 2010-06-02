@@ -6,7 +6,7 @@ one:
   description: basic chequing account
   units: 245
   price: 1
-  active: 1
+  active: true
   person_id: 1
 
 two:
@@ -17,7 +17,7 @@ two:
   description: credit card
   units: -1000
   price: 1
-  active: 1
+  active: true
   person_id: 1
   
 three:
@@ -28,7 +28,7 @@ three:
   description: high interest emergency account
   units: 1006
   price: 1
-  active: 1
+  active: true
   person_id: 1
   
 four:
@@ -39,5 +39,5 @@ four:
   description: basic rrsp account
   units: 235
   price: 11.45
-  active: 1
+  active: true
   person_id: 1
