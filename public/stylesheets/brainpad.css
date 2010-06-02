@@ -106,8 +106,12 @@ a.nav_off, a.nav_on:visited {
 label { 
     text-align: right;
     font-weight: bold;
+    color: #666;  
+}
+
+.label { 
+    font-weight: bold;
     color: #666;
-    
 }
 
 .links a {
@@ -335,12 +339,6 @@ select {
   background: #fff;
 }
 
-label { 
-    text-align: right;
-    font-weight: bold;
-    color: #666;
-    
-}
 
 
 
