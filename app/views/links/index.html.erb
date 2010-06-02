@@ -99,7 +99,7 @@
 <span class="label">due today:</span>
 <ul>
     <% for reminder in @due_today %>
-    <li><%= reminder.description[0,40] + (reminder.description.length > 40 ? '...' : '') %></li>
+    <li style="display:inline;"><%= reminder.description[0,40] + (reminder.description.length > 40 ? '...' : '') %></li>
     <% end %>
 </ul>
 <% end %>

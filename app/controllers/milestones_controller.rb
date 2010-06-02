@@ -16,28 +16,6 @@ class MilestonesController < ApplicationController
     end
   end
 
-  # GET /milestones/1
-  # GET /milestones/1.xml
-  def show
-    @milestone = Milestone.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @milestone }
-    end
-  end
-
-  # GET /milestones/new
-  # GET /milestones/new.xml
-  def new
-    @milestone = Milestone.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @milestone }
-    end
-  end
-
   # GET /milestones/1/edit
   def edit
     @milestone = Milestone.find(params[:id])
