@@ -7,7 +7,7 @@ class Reminder < ActiveRecord::Base
   end
   
   def self.todays(person_id)
-    Reminder.find(:all, :conditions => "person_id = #{person_id} and due = '#{Date.today}' and (done = 0 or done = 'f')")
+    Reminder.find(:all, :conditions => "person_id = #{person_id} and due = '#{Date.today}' and not done")
   end
   
 end
