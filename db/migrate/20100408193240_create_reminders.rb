@@ -7,7 +7,7 @@ class CreateReminders < ActiveRecord::Migration
       t.integer :reminder_type
       t.integer :interval
       t.date :repeat_until
-      t.date :due
+      t.date :due_on
       t.integer :person_id
 
       t.timestamps

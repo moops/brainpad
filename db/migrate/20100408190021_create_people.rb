@@ -8,8 +8,8 @@ class CreatePeople < ActiveRecord::Migration
       t.string :banking_url
       t.string :map_center
       t.integer :authority
-      t.date :birth_on
-      t.datetime :last_login_on
+      t.date :born_on
+      t.datetime :last_login_at
 
       t.timestamps
     end
