@@ -2,7 +2,7 @@
 
 one:
   description: test first reminder
-  done: 0
+  done: false
   priority: 28
   reminder_type: 40
   interval:
@@ -12,7 +12,7 @@ one:
 
 two:
   description: test second reminder
-  done: 0
+  done: false
   priority: 28
   reminder_type: 41
   interval:
@@ -22,7 +22,7 @@ two:
   
 three:
   description: test third reminder
-  done: 0
+  done: false
   priority: 28
   reminder_type: 41
   interval:
@@ -32,7 +32,7 @@ three:
   
 four:
   description: test fourth reminder
-  done: 0
+  done: false
   priority: 28
   reminder_type: 41
   interval:
@@ -42,7 +42,7 @@ four:
   
 five:
   description: test fifth reminder
-  done: 0
+  done: false
   priority: 28
   reminder_type: 41
   interval:
