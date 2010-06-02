@@ -20,7 +20,7 @@ two:
 
 three:
   description: hiking boots
-  tags: recreation-equip
+  tags: rec-equip
   amount: -123.34
   payment_on: 2010-05-22
   account_id: 2
@@ -29,7 +29,7 @@ three:
   
 four:
   description: swimming
-  tags: recreation-fee
+  tags: rec-fee
   amount: -15.34
   payment_on: 2010-05-25
   account_id: 1

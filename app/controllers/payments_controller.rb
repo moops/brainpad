@@ -106,15 +106,20 @@ end
 
 class MoneySummary
 
-  attr_reader :buy_nothing_days, :per_expense, :per_day, :days_with_expenses, :balance, :total
+  attr_reader :buy_nothing_days, :net_change, :per_day, :days_with_expenses, :balance, :total
 
   def initialize(user,days)
+    deposits = Payment.recent_deposits(user,days)
+    income = 0
+    for dep in deposits
+      income += dep.amount
+    end
     expenses = Payment.recent_expenses(user,days)
     @total = 0
     for exp in expenses
       @total += exp.amount.abs
     end
-    @per_expense = @total/expenses.length if expenses.length > 0
+    @net_change = income - @total
     @per_day     = @total/days if days > 0
     @buy_nothing_days = days - Payment.days_with_expenses?(user,days)
     @balance = 0

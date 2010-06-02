@@ -3,7 +3,7 @@
         <table width="100%" border="0">
             <tr>
                 <td>last 30 days:</td>
-                <td><div class="summary_data"><%= number_to_currency @money_summary.per_expense %></div>per expense</td>
+                <td><div class="summary_data"><%= number_to_currency @money_summary.net_change %></div>net change</td>
                 <td><div class="summary_data"><%= number_to_currency @money_summary.per_day %></div>per day</td>
                 <td><div class="summary_data"><%= @money_summary.buy_nothing_days %></div>buy nothing days</td>
                 <td><div class="summary_data"><%= number_to_currency @money_summary.balance %></div>net worth</td></tr>
