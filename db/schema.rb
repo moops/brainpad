@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(:version => 20100429213552) do
     t.boolean  "done"
     t.integer  "priority"
     t.integer  "reminder_type"
-    t.integer  "interval"
+    t.integer  "frequency"
     t.date     "repeat_until"
     t.date     "due_on"
     t.integer  "person_id"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(:version => 20100429213552) do
   create_table "workouts", :force => true do |t|
     t.string   "location"
     t.string   "race"
-    t.string   "route"
+    t.integer  "route"
     t.text     "description"
     t.integer  "duration"
     t.integer  "intensity"

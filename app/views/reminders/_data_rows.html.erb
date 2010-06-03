@@ -1,17 +1,14 @@
 <% 
-due = Date.new(data_rows["due"].year,data_rows["due"].month,data_rows["due"].day)
-if due < Date.today 
-    logger.info "overdue - due = #{due}"
+if data_rows['due_on'] < Date.today 
     @class = 'class="overdue"'
-elsif due == Date.today 
-    logger.info "due - due = #{due}"
+elsif data_rows['due_on'] == Date.today 
     @class = 'class="due"'
 else
     @class = ''
 end
 %>
 <tr class="<%= data_rows_counter.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
-    <td <%= @class %>><%= data_rows['due'].strftime("%a %b %d, %y") %></td>
+    <td <%= @class %>><%= data_rows['due_on'].strftime("%a %b %d, %y") %></td>
     <td <%= @class %>><%= Lookup.find_by_id(data_rows['reminder_type']).description %></td>
     <td <%= @class %>><%= Lookup.find_by_id(data_rows['priority']).description %></td>
     <td <%= @class %>><%= data_rows['description'][0,40] + (data_rows['description'].length > 40 ? '...' : '') %></td>
