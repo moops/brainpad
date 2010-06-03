@@ -7,7 +7,7 @@ one:
   reminder_type: 40
   interval:
   repeat_until:
-  due: 2010-04-30
+  due_on: 2010-04-30
   person_id: 1
 
 two:
@@ -17,7 +17,7 @@ two:
   reminder_type: 41
   interval:
   repeat_until:
-  due: 2010-04-30
+  due_on: 2010-04-30
   person_id: 1
   
 three:
@@ -27,7 +27,7 @@ three:
   reminder_type: 41
   interval:
   repeat_until:
-  due: 2010-05-02
+  due_on: 2010-05-02
   person_id: 1
   
 four:
@@ -37,7 +37,7 @@ four:
   reminder_type: 41
   interval:
   repeat_until:
-  due: 2010-05-02
+  due_on: 2010-05-02
   person_id: 1
   
 five:
@@ -47,5 +47,5 @@ five:
   reminder_type: 41
   interval:
   repeat_until:
-  due: 2010-05-04
+  due_on: 2010-05-04
   person_id: 1
