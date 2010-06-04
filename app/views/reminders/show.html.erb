@@ -12,7 +12,7 @@
         <tr>
             <td><div class="label">priority</div></td><td><%= Lookup.find_by_id(@reminder.priority).description %></td></tr>
         <tr>
-            <td><div class="label">due</div></td><td><%= @reminder.due.strftime("%a %b %d, %y") %></td></tr>
+            <td><div class="label">due</div></td><td><%= @reminder.due_on.strftime("%a %b %d, %y") %></td></tr>
         <tr>
             <td><div class="label" valign="top">description</div></td><td><%= @reminder.description %></td></tr>
         <tr>

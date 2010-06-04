@@ -6,7 +6,7 @@
     <div class="label">often</div>
     <ul class="links">
     <% for cur_link in @most_often_1 %>
-        <li>(<%=link_to(cur_link.clicks, :action => "edit", :id => cur_link.id) %>)<%=link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
+        <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
 </div>
@@ -15,7 +15,7 @@
     <div class="label">&nbsp;</div>
     <ul class="links">
     <% for cur_link in @most_often_2 %>
-        <li>(<%=link_to(cur_link.clicks, :action => "edit", :id => cur_link.id) %>)<%=link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
+        <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
 </div>
@@ -24,7 +24,7 @@
     <div class="label">recent</div>
     <ul class="links">
     <% for cur_link in @recently_clicked %>
-        <li><%= link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
+        <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
 </div>
@@ -33,7 +33,7 @@
     <div class="label">new</div>
     <ul class="links">
     <% for cur_link in @recently_added %>
-        <li><%= link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
+        <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
 </div>
@@ -42,7 +42,7 @@
     <div class="label">random</div>
     <ul class="links">
     <% for cur_link in @random %>
-        <li><%= link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %></li>
+        <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
 </div>
@@ -104,6 +104,7 @@
 </ul>
 <% end %>
 
+<% if @milestone %>
 <div>
     <span class="label">next milestone:</span>  
     <%= @milestone.name %>
@@ -113,3 +114,4 @@
         count('<%= @milestone.id %>', '<%= @milestone.milestone_at %>');
     </script>
 </div>
+<% end %>

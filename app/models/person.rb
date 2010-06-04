@@ -14,12 +14,12 @@ class Person < ActiveRecord::Base
   end
     
   def get_age
-    Date.today - birth_on
+    Date.today - born_on
   end
     
   def get_days_left
     #based on 84 year life expectancy 
-    (birth_on>>(84*12)) - Date.today
+    (born_on>>(84*12)) - Date.today
   end
     
   def active_accounts

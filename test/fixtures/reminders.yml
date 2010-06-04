@@ -5,9 +5,9 @@ one:
   done: false
   priority: 28
   reminder_type: 40
-  interval:
+  frequency:
   repeat_until:
-  due: 2010-04-30
+  due_on: 2010-04-30
   person_id: 1
 
 two:
@@ -15,9 +15,9 @@ two:
   done: false
   priority: 28
   reminder_type: 41
-  interval:
+  frequency:
   repeat_until:
-  due: 2010-04-30
+  due_on: 2010-04-30
   person_id: 1
   
 three:
@@ -25,9 +25,9 @@ three:
   done: false
   priority: 28
   reminder_type: 41
-  interval:
+  frequency:
   repeat_until:
-  due: 2010-05-02
+  due_on: 2010-05-02
   person_id: 1
   
 four:
@@ -35,9 +35,9 @@ four:
   done: false
   priority: 28
   reminder_type: 41
-  interval:
+  frequency:
   repeat_until:
-  due: 2010-05-02
+  due_on: 2010-05-02
   person_id: 1
   
 five:
@@ -45,7 +45,7 @@ five:
   done: false
   priority: 28
   reminder_type: 41
-  interval:
+  frequency:
   repeat_until:
-  due: 2010-05-04
+  due_on: 2010-05-04
   person_id: 1

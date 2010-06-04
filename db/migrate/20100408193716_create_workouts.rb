@@ -3,7 +3,7 @@ class CreateWorkouts < ActiveRecord::Migration
     create_table :workouts do |t|
       t.string :location
       t.string :race
-      t.string :route
+      t.integer :route
       t.text :description
       t.integer :duration
       t.integer :intensity
