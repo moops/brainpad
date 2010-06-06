@@ -1,2 +1,6 @@
 1. replace reminder_type with tags
 2. fix workout.route
+
+get rid of 2 feeds on the main page and move them somewhere else (maybe an ajax expanding area)
+reverse the sort journal entries so newest is at the top
+sort the accounts in the money form
