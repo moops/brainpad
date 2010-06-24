@@ -1,2 +1,5 @@
 1. replace reminder_type with tags
 2. fix workout.route
+
+3. recent links not sorting
+4. payment edit expense becomes a deposit and screws up the balance.
