@@ -3,3 +3,13 @@
 
 3. recent links not sorting
 4. payment edit expense becomes a deposit and screws up the balance.
+
+5. add the following to the css for adding commas (or something else) between the elements of the inline list of tasks due today on the home page.
+
+    #inline-list-gen ul li:after {
+    content: ", ";
+    }
+        
+    #inline-list-gen ul li.last:after {
+    content: ". ";
+    }
