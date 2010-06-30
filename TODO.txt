@@ -1,0 +1,15 @@
+1. replace reminder_type with tags
+2. fix workout.route
+
+3. get rid of 2 feeds on the main page and move them somewhere else (maybe an ajax expanding area)
+4. reverse the sort journal entries so newest is at the top
+5. sort the accounts in the money form
+
+6. add the following css to add a text seperator between the inline list of tasks due today on the home page
+    #inline-list-gen ul li:after {
+    content: ", ";
+    }
+        
+    #inline-list-gen ul li.last:after {
+    content: ". ";
+    }
