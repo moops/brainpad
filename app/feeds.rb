@@ -6,7 +6,7 @@ module Feeds
   def Feeds.get_feeds
     feed_urls = [
       'http://feeds.feedburner.com/TechCrunch', 
-      'http://feeds.digg.com/digg/popular.rss', 
+      'http://www.reddit.com/new.rss', 
       'http://feeds2.feedburner.com/cyclingnews/news',
       'http://feeds.wired.com/wired/index?format=xml']
     feeds = Array.new
