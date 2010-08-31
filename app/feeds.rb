@@ -15,7 +15,7 @@ module Feeds
       open(url) do |http|
         response = http.read
         result = RSS::Parser.parse(response, false)
-        feeds << result
+        feeds << result if result
       end
     end
     feeds
