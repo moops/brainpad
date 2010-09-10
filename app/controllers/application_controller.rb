@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   
   def authenticate
     if session[:user_id]
+      logger.info("session: #{session.inspect}")
       @user = Person.find(session[:user_id])
     else
       session[:return_to] = request.request_uri

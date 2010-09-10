@@ -109,15 +109,10 @@ ActiveRecord::Schema.define(:version => 20100429213552) do
   end
 
   create_table "people", :force => true do |t|
-    t.string   "name"
     t.string   "user_name"
-    t.string   "password"
     t.string   "mail_url"
     t.string   "banking_url"
     t.string   "map_center"
-    t.integer  "authority"
-    t.date     "born_on"
-    t.datetime "last_login_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

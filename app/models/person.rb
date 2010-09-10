@@ -1,3 +1,4 @@
+
 class Person < ActiveRecord::Base
 
   
@@ -10,7 +11,13 @@ class Person < ActiveRecord::Base
   has_many :workouts
 
   def self.authenticate(name, password)
-    Person.find(:first, :conditions => [ "user_name = ? and password = ?", name, password ])
+    #Person.find(:first, :conditions => [ "user_name = ? and password = ?", name, password ])
+    
+    url = 'http://localhost:3001/users/find.xml?user_name=quinnlawr&password=quinn_pass'
+    open(url) do |http|
+      response = http.read
+      logger.info("name #{name} password #{password} response #{response}")
+    end
   end
     
   def get_age

@@ -50,4 +50,4 @@ Lookup.create({:category => 36, :code => '15', :description => 'twice monthly' }
 Lookup.create({:category => 36, :code => '30', :description => 'monthly' })
 Lookup.create({:category => 36, :code => '365', :description => 'annualy' })
 
-adam = Person.create({ :id => 1, :name => 'Adam Lawrence', :user_name => 'adam', :password => 'adam', :mail_url => 'http://mail.google.com/mail', :map_center => '48.468141,-123.358612', :authority => 1, :born_on => '1969-07-09'})
+adam = Person.create({ :id => 1, :user_name => 'adam', :mail_url => 'http://mail.google.com/mail', :map_center => '48.468141,-123.358612'})
