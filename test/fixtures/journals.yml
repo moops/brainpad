@@ -2,17 +2,17 @@ one:
   entry: test first entry
   entry_on: 2010-03-30
   journal_type: 31
-  person_id: 1
+  person: adam
 
 two:
   entry: test second entry
   entry_on: 2010-04-01
   journal_type: 32
-  person_id: 1
+  person: adam
 
 three:
   entry: test third entry. this one is a long one so we can see some wrapping in the list view or the show view. this one is a long one so we can see some wrapping in the list view or the show view. this one is a long one so we can see some wrapping in the list view or the show view.
   entry_on: 2010-04-03
   journal_type: 33
-  person_id: 1
+  person: adam
 

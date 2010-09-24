@@ -4,7 +4,7 @@ one:
   password: imp
   url: http://www.investorsgroup.ca
   description: investments
-  person_id: 1
+  person: adam
 
 two:
   name: pih
@@ -12,7 +12,7 @@ two:
   password: imp
   url: http://www.pih.ca
   description: running club
-  person_id: 1
+  person: adam
   
 three:
   name: imdb
@@ -20,7 +20,7 @@ three:
   password: imp
   url: http://www.imdb.com
   description: everything about movies and actors
-  person_id: 1
+  person: adam
 
 four:
   name: yahoo
@@ -28,7 +28,7 @@ four:
   password: jdev
   url: http://www.yahoo.com
   description: junk mail and alternate search engine/potrtal
-  person_id: 1
+  person: adam
   
 five:
   name: virgin
@@ -36,4 +36,4 @@ five:
   password: imp
   url: http://www.virginmobile.ca
   description: cell phone
-  person_id: 1
+  person: adam

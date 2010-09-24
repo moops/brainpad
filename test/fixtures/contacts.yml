@@ -8,7 +8,7 @@ one:
   city: 
   tags: family
   comments: don't lend him money
-  person_id: 1
+  person: adam
 
 two:
   name: jerry lawrence
@@ -20,7 +20,7 @@ two:
   city: golden
   tags: family
   comments: call him every once in a while
-  person_id: 1 
+  person: adam 
   
 three:
   name: cate shepherd
@@ -32,7 +32,7 @@ three:
   city: victoria
   tags: family
   comments: call her every once in a while
-  person_id: 1
+  person: adam
   
 four:
   name: gerry etchevery
@@ -44,6 +44,6 @@ four:
   city: victoria
   tags: pih running friend
   comments: sunday morning runs around elk lake
-  person_id: 1
+  person: adam
 
 

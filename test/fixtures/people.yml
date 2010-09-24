@@ -1,18 +1,18 @@
 adam:
   user_name: adam
   mail_url: http://gmail.com
-  banking_url: http://coastcapitalsavings.com
+  banking_url: http://coastcapitalsavings_a.com
   map_center:
   
 quinn:
-  user_name: adam
+  user_name: quinn
   mail_url: http://gmail.com
-  banking_url: http://coastcapitalsavings.com
+  banking_url: http://coastcapitalsavings_q.com
   map_center:
   
 else:
   user_name: else
   mail_url: http://gmail.com
-  banking_url: http://coastcapitalsavings.com
+  banking_url: http://coastcapitalsavings_e.com
   map_center:
   
