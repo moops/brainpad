@@ -1,0 +1,18 @@
+adam:
+  user_name: adam
+  mail_url: http://gmail.com
+  banking_url: http://coastcapitalsavings.com
+  map_center:
+  
+quinn:
+  user_name: adam
+  mail_url: http://gmail.com
+  banking_url: http://coastcapitalsavings.com
+  map_center:
+  
+else:
+  user_name: else
+  mail_url: http://gmail.com
+  banking_url: http://coastcapitalsavings.com
+  map_center:
+  

@@ -1,8 +1,13 @@
 require 'test_helper'
 
 class PersonTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  
+  test "save without required fields" do
+    a = Person.new
+    assert !a.save, 'saved without user_name'
+    a.user_name= 'fred'
+
+    assert a.save, 'save with all required fields'
   end
+  
 end

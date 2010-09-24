@@ -1,7 +1,6 @@
 
 class Person < ActiveRecord::Base
 
-  
   has_many :accounts
   has_many :connections
   has_many :contacts
@@ -9,6 +8,8 @@ class Person < ActiveRecord::Base
   has_many :links
   has_many :reminders
   has_many :workouts
+  
+  validates_presence_of :user_name
 
   def self.authenticate(name, password)
     #Person.find(:first, :conditions => [ "user_name = ? and password = ?", name, password ])

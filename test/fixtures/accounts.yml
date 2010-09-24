@@ -1,5 +1,4 @@
-one:
-  id: 1
+chequing:
   name: chequing
   url: www.coastcapitalsavings.com
   price_url: 
@@ -7,10 +6,9 @@ one:
   units: 245
   price: 1
   active: true
-  person_id: 1
+  person: adam
 
-two:
-  id: 2
+visa:
   name: visa
   url: www.visa.ca
   price_url: www.cibcvisa.com
@@ -18,10 +16,9 @@ two:
   units: -1000
   price: 1
   active: true
-  person_id: 1
+  person: adam
   
-three:
-  id: 3
+ing:
   name: ing
   url: www.ingdirect.ca
   price_url: www.ingdirect.ca
@@ -29,10 +26,9 @@ three:
   units: 1006
   price: 1
   active: true
-  person_id: 1
+  person: adam
   
-four:
-  id: 4
+investors:
   name: investors
   url: www.investorsgroup.ca
   price_url: www.globeandmail.com
@@ -40,4 +36,4 @@ four:
   units: 235
   price: 11.45
   active: true
-  person_id: 1
+  person: adam

@@ -3,6 +3,8 @@ class Payment < ActiveRecord::Base
   belongs_to :person
   belongs_to :account
   belongs_to :transfer_account, :class_name => 'Account', :foreign_key => 'transfer_from'
+  
+  validates_presence_of :person, :account, :amount, :payment_on
 
   attr_accessor :payment_type
 

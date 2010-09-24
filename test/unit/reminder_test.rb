@@ -1,8 +1,19 @@
 require 'test_helper'
 
 class ReminderTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  
+  test "save without required fields" do
+    a = Reminder.new
+    assert !a.save, 'saved without person'
+    a.person= people(:adam)
+
+    assert !a.save, 'saved without description'
+    a.description= 'get something done'
+
+    assert !a.save, 'saved without due date'
+    a.due_on= Date.today + 1
+
+    assert a.save, 'save with all required fields'
   end
+  
 end
