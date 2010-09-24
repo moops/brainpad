@@ -12,6 +12,9 @@ class WorkoutTest < ActiveSupport::TestCase
 
     assert !a.save, 'saved without duration'
     a.duration= '25'
+    
+    assert !a.save, 'saved without workout date'
+    a.workout_on= Date.today
 
     assert a.save, 'save with all required fields'
   end

@@ -14,10 +14,10 @@ class WorkoutsControllerTest < ActionController::TestCase
 
   test "should create workout" do
     assert_difference('Workout.count') do
-      post :create, :workout => { }
+      post :create, :workout => { :person => people(:adam), :location => 'elk lake', :duration => 25, :workout_on => Date.today }
     end
 
-    assert_redirected_to workout_path(assigns(:workout))
+    assert_redirected_to workouts_path
   end
 
   test "should show workout" do
