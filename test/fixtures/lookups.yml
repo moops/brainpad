@@ -1,0 +1,250 @@
+root:
+ id: 1
+ category: 1
+ code: root
+ description: root
+
+work_type:
+ id: 2
+ category: 1
+ code: work_type
+ description: workout types
+ 
+run:
+ id: 3
+ category: 2
+ code: run
+ description: run
+ 
+bike:
+ id: 4
+ category: 2
+ code: bike
+ description: bike
+ 
+swim:
+ id: 5
+ category: 2
+ code: swim
+ description: swim
+ 
+work_other:
+ id: 6
+ category: 2
+ code: other
+ description: other
+
+jour_type:
+ id: 7
+ category: 1
+ code: jour_type
+ description: journal entry type
+ 
+journ_default:
+ id: 8
+ category: 7
+ code: 1
+ description: default
+
+quote:
+ id: 9
+ category: 7
+ code: 2
+ description: quote
+
+journ_other:
+ id: 10
+ category: 7
+ code: 3
+ description: other
+
+priority:
+ id: 11
+ category: 1
+ code: priority
+ description: priority
+
+low:
+ id: 12
+ category: 11
+ code: 1
+ description: low
+
+medium:
+ id: 13
+ category: 11
+ code: 2
+ description: medium
+
+high:
+ id: 14
+ category: 11
+ code: 3
+ description: high
+
+critical:
+ id: 15
+ category: 11
+ code: 4
+ description: critical
+
+task_type:
+ id: 16
+ category: 1
+ code: task_type
+ description: task types
+
+home:
+ id: 17
+ category: 16
+ code: 1
+ description: home
+
+task_other:
+ id: 18
+ category: 16
+ code: 2
+ description: other
+
+tccf:
+ id: 19
+ category: 16
+ code: 3
+ description: tccf
+
+sidney:
+ id: 20
+ category: 16
+ code: 4
+ description: sidney
+
+cadboro:
+ id: 21
+ category: 16
+ code: 5
+ description: cadboro
+
+layritz:
+ id: 22
+ category: 16
+ code: 6
+ description: layritz
+
+raceweb:
+ id: 23
+ category: 16
+ code: 7
+ description: raceweb
+
+race:
+ id: 24
+ category: 16
+ code: 8
+ description: race
+
+route:
+ id: 25
+ category: 1
+ code: route
+ description: route
+
+115415:
+ id: 26
+ category: 25
+ code: 115415
+ description: esquimalt run (14)
+
+488297:
+ id: 27
+ category: 25
+ code: 488297
+ description: christmas hill run (13)
+
+115277:
+ id: 28
+ category: 25
+ code: 115277
+ description: waterfront ride
+
+1077154:
+ id: 29
+ category: 25
+ code: 1077154 
+ description: peninsula,path,waterfront
+
+491770:
+ id: 30
+ category: 25
+ code: 491770
+ description: songhees run
+
+115570:
+ id: 31
+ category: 25
+ code: 115570
+ description: bear hill run
+
+649633:
+ id: 32
+ category: 25
+ code: 649633
+ description: selkirk run (7)
+
+702047:
+ id: 33
+ category: 25
+ code: 702047
+ description: breakwater run (14)
+
+782559:
+ id: 34
+ category: 25
+ code: 817509
+ description: gorge cuthbert run (12)
+
+ id: 35
+ category: 25
+ code: 782559
+ description: mt doug ritechs bogg run (24)
+
+frequency:
+ id: 36
+ category: 1
+ code: freq
+ description: frequency
+
+daily:
+ id: 37
+ category: 36
+ code: 1
+ description: daily
+
+weekly:
+ id: 38
+ category: 36
+ code: 7
+ description: weekly
+
+biweekly:
+ id: 39
+ category: 36
+ code: 14
+ description: biweekly
+
+twice_monthly:
+ id: 40
+ category: 36
+ code: 15
+ description: twice monthly
+
+monthly:
+ id: 41
+ category: 36
+ code: 30
+ description: monthly
+
+annualy:
+ id: 42
+ category: 36
+ code: 365
+ description: annualy
