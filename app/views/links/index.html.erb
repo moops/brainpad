@@ -5,7 +5,7 @@
 <div class="left">
     <div class="label">often</div>
     <ul class="links">
-    <% for cur_link in @most_often_1 %>
+    <% for cur_link in @most_often_1 or Array.new %>
         <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
@@ -14,7 +14,7 @@
 <div class="left">
     <div class="label">&nbsp;</div>
     <ul class="links">
-    <% for cur_link in @most_often_2 %>
+    <% for cur_link in @most_often_2 or Array.new %>
         <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
@@ -23,7 +23,7 @@
 <div class="left">
     <div class="label">recent</div>
     <ul class="links">
-    <% for cur_link in @recently_clicked %>
+    <% for cur_link in @recently_clicked or Array.new %>
         <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
@@ -32,7 +32,7 @@
 <div class="left">
     <div class="label">new</div>
     <ul class="links">
-    <% for cur_link in @recently_added %>
+    <% for cur_link in @recently_added or Array.new %>
         <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>
@@ -41,7 +41,7 @@
 <div class="left">
     <div class="label">random</div>
     <ul class="links">
-    <% for cur_link in @random %>
+    <% for cur_link in @random or Array.new %>
         <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
     <% end %>
     </ul>

@@ -1,16 +1,6 @@
 <p>
-  <b>Name:</b>
-  <%=h @person.name %>
-</p>
-
-<p>
   <b>User name:</b>
   <%=h @person.user_name %>
-</p>
-
-<p>
-  <b>Password:</b>
-  <%=h @person.password %>
 </p>
 
 <p>
@@ -27,22 +17,6 @@
   <b>Map center:</b>
   <%=h @person.map_center %>
 </p>
-
-<p>
-  <b>Authority:</b>
-  <%=h @person.authority %>
-</p>
-
-<p>
-  <b>Birth on:</b>
-  <%=h @person.born_on %>
-</p>
-
-<p>
-  <b>Last login on:</b>
-  <%=h @person.last_login_on %>
-</p>
-
 
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>

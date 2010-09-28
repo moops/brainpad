@@ -42,10 +42,8 @@
             <%= link_to(image_tag('ff9933_link.png', :size => '15x15', :border => 0), :action => 'index', :style => "ff9933") %></div>
         <div id="user">
             <% if (session[:user_id]) %>
-                logged in as <%= @user.name %>.
                 <%= link_to('log out', :controller => "login", :action => "logout") %>
                 <br/>
-                you've used <%= @user.get_age %> days and have <%= @user.get_days_left %> left.
             <% end %></div>
         <div id="copyright">
             &copy <%= Date.today.year %> raceweb.ca victoria bc<br>
