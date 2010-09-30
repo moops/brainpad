@@ -1,10 +1,10 @@
-<script>
-	$(function() {
-		$( "#reminder_due_on" ).datepicker();
-		$( "#reminder_due_on" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-		$( "#reminder_repeat_until" ).datepicker();
-		$( "#reminder_repeat_until" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-	});
+<script type="text/javascript">
+  $(document).ready(function() {
+    $( "#reminder_due_on" ).datepicker();
+    $( "#reminder_due_on" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $( "#reminder_repeat_until" ).datepicker();
+    $( "#reminder_repeat_until" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+  });
 </script>
 
 <% form_for(@reminder) do |f| %>
@@ -46,10 +46,10 @@
     <tr>
         <td><%= f.label(:description) %></td>
         <td colspan="3" rowspan="2">
-        	<%= f.text_area(:description, :cols => 63, :rows => 3) %>
-	        <span class="submit">
-	            <%= f.submit(@reminder.id ? 'update' : 'create') %>
-	        </span></td></tr>
+          <%= f.text_area(:description, :cols => 63, :rows => 3) %>
+          <span class="submit">
+              <%= f.submit(@reminder.id ? 'update' : 'create') %>
+          </span></td></tr>
 </table>
 
 <% end %>

@@ -1,8 +1,8 @@
-<script>
-	$(function() {
-		$( "#workout_workout_on" ).datepicker();
-		$( "#workout_workout_on" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-	});
+<script type="text/javascript">
+  $(document).ready(function() {
+    $( "#workout_workout_on" ).datepicker();
+    $( "#workout_workout_on" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+  });
 </script>
 
 <% form_for(@workout) do |f| %>

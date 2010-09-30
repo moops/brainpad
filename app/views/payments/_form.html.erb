@@ -21,13 +21,13 @@
             document.getElementById('payment_description').value = t;
         }
     }
-	
-	$(function() {
-		$( "#payment_payment_on" ).datepicker();
-		$( "#payment_payment_on" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-		$( "#payment_until" ).datepicker();
-		$( "#payment_until" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-	});
+  
+  $(document).ready(function() {
+    $( "#payment_payment_on" ).datepicker();
+    $( "#payment_payment_on" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    $( "#payment_until" ).datepicker();
+    $( "#payment_until" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+  });
 </script>
 
 <% form_for(@payment) do |f| %>
@@ -56,7 +56,7 @@
             <%= f.text_field(:amount, :size => '7', :class => 'text') %></td>
         <td>
             <%= label(:payment, :payment_on, "Date") %>
-			<%= f.text_field(:payment_on, :size => '12') %></td>
+      <%= f.text_field(:payment_on, :size => '12') %></td>
         <td>
             <%= f.label(:name) %>
             <%= f.text_field(:description, :size => '25', :class => 'text') %></td></tr>
@@ -66,7 +66,7 @@
             <%= f.select(:frequency, Lookup.get_list('freq').collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %></td>
         <td>
             <%= label(:payment, :until) %>
-			<%= f.text_field(:until, :size => '12') %></td>
+      <%= f.text_field(:until, :size => '12') %></td>
         <td>&nbsp;</td></tr>
     <tr>
         <td colspan="2">
