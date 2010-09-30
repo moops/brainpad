@@ -3,24 +3,27 @@
 <html>
 <head>
     <title>brainpad</title>
-    <%= stylesheet_link_tag 'brainpad','jquery-ui-1.8.5.custom' %>
-    <%= javascript_include_tag :defaults, 'jquery-1.4.2.min', 'jquery-ui-1.8.5.custom.min'%>
+    <%= stylesheet_link_tag 'brainpad','jquery-ui-1.8.5.custom', 'lavalamp' %>
+    <%= javascript_include_tag :defaults, 'jquery-1.4.2.min', 'jquery-ui-1.8.5.custom.min', 'jquery.lavalamp.1.3.3-min', 'jquery.easing.1.3' %>
 </head>
+
+<script type="text/javascript">
+    $(function() { $("#lavaLamp").lavaLamp({ fx: "easeOutBack", speed: 700}) });
+</script>
 
 <body>
     <div id="header"><%= show_image('/images/headers/' + (Time.now.sec % 13).to_s,700,100) %></div>
-    <div id="navbar">
-        <%= link_to('home',       links_path,     :class => (params[:controller] == 'links' ? 'nav_on' : 'nav_off') ) %>
-        <%= link_to('contacts',   contacts_path,  :class => (params[:controller] == 'contacts' ? 'nav_on' : 'nav_off') ) %>
-        <%= link_to('workouts',   workouts_path,  :class => (params[:controller] == 'workouts' ? 'nav_on' : 'nav_off') ) %>
-        <%= link_to('money',      payments_path,  :class => (params[:controller] == 'payments' ? 'nav_on' : 'nav_off') ) %>
-        <%= link_to('journal' ,   journals_path,  :class => (params[:controller] == 'journals' ? 'nav_on' : 'nav_off') ) %>
-        <%= link_to('calendar' ,  reminders_path, :class => (params[:controller] == 'reminders' ? 'nav_on' : 'nav_off') ) %>
-        <%= link_to('photos' ,  'http://photo.raceweb.ca',   :target => '_blank',  :class => 'nav_off' ) %>
-        <%= link_to('conn' ,      connections_path,:class => (params[:controller] == 'connections' ? 'nav_on' : 'nav_off') ) %>
-        <%= link_to('milestones', milestones_path, :class => (params[:controller] == 'milestones' ? 'nav_on' : 'nav_off') ) %>
-        <div class="clear"></div>
-    </div>
+    <ul id="lavaLamp">
+        <li><%= link_to('home',       links_path ) %></li>
+        <li><%= link_to('contacts',   contacts_path ) %></li>
+        <li><%= link_to('workouts',   workouts_path ) %></li>
+        <li><%= link_to('money',      payments_path ) %></li>
+        <li><%= link_to('journal' ,   journals_path ) %></li>
+        <li><%= link_to('calendar' ,  reminders_path ) %></li>
+        <li><%= link_to('photos' ,  'http://photo.raceweb.ca',   :target => '_blank' ) %></li>
+        <li><%= link_to('conn' ,      connections_path ) %></li>
+        <li><%= link_to('milestones', milestones_path ) %></li>
+    </ul>
     
     <!-- main content -->
     
