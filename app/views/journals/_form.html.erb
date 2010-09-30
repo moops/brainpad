@@ -1,3 +1,10 @@
+<script>
+	$(function() {
+		$( "#journal_entry_on" ).datepicker();
+		$( "#journal_entry_on" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+	});
+</script>
+
 <% form_for(@journal) do |f| %>
 
 <% if session[:user_id] %>
@@ -18,7 +25,7 @@
             <% end %></td></tr>
     <tr>
         <td><%= label(:journal, :entry_on, 'Date') %></td>
-        <td><%= calendar('journal','entry_on') %></td>
+        <td><%= f.text_field(:entry_on, :size => '12', :class => 'text') %></td>
         <td><%= f.label(:type) %></td>
         <td>
             <%= f.select('journal_type', Lookup.get_list('jour_type').collect {|l| [ l.description, l.id ] }) %></td>

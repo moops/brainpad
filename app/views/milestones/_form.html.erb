@@ -1,3 +1,10 @@
+<script>
+	$(function() {
+		$( "#milestone_milestone_at" ).datepicker();
+		$( "#milestone_milestone_at" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+	});
+</script>
+
 <% form_for(@milestone) do |f| %>
 
 <% if session[:user_id] %>
@@ -17,7 +24,7 @@
         <td><%= f.label(:name) %></td>
         <td><%= f.text_field(:name, :size => '37', :class => 'text') %></td>
         <td><%= f.label(:milestone_at, 'At') %></td>
-        <td width="200"><%= calendar('milestone','milestone_at', true) %></td>
+        <td width="200"><%= f.text_field(:milestone_at, :size => '19', :class => 'text') %></td>
         <td class="submit">
             <%= f.submit(@milestone.id ? 'update' : 'create') %></td></tr>
 </table>

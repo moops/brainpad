@@ -1,3 +1,10 @@
+<script>
+	$(function() {
+		$( "#workout_workout_on" ).datepicker();
+		$( "#workout_workout_on" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+	});
+</script>
+
 <% form_for(@workout) do |f| %>
 
 <% if session[:user_id] %>
@@ -24,7 +31,7 @@
             <%= f.select('workout_type', Lookup.get_list('work_type').collect {|l| [ l.description, l.id ] }) %></td></tr>
     <tr>
         <td><%= f.label(:workout_on, 'date') %></td>
-        <td ><%= calendar('workout','workout_on') %></td>
+        <td ><%= f.text_field(:workout_on, :size => '12', :class => 'text') %></td>
         <td><%= f.label(:distance) %></td>
         <td><%= f.text_field('distance', :size => '13', :class => 'text') %></td></tr>
         

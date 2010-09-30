@@ -1,3 +1,12 @@
+<script>
+	$(function() {
+		$( "#reminder_due_on" ).datepicker();
+		$( "#reminder_due_on" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+		$( "#reminder_repeat_until" ).datepicker();
+		$( "#reminder_repeat_until" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+	});
+</script>
+
 <% form_for(@reminder) do |f| %>
 
 <% if session[:user_id] %>
@@ -26,14 +35,14 @@
         <td><%= f.label(:priority) %></td>
         <td>
             <%= f.select(:priority, Lookup.get_list('priority').collect {|l| [ l.description, l.id ] }) %></td>
-        <td><%= f.label(:due_on, 'Date') %></td>
-        <td><%= calendar('reminder','due_on',true) %></td></tr>
+        <td><%= f.label(:due_on, 'Due') %></td>
+        <td><%= f.text_field(:due_on, :size => '12') %></td></tr>
     <tr>
         <td><%= f.label(:frequency, 'Every') %></td>
         <td>
             <%= f.select(:frequency, Lookup.get_list('freq').collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %></td>
         <td><%= f.label(:repeat_until, 'Until') %></td>
-        <td><%= calendar('reminder','repeat_until') %></td></tr>
+        <td><%= f.text_field(:repeat_until, :size => '12') %></td></tr>
     <tr>
         <td><%= f.label(:description) %></td>
         <td colspan="3" rowspan="2">
