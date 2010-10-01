@@ -35,11 +35,11 @@
     <div id="footer">
         <div id="styleLinks"></div>
         <div id="user">
-        	logged in as <%= @user.name %>.
+        	
             <% if (session[:user_id]) %>
                 <%= link_to('log out', :controller => "login", :action => "logout") %>
                 <br/>
-				you've used <%= @user.get_age %> days and have <%= @user.get_days_left %> left.
+				
             <% end %></div>
         <div id="copyright">
             &copy <%= Date.today.year %> raceweb.ca victoria bc<br>
