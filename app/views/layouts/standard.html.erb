@@ -12,7 +12,7 @@
 </script>
 
 <body>
-    <div id="header"><%= show_image('/images/headers/' + (Time.now.sec % 13).to_s,700,100) %></div>
+    <div id="header"><%= show_image('/images/headers/' + (Time.now.sec % 14).to_s,700,100) %></div>
     <ul id="lavaLamp">
         <li><%= link_to('home',       links_path ) %></li>
         <li><%= link_to('contacts',   contacts_path ) %></li>
@@ -35,11 +35,11 @@
     <div id="footer">
         <div id="styleLinks"></div>
         <div id="user">
-        	logged in as <%= @user.name %>.
+        	
             <% if (session[:user_id]) %>
                 <%= link_to('log out', :controller => "login", :action => "logout") %>
                 <br/>
-				you've used <%= @user.get_age %> days and have <%= @user.get_days_left %> left.
+				
             <% end %></div>
         <div id="copyright">
             &copy <%= Date.today.year %> raceweb.ca victoria bc<br>
