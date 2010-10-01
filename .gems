@@ -1,1 +1,3 @@
+rails -v 2.3.8
+mysql -v 2.7
 will_paginate --version 2.3.14
