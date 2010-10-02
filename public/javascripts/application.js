@@ -1,3 +1,15 @@
+jQuery(document).ready(function() { 
+    jQuery.noConflict()
+    jQuery("#lavaLamp").lavaLamp({ fx: "easeOutBack", speed: 700})
+    jQuery("input.calendar").datepicker();
+    jQuery("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
+    
+    jQuery("a.id_edit_link").click(function() { 
+        jQuery.get(jQuery(this).attr("href"), jQuery(this).serialize(), null, "script");
+        return false; 
+    }); 
+});
+
 function openWindow(inWidth,inHeight,inName) {
   var options = "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,alwaysRaised=yes,width=" + inWidth + ",height=" + inHeight;
   var w = window.open("",inName,options);
@@ -51,3 +63,5 @@ function hideForm(id) {
         Effect.BlindUp(id, { duration: 0.5 });
     }
 }
+
+

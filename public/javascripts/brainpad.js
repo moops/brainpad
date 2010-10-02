@@ -1,3 +1,5 @@
+$(document).ready(function() { $("#lavaLamp").lavaLamp({ fx: "easeOutBack", speed: 700}) });
+
 function openWindow(inWidth,inHeight,inName) {
   var options = "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,alwaysRaised=yes,width=" + inWidth + ",height=" + inHeight;
   var w = window.open("",inName,options);
@@ -14,7 +16,7 @@ function count(id,until) {
   var hr = Math.floor((duration % 86400) / 3600);
   var min = Math.floor((duration % 3600) / 60);
   var sec = Math.floor(duration % 60);
-
+  
   if(min < 10) {
     min = "0" + min;
   }
@@ -36,4 +38,18 @@ function count(id,until) {
   
   document.getElementById(id).value = val;
   setTimeout("count('" + id + "','" + until + "')", 1000);
+}
+
+function showForm(id) {
+    var el = $(id);
+    if (!el.visible()) {
+        Effect.BlindDown(id, { duration: 0.5 });
+    }
+}
+
+function hideForm(id) {
+    var el = $(id);
+    if (el.visible()) {
+        Effect.BlindUp(id, { duration: 0.5 });
+    }
 }

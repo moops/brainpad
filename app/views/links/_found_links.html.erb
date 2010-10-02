@@ -1,6 +1,9 @@
 <% if @found_links %>
+    <%= @found_links.inspect %>
     <span class="label"><%= params[:tag] %></span>
     <% for cur_link in @found_links %>
         <%= link_to(cur_link.name[0,15], cur_link, :title => cur_link.get_description) %>,
     <% end %>
+<% else %>
+    @found_links NOT found
 <% end %>

@@ -119,8 +119,9 @@ class LinksController < ApplicationController
   # GET /links/find
   # GET /links/find.xml
   def find
+    logger.info('finding links...')
     @found_links = Link.find(:all, :conditions => "person_id = #{session[:user_id]} and tags like '%#{params[:tag]}%'")
-
+    logger.info("found links: #{@found_links.inspect}")
     respond_to do |format|
       format.html { render :partial => 'found_links' }
       format.xml  { render :xml => @found_links }
