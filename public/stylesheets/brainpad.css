@@ -90,13 +90,13 @@ label {
     color: #666;
 }
 
-ul.links a {
+.links a {
     line-height: 140%;
     color: #3333ff;
     font-size: .9em;
 }
 
-ul.links {
+.links {
     list-style-type: circle;
     padding-left: 1em;
     margin-left: 1em;
