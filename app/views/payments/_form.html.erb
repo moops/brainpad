@@ -21,7 +21,6 @@
             document.getElementById('payment_description').value = t;
         }
     }
-  });
 </script>
 
 <% form_for(@payment) do |f| %>
@@ -50,7 +49,7 @@
             <%= f.text_field(:amount, :size => '7', :class => 'text') %></td>
         <td>
             <%= label(:payment, :payment_on, "Date") %>
-      <%= f.text_field(:payment_on, :size => '12' :class => 'text calendar') %></td>
+      <%= f.text_field(:payment_on, :size => '12', :class => 'text calendar') %></td>
         <td>
             <%= f.label(:name) %>
             <%= f.text_field(:description, :size => '25', :class => 'text') %></td></tr>

@@ -12,8 +12,8 @@ class Person < ActiveRecord::Base
   validates_presence_of :user_name
 
   def self.authenticate(name, password)
-    #Person.find(:first, :conditions => [ "user_name = ? and password = ?", name, password ])
-    Person.find(:first, :conditions => [ "user_name = ?", name ])
+    Person.find(:first, :conditions => [ "user_name = ? and password = ?", name, password ])
+    #Person.find(:first, :conditions => [ "user_name = ?", name ])
     
     #url = 'http://localhost:3001/users/find.xml?user_name=quinnlawr&password=quinn_pass'
     #open(url) do |http|

@@ -38,30 +38,6 @@ textarea, input, select {
     width: 700px;
 }
 
-#navbar {
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 0px;
-    width: 680px;
-    padding: 0px 5px 0px 5px;
-    border: 1px solid #333;
-    -moz-border-radius: 8px;
-}
-
-a.nav_off, a.nav_on:visited {
-    text-decoration: none;
-    padding: 0px 5px 0px 5px; 
-    height:25px;
-    background:#fff;
-    color: #333;
-    margin-right: 2px; 
-    text-align: center;
-    line-height: 25px; 
-    overflow: hidden;
-    float: left;
-    font-weight: bold;
-}
-
 #content {
     margin-right: auto;
     margin-left: auto;
@@ -114,11 +90,13 @@ label {
     color: #666;
 }
 
-.links a {
+ul.links a {
     line-height: 140%;
+    color: #3333ff;
+    font-size: .9em;
 }
 
-.links {
+ul.links {
     list-style-type: circle;
     padding-left: 1em;
     margin-left: 1em;
@@ -222,21 +200,6 @@ img.photo {
     clear: both;
 }
 
-.digg_box {
-    background: #eee;
-    border: 1px solid #999;
-    -moz-border-radius: 8px;
-    float: left;
-    padding: 5px;
-    margin-left: 4px;
-    width: 57%;
-}
-
-.digg_box ul {
-     padding: 0em 0em 0em 2em;
-     list-style-type: circle;
-}
-
 .summary_data {
     color: #666;
     font-weight: bold;
@@ -303,11 +266,6 @@ img.photo {
     border: 1px solid #bbb;
     padding: 5px;
     background: #ddd;
-}
-
-img.calIcon {
-    position: absolute;
-    cursor: pointer;
 }
 
 input.text {

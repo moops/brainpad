@@ -2,100 +2,110 @@
     <div class="notice"><%=h flash[:notice] %></div><p/>
 <% end %>
 
-<div class="left">
-    <div class="label">often</div>
-    <ul class="links">
-    <% for cur_link in @most_often_1 or Array.new %>
-        <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
-    <% end %>
-    </ul>
-</div>
+<div class="accordion">
+	<h3><a href="#">links</a></h3>
+	<div> <!-- start links div -->
+		<div class="left">
+		    <div class="label">often</div>
+		    <ul class="links">
+		    <% for cur_link in @most_often_1 or Array.new %>
+		        <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
+		    <% end %>
+		    </ul>
+		</div>
+		
+		<div class="left">
+		    <div class="label">&nbsp;</div>
+		    <ul class="links">
+		    <% for cur_link in @most_often_2 or Array.new %>
+		        <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
+		    <% end %>
+		    </ul>
+		</div>
+		
+		<div class="left">
+		    <div class="label">recent</div>
+		    <ul class="links">
+		    <% for cur_link in @recently_clicked or Array.new %>
+		        <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
+		    <% end %>
+		    </ul>
+		</div>
+		
+		<div class="left">
+		    <div class="label">new</div>
+		    <ul class="links">
+		    <% for cur_link in @recently_added or Array.new %>
+		        <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
+		    <% end %>
+		    </ul>
+		</div>
+		
+		<div class="left">
+		    <div class="label">random</div>
+		    <ul class="links">
+		    <% for cur_link in @random or Array.new %>
+		        <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
+		    <% end %>
+		    </ul>
+		</div>
+		
+		<div class="left">
+		    <div class="label">other</div>
+		    <ul class="links">
+		    <% if @user.mail_url %>
+		        <li><a href="<%=@user.mail_url%>">mail</a></li>
+		    <% end %>
+		    <% if @user.banking_url %>
+		        <li><a href="<%=@user.banking_url%>">banking</a></li>
+		    <% end %>
+		    <% if @user.map_center %>
+		        <li><a href="http://maps.google.ca/maps?ll=<%=@user.map_center%>&spn=0.127157,0.246901&hl=en">maps</a></li>
+		    <% end %>
+		        <li><a href="http://tvlistings3.zap2it.com/partners/grid.asp?partner_id=097">tv</a></li>
+		        <li><a href="javascript:location.href='http://localhost:3000/links/new?url='+encodeURIComponent(location.href)+'&name='+encodeURIComponent(document.title)">poster</a></li>
+		        <li><%= link_to('reports', {:controller => 'report', :action => 'index'}) %></li>
+		    </ul>
+		</div>
+		
+		<div style="clear: left;"></div>
+		
+		<div>
+		    <span class="label">tags</span>       
+		    <%= link_to_remote('refresh', :url => refresh_tags_links_path, :update => "tags") %> |
+		    <%= link_to('clean', clean_links_path) %><br/>
+		    <div id="tags">
+		        <% for cur_tag in session[:tags] %>
+		            <%= link_to_remote(cur_tag, :url => find_links_url(:tag => cur_tag), :update => "found_links") %>,
+		        <% end %><p/>
+		    </div>
+		
+		    <div id="found_links"></div>
+		</div>
+		
+		<div style="clear: left;"></div>
 
-<div class="left">
-    <div class="label">&nbsp;</div>
-    <ul class="links">
-    <% for cur_link in @most_often_2 or Array.new %>
-        <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
-    <% end %>
-    </ul>
-</div>
+	</div> <!-- end links div -->
+	<h3><a href="#">feeds</a></h3>
+	<div> <!-- start feeds div -->
+	
+		<% @feeds.each do |feed| %>
+		<div style="width:48%;" class="left">
+		    <div class="label"><%= feed.channel.title %></div>
+		    <ul class="links">
+		    <% feed.items.each_with_index { |cur_item,i| %>
+		        <% if i < 6 %>
+		        <li><a href="<%= cur_item.link %>" title="<%= clean_feed_description(cur_item.description) %>" target="_blank"><%= cur_item.title[0,48] if cur_item.title %></a></li>
+		        <% end %>
+		    <% } %>
+		    </ul>
+		</div>
+		<% end %>
+		
+		<div style="clear: left;"></div>
 
-<div class="left">
-    <div class="label">recent</div>
-    <ul class="links">
-    <% for cur_link in @recently_clicked or Array.new %>
-        <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
-    <% end %>
-    </ul>
-</div>
-
-<div class="left">
-    <div class="label">new</div>
-    <ul class="links">
-    <% for cur_link in @recently_added or Array.new %>
-        <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
-    <% end %>
-    </ul>
-</div>
-
-<div class="left">
-    <div class="label">random</div>
-    <ul class="links">
-    <% for cur_link in @random or Array.new %>
-        <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
-    <% end %>
-    </ul>
-</div>
-
-<div class="left">
-    <div class="label">other</div>
-    <ul class="links">
-    <% if @user.mail_url %>
-        <li><a href="<%=@user.mail_url%>">mail</a></li>
-    <% end %>
-    <% if @user.banking_url %>
-        <li><a href="<%=@user.banking_url%>">banking</a></li>
-    <% end %>
-    <% if @user.map_center %>
-        <li><a href="http://maps.google.ca/maps?ll=<%=@user.map_center%>&spn=0.127157,0.246901&hl=en">maps</a></li>
-    <% end %>
-        <li><a href="http://tvlistings3.zap2it.com/partners/grid.asp?partner_id=097">tv</a></li>
-        <li><a href="javascript:location.href='http://localhost:3000/links/new?url='+encodeURIComponent(location.href)+'&name='+encodeURIComponent(document.title)">poster</a></li>
-        <li><%= link_to('reports', {:controller => 'report', :action => 'index'}) %></li>
-    </ul>
-</div>
-
-<div style="clear: left;"></div>
-
-<div>
-    <span class="label">tags</span>       
-    <%= link_to_remote('refresh', :url => refresh_tags_links_path, :update => "tags") %> |
-    <%= link_to('clean', clean_links_path) %><br/>
-    <div id="tags">
-        <% for cur_tag in session[:tags] %>
-            <%= link_to_remote(cur_tag, :url => find_links_url(:tag => cur_tag), :update => "found_links") %>,
-        <% end %><p/>
-    </div>
-
-    <div id="found_links">foo</div>
-</div>
-
-<div style="clear: left;"></div>
-
-<% @feeds.each do |feed| %>
-<div style="width:48%;" class="left">
-    <div class="label"><%= feed.channel.title %></div>
-    <ul class="links">
-    <% feed.items.each_with_index { |cur_item,i| %>
-        <% if i < 6 %>
-        <li><a href="<%= cur_item.link %>" title="<%= clean_feed_description(cur_item.description) %>" target="_blank"><%= cur_item.title[0,48] if cur_item.title %></a></li>
-        <% end %>
-    <% } %>
-    </ul>
-</div>
-<% end %>
-
-<div style="clear: left;"></div>
+	</div> <!-- end feeds div -->
+</div> <!-- end accordian div -->
 
 <% unless @due_today.empty? %>
 <span class="label">due today:</span>

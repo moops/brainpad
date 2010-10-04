@@ -1,6 +1,7 @@
 jQuery(document).ready(function() { 
     jQuery.noConflict()
     jQuery("#lavaLamp").lavaLamp({ fx: "easeOutBack", speed: 700})
+	jQuery(".accordion").accordion();
     jQuery("input.calendar").datepicker();
     jQuery("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
     
