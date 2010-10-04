@@ -41,7 +41,6 @@ class ConnectionsController < ApplicationController
   # GET /connections/1/edit
   def edit
     @connection = Connection.find(params[:id])
-    logger.info('format: ' + format.inspect)
     respond_to do |format|
       format.html { render(:partial => 'form') }
       format.js

@@ -42,16 +42,14 @@ textarea, input, select {
     margin-right: auto;
     margin-left: auto;
     margin-top: 10px;
-
     width: 700px;
-    -moz-border-radius: 8px
 }
 
 .form {
     background: #f6f6f6;
-    border: 1px solid #999;
+    border: 1px solid #bbb;
     padding: 10px 5px 10px 5px;
-    -moz-border-radius: 8px
+    border-radius: 6px 6px;
 }
 
 #footer {
@@ -60,9 +58,9 @@ textarea, input, select {
     margin-left: auto;
     margin-top: 10px;
     background: #fff;
-    width: 680px;
-    border: 1px solid #333;
-    -moz-border-radius: 8px;
+    width: 690px;
+    border: 1px solid #bbb;
+    border-radius: 6px 6px;
     padding: 5px;
 }
 
@@ -103,7 +101,7 @@ div.links ul {
 }
 
 .dataOn {
-    background-color: #ddd;
+    background-color: #f6f6f6;
     text-align: center;
 }
 
