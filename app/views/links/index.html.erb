@@ -89,12 +89,12 @@
 
   </div> <!-- end links div -->
   <h3><a href="#">feeds</a></h3>
-  <div> <!-- start feeds div -->
+  <div class="links"> <!-- start feeds div -->
   
     <% @feeds.each do |feed| %>
     <div style="width:48%;" class="left">
         <div class="label"><%= feed.channel.title %></div>
-        <ul class="links">
+        <ul>
         <% feed.items.each_with_index { |cur_item,i| %>
             <% if i < 6 %>
             <li><a href="<%= cur_item.link %>" title="<%= clean_feed_description(cur_item.description) %>" target="_blank"><%= cur_item.title[0,48] if cur_item.title %></a></li>
