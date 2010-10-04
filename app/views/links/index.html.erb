@@ -4,10 +4,10 @@
 
 <div class="accordion">
   <h3><a href="#">links</a></h3>
-  <div> <!-- start links div -->
+  <div class="links"> <!-- start links div -->
     <div class="left">
         <div class="label">often</div>
-        <ul class="links">
+        <ul>
         <% for cur_link in @most_often_1 or Array.new %>
             <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
         <% end %>
@@ -16,7 +16,7 @@
     
     <div class="left">
         <div class="label">&nbsp;</div>
-        <ul class="links">
+        <ul>
         <% for cur_link in @most_often_2 or Array.new %>
             <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
         <% end %>
@@ -25,7 +25,7 @@
     
     <div class="left">
         <div class="label">recent</div>
-        <ul class="links">
+        <ul>
         <% for cur_link in @recently_clicked or Array.new %>
             <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
         <% end %>
@@ -34,7 +34,7 @@
     
     <div class="left">
         <div class="label">new</div>
-        <ul class="links">
+        <ul>
         <% for cur_link in @recently_added or Array.new %>
             <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
         <% end %>
@@ -43,7 +43,7 @@
     
     <div class="left">
         <div class="label">random</div>
-        <ul class="links">
+        <ul>
         <% for cur_link in @random or Array.new %>
             <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
         <% end %>
@@ -52,7 +52,7 @@
     
     <div style="clear: left;"></div>
     
-    <div class="left links">
+    <div class="left">
         <div class="label">other</div>
         
         <% if @user.mail_url %>
@@ -66,13 +66,13 @@
         <% end %>
         <a href="http://tvlistings3.zap2it.com/partners/grid.asp?partner_id=097">tv</a>,
         <a href="javascript:location.href='http://localhost:3000/links/new?url='+encodeURIComponent(location.href)+'&name='+encodeURIComponent(document.title)">poster</a>,
-        <%= link_to('reports', {:controller => 'report', :action => 'index'}) %>
+        <%= link_to('reports', {:controller => 'report', :action => 'index'}) %><p/>
 
     </div>
     
     <div style="clear: left;"></div>
     
-    <div class="links">
+    <div>
         <span class="label">tags</span>       
         <%= link_to_remote('refresh', :url => refresh_tags_links_path, :update => "tags") %> |
         <%= link_to('clean', clean_links_path) %><br/>
