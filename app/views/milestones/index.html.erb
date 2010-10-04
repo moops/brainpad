@@ -3,15 +3,15 @@
 <% end %>
 
 <div id="form" class="form">
-	<%= render(:partial => 'form') %>
+  <%= render(:partial => 'form') %>
 </div>
 </p>
 
 <% @milestones.each do |milestone| %>
 <div>
-  	<%=link_to_remote(milestone.name, :update => 'form', :method => :get, :url => edit_milestone_path(milestone)) %>
-  	<input type="text" class="milestone_time" id="<%= milestone.id %>"/>
-	<span class="right"><%= link_to(image_tag("delete.png", :size => "15x15", :border => 0), 
+    <%=link_to_remote(milestone.name, :update => 'form', :method => :get, :url => edit_milestone_path(milestone)) %>
+    <input type="text" class="milestone_time" id="<%= milestone.id %>" size="30"/>
+  <span class="right"><%= link_to(image_tag("delete.png", :size => "15x15", :border => 0), 
                     milestone_path(milestone), :method => :delete, :confirm => "really delete #{milestone.name}") %></span>
 </div>
 

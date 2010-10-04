@@ -3,49 +3,49 @@
 one:
   description: test first reminder
   done: false
-  priority: 28
-  reminder_type: 40
+  priority: 12
+  reminder_type: 17
   frequency:
   repeat_until:
   due_on: 2010-04-30
-  person_id: 1
+  person: adam
 
 two:
   description: test second reminder
   done: false
-  priority: 28
-  reminder_type: 41
+  priority: 13
+  reminder_type: 17
   frequency:
   repeat_until:
   due_on: 2010-04-30
-  person_id: 1
+  person: adam
   
 three:
   description: test third reminder
   done: false
-  priority: 28
-  reminder_type: 41
+  priority: 14
+  reminder_type: 17
   frequency:
   repeat_until:
   due_on: 2010-05-02
-  person_id: 1
+  person: adam
   
 four:
   description: test fourth reminder
   done: false
-  priority: 28
-  reminder_type: 41
+  priority: 12
+  reminder_type: 17
   frequency:
   repeat_until:
   due_on: 2010-05-02
-  person_id: 1
+  person: adam
   
 five:
   description: test fifth reminder
   done: false
-  priority: 28
-  reminder_type: 41
+  priority: 13
+  reminder_type: 18
   frequency:
   repeat_until:
   due_on: 2010-05-04
-  person_id: 1
+  person: adam

@@ -6,9 +6,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.xml
   def index
-    @user = Person.find(session[:user_id])
-    @order = params[:order] ? params[:order] : 'name'
-    
+    @user = Person.find(session[:user_id])    
     session[:contact_tags] = getUniqueTags
     
     conditions = "person_id = #{session[:user_id]}"
@@ -16,10 +14,8 @@ class ContactsController < ApplicationController
       logger.info "contacts tag[#{params[:tag]}]"
       conditions = "tags like '%#{params[:tag]}%' and person_id = #{session[:user_id]}"
       @tag = params[:tag]
-    else
-      logger.info "no tag param"
     end
-    @contacts = Contact.paginate :page => params[:page], :conditions => conditions, :order => @order, :per_page => 10
+    @contacts = Contact.paginate :page => params[:page], :conditions => conditions, :order => 'name', :per_page => 10
     @contact = Contact.new #for the 'new' form
     
     respond_to do |format|
