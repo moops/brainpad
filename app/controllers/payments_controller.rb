@@ -68,13 +68,12 @@ class PaymentsController < ApplicationController
   # PUT /payments/1.xml
   def update
     @payment = Payment.find(params[:id])
-    #@payment.amount *= -1 if @payment.payment_type.eql?('expense')
-    logger.info("1 @payment: #{@payment.inspect}")
-    @payment.apply_to_account
-    logger.info("2 @payment: #{@payment.inspect}")
+    new_amount = params[:payment][:amount].to_f
+    new_amount = -new_amount if 'expense'.eql? params[:payment][:payment_type]
+    @payment.update_amount_and_adjust_account(new_amount)
+    params[:payment].delete('amount')
     respond_to do |format|
       if @payment.update_attributes(params[:payment])
-        logger.info("3 @payment: #{@payment.inspect}")
         flash[:notice] = 'Payment was successfully updated.'
         format.html { redirect_to(payments_path)  }
         format.xml  { head :ok }
@@ -127,7 +126,7 @@ class MoneySummary
     @buy_nothing_days = days - Payment.days_with_expenses?(user,days)
     @balance = 0
     for account in user.active_accounts
-      @balance += account.price * account.units
+      @balance += account.balance?
     end
   end
     

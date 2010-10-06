@@ -3,7 +3,17 @@ chequing:
   url: www.coastcapitalsavings.com
   price_url: 
   description: basic chequing account
-  units: 245
+  units: 1500
+  price: 1
+  active: true
+  person: adam
+  
+cash:
+  name: cash
+  url: 
+  price_url: 
+  description: cash money
+  units: 500
   price: 1
   active: true
   person: adam

@@ -8,15 +8,6 @@ class Payment < ActiveRecord::Base
 
   attr_accessor :payment_type
 
-  def apply_to_account
-    account.units += (amount / account.price)
-    account.save
-    if transfer_account
-      transfer_account.units -= (amount / transfer_account.price)
-      transfer_account.save
-    end
-  end
-
   def payment_type?
     if transfer_account
       return 'transfer'
@@ -25,6 +16,26 @@ class Payment < ActiveRecord::Base
     elsif amount and amount <= 0
       return 'expense'
     end
+  end
+  
+  def apply_to_account(reverse= false)
+    amt = reverse ? -amount : amount
+    account.units += (amt / account.price)
+    account.save
+    if transfer_account
+      transfer_account.units -= (amt / transfer_account.price)
+      transfer_account.save
+    end
+  end
+  
+  def update_amount_and_adjust_account(new_amount)
+    # reverse it
+    apply_to_account(true)
+    # apply new amount
+    self.amount = new_amount
+    self.save
+    # apply it
+    apply_to_account
   end
   
   def build_repeat

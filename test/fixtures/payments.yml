@@ -1,58 +1,67 @@
 one:
   description: mcdonalds
   tags: restaurant
-  amount: -4.34
-  payment_on: 2010-05-26
-  account_id: 1
+  amount: -5.00
+  payment_on: <%= Date.today %>
+  account: chequing
   transfer_from:
-  person_id: 1
+  person: adam
 
 two:
   description: cnx salary
   tags: 
   amount: 2082.62
-  payment_on: 2010-03-01
-  frequency: 45
-  until: 2011-06-02
-  account_id: 1
+  payment_on: <%= Date.today %>
+  frequency: 40
+  until: <%= Date.today + 365 %>
+  account: chequing
   transfer_from:
-  person_id: 1  
+  person: adam  
 
 three:
   description: hiking boots
   tags: rec-equip
-  amount: -123.34
-  payment_on: 2010-05-22
-  account_id: 2
+  amount: -120.00
+  payment_on: <%= Date.today - 7 %>
+  account: visa
   transfer_from:
-  person_id: 1
+  person: adam
   
 four:
   description: swimming
   tags: rec-fee
   amount: -15.34
-  payment_on: 2010-05-25
-  account_id: 1
+  payment_on: <%= Date.today - 8 %>
+  account: visa
   transfer_from:
-  person_id: 1
+  person: adam
   
 five:
   description: groceries
   tags: groceries
   amount: -64.77
-  payment_on: 2010-05-09
-  account_id: 2
+  payment_on: <%= Date.today - 9 %>
+  account: visa
   transfer_from:
-  person_id: 1
+  person: adam
   
 six:
   description: rent
   tags: rent
-  amount: -845.00
-  payment_on: 2010-04-01
-  frequency: 46
-  until: 2011-06-02
-  account_id: 1
+  amount: -800.00
+  payment_on: <%= Date.today - 10 %>
+  frequency: 41
+  until: <%= Date.today + 365 %>
+  account: chequing
   transfer_from:
-  person_id: 1
+  person: adam
+  
+seven:
+  description: atm
+  tags: 
+  amount: 100.00
+  payment_on: <%= Date.today - 11 %>
+  account: cash
+  transfer_from: chequing
+  person: adam
 
