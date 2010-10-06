@@ -4,6 +4,7 @@ jQuery(document).ready(function() {
 	jQuery(".accordion").accordion();
     jQuery("input.calendar").datepicker();
     jQuery("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
+	jQuery("input.today").datepicker('setDate', new Date());
     
     jQuery("a.id_edit_link").click(function() { 
         jQuery.get(jQuery(this).attr("href"), jQuery(this).serialize(), null, "script");

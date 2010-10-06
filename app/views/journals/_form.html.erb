@@ -18,7 +18,7 @@
             <% end %></td></tr>
     <tr>
         <td><%= label(:journal, :entry_on, 'Date') %></td>
-        <td><%= f.text_field(:entry_on, :size => '12', :class => 'text calendar') %></td>
+        <td><%= f.text_field(:entry_on, :size => '12', :class => 'text calendar today') %></td>
         <td><%= f.label(:type) %></td>
         <td>
             <%= f.select('journal_type', Lookup.get_list('jour_type').collect {|l| [ l.description, l.id ] }) %></td>

@@ -24,7 +24,7 @@
             <%= f.select('workout_type', Lookup.get_list('work_type').collect {|l| [ l.description, l.id ] }) %></td></tr>
     <tr>
         <td><%= f.label(:workout_on, 'date') %></td>
-        <td ><%= f.text_field(:workout_on, :size => '12', :class => 'text calendar') %></td>
+        <td ><%= f.text_field(:workout_on, :size => '12', :class => 'text calendar today') %></td>
         <td><%= f.label(:distance) %></td>
         <td><%= f.text_field('distance', :size => '13', :class => 'text') %></td></tr>
         

@@ -12,7 +12,7 @@ class PaymentsController < ApplicationController
     else
       @payment = Payment.new
       @payment.payment_type = 'expense'
-      @payment.payment_on = Date.today.strftime("%b %d, %Y")
+      @payment.payment_on = Date.today.strftime('%Y-%m-%d')
     end
     
     @upcoming_payments = Payment.find_upcoming(@user)
@@ -68,10 +68,13 @@ class PaymentsController < ApplicationController
   # PUT /payments/1.xml
   def update
     @payment = Payment.find(params[:id])
-    @payment.amount *= -1 if @payment.payment_type.eql?('expense')
+    #@payment.amount *= -1 if @payment.payment_type.eql?('expense')
+    logger.info("1 @payment: #{@payment.inspect}")
     @payment.apply_to_account
+    logger.info("2 @payment: #{@payment.inspect}")
     respond_to do |format|
       if @payment.update_attributes(params[:payment])
+        logger.info("3 @payment: #{@payment.inspect}")
         flash[:notice] = 'Payment was successfully updated.'
         format.html { redirect_to(payments_path)  }
         format.xml  { head :ok }
