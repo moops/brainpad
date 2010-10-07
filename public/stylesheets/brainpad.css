@@ -241,6 +241,7 @@ img.photo {
 
 .box {
     border: 1px solid #bbb;
+    border-radius: 6px;
 }
 
 .box_header {
@@ -264,6 +265,7 @@ img.photo {
     border: 1px solid #bbb;
     padding: 5px;
     background: #ddd;
+    -moz-border-radius: 6px; -webkit-border-radius: 6px; border-radius: 6px;
 }
 
 input.text {
