@@ -109,9 +109,9 @@
 
 <% unless @due_today.empty? %>
 <span class="label">due today:</span>
-<ul>
+<ul class="due">
     <% for reminder in @due_today %>
-    <li style="display:inline;"><%= reminder.description[0,40] + (reminder.description.length > 40 ? '...' : '') %></li>
+    <li><%= reminder.description[0,40] + (reminder.description.length > 40 ? '...' : '') %></li>
     <% end %>
 </ul>
 <% end %>

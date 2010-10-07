@@ -4,7 +4,6 @@ one:
   amount: -5.00
   payment_on: <%= Date.today %>
   account: chequing
-  transfer_from:
   person: adam
 
 two:
@@ -15,7 +14,6 @@ two:
   frequency: 40
   until: <%= Date.today + 365 %>
   account: chequing
-  transfer_from:
   person: adam  
 
 three:
@@ -24,7 +22,6 @@ three:
   amount: -120.00
   payment_on: <%= Date.today - 7 %>
   account: visa
-  transfer_from:
   person: adam
   
 four:
@@ -33,7 +30,6 @@ four:
   amount: -15.34
   payment_on: <%= Date.today - 8 %>
   account: visa
-  transfer_from:
   person: adam
   
 five:
@@ -42,7 +38,6 @@ five:
   amount: -64.77
   payment_on: <%= Date.today - 9 %>
   account: visa
-  transfer_from:
   person: adam
   
 six:
@@ -53,7 +48,6 @@ six:
   frequency: 41
   until: <%= Date.today + 365 %>
   account: chequing
-  transfer_from:
   person: adam
   
 seven:
@@ -62,6 +56,6 @@ seven:
   amount: 100.00
   payment_on: <%= Date.today - 11 %>
   account: cash
-  transfer_from: chequing
+  transfer_account: chequing
   person: adam
 

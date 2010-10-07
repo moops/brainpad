@@ -69,8 +69,12 @@ class PaymentsController < ApplicationController
   def update
     @payment = Payment.find(params[:id])
     new_amount = params[:payment][:amount].to_f
+    logger.info("new_amount: #{new_amount}, payment type: #{params[:payment][:payment_type]}")
     new_amount = -new_amount if 'expense'.eql? params[:payment][:payment_type]
+    logger.info("new_amount: #{new_amount}, payment type: #{params[:payment][:payment_type]}")
+    logger.info("@payment: #{@payment.inspect}")
     @payment.update_amount_and_adjust_account(new_amount)
+    logger.info("@payment: #{@payment.inspect}")
     params[:payment].delete('amount')
     respond_to do |format|
       if @payment.update_attributes(params[:payment])
