@@ -1,58 +1,25 @@
-<p>
-  <b>Location:</b>
-  <%=h @workout.location %>
-</p>
+<html>
+<head>
+    <title>reminder</title>
+    <%= stylesheet_link_tag 'brainpad' %>
+</head>
 
-<p>
-  <b>Race:</b>
-  <%=h @workout.race %>
-</p>
+<body style="margin-top: 50px;">
 
-<p>
-  <b>Route:</b>
-  <%=h @workout.route %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%=h @workout.description %>
-</p>
-
-<p>
-  <b>Duration:</b>
-  <%=h @workout.duration %>
-</p>
-
-<p>
-  <b>Intensity:</b>
-  <%=h @workout.intensity %>
-</p>
-
-<p>
-  <b>Weight:</b>
-  <%=h @workout.weight %>
-</p>
-
-<p>
-  <b>Distance:</b>
-  <%=h @workout.distance %>
-</p>
-
-<p>
-  <b>Workout type:</b>
-  <%=h @workout.workout_type %>
-</p>
-
-<p>
-  <b>Workout on:</b>
-  <%=h @workout.workout_on %>
-</p>
-
-<p>
-  <b>Person:</b>
-  <%=h @workout.person_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_workout_path(@workout) %> |
-<%= link_to 'Back', workouts_path %>
+    <table cellpadding="3" cellspacing="0" border="0" align="center">
+    	<tr>
+            <td><label>date</label></td><td><%= @workout.workout_on %></td></tr>
+		<tr>
+            <td><label>type</label></td><td><%= Lookup.find_by_id(@workout.workout_type).description %></td></tr>
+        <tr>
+            <td><label>location</label></td><td><%= @workout.location %></td></tr>
+        <tr>
+            <td><label>description</label></td><td><%= @workout.description %></td></tr>
+        <tr>
+            <td><label>duration</label></td><td><%= @workout.duration %> minutes</td></tr>
+        <tr>
+            <td><label>distance</label></td><td><%= @workout.distance %></td></tr>
+    </table>
+  
+  </body>
+</html>

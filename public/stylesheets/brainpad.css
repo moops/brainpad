@@ -26,7 +26,6 @@ ul { margin: 4px 0px; }
 #errors li { font-weight: bold; color: #930; text-align: center; }
 
 label {  text-align: right; font-weight: bold; color: #666; }
-.label {  font-weight: bold; color: #666; }
 .notice { font-weight: bold; color: #930; text-align: center; padding: 10px 5px 10px 5px; }
 div.links a { line-height: 140%; color: #3333ff; font-size: .9em; }
 div.links ul { list-style-type: circle; padding-left: 1em; margin-left: 1em; }

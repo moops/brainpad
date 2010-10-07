@@ -8,15 +8,15 @@
 
     <table cellpadding="3" cellspacing="0" border="0" align="center">
         <tr>
-            <td><div class="label">type</div></td><td><%= Lookup.find_by_id(@reminder.reminder_type).description %></td></tr>
+            <td><label>type</label></td><td><%= Lookup.find_by_id(@reminder.reminder_type).description %></td></tr>
         <tr>
-            <td><div class="label">priority</div></td><td><%= Lookup.find_by_id(@reminder.priority).description %></td></tr>
+            <td><label>priority</label></td><td><%= Lookup.find_by_id(@reminder.priority).description %></td></tr>
         <tr>
-            <td><div class="label">due</div></td><td><%= @reminder.due_on.strftime("%a %b %d, %y") %></td></tr>
+            <td><label>due</label></td><td><%= @reminder.due_on.strftime("%a %b %d, %y") %></td></tr>
         <tr>
-            <td><div class="label" valign="top">description</div></td><td><%= @reminder.description %></td></tr>
+            <td><label valign="top">description</label></td><td><%= @reminder.description %></td></tr>
         <tr>
-            <td><div class="label">created on</div></td><td><%= @reminder.created_at.strftime("%a %b %d, %y") %></td></tr>
+            <td><label>created on</label></td><td><%= @reminder.created_at.strftime("%a %b %d, %y") %></td></tr>
     </table>
   
   </body>
