@@ -1,15 +1,19 @@
 jQuery(document).ready(function() { 
+    
     jQuery.noConflict()
     jQuery("#lavaLamp").lavaLamp({ fx: "easeOutBack", speed: 700})
-	jQuery(".accordion").accordion();
+    jQuery(".accordion").accordion();
     jQuery("input.calendar").datepicker();
     jQuery("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
-	jQuery("input.today").datepicker('setDate', new Date());
+    jQuery("input.today").datepicker('setDate', new Date());
     
     jQuery("a.id_edit_link").click(function() { 
         jQuery.get(jQuery(this).attr("href"), jQuery(this).serialize(), null, "script");
         return false; 
-    }); 
+    });
+    
+    jQuery('.toggle_form_trigger').click(function() { jQuery(".toggle_form").toggle('blind'); });
+    
 });
 
 function openWindow(inWidth,inHeight,inName) {
@@ -52,15 +56,12 @@ function count(id,until) {
   setTimeout("count('" + id + "','" + until + "')", 1000);
 }
 
-function showForm(id) {
-    var el = $(id);
-    if (!el.visible()) {
-        Effect.BlindDown(id, { duration: 0.5 });
-    }
+function toggleForm(id) {
+    jQuery('#'+ id).effect('blind');
 }
 
 function hideForm(id) {
-    var el = $(id);
+    var el = jQuery('#'+ id);
     if (el.visible()) {
         Effect.BlindUp(id, { duration: 0.5 });
     }

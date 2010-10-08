@@ -17,16 +17,15 @@ th { font-weight: bold; text-align: left; }
 td { text-align: left; }
 ul { margin: 4px 0px; }
 
-#header { margin-right: auto; margin-left: auto; margin-top: 10px; width: 700px; }
-#content { margin-right: auto; margin-left: auto; margin-top: 10px; width: 700px; }
-#footer { font-size: .9em; margin-right: auto; margin-left: auto; margin-top: 10px; background: #fff; width: 690px; border: 1px solid #bbb; border-radius: 6px 6px; padding: 5px; }
+#header { margin-right: auto; margin-left: auto; width: 700px; }
+#content { margin-right: auto; margin-left: auto; margin-bottom: 10px; width: 700px; }
+#footer { font-size: .9em; margin-right: auto; margin-left: auto; background: #fff; width: 690px; border: 1px solid #bbb; border-radius: 6px 6px; padding: 5px; border: 1px solid green; }
 
 .form { background: #f6f6f6; border: 1px solid #bbb; padding: 10px 5px 10px 5px; border-radius: 6px 6px; }
 
 #errors li { font-weight: bold; color: #930; text-align: center; }
 
 label {  text-align: right; font-weight: bold; color: #666; }
-.notice { font-weight: bold; color: #930; text-align: center; padding: 10px 5px 10px 5px; }
 div.links a { line-height: 140%; color: #3333ff; font-size: .9em; }
 div.links ul { list-style-type: circle; padding-left: 1em; margin-left: 1em; }
 
@@ -37,6 +36,16 @@ div.links ul { list-style-type: circle; padding-left: 1em; margin-left: 1em; }
 #found_links { padding-bottom: 10px; }
 #copyright { width: 25%; float: right; text-align: right; }
 
+#money_left { width: 25%; float: left; }
+#money_payment_form { display: none; }
+#money_upcoming { width: 73%; float: right; }
+#money_payments { width: 73%; float: right; }
+
+.left { float: left; padding: 1px; }
+.right { float: right; }
+.clear { clear: both; }
+
+.notice { font-weight: bold; color: #930; text-align: center; padding: 10px 5px 10px 5px; }
 .submit { text-align: right; }
 .submit input { font-size: 1.2em; font-weight: bold; }
 .dataOn { background-color: #f6f6f6; text-align: center; }
@@ -47,20 +56,11 @@ div.links ul { list-style-type: circle; padding-left: 1em; margin-left: 1em; }
 ul.due li { display:inline; }
 ul.due li:after { content: ", "; }
 
-.left { float: left; padding: 1px; }
-.right { float: right; }
-.clear { clear: both; }
-
-#money_left { width: 25%; float: left; }
-#money_payment_form { display: none; }
-#money_upcoming { width: 73%; float: right; }
-#money_payments { width: 73%; float: right; }
-
-.box { margin-top: 10px; border: 1px solid #bbb; border-radius: 6px; }
+.box { margin-bottom: 10px; border: 1px solid #bbb; border-radius: 6px; }
 .box_header { border-bottom: 1px solid #bbb; background: #ddd; font-weight: bold; font-size: 1.2em; padding: 5px; }
 .box_content { padding: 5px; }
 .box_buttons { padding: 5px; text-align: right; }
-.shaded_box { margin-top: 10px; border: 1px solid #bbb; padding: 5px; background: #ddd; border-radius: 6px; }
+.shaded_box { margin-bottom: 10px; border: 1px solid #bbb; padding: 5px; background: #ddd; border-radius: 6px; }
 
 input.text { height: 1.5em; font-size: 1.2em; color: #666; }
 select { height: 1.8em; font-size: 1.3em;  color: #666; }

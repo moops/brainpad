@@ -11,7 +11,9 @@
     </div>
 <% end %>
 
-<div id="form" style="display:none;">
+<div id="foo"></div>
+
+<div class="toggle_form" id="payment_form" style="display:none;">
     <%= render(:partial => 'form') %>
 </div>
 
@@ -35,7 +37,6 @@
         <div class="box_header">upcoming</div>
         <div class="box_content">
             <table width="100%" border="0" cellspacing="0" cellpadding="2">
-            <% logger.info("@upcoming_payments from ui: #{@upcoming_payments.inspect}") %>
             <%= render :partial => 'upcoming', :collection => @upcoming_payments %>
             </table>
         </div>
@@ -47,7 +48,7 @@
     <div class="box_header">
         transactions
         <span style="float:right">
-            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', {:onclick => "showForm('form'); return false;"}) %>
+            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'toggle_form_trigger') %>
         </span>
     </div>
     <div class="box_content">

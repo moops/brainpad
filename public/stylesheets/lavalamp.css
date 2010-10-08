@@ -1,13 +1,14 @@
 #lavaLamp {
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 10px;
     position: relative;
     width: 700px;
     background: url("/images/lavalamp/bg.png") no-repeat top;
-    padding: 15px;
+    padding-top: 15px;
     padding-right:5px;
     overflow: hidden;
-    height:40px;
+    height:45px;
 }
 
 #lavaLamp li {
