@@ -16,4 +16,8 @@ class MilestoneTest < ActiveSupport::TestCase
     assert a.save, 'save with all required fields'
   end
   
+  test "next milestone" do
+    assert Milestone.next_milestone(people(:adam)).eql?(milestones(:tomorrow))
+  end
+  
 end

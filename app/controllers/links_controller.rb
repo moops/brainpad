@@ -18,7 +18,7 @@ class LinksController < ApplicationController
     @most_often_1 = @all.sort { |a,b| (b.clicks and a.clicks) ? b.clicks<=>a.clicks : 0 }[0,9]
     @most_often_2 = @all.sort { |a,b| (b.clicks and a.clicks) ? b.clicks<=>a.clicks : 0 }[9,9]
     @random = @all.sort_by { rand }[0,9]
-    @milestone = Milestone.find(:first, :conditions => "person_id = #{session[:user_id]}")
+    @milestone = Milestone.next_milestone(@user)
     @due_today = Reminder.todays(@user.id)
     @feeds = Feeds.get_feeds
     

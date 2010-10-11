@@ -12,3 +12,13 @@ three:
   name: first mountaineering course
   milestone_at: 2010-07-01
   person: quinn
+  
+tomorrow:
+  name: tomorrow
+  milestone_at: <%= Date.today + 1 %>
+  person: adam
+  
+next_week:
+  name: next week
+  milestone_at: <%= Date.today + 7 %>
+  person: adam
