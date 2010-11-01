@@ -38,7 +38,10 @@ class ContactsController < ApplicationController
   # GET /contacts/1/edit
   def edit
     @contact = Contact.find(params[:id])
-    render(:partial => 'form')
+    respond_to do |format|
+      format.js { logger.info('format is js') }
+      format.html { logger.info('format is html') }
+    end
   end
 
   # POST /contacts

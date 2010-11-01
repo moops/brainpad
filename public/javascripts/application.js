@@ -1,3 +1,7 @@
+jQuery.ajaxSetup({
+    'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+})
+
 jQuery(document).ready(function() { 
     
     jQuery.noConflict()
@@ -13,6 +17,12 @@ jQuery(document).ready(function() {
     });
     
     jQuery('.toggle_form_trigger').click(function() { jQuery(".toggle_form").toggle('blind'); });
+    
+    jQuery(".edit_contact_link").click(function() { 
+        alert('getting');
+        jQuery.get("/contacts/980190962/edit", null, null, "script");
+        return false; 
+    });
     
 });
 

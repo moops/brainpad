@@ -5,7 +5,8 @@
     <td><%= data_rows["phone_work"] %></td>
     <td><%= data_rows["phone_cell"] %></td>
     <td><%= link_to(image_tag("detail.png", :size => "15x15", :border => 0), contact_path(data_rows), {:target => "detail", :onClick => "openWindow(500,500,'detail');"}) %></td>
-    <td><%=link_to_remote(image_tag("edit.png", :size => "15x15", :border => 0), :update => 'form', :method => :get, :url => edit_contact_path(data_rows)) %></td>
+    <td>
+        <%=link_to(image_tag("edit.png", :size => "15x15", :border => 0), edit_contact_path(data_rows), {:class => 'edit_contact_link'}) %></td>
     <td><%= link_to(image_tag("delete.png", :size => "15x15", :border => 0), 
                     contact_path(data_rows), :method => :delete,
                     :confirm => "really delete #{data_rows["name"]}?") %></td></tr>
