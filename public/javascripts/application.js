@@ -11,15 +11,9 @@ jQuery(document).ready(function() {
     jQuery("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
     jQuery("input.today").datepicker('setDate', new Date());
     
-    jQuery("a.id_edit_link").click(function() { 
-        jQuery.get(jQuery(this).attr("href"), jQuery(this).serialize(), null, "script");
-        return false; 
-    });
-    
     jQuery('.toggle_form_trigger').click(function() { jQuery(".toggle_form").toggle('blind'); });
     
     jQuery(".edit_contact_link").click(function() { 
-        alert('getting');
         jQuery.get("/contacts/980190962/edit", null, null, "script");
         return false; 
     });

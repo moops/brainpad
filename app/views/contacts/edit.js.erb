@@ -1,16 +1,4 @@
-jQuery("#id").val("<%= @contact.id %>");
-jQuery("#contact_person_id").val("<%= @contact.person.id %>");
-jQuery("#contact_name").val("<%= @contact.name %>");
-jQuery("#contact_email").val("<%= @contact.email %>");
-jQuery("#contact_address").val("<%= @contact.address %>");
-jQuery("#contact_city").val("<%= @contact.city %>");
-jQuery("#contact_phone_home").val("<%= @contact.phone_home %>");
-jQuery("#contact_phone_work").val("<%= @contact.phone_work %>");
-jQuery("#contact_tags").val("<%= @contact.tags %>");
-jQuery("#contact_comments").val("<%= @contact.comments %>");
-
-
-jQuery("#contact_submit").val("<%= @contact.id ? 'edit' : 'foo' %>");
+jQuery("#form").html("<%= escape_javascript(render(:partial=>'form')) %>");
 
 
 

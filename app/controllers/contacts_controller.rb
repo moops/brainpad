@@ -39,7 +39,7 @@ class ContactsController < ApplicationController
   def edit
     @contact = Contact.find(params[:id])
     respond_to do |format|
-      format.js { logger.info('format is js') }
+      format.js
       format.html { logger.info('format is html') }
     end
   end
