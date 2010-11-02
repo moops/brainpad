@@ -1,20 +1,20 @@
-jQuery.ajaxSetup({
+$.ajaxSetup({
     'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 })
 
 jQuery(document).ready(function() { 
     
-    jQuery.noConflict()
-    jQuery("#lavaLamp").lavaLamp({ fx: "easeOutBack", speed: 700})
-    jQuery(".accordion").accordion();
-    jQuery("input.calendar").datepicker();
-    jQuery("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
-    jQuery("input.today").datepicker('setDate', new Date());
+    $("#lavaLamp").lavaLamp({ fx: "easeOutBack", speed: 700})
+    $(".accordion").accordion();
+    $("input.calendar").datepicker();
+    $("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
+    $("input.today").datepicker('setDate', new Date());
     
-    jQuery('.toggle_form_trigger').click(function() { jQuery(".toggle_form").toggle('blind'); });
+    $('.toggle_form_trigger').click(function() { $(".toggle_form").toggle('blind'); });
     
-    jQuery(".edit_contact_link").click(function() { 
-        jQuery.get("/contacts/980190962/edit", null, null, "script");
+    $(".remote_edit_link").click(function() {
+        var parts = this.id.split('_',2);
+        $.get("/"+parts[0]+"/"+parts[1]+"/edit", null, null, "script");
         return false; 
     });
     

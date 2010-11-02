@@ -38,10 +38,6 @@ class ContactsController < ApplicationController
   # GET /contacts/1/edit
   def edit
     @contact = Contact.find(params[:id])
-    respond_to do |format|
-      format.js
-      format.html { logger.info('format is html') }
-    end
   end
 
   # POST /contacts
