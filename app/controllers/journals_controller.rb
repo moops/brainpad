@@ -1,7 +1,7 @@
 class JournalsController < ApplicationController
   
   before_filter :authenticate
-  layout 'standard.html', :except => [:show]
+  layout 'standard.html', :except => [:show, :edit]
   
   # GET /journals
   # GET /journals.xml
@@ -44,9 +44,7 @@ class JournalsController < ApplicationController
 
   # GET /journals/1/edit
   def edit
-    logger.info('editing a journal')
     @journal = Journal.find(params[:id])
-    render(:partial => 'form')
   end
 
   # POST /journals

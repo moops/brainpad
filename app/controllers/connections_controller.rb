@@ -41,10 +41,6 @@ class ConnectionsController < ApplicationController
   # GET /connections/1/edit
   def edit
     @connection = Connection.find(params[:id])
-    respond_to do |format|
-      format.html { render(:partial => 'form') }
-      format.js
-    end
   end
 
   # POST /connections

@@ -3,6 +3,5 @@
     <td><%= Lookup.find_by_id(data_rows['journal_type']).description %></td>
     <td><%= data_rows["entry"][0,30] + ' ...' %></td>
     <td><%= link_to(image_tag("detail.png", :size => "15x15", :border => 0), journal_path(data_rows), {:target => "detail", :onClick => "openWindow(500,500,'detail');"}) %></td>
-    <td><%= link_to_remote(image_tag("edit.png", :size => "15x15", :border => 0), :update => 'form', :method => :get, :url => edit_journal_path(data_rows)) %></td>
-    <td><%= link_to(image_tag("delete.png", :size => "15x15", :border => 0), 
-                    journal_path(data_rows), :method => :delete, :confirm => "really delete entry?") %></td></tr>
+    <td><%= link_to(image_tag("edit.png", :size => "15x15", :border => 0), edit_journal_path(data_rows), {:class => 'remote_edit_link', :id => "journals_#{data_rows.id}"}) %></td>
+    <td><%= link_to(image_tag("delete.png", :size => "15x15", :border => 0), journal_path(data_rows), :method => :delete, :confirm => "really delete entry?") %></td></tr>
