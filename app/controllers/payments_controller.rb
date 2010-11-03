@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   
-  before_filter :authenticate
+  before_filter :authorize
   layout 'standard.html', :except => [:show]
   
   # GET /payments

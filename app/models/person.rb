@@ -1,3 +1,4 @@
+require 'open-uri'
 
 class Person < ActiveRecord::Base
 
@@ -12,14 +13,23 @@ class Person < ActiveRecord::Base
   validates_presence_of :user_name
 
   def self.authenticate(name, password)
-    Person.find(:first, :conditions => [ "user_name = ? and password = ?", name, password ])
+    #Person.find(:first, :conditions => [ "user_name = ? and password = ?", name, password ])
     #Person.find(:first, :conditions => [ "user_name = ?", name ])
     
-    #url = 'http://localhost:3001/users/find.xml?user_name=quinnlawr&password=quinn_pass'
-    #open(url) do |http|
-    #  response = http.read
-    #  logger.info("name #{name} password #{password} response #{response}")
-   # end
+    url = "http://localhost:3004/users/find.xml?user_name=#{name}&password=#{password}"
+    logger.info("person.authenticate url: #{url}")
+    response = ''
+    open(url) do |http|
+      response = http.read
+      logger.info("name #{name} password #{password} response #{response}")
+    end
+    response
+  end
+  
+  def self.find_id_by_user_name(user_name)
+    user = Person.find_by_user_name(user_name)
+    logger.info("person.find_id_by_user_name id found: #{user.id}")
+    user ? user.id : 0
   end
     
   def get_age

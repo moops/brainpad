@@ -1,6 +1,6 @@
 class WorkoutsController < ApplicationController
   
-  before_filter :authenticate
+  before_filter :authorize
   layout 'standard.html', :except => [:show, :edit]
   
   # GET /workouts

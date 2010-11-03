@@ -2,7 +2,7 @@ require 'feeds'
 
 class LinksController < ApplicationController
 
-  before_filter :authenticate
+  before_filter :authorize
   layout 'standard.html'
   
   # GET /links

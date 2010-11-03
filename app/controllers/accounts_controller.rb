@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   
-  before_filter :authenticate
+  before_filter :authorize
   layout 'standard', :except => :show
   
   # GET /accounts

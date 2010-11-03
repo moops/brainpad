@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
   
-  def authenticate
+  def authorize
     if session[:user_id]
       logger.info("session: #{session.inspect}")
       @user = Person.find(session[:user_id])

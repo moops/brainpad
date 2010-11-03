@@ -1,6 +1,6 @@
 class MilestonesController < ApplicationController
 
-  before_filter :authenticate
+  before_filter :authorize
   layout 'standard.html', :except => [:show]
   
   # GET /milestones
