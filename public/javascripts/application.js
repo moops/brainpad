@@ -14,7 +14,6 @@ jQuery(document).ready(function() {
     
     $(".remote_edit_link").click(function() {
         var parts = this.id.split('_',2);
-        alert("/"+parts[0]+"/"+parts[1]+"/edit");
         $.get("/"+parts[0]+"/"+parts[1]+"/edit", null, null, "script");
         return false; 
     });
