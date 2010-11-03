@@ -1,0 +1,9 @@
+development:
+  athenticate: false
+  
+test:
+  athenticate: false
+  
+production:
+  athenticate: true
+  auth_host: http://raceweb-auth.heroku.com

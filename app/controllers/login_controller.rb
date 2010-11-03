@@ -8,25 +8,27 @@ class LoginController < ApplicationController
     # show login screen
   end
 
-  def authenticate
-    @user = Person.authenticate(params[:person][:user_name], params[:person][:password])
-    logger.info("@user: #{@user.inspect}")
-    
-    doc = REXML::Document.new(@user, 'user')
-  
-    
-    logger.info("doc #{doc.inspect}")
-    
-    
-  
-    if @user
-      session[:user_id] = Person.find_id_by_user_name(@user.user_name)
+  def authenticate  
+    if APP_CONFIG['authenticate'].eql?('true')
+      user = Person.authenticate(params[:person][:user_name], params[:person][:password])
+      if user.empty?
+        user_name = nil
+      else 
+        user_name = REXML::Document.new(user).root.elements["user-name"].text
+      end
+    else #not authenticating, just use the param as the user_name
+      user_name = params[:person][:user_name]
+    end
+
+    if user_name
+      logger.debug("LoginController.authenticate: user_name[#{user_name}] authenticated")
+      session[:user_id] = Person.find_id_by_user_name(user_name)
       if session[:return_to]
         temp = session[:return_to]
         session[:return_to] = nil
         redirect_to(temp)
       else
-        redirect_to :controller => 'links', :action => 'index'
+        redirect_to links_path
       end
     else
       flash[:notice] = 'Login failed!' 

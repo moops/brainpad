@@ -13,17 +13,11 @@ class Person < ActiveRecord::Base
   validates_presence_of :user_name
 
   def self.authenticate(name, password)
-    #Person.find(:first, :conditions => [ "user_name = ? and password = ?", name, password ])
-    #Person.find(:first, :conditions => [ "user_name = ?", name ])
-    
-    url = "http://localhost:3004/users/find.xml?user_name=#{name}&password=#{password}"
-    logger.info("person.authenticate url: #{url}")
-    response = ''
+    url = "#{APP_CONFIG['auth_host']}/users/find.xml?user_name=#{name}&password=#{password}"
+    logger.debug("Person.authenticate: authenticating with url[#{url}]...")
     open(url) do |http|
-      response = http.read
-      logger.info("name #{name} password #{password} response #{response}")
+      http.read
     end
-    response
   end
   
   def self.find_id_by_user_name(user_name)
