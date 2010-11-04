@@ -1,5 +1,3 @@
-require 'rexml/document'
-
 class LoginController < ApplicationController
     
   layout 'standard.html'
@@ -8,21 +6,19 @@ class LoginController < ApplicationController
     # show login screen
   end
 
-  def authenticate  
-    if APP_CONFIG['authenticate'].eql?('true')
+  def authenticate
+    
+    if APP_CONFIG['authenticate']
+      logger.debug("LoginController.authenticate: authenticating...")
       user = Person.authenticate(params[:person][:user_name], params[:person][:password])
-      if user.empty?
-        user_name = nil
-      else 
-        user_name = REXML::Document.new(user).root.elements["user-name"].text
-      end
     else #not authenticating, just use the param as the user_name
-      user_name = params[:person][:user_name]
+      logger.debug("LoginController.authenticate: using user_name param...")
+      user = Person.find_by_user_name(params[:person][:user_name])
     end
 
-    if user_name
-      logger.debug("LoginController.authenticate: user_name[#{user_name}] authenticated")
-      session[:user_id] = Person.find_id_by_user_name(user_name)
+    if user
+      logger.debug("LoginController.authenticate: user authenticated[#{user.inspect}]")
+      session[:user] = user
       if session[:return_to]
         temp = session[:return_to]
         session[:return_to] = nil

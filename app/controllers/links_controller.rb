@@ -11,7 +11,7 @@ class LinksController < ApplicationController
     unless session[:tags]
       session[:tags] = getUniqueTags
     end
-    @all = Link.find(:all, :conditions => "person_id = #{session[:user_id]}")
+    @all = Link.find(:all, :conditions => "person_id = #{@user.id}")
     
     @recently_clicked = @all.sort { |a,b| (a.last_clicked and b.last_clicked) ? b.last_clicked<=>(a.last_clicked) : 0 }[0,9]
     @recently_added = @all.sort { |a,b| b.created_at<=>(a.created_at) }[0,9]
@@ -120,7 +120,7 @@ class LinksController < ApplicationController
   # GET /links/find.xml
   def find
     logger.info('finding links...')
-    @found_links = Link.find(:all, :conditions => "person_id = #{session[:user_id]} and tags like '%#{params[:tag]}%'")
+    @found_links = Link.find(:all, :conditions => "person_id = #{@user.id} and tags like '%#{params[:tag]}%'")
     logger.info("found links: #{@found_links.inspect}")
     respond_to do |format|
       format.html { render :partial => 'found_links' }
@@ -130,7 +130,7 @@ class LinksController < ApplicationController
   
   # GET /links/clean
   def clean
-    @links = Link.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => :name, :per_page => 15
+    @links = Link.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => :name, :per_page => 15
   end
   
   # GET /link/refresh_tags
@@ -152,7 +152,7 @@ class LinksController < ApplicationController
     def getUniqueTags
       unique_tags = []
       #all_links = Link.find(:all)
-      all_links = Link.find_by_sql("select * from links where person_id = #{session[:user_id]}")
+      all_links = Link.find_by_sql("select * from links where person_id = #{@user.id}")
       all_links.each { |cur_link|
         if cur_link.tags
           cur_link.tags.split(' ').each { |cur_tag|

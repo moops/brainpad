@@ -4,7 +4,7 @@
 <head>
     <title>brainpad</title>
     <%= stylesheet_link_tag 'jquery-ui-1.8.5.custom', 'lavalamp', 'brainpad' %>
-    <%= javascript_include_tag :defaults, 'jquery-1.4.2.min', 'jquery-ui-1.8.5.custom.min', 'jquery.lavalamp.1.3.3-min', 'jquery.easing.1.3' %>
+    <%= javascript_include_tag 'jquery-1.4.2.min', 'jquery-ui-1.8.5.custom.min', 'jquery.lavalamp.1.3.3-min', 'jquery.easing.1.3', 'application' %>
 </head>
 
 <body>
@@ -30,11 +30,11 @@
     <div id="footer">
         <div id="styleLinks"></div>
         <div id="user">
-            <% if (session[:user_id]) %>
-                logged in as <%= @user.name %>.
+            <% if (session[:user]) %>
+                
                 <%= link_to('log out', :controller => "login", :action => "logout") %>
                 <br/>
-                you've used <%= @user.get_age %> days and have <%= @user.get_days_left %> left.
+                
             <% end %></div>
         <div id="copyright">
             &copy <%= Date.today.year %> raceweb.ca victoria bc<br>

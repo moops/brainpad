@@ -1,7 +1,7 @@
 <% form_for(@reminder) do |f| %>
 
-<% if session[:user_id] %>
-    <%= hidden_field_tag('reminder[person_id]',session[:user_id]) %>
+<% if @user %>
+    <%= hidden_field_tag('reminder[person_id]', @user.id) %>
 <% end %>
 <table cellpadding="3" cellspacing="0" border="0">
     <tr>

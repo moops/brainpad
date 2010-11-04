@@ -6,8 +6,7 @@ class ConnectionsController < ApplicationController
   # GET /connections
   # GET /connections.xml
   def index
-    @user = Person.find(session[:user_id])
-    @connections = Connection.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => 'name', :per_page => 10
+    @connections = Connection.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'name', :per_page => 10
     @connection = Connection.new #for the 'new' form
     
     respond_to do |format|

@@ -73,7 +73,7 @@ class MilestonesController < ApplicationController
   private
   
   def get_milestones
-    Milestone.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => 'milestone_at', :per_page => 10
+    Milestone.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'milestone_at', :per_page => 10
   end
    
 end

@@ -6,8 +6,7 @@ class WorkoutsController < ApplicationController
   # GET /workouts
   # GET /workouts.xml
   def index    
-    @user = Person.find(session[:user_id])
-    @workouts = Workout.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => 'workout_on desc', :per_page => 10
+    @workouts = Workout.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'workout_on desc', :per_page => 10
 
     @workout = Workout.new #for the 'new' form
     @workout.workout_on = Date.today.strftime("%b %d, %Y")

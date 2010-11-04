@@ -6,8 +6,7 @@ class JournalsController < ApplicationController
   # GET /journals
   # GET /journals.xml
   def index
-    @user = Person.find(session[:user_id])
-    @journals = Journal.paginate :page => params[:page], :conditions => "person_id = #{session[:user_id]}", :order => 'entry_on desc', :per_page => 10
+    @journals = Journal.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'entry_on desc', :per_page => 10
 
     @journal = Journal.new #for the 'new' form
     @journal.entry_on = Date.today.strftime("%b %d, %Y")

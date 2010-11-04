@@ -10,10 +10,9 @@ class PersonTest < ActiveSupport::TestCase
     assert a.save, 'save with all required fields'
   end
   
-  test "find id by user name" do
-    user_name = people(:adam).user_name
-    found_id = Person.find_id_by_user_name(user_name)
-    assert found_id > 0, 'found id is different'
+  test "test authenticate" do
+    #todo
+    assert true
   end
   
 end

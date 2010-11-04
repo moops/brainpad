@@ -6,13 +6,11 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.xml
   def index
-    @user = Person.find(session[:user_id])    
     session[:contact_tags] = getUniqueTags
     
-    conditions = "person_id = #{session[:user_id]}"
+    conditions = "person_id = #{@user.id}"
     if params[:tag]
-      logger.info "contacts tag[#{params[:tag]}]"
-      conditions = "tags like '%#{params[:tag]}%' and person_id = #{session[:user_id]}"
+      conditions = "tags like '%#{params[:tag]}%' and #{conditions}"
       @tag = params[:tag]
     end
     @contacts = Contact.paginate :page => params[:page], :conditions => conditions, :order => 'name', :per_page => 10
@@ -90,7 +88,7 @@ class ContactsController < ApplicationController
   
     def getUniqueTags
       unique_tags = []
-      all_contacts = Contact.find(:all, :conditions => "person_id = #{session[:user_id]}")
+      all_contacts = Contact.find(:all, :conditions => "person_id = #{@user.id}")
       all_contacts.each { |cur_contact|
         cur_contact.tags.split.each { |cur_tag|
           unique_tags.push(cur_tag.strip)

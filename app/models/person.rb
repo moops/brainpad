@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'rexml/document'
 
 class Person < ActiveRecord::Base
 
@@ -11,19 +12,29 @@ class Person < ActiveRecord::Base
   has_many :workouts
   
   validates_presence_of :user_name
+  
+  attr_accessor :name, :authority, :born_on
 
   def self.authenticate(name, password)
+    user = nil
+    resp = nil
     url = "#{APP_CONFIG['auth_host']}/users/find.xml?user_name=#{name}&password=#{password}"
     logger.debug("Person.authenticate: authenticating with url[#{url}]...")
     open(url) do |http|
-      http.read
+      resp = http.read
     end
-  end
-  
-  def self.find_id_by_user_name(user_name)
-    user = Person.find_by_user_name(user_name)
-    logger.info("person.find_id_by_user_name id found: #{user.id}")
-    user ? user.id : 0
+    logger.debug("Person.authenticate: resp[#{resp}]...")
+    
+    if !resp.empty?
+      root = REXML::Document.new(resp).root
+      user = Person.find_by_user_name(root.elements["user-name"].text)
+      if user
+        user.name=(root.elements["name"].text)
+        user.authority=(root.elements["authority"].text.to_i)
+        user.born_on=(Date.parse(root.elements["born-on"].text))
+      end
+    end
+    user
   end
     
   def get_age

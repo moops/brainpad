@@ -7,8 +7,8 @@
 
 <% form_for(@milestone) do |f| %>
 
-<% if session[:user_id] %>
-    <%= hidden_field_tag('milestone[person_id]',session[:user_id]) %>
+<% if @user %>
+    <%= hidden_field_tag('milestone[person_id]', @user.id) %>
 <% end %>
 <table cellpadding="3" cellspacing="0" border="0">
     <tr>

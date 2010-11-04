@@ -9,9 +9,8 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   
   def authorize
-    if session[:user_id]
-      logger.info("session: #{session.inspect}")
-      @user = Person.find(session[:user_id])
+    if session[:user]
+      @user = session[:user]
     else
       session[:return_to] = request.request_uri
       redirect_to :controller => 'login' 
