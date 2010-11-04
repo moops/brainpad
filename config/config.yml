@@ -1,5 +1,5 @@
 development:
-  authenticate: true
+  authenticate: false
   auth_host: http://localhost:3004
   
 test:

@@ -29,9 +29,9 @@ class Person < ActiveRecord::Base
       root = REXML::Document.new(resp).root
       user = Person.find_by_user_name(root.elements["user-name"].text)
       if user
-        user.name=(root.elements["name"].text)
-        user.authority=(root.elements["authority"].text.to_i)
-        user.born_on=(Date.parse(root.elements["born-on"].text))
+        user.name=(root.elements["name"].text) if root.elements["name"].text
+        user.authority=(root.elements["authority"].text.to_i) if root.elements["authority"].text
+        user.born_on=(Date.parse(root.elements["born-on"].text)) if root.elements["born-on"].text
       end
     end
     user
@@ -57,6 +57,10 @@ class Person < ActiveRecord::Base
       p += a.payments
     end
     p
+  end
+  
+  def name?
+    name ? name : user_name
   end
   
 end
