@@ -99,12 +99,10 @@ class Payment < ActiveRecord::Base
   def self.find_upcoming(user)
     query = "select p.* from payments p where p.frequency is not null and p.person_id = ?"
     repeating = Payment.find_by_sql([query,user.id])
-    logger.info("repeating: #{repeating.inspect}")
     for p in repeating
       p.build_repeat
     end
     upcoming = Payment.find_by_sql([query,user.id])
-    logger.info("upcoming: #{upcoming.inspect}")
     upcoming.sort! {|x,y| x.payment_on <=> y.payment_on }
   end
 
