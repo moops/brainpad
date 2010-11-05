@@ -37,11 +37,17 @@ class Person < ActiveRecord::Base
     user
   end
     
-  def get_age
+  def age_in_days?
     Date.today - born_on
   end
+  
+  def age_in_years?
+    y = Date.today.year - born_on.year
+    y -= 1 if (Date.today.yday < born_on.yday)
+    y
+  end
     
-  def get_days_left
+  def days_left?
     #based on 84 year life expectancy 
     (born_on>>(84*12)) - Date.today
   end
