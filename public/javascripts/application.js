@@ -4,7 +4,7 @@ $.ajaxSetup({
 
 jQuery(document).ready(function() { 
     
-    $("#lavaLamp").lavaLamp({ fx: "easeOutBack", speed: 700})
+    $("#lavaLamp").lavaLamp({ fx: "easeOutBack", speed: 700});
     $(".accordion").accordion();
     $("input.calendar").datepicker();
     $("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
@@ -13,9 +13,19 @@ jQuery(document).ready(function() {
     $('.toggle_form_trigger').click(function() { $(".toggle_form").toggle('blind'); });
     
     $(".remote_edit_link").click(function() {
+        // the id of the link needs to be of the form 'controller_id' i.e. 'workouts_123'
         var parts = this.id.split('_',2);
         $.get("/"+parts[0]+"/"+parts[1]+"/edit", null, null, "script");
         return false; 
+    });
+    
+    var $moneyForm = $('<div></div>')
+            .html('This dialog will show every time!')
+            .dialog({ autoOpen: false, title: 'money form', modal: true, show: 'fade' });
+    
+    $('#pop_up_money_form').click(function() {
+        $moneyForm.dialog('open');
+        return false;
     });
     
 });
