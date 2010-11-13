@@ -11,7 +11,19 @@
     </div>
 <% end %>
 
-<div id="foo"></div>
+<script>
+  jQuery(document).ready(function() { 
+
+    var moneyForm = $('<div></div>')
+              .html('<%= escape_javascript(render(:partial => 'form')) %>')
+              .dialog({ autoOpen: false, width: 500, title: 'money2 form', modal: true, show: 'fade' });
+              
+    $('#pop_up_money_form').click(function() {
+      moneyForm.dialog('open');
+      return false;
+    });
+  });
+</script>
 
 <div class="toggle_form" id="payment_form" style="display:none;">
     <%= render(:partial => 'form') %>

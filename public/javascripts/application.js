@@ -2,7 +2,7 @@ $.ajaxSetup({
     'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 })
 
-jQuery(document).ready(function() { 
+$(document).ready(function() { 
     
     $("#lavaLamp").lavaLamp({ fx: "easeOutBack", speed: 700});
     $(".accordion").accordion();
@@ -19,14 +19,7 @@ jQuery(document).ready(function() {
         return false; 
     });
     
-    var $moneyForm = $('<div></div>')
-            .html('This dialog will show every time!')
-            .dialog({ autoOpen: false, title: 'money form', modal: true, show: 'fade' });
     
-    $('#pop_up_money_form').click(function() {
-        $moneyForm.dialog('open');
-        return false;
-    });
     
 });
 
