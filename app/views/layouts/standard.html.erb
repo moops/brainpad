@@ -31,10 +31,10 @@
         <div id="styleLinks"></div>
         <div id="user">
             <% if @user %>
-                logged in as <%= @user.name? %>.
+                logged in as <%= @user.auth_profile.name %>.
                 <%= link_to('log out', :controller => "login", :action => "logout") %>
                 <br/>
-                <% if @user.born_on %>you've used <%= @user.age_in_days? %> days and have <%= @user.days_left? %> left.<% end %>
+                <% if @user.auth_profile.born_on %>you've used <%= @user.age_in_days? %> days and have <%= @user.days_left? %> left.<% end %>
             <% end %></div>
         <div id="copyright">
             &copy <%= Date.today.year %> raceweb.ca victoria bc<br>

@@ -10,15 +10,16 @@ class LoginController < ApplicationController
     
     if APP_CONFIG['authenticate']
       logger.debug("LoginController.authenticate: authenticating...")
-      user = Person.authenticate(params[:person][:user_name], params[:person][:password])
+      auth_profile = Person.authenticate(params[:person][:user_name], params[:person][:password])
     else #not authenticating, just use the param as the user_name
-      logger.debug("LoginController.authenticate: using user_name param...")
+      logger.debug("LoginController.authenticate: not authenticating just use user_name param...")
       user = Person.find_by_user_name(params[:person][:user_name])
+      auth_profile = AuthProfile.new(user.id, params[:person][:user_name], 1, Date.parse('1970-01-01')) if user.id
     end
 
-    if user
-      logger.debug("LoginController.authenticate: user authenticated[#{user.inspect}]")
-      session[:user] = user
+    if auth_profile
+      logger.debug("LoginController.authenticate: auth profile[#{auth_profile.inspect}]")
+      session[:user] = auth_profile
       if session[:return_to]
         temp = session[:return_to]
         session[:return_to] = nil

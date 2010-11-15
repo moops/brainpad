@@ -10,7 +10,10 @@ class ApplicationController < ActionController::Base
   
   def authorize
     if session[:user]
-      @user = session[:user]
+      @user = Person.find(session[:user].user_id)
+      @user.auth_profile = session[:user]
+      logger.debug("ApplicationController.authorize: @user[#{@user.inspect}]")
+      logger.debug("ApplicationController.authorize: @user.auth_profile[#{@user.auth_profile.inspect}]")
     else
       session[:return_to] = request.request_uri
       redirect_to :controller => 'login' 

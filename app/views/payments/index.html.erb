@@ -12,13 +12,13 @@
 <% end %>
 
 <script>
-  jQuery(document).ready(function() { 
+  $(document).ready(function() { 
 
     var moneyForm = $('<div></div>')
-              .html('<%= escape_javascript(render(:partial => 'form')) %>')
-              .dialog({ autoOpen: false, width: 500, title: 'money2 form', modal: true, show: 'fade' });
+              .html("<%= escape_javascript(render(:partial => 'form')) %>")
+              .dialog({ autoOpen: false, width: 500, title: 'payment form', modal: true, show: 'fade' });
               
-    $('#pop_up_money_form').click(function() {
+    $('.pop_up_money_form').click(function() {
       moneyForm.dialog('open');
       return false;
     });
@@ -60,8 +60,7 @@
     <div class="box_header">
         transactions
         <span style="float:right">
-            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'toggle_form_trigger') %>
-            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :id => 'pop_up_money_form') %>
+            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'pop_up_money_form') %>
         </span>
     </div>
     <div class="box_content">

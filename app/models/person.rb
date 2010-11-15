@@ -13,10 +13,10 @@ class Person < ActiveRecord::Base
   
   validates_presence_of :user_name
   
-  attr_accessor :name, :authority, :born_on
+  attr_accessor :auth_profile
 
   def self.authenticate(name, password)
-    user = nil
+    profile = nil
     resp = nil
     url = "#{APP_CONFIG['auth_host']}/users/find.xml?user_name=#{name}&password=#{password}"
     logger.debug("Person.authenticate: authenticating with url[#{url}]...")
@@ -29,16 +29,18 @@ class Person < ActiveRecord::Base
       root = REXML::Document.new(resp).root
       user = Person.find_by_user_name(root.elements["user-name"].text)
       if user
-        user.name=(root.elements["name"].text) if root.elements["name"].text
-        user.authority=(root.elements["authority"].text.to_i) if root.elements["authority"].text
-        user.born_on=(Date.parse(root.elements["born-on"].text)) if root.elements["born-on"].text
+        name = (root.elements["name"].text) if root.elements["name"].text
+        authority = (root.elements["authority"].text.to_i) if root.elements["authority"].text
+        born_on = (Date.parse(root.elements["born-on"].text)) if root.elements["born-on"].text
+        profile = AuthProfile.new(user.id, name, authority, born_on)
       end
     end
-    user
+    profile
   end
     
   def age_in_days?
-    Date.today - born_on
+    logger.debug("Person.age_in_days?: auth_profile.born_on[#{auth_profile.born_on.inspect}]...")
+    Date.today - auth_profile.born_on
   end
   
   def age_in_years?
@@ -49,7 +51,7 @@ class Person < ActiveRecord::Base
     
   def days_left?
     #based on 84 year life expectancy 
-    (born_on>>(84*12)) - Date.today
+    (auth_profile.born_on>>(84*12)) - Date.today
   end
     
   def active_accounts

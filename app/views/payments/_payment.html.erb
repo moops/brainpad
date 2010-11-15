@@ -1,6 +1,6 @@
 <tr class="<%= payment_counter.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
-    <td><%= payment.description[0,25] + (payment.description.length > 25 ? '...' : '') %></td>
+    <td>
+		<%= link_to(payment.description[0,40] + (payment.description.length > 40 ? '...' : ''), '#', :class => 'pop_up_money_form') %></td>
     <td class="<%= payment.payment_type? %>_amount"><%= number_to_currency(payment.amount.abs) %></td>
     <td><%= payment.account.name %></td>
-    <td><%= payment.payment_on.strftime("%b %d") %></td>
-    <td><%= link_to_remote('edit', {:update => 'payment_form', :method => :get, :url => edit_payment_path(payment)} ) %></td></tr>
+    <td><%= payment.payment_on.strftime("%b %d") %></td></tr>
