@@ -1,1 +1,8 @@
+alert('foo');
+
 $("#form").html("<%= escape_javascript(render(:partial=>'form')) %>");
+
+var editMoneyForm = $('<div></div>')
+                      .html("<%= escape_javascript(render(:partial => 'form')) %>")
+              .dialog({ autoOpen: true, width: 500, title: 'payment form', modal: true, show: 'fade' });
+            

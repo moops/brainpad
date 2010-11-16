@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
   
   before_filter :authorize
-  layout 'standard.html', :except => [:show]
+  layout 'standard.html', :except => [:show, :edit]
   
   # GET /payments
   # GET /payments.xml
@@ -44,7 +44,10 @@ class PaymentsController < ApplicationController
     @payment = Payment.find(params[:id])
     @payment.amount = @payment.amount.abs
     get_stuff_for_form
-    render(:partial => 'form')
+    respond_to do |format|
+      format.html { logger.debug("PaymentsController.edit: format is html") }
+      format.js { logger.debug("PaymentsController.edit: format is js") }
+    end
   end
 
   # POST /payments
