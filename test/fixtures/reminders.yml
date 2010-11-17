@@ -1,5 +1,3 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 one:
   description: test first reminder
   done: false
@@ -7,7 +5,7 @@ one:
   reminder_type: 17
   frequency:
   repeat_until:
-  due_on: <%= Date.today + 2 %>
+  due_on: <%= 2.days.from_now.to_s(:db) %>
   person: adam
 
 two:
@@ -17,7 +15,7 @@ two:
   reminder_type: 17
   frequency:
   repeat_until:
-  due_on: <%= Date.today + 1 %>
+  due_on: <%= 1.days.from_now.to_s(:db) %>
   person: adam
   
 three:
@@ -27,7 +25,7 @@ three:
   reminder_type: 17
   frequency:
   repeat_until:
-  due_on: <%= Date.today %>
+  due_on: <%= 0.days.ago.to_s(:db) %>
   person: adam
   
 four:
@@ -37,7 +35,7 @@ four:
   reminder_type: 17
   frequency:
   repeat_until:
-  due_on: <%= Date.today - 1 %>
+  due_on: <%= 1.days.ago.to_s(:db) %>
   person: adam
   
 five:
@@ -47,5 +45,5 @@ five:
   reminder_type: 18
   frequency:
   repeat_until:
-  due_on: <%= Date.today - 2 %>
+  due_on: <%= 2.days.ago.to_s(:db) %>
   person: adam

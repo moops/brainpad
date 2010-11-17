@@ -3,9 +3,9 @@
 one:
   account_id: 1
   price: 1.5
-  price_on: 2010-04-29
+  price_on: <%= 12.days.ago.to_s(:db) %>
 
 two:
   account_id: 1
   price: 1.5
-  price_on: 2010-04-29
+  price_on: <%= 22.days.ago.to_s(:db) %>

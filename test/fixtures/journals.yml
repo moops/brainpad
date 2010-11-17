@@ -1,18 +1,18 @@
 one:
   entry: test first entry
-  entry_on: 2010-03-30
-  journal_type: 31
+  entry_on: <%= 10.days.ago.to_s(:db) %>
+  journal_type: 8
   person: adam
 
 two:
   entry: test second entry
-  entry_on: 2010-04-01
-  journal_type: 32
+  entry_on: <%= 15.days.ago.to_s(:db) %>
+  journal_type: 8
   person: adam
 
 three:
   entry: test third entry. this one is a long one so we can see some wrapping in the list view or the show view. this one is a long one so we can see some wrapping in the list view or the show view. this one is a long one so we can see some wrapping in the list view or the show view.
-  entry_on: 2010-04-03
-  journal_type: 33
+  entry_on: <%= 5.days.ago.to_s(:db) %>
+  journal_type: 9
   person: adam
 

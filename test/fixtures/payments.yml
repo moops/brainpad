@@ -2,7 +2,7 @@ one:
   description: mcdonalds
   tags: restaurant
   amount: -5.00
-  payment_on: <%= Date.today %>
+  payment_on: <%= 0.days.ago.to_s(:db) %>
   account: chequing
   person: adam
 
@@ -10,7 +10,7 @@ two:
   description: cnx salary
   tags: 
   amount: 2082.62
-  payment_on: <%= Date.today %>
+  payment_on: <%= 0.days.ago.to_s(:db) %>
   frequency: 40
   until: <%= Date.today + 365 %>
   account: chequing
@@ -20,7 +20,7 @@ three:
   description: hiking boots
   tags: rec-equip
   amount: -120.00
-  payment_on: <%= Date.today - 7 %>
+  payment_on: <%= 7.days.ago.to_s(:db) %>
   account: visa
   person: adam
   
@@ -28,7 +28,7 @@ four:
   description: swimming
   tags: rec-fee
   amount: -15.34
-  payment_on: <%= Date.today - 8 %>
+  payment_on: <%= 8.days.ago.to_s(:db) %>
   account: visa
   person: adam
   
@@ -36,7 +36,7 @@ five:
   description: groceries
   tags: groceries
   amount: -64.77
-  payment_on: <%= Date.today - 9 %>
+  payment_on: <%= 9.days.ago.to_s(:db) %>
   account: visa
   person: adam
   
@@ -44,7 +44,7 @@ six:
   description: rent
   tags: rent
   amount: -800.00
-  payment_on: <%= Date.today - 10 %>
+  payment_on: <%= 10.days.ago.to_s(:db) %>
   frequency: 41
   until: <%= Date.today + 365 %>
   account: chequing
@@ -54,7 +54,7 @@ seven:
   description: atm
   tags: 
   amount: 100.00
-  payment_on: <%= Date.today - 11 %>
+  payment_on: <%= 11.days.ago.to_s(:db) %>
   account: cash
   transfer_account: chequing
   person: adam

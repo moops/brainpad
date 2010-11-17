@@ -15,10 +15,10 @@ three:
   
 tomorrow:
   name: tomorrow
-  milestone_at: <%= Date.today + 1 %>
+  milestone_at: <%= 1.days.from_now.to_s(:db) %>
   person: adam
   
 next_week:
   name: next week
-  milestone_at: <%= Date.today + 7 %>
+  milestone_at: <%= 7.days.from_now.to_s(:db) %>
   person: adam
