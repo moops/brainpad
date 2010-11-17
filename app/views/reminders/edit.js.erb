@@ -1,1 +1,8 @@
-$("#form").html("<%= escape_javascript(render(:partial=>'form')) %>");
+jQuery('#reminder_form')
+    .html("<%= escape_javascript(render(:partial => 'form')) %>")
+    .dialog({ autoOpen: true, width: 500, title: 'reminder form', modal: true, show: 'fade' });
+ajaxLinks();
+
+jQuery("input.calendar").datepicker();
+jQuery("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
+jQuery("input.today").datepicker('setDate', new Date());

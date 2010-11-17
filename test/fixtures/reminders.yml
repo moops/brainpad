@@ -7,7 +7,7 @@ one:
   reminder_type: 17
   frequency:
   repeat_until:
-  due_on: 2010-04-30
+  due_on: <%= Date.today + 2 %>
   person: adam
 
 two:
@@ -17,7 +17,7 @@ two:
   reminder_type: 17
   frequency:
   repeat_until:
-  due_on: 2010-04-30
+  due_on: <%= Date.today + 1 %>
   person: adam
   
 three:
@@ -27,7 +27,7 @@ three:
   reminder_type: 17
   frequency:
   repeat_until:
-  due_on: 2010-05-02
+  due_on: <%= Date.today %>
   person: adam
   
 four:
@@ -37,7 +37,7 @@ four:
   reminder_type: 17
   frequency:
   repeat_until:
-  due_on: 2010-05-02
+  due_on: <%= Date.today - 1 %>
   person: adam
   
 five:
@@ -47,5 +47,5 @@ five:
   reminder_type: 18
   frequency:
   repeat_until:
-  due_on: 2010-05-04
+  due_on: <%= Date.today - 2 %>
   person: adam
