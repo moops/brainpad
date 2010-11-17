@@ -19,47 +19,45 @@
 <% form_for(@payment) do |f| %>
 
 <% if @user %>
-    <%= hidden_field_tag('payment[person_id]', @user.id) %>
+	<%= hidden_field_tag('payment[person_id]', @user.id) %>
 <% end %>
 
 <fieldset>   
-  <legend>details</legend>   
-    <ol>   
+	<legend>details</legend>   
+	<ol>   
     <li> 
-      <%= f.label(:type) %>
-      <%= f.select(:payment_type, @payment_types, {}, :onchange => 'paymentType()') %></li>
+		<%= f.label(:type) %>
+		<%= f.select(:payment_type, @payment_types, {}, :onchange => 'paymentType()') %></li>
     <li>
-      <%= f.label(:account) %>
-      <%= f.select(:account_id, @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %></li>
+		<%= f.label(:account) %>
+		<%= f.select(:account_id, @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %></li>
     <li>
-      <%= f.label(:from) %>
-      <%= f.select(:transfer_from, @accounts.collect {|a| [a.name, a.id] }, {:include_blank => true}, {:disabled => true}) %>
-      <script type="text/javascript">paymentType();</script></li>
+		<%= f.label(:from) %>
+		<%= f.select(:transfer_from, @accounts.collect {|a| [a.name, a.id] }, {:include_blank => true}, {:disabled => true}) %>
+		<script type="text/javascript">paymentType();</script></li>
     <li>
-      <%= f.label(:amount) %>
-      <%= f.text_field(:amount, :size => '7', :class => 'text') %></li>
+		<%= f.label(:amount) %>
+		<%= f.text_field(:amount, :size => '7') %></li>
     <li>
-      <%= label(:payment, :payment_on, "Date") %>
-      <%= f.text_field(:payment_on, :size => '12', :class => 'text calendar today') %></li>
+		<%= label(:payment, :payment_on, "Date") %>
+		<%= f.text_field(:payment_on, :size => '12', :class => 'text calendar today') %></li>
     <li>
-      <%= f.label(:name) %>
-      <%= f.text_field(:description, :size => '25', :class => 'text') %></td></li>
+		<%= f.label(:name) %>
+		<%= f.text_field(:description, :size => '25') %></td></li>
     <li>
-      <%= f.label(:tags) %>
-      <%= select_tag('tags', options_for_select(@tags), :onchange => 'addTag()') %>
-      <%= f.text_field('tags', :size => '30', :class => 'text') %></li></ol>
-</fieldset>
+		<%= f.label(:tags) %>
+		<%= select_tag('tags', options_for_select(@tags), :onchange => 'addTag()') %>
+		<%= f.text_field(:tags, :size => '30') %></li></ol></fieldset>
 <fieldset>   
-  <legend>schedule</legend>
-    <ol>
+  	<legend>schedule</legend>
+	<ol>
     <li>
-      <%= f.label(:frequency) %>
-      <%= f.select(:frequency, Lookup.get_list('freq').collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %>
-      <%= label(:payment, :until) %>
-      <%= f.text_field(:until, :size => '12', :class => 'text calendar') %></li></ol>
-</fieldset>
+		<%= f.label(:frequency) %>
+		<%= f.select(:frequency, Lookup.get_list('freq').collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %></li>
+	<li>
+		<%= label(:payment, :until) %>
+		<%= f.text_field(:until, :size => '12', :class => 'text calendar') %></li></ol></fieldset>
 <fieldset class="submit">
-    <%= f.submit('go', :style => 'height:3.0em;') %>
-</fieldset>
+    <%= f.submit('go', :style => 'height:3.0em;') %></fieldset>
 
 <% end %>

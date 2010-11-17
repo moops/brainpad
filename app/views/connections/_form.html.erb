@@ -3,38 +3,25 @@
 <% if @user %>
     <%= hidden_field_tag('connection[person_id]', @user.id) %>
 <% end %>
-<table cellpadding="3" cellspacing="0" border="0">
-    <tr>
-        <td id="errors" colspan="7">
-            <% unless @connection.errors.empty? %>
-                <ul>
-                <% @connection.errors.each_full do |message| %>
-                    <li><%= message %></li>
-                <% end %>
-                </ul>
-            <% end %></td>
-            <% if flash[:notice] %>
-                <div class="notice"><%=h flash[:notice] %></div>
-            <% end %></td></tr>
-    <tr>
-        <td><%= f.label(:name) %></td>
-        <td colspan="3">
-            <%= f.text_field(:name, :size => '25', :class => 'text') %></td></tr>
-    <tr>
-        <td><%= f.label(:username) %></td>
-        <td><%= f.text_field(:username, :size => '30', :class => 'text') %></td>
-        <td><%= f.label(:password) %></td>
-        <td><%= f.text_field(:password, :size => '30', :class => 'text') %></td></tr>
-    <tr>
-        <td><%= f.label(:url) %></td>
-        <td colspan="3"><%= f.text_field(:url, :size => '78', :class => 'text') %></td></tr>
-    <tr>
-        <td><%= f.label(:description) %></td>
-        <td colspan="3"><%= f.text_area(:description, :cols => '75', :rows => '2') %></td></tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td class="submit" colspan="3">
-            <%= f.submit(@connection.id ? 'update' : 'create') %></td></tr>
-</table>
+
+<fieldset>   
+    <ol>   
+	<li>
+		<%= f.label(:name) %>
+  		<%= f.text_field(:name, :size => '25') %></li>
+	<li>
+		<%= f.label(:username) %>
+		<%= f.text_field(:username, :size => '25') %></li>
+	<li>
+		<%= f.label(:password) %>
+		<%= f.text_field(:password, :size => '25') %></li>
+	<li>
+		<%= f.label(:url) %></td>
+		<%= f.text_field(:url, :size => '50') %></li>
+	<li>
+		<%= f.label(:description) %></td>
+		<%= f.text_area(:description, :cols => '50', :rows => '3') %></li></ol></fieldset>
+<fieldset class="submit">
+	<%= f.submit(@connection.id ? 'update' : 'create') %></fieldset>
 
 <% end %>

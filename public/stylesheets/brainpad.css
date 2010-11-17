@@ -17,15 +17,24 @@ th { font-weight: bold; text-align: left; }
 td { text-align: left; }
 ul { margin: 4px 0px; }
 
+/* containers */
 #header { margin-right: auto; margin-left: auto; width: 700px; }
 #content { margin-right: auto; margin-left: auto; margin-bottom: 10px; width: 700px; }
 #footer { font-size: .9em; margin-right: auto; margin-left: auto; background: #fff; width: 690px; border: 1px solid #bbb; border-radius: 6px 6px; padding: 5px; border: 1px solid green; }
 
+/* forms */
 .form { background: #f6f6f6; border: 1px solid #bbb; padding: 10px 5px 10px 5px; border-radius: 6px 6px; }
+label {  text-align: right; float: left; width: 7em; margin-right: 1em; color: #666; clear: both; }
+fieldset { background: #f6f6f6; margin: 1.5em 0 0 0; padding: 0; border: 1px solid #bbb; border-radius: 6px 6px; } 
+fieldset ol { padding: 1em 1em 0 1em; list-style: none; }  
+fieldset li { padding-bottom: 1em; }  
+fieldset.submit { border-style: none; background: #fff; }
+legend { margin-left: 1em; color: #333; font-weight: bold; } 
+input[type="text"], textarea { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 1em; color: #333; }
+select { font-family: Verdana, Arial, Helvetica, sans-serif; color: #333; }
 
 #errors li { font-weight: bold; color: #930; text-align: center; }
 
-label {  text-align: right; float: left; width: 6em; margin-right: 1em; font-weight: bold; color: #666; }
 div.links a { line-height: 140%; color: #3333ff; font-size: .9em; }
 div.links ul { list-style-type: circle; padding-left: 1em; margin-left: 1em; }
 
@@ -62,32 +71,7 @@ ul.due li:after { content: ", "; }
 .box_buttons { padding: 5px; text-align: right; }
 .shaded_box { margin-bottom: 10px; border: 1px solid #bbb; padding: 5px; background: #ddd; border-radius: 6px; }
 
-input.text { height: 1.5em; font-size: 1.2em; color: #666; }
-select { height: 1.8em; font-size: 1.3em;  color: #666; }
-
 .deposit_amount { font-weight: bold; }
 .expense_amount { }
 .transfer_amount { font-style: italic; }
 .milestone_time {  border: 0px; font-size: 1.4em; background: #fff; }
-
-
-
-fieldset { 
-margin: 1.5em 0 0 0;   
-padding: 0;  
-}  
-legend {   
-margin-left: 1em;   
-color: #000000;   
-font-weight: bold;  
-}  
-fieldset ol {   
-padding: 1em 1em 0 1em;   
-list-style: none;  
-}  
-fieldset li {   
-padding-bottom: 1em;  
-}  
-fieldset.submit {   
-border-style: none;  
-}

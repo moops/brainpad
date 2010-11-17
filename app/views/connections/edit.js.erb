@@ -1,1 +1,4 @@
-$("#form").html("<%= escape_javascript(render(:partial=>'form')) %>");
+jQuery('#connection_form')
+    .html("<%= escape_javascript(render(:partial => 'form')) %>")
+    .dialog({ autoOpen: true, width: 500, title: 'connection form', modal: true, show: 'fade' });
+ajaxLinks();
