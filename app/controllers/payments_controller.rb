@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
   
   before_filter :authorize
-  layout 'standard.html', :except => [:show, :edit]
+  layout 'standard.html', :except => :show
   
   # GET /payments
   # GET /payments.xml
@@ -45,8 +45,8 @@ class PaymentsController < ApplicationController
     @payment.amount = @payment.amount.abs
     get_stuff_for_form
     respond_to do |format|
-      format.html { logger.debug("PaymentsController.edit: format is html") }
-      format.js { logger.debug("PaymentsController.edit: format is js") }
+      format.html 
+      format.js {render :layout => false}
     end
   end
 

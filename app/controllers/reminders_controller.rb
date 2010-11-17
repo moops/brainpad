@@ -1,7 +1,7 @@
 class RemindersController < ApplicationController
 
   before_filter :authorize
-  layout 'standard.html', :except => [:show, :edit]
+  layout 'standard.html', :except => :show
 
   # GET /reminders
   # GET /reminders.xml
@@ -43,6 +43,10 @@ class RemindersController < ApplicationController
   # GET /reminders/1/edit
   def edit
     @reminder = Reminder.find(params[:id])
+    respond_to do |format|
+      format.html 
+      format.js {render :layout => false}
+    end
   end
 
   # POST /reminders

@@ -25,7 +25,7 @@ ul { margin: 4px 0px; }
 
 #errors li { font-weight: bold; color: #930; text-align: center; }
 
-label {  text-align: right; font-weight: bold; color: #666; }
+label {  text-align: right; float: left; width: 6em; margin-right: 1em; font-weight: bold; color: #666; }
 div.links a { line-height: 140%; color: #3333ff; font-size: .9em; }
 div.links ul { list-style-type: circle; padding-left: 1em; margin-left: 1em; }
 
@@ -69,3 +69,25 @@ select { height: 1.8em; font-size: 1.3em;  color: #666; }
 .expense_amount { }
 .transfer_amount { font-style: italic; }
 .milestone_time {  border: 0px; font-size: 1.4em; background: #fff; }
+
+
+
+fieldset { 
+margin: 1.5em 0 0 0;   
+padding: 0;  
+}  
+legend {   
+margin-left: 1em;   
+color: #000000;   
+font-weight: bold;  
+}  
+fieldset ol {   
+padding: 1em 1em 0 1em;   
+list-style: none;  
+}  
+fieldset li {   
+padding-bottom: 1em;  
+}  
+fieldset.submit {   
+border-style: none;  
+}

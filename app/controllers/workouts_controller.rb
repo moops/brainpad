@@ -1,7 +1,7 @@
 class WorkoutsController < ApplicationController
   
   before_filter :authorize
-  layout 'standard.html', :except => [:show, :edit]
+  layout 'standard.html', :except => :show
   
   # GET /workouts
   # GET /workouts.xml
@@ -42,6 +42,10 @@ class WorkoutsController < ApplicationController
   # GET /workouts/1/edit
   def edit
     @workout = Workout.find(params[:id])
+    respond_to do |format|
+      format.html 
+      format.js {render :layout => false}
+    end
   end
 
   # POST /workouts
