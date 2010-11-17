@@ -3,33 +3,20 @@
 <% if @user %>
     <%= hidden_field_tag('journal[person_id]', @user.id) %>
 <% end %>
-<table cellpadding="3" cellspacing="0" border="0">
-    <tr>
-        <td id="errors" colspan="5">
-            <% unless @journal.errors.empty? %>
-                <ul>
-                <% @journal.errors.each_full do |message| %>
-                    <li><%= message %></li>
-                <% end %>
-                </ul>
-            <% end %></td>
-            <% if flash[:notice] %>
-                <div class="notice"><%=h flash[:notice] %></div>
-            <% end %></td></tr>
-    <tr>
-        <td><%= label(:journal, :entry_on, 'Date') %></td>
-        <td><%= f.text_field(:entry_on, :size => '12', :class => 'text calendar today') %></td>
-        <td><%= f.label(:type) %></td>
-        <td>
-            <%= f.select('journal_type', Lookup.get_list('jour_type').collect {|l| [ l.description, l.id ] }) %></td>
-        <td rowspan="2">&nbsp;</td></tr>    
-    <tr>
-        <td><%= f.label(:entry) %></td>
-        <td colspan="3" rowspan="2"><%= f.text_area('entry', :cols => 60, :rows => 5) %></td></tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td class="submit">
-            <%= f.submit(@journal.id ? 'update' : 'create') %></td></tr>
+
+<fieldset>
+	<ol>   
+	<li>
+        <%= f.label(:type) %>
+        <%= f.select('journal_type', Lookup.get_list('jour_type').collect {|l| [ l.description, l.id ] }) %></li>
+	<li>
+		<%= label(:journal, :entry_on, 'Date') %>
+        <%= f.text_field(:entry_on, :size => '12', :class => 'calendar today') %></li>
+    <li>
+        <%= f.label(:entry) %></td>
+        <%= f.text_area('entry', :cols => 50, :rows => 10) %></li></ol></fieldset>
+<fieldset class="submit">
+    <%= f.submit(@journal.id ? 'update' : 'create') %></fieldset>
 </table>
 
 <% end %>
