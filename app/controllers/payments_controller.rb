@@ -18,7 +18,6 @@ class PaymentsController < ApplicationController
     @upcoming_payments = Payment.find_upcoming(@user)
     @payments = Payment.find_recent(@user,31)
     get_stuff_for_form
-    logger.debug("accounts[#{@accounts.inspect}]")
     @money_summary = MoneySummary.new(@user,31)
     @expenses_by_tag = Payment.expenses_by_tag(@user,31)
 

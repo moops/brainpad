@@ -5,12 +5,12 @@
 <% end %>
 
 <fieldset>
-	<ol>   
-	<li>
+  <ol>   
+  <li>
         <%= f.label(:type) %>
         <%= f.select('journal_type', Lookup.get_list('jour_type').collect {|l| [ l.description, l.id ] }) %></li>
-	<li>
-		<%= label(:journal, :entry_on, 'Date') %>
+  <li>
+    <%= label(:journal, :entry_on, 'Date') %>
         <%= f.text_field(:entry_on, :size => '12', :class => 'calendar today') %></li>
     <li>
         <%= f.label(:entry) %></td>

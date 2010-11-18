@@ -28,9 +28,13 @@
         <li><%= link_to('conn' ,      connections_path ) %></li>
         <li><%= link_to('milestones', milestones_path ) %></li>
     </ul>
+    
     <!-- main content -->
     
     <div id="content">
+        <% if flash[:notice] %>
+            <div class="notice"><%=h flash[:notice] %></div><p/>
+        <% end %>
         <%= @content_for_layout %></div>
     
     <!-- end main content -->

@@ -1,5 +1,7 @@
 <div id="journal_form" style="display:none;"><%= render(:partial => 'form') %></div>
 
+<%= error_messages_for :journal %>
+
 <script>
   jQuery(document).ready(function() { 
 
@@ -15,7 +17,7 @@
 <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_journal_form') %>
 
 <% if (@journals and @journals.size > 0) %>
-<table width="100% cellpadding="2" cellspacing="0" class="searchResult">
+<table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
     <tr>
         <th>date</th>
         <th>type</th>

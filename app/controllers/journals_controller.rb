@@ -15,8 +15,6 @@ class JournalsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @journals }
     end
-    
-    
   end
 
   # GET /journals/1
@@ -26,17 +24,6 @@ class JournalsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @journal }
-    end
-  end
-
-  # GET /journals/new
-  # GET /journals/new.xml
-  def new
-    @journal = Journal.new
-
-    respond_to do |format|
-      format.html # new.html.erb
       format.xml  { render :xml => @journal }
     end
   end
@@ -61,7 +48,8 @@ class JournalsController < ApplicationController
         format.html { redirect_to(journals_path) }
         format.xml  { render :xml => @journal, :status => :created, :location => @journal }
       else
-        format.html { redirect_to(journals_path) }
+        flash[:notice] = 'Journal save failed.'
+        format.html { render(:action => 'index') }
         format.xml  { render :xml => @journal.errors, :status => :unprocessable_entity }
       end
     end
