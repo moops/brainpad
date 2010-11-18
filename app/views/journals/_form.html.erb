@@ -11,10 +11,10 @@
         <%= f.select('journal_type', Lookup.get_list('jour_type').collect {|l| [ l.description, l.id ] }) %></li>
   <li>
     <%= label(:journal, :entry_on, 'Date') %>
-        <%= f.text_field(:entry_on, :size => '12', :class => 'calendar today') %></li>
+        <%= f.text_field(:entry_on, :size => '12', :class => 'calendar today required') %></li>
     <li>
         <%= f.label(:entry) %></td>
-        <%= f.text_area('entry', :cols => 50, :rows => 10) %></li></ol></fieldset>
+        <%= f.text_area('entry', :cols => 50, :rows => 10, :class => 'required') %></li></ol></fieldset>
 <fieldset class="submit">
     <%= f.submit(@journal.id ? 'update' : 'create') %></fieldset>
 </table>

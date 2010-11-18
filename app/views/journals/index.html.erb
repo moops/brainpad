@@ -1,11 +1,10 @@
 <div id="journal_form" style="display:none;"><%= render(:partial => 'form') %></div>
 
-<%= error_messages_for :journal %>
-
 <script>
   jQuery(document).ready(function() { 
 
     var journalForm = jQuery('#journal_form').dialog({ autoOpen: false, width: 600, title: 'journal form', modal: true, show: 'fade' });
+	jQuery('#new_journal').validate();
     ajaxLinks();         
     jQuery('.show_journal_form').click(function() {
       journalForm.dialog('open');

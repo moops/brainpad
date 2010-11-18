@@ -1,4 +1,8 @@
 2010
 - Nov 01 - replace reminder_type with tags
 - Nov 01 - fix workout.route
+x Nov 10 - popup forms - Nov 18
+- Nov 18 - create form validation
+- Nov 18 - update form validation
+- Nov 18 - fix milestone editing (no popup form necessary)
 

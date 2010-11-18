@@ -49,7 +49,7 @@ class JournalsController < ApplicationController
         format.xml  { render :xml => @journal, :status => :created, :location => @journal }
       else
         flash[:notice] = 'Journal save failed.'
-        format.html { render(:action => 'index') }
+        format.html { redirect_to(journals_path) }
         format.xml  { render :xml => @journal.errors, :status => :unprocessable_entity }
       end
     end
@@ -67,6 +67,7 @@ class JournalsController < ApplicationController
         format.html { redirect_to(journals_path) }
         format.xml  { head :ok }
       else
+        flash[:notice] = 'Journal update failed.'
         format.html { redirect_to(journals_path) }
         format.xml  { render :xml => @journal.errors, :status => :unprocessable_entity }
       end
