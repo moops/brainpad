@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>brainpad</title>
-    <%= stylesheet_link_tag 'jquery-ui-1.8.5.custom', 'lavalamp', 'brainpad' %>
+    <%= stylesheet_link_tag 'jquery-ui-1.8.5.custom', 'lavalamp', 'jquery.tooltip', 'brainpad' %>
     <% if protect_against_forgery? %>
       <script type='text/javascript'>
         //<![CDATA[
@@ -12,7 +12,7 @@
         //]]>
         </script>
     <% end %>
-    <%= javascript_include_tag 'jquery-1.4.2.min', 'jquery-ui-1.8.5.custom.min', 'jquery.lavalamp.1.3.3-min', 'jquery.easing.1.3', 'jquery.validate', 'application' %>
+    <%= javascript_include_tag 'jquery-1.4.2.min', 'jquery-ui-1.8.5.custom.min', 'jquery.lavalamp.1.3.3-min', 'jquery.easing.1.3', 'jquery.validate', 'jquery.tooltip', 'application' %>
 </head>
 
 <body>
@@ -44,7 +44,7 @@
         <div id="user">
             <% if @user %>
                 logged in as <%= @user.auth_profile.name %>.
-                <%= link_to('log out', :controller => "login", :action => "logout") %>
+                <%= link_to('log out', {:controller => "login", :action => "logout"}, {:title => 'get me out of here', :id => 'logoutlink'}) %>
                 <br/>
                 <% if @user.auth_profile.born_on %>you've used <%= @user.age_in_days? %> days and have <%= @user.days_left? %> left.<% end %>
             <% end %></div>

@@ -1,4 +1,4 @@
-jQuery('#journal_form')
+jQuery('#form')
     .html("<%= escape_javascript(render(:partial => 'form')) %>")
     .dialog({ autoOpen: true, width: 500, title: 'journal form', modal: true, show: 'fade' });
 
@@ -6,4 +6,4 @@ ajaxLinks();
 jQuery("input.calendar").datepicker();
 jQuery("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
 jQuery("#journal_entry_on").val('<%= @journal.entry_on %>');
-jQuery('#update_journal').validate();
+validate('edit_journal_' + <%= @journal.id %>);

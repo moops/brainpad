@@ -1,18 +1,13 @@
-<div id="workout_form" style="display:none;"><%= render(:partial => 'form') %></div>
+<div id="form" style="display:none;"><%= render(:partial => 'form') %></div>
 
-<script>
-  jQuery(document).ready(function() { 
-
-    var workoutForm = jQuery('#workout_form').dialog({ autoOpen: false, width: 600, title: 'workout form', modal: true, show: 'fade' });
-    ajaxLinks();         
-    jQuery('.show_workout_form').click(function() {
-      workoutForm.dialog('open');
-      return false;
-    });
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    buildFormDialog('workout');
+    validate('new_workout');         
   });
 </script>
 
-<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_workout_form') %>
+<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_form') %>
 
 <% if (@workouts and @workouts.size > 0) %>
 <table width="100% cellpadding="2" cellspacing="0" class="searchResult">

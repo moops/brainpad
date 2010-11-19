@@ -1,18 +1,13 @@
-<div id="reminder_form" style="display:none;"><%= render(:partial => 'form') %></div>
+<div id="form" style="display:none;"><%= render(:partial => 'form') %></div>
 
-<script>
-  jQuery(document).ready(function() { 
-
-    var contactForm = jQuery('#reminder_form').dialog({ autoOpen: false, width: 600, title: 'contact form', modal: true, show: 'fade' });
-    ajaxLinks();         
-    jQuery('.show_reminder_form').click(function() {
-      contactForm.dialog('open');
-      return false;
-    });
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    buildFormDialog('reminder');
+    validate('new_reminder');         
   });
 </script>
 
-<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_reminder_form') %>
+<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_form') %>
 
 <% if (@reminders and @reminders.size > 0) %>
 <% form_tag(:action => 'finish') do %>

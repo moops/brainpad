@@ -1,18 +1,13 @@
-<div id="contact_form" style="display:none;"><%= render(:partial => 'form') %></div>
+<div id="form" style="display:none;"><%= render(:partial => 'form') %></div>
 
-<script>
-  jQuery(document).ready(function() { 
-
-    var contactForm = jQuery('#contact_form').dialog({ autoOpen: false, width: 600, title: 'contact form', modal: true, show: 'fade' });
-    ajaxLinks();         
-    jQuery('.show_contact_form').click(function() {
-      contactForm.dialog('open');
-      return false;
-    });
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    buildFormDialog('contact');
+    validate('new_contact');         
   });
 </script>
 
-<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_contact_form') %>
+<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_form') %>
 
 <% if (@contacts and @contacts.size > 0) %>
 <table width="100% cellpadding="2" cellspacing="0" class="searchResult">

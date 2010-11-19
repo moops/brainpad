@@ -79,6 +79,25 @@ function ajaxLinks(){
   jQuery('a.delete').deleteWithAjax();
 }
 
+//build a form dialog
+function buildFormDialog(name) {
+  var f = jQuery('#form').dialog({ autoOpen: false, width: 600, title: name + ' form', modal: true, show: 'fade' });
+  jQuery('.show_form').click(function() {
+    f.dialog('open');
+    return false;
+  });
+}
+
+//validate a form
+function validate(form_id) {
+  jQuery('#' + form_id).validate({
+        errorPlacement: function(error, element) {
+          jQuery(element).attr('title', jQuery(error).html());
+          jQuery(element).tooltip();
+        }
+  });
+}
+
 jQuery(document).ready(function() {
 
   //all non-GET requests will add the authenticity token in the data packet
@@ -94,15 +113,16 @@ jQuery(document).ready(function() {
   ajaxLinks(); 
     
   jQuery("#lavaLamp").lavaLamp({ fx: "easeOutBack", speed: 700});
+  jQuery("#logoutlink").tooltip();
   jQuery(".accordion").accordion();
   jQuery("input.calendar").datepicker();
   jQuery("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
   jQuery("input.today").datepicker('setDate', new Date());
     
-  $(".remote_edit_link").click(function() {
+  jQuery(".remote_edit_link").click(function() {
     // the id of the link needs to be of the form 'controller_id' i.e. 'workouts_123'
     var parts = this.id.split('_',2);
-    $.get("/"+parts[0]+"/"+parts[1]+"/edit", null, null, "script");
+    jQuery.get("/"+parts[0]+"/"+parts[1]+"/edit", null, null, "script");
       return false; 
   });
      

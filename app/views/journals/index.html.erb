@@ -1,19 +1,13 @@
-<div id="journal_form" style="display:none;"><%= render(:partial => 'form') %></div>
+<div id="form" style="display:none;"><%= render(:partial => 'form') %></div>
 
-<script>
-  jQuery(document).ready(function() { 
-
-    var journalForm = jQuery('#journal_form').dialog({ autoOpen: false, width: 600, title: 'journal form', modal: true, show: 'fade' });
-	jQuery('#new_journal').validate();
-    ajaxLinks();         
-    jQuery('.show_journal_form').click(function() {
-      journalForm.dialog('open');
-      return false;
-    });
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    buildFormDialog('journal');
+    validate('new_journal');         
   });
 </script>
 
-<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_journal_form') %>
+<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_form') %>
 
 <% if (@journals and @journals.size > 0) %>
 <table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
