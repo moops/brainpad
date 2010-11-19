@@ -1,5 +1,5 @@
 <tr class="<%= data_rows_counter.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
-    <td><%= data_rows['workout_on'].strftime("%a %b %d, %y") %></td>
+    <td><%= link_to(data_rows['workout_on'].strftime("%a %b %d, %y"),workout_path(data_rows),{:target => 'detail', :onClick => "openWindow(300,300,'detail');"}) %></td>
     <td><%= Lookup.find_by_id(data_rows['workout_type']).description %></td>
     <td>
         <% if data_rows['route'] %>
@@ -11,6 +11,5 @@
         <% end %></td>
     <td><%= data_rows['distance'] %></td>
     <td><%= data_rows['duration'] %></td>
-    <td><%= link_to(image_tag('detail.png', :size => '15x15', :border => 0),workout_path(data_rows),{:target => 'detail', :onClick => "openWindow(300,300,'detail');"}) %></td>
     <td><%= link_to(image_tag("edit.png", :size => "15x15", :border => 0), edit_workout_path(data_rows), {:class => 'remote_edit_link', :id => "workouts_#{data_rows.id}"}) %></td>
     <td><%= link_to(image_tag('delete.png', :size => '15x15', :border => 0), workout_path(data_rows), :method => :delete, :confirm => "really delete #{data_rows['location']} workout?") %></td></tr>

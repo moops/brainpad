@@ -69,7 +69,7 @@ ul.due li:after { content: ", "; }
 .box_header { border-bottom: 1px solid #bbb; background: #ddd; font-weight: bold; font-size: 1.2em; padding: 5px; }
 .box_content { padding: 5px; }
 .box_buttons { padding: 5px; text-align: right; }
-.shaded_box { margin-bottom: 10px; border: 1px solid #bbb; padding: 5px; background: #ddd; border-radius: 6px; }
+.dashboard { margin-bottom: 10px; border: 1px solid #bbb; padding: 5px; background: #ddd; border-radius: 6px; }
 
 .deposit_amount { font-weight: bold; }
 .expense_amount { }

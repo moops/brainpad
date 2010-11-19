@@ -10,6 +10,9 @@ class WorkoutsController < ApplicationController
 
     @workout = Workout.new #for the 'new' form
     @workout.workout_on = Date.today.strftime("%b %d, %Y")
+    
+    @workout_summary = WorkoutSummary.new(@user,31)
+    @workout_duration_by_type = Workout.workout_duration_by_type(@user,31)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -93,4 +96,26 @@ class WorkoutsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+end
+
+class WorkoutSummary
+
+  attr_reader :workout_days, :mileage, :duration, :weight_range
+
+  def initialize(user,days)
+    workouts = Workout.recent_workouts(user,days)
+    @mileage = 0
+    @duration = 0
+    max_weight = 0
+    min_weight = 999
+    for w in workouts
+      @mileage += w.distance
+      @duration += w.duration
+      max_weight = w.weight if w.weight > max_weight
+      min_weight = w.weight if w.weight < min_weight
+    end
+    @weight_range = "#{min_weight}-#{max_weight}"
+    @workout_days = Workout.days_with_workouts?(user,days)
+  end
+    
 end

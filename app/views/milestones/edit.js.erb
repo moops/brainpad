@@ -1,5 +1,5 @@
 jQuery('#form')
-	.html("foo<%= escape_javascript(render(:partial => 'form')) %>")
+	.html("<%= escape_javascript(render(:partial => 'form')) %>")
 	.dialog({ autoOpen: true, width: 500, title: 'milestone form', modal: true, show: 'fade' });
 	
 jQuery("input.calendar").datepicker();

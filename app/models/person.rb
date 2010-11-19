@@ -44,8 +44,8 @@ class Person < ActiveRecord::Base
   end
   
   def age_in_years?
-    y = Date.today.year - born_on.year
-    y -= 1 if (Date.today.yday < born_on.yday)
+    y = Date.today.year - auth_profile.born_on.year
+    y -= 1 if (Date.today.yday < auth_profile.born_on.yday)
     y
   end
     
@@ -68,7 +68,7 @@ class Person < ActiveRecord::Base
   end
   
   def name?
-    name ? name : user_name
+    auth_profile.name ? auth_profile.name : user_name
   end
   
 end
