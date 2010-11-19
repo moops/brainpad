@@ -111,8 +111,8 @@ class WorkoutSummary
     for w in workouts
       @mileage += w.distance
       @duration += w.duration
-      max_weight = w.weight if w.weight > max_weight
-      min_weight = w.weight if w.weight < min_weight
+      max_weight = w.weight if w.weight and w.weight > max_weight
+      min_weight = w.weight if w.weight and w.weight < min_weight
     end
     @weight_range = "#{min_weight}-#{max_weight}"
     @workout_days = Workout.days_with_workouts?(user,days)
