@@ -7,4 +7,5 @@ x Nov 18 - update form validation - Nov 19
 x Nov 18 - fix milestone editing - Nov 19
 x Nov 19 - add dashboard report to workouts - Nov 19
 - Nov 19 - generalize money_left etc css selectors
+- Nov 19 - look into replacing remote_edit_link with one of the js ajax methods in application.js
 
