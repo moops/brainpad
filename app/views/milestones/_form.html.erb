@@ -1,31 +1,18 @@
-<script type="text/javascript">
-  jQuery(document).ready(function() {
-    jQuery( "#milestone_milestone_at" ).datepicker();
-    jQuery( "#milestone_milestone_at" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-  });
-</script>
-
 <% form_for(@milestone) do |f| %>
 
 <% if @user %>
     <%= hidden_field_tag('milestone[person_id]', @user.id) %>
 <% end %>
-<table cellpadding="3" cellspacing="0" border="0">
-    <tr>
-        <td id="errors" colspan="7">
-            <% unless @milestone.errors.empty? %>
-                <ul>
-                <% @milestone.errors.each_full do |message| %>
-                    <li><%= message %></li>
-                <% end %>
-                </ul>
-            <% end %></td></tr>
-    <tr>
-        <td><%= f.label(:name) %></td>
-        <td><%= f.text_field(:name, :size => '37', :class => 'text') %></td>
-        <td><%= f.label(:milestone_at, 'At') %></td>
-        <td width="200"><%= f.text_field(:milestone_at, :size => '19', :class => 'text') %></td>
-        <td class="submit">
-            <%= f.submit(@milestone.id ? 'update' : 'create') %></td></tr>
-</table>
+
+<fieldset>
+  	<ol>   
+  	<li>
+  		<%= f.label(:name) %>
+        <%= f.text_field(:name, :size => '37', :class => 'required') %></li>
+	<li>
+        <%= f.label(:milestone_at, 'At') %>
+        <%= f.text_field(:milestone_at, :size => '19', :class => 'calendar required') %></li></ol></fieldset>
+<fieldset class="submit">
+    	<%= f.submit(@milestone.id ? 'update' : 'create') %></fieldset>
+	
 <% end %>

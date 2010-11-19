@@ -1,15 +1,17 @@
-<% if flash[:notice] %>
-    <div class="notice"><%=h flash[:notice] %></div>
-<% end %>
+<div id="form" style="display:none;"><%= render(:partial => 'form') %></div>
 
-<div id="form" class="form">
-  <%= render(:partial => 'form') %>
-</div>
-</p>
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    buildFormDialog('milestone');
+    validate('new_milestone'); 
+  });
+</script>
+
+<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_form') %>
 
 <% @milestones.each do |milestone| %>
 <div>
-    <%=link_to_remote(milestone.name, :update => 'form', :method => :get, :url => edit_milestone_path(milestone)) %>
+	<%= link_to(milestone.name, edit_milestone_path(milestone), {:class => 'remote_edit_link', :id => "milestones_#{milestone.id}"}) %>
     <input type="text" class="milestone_time" id="<%= milestone.id %>" size="30"/>
   <span class="right"><%= link_to(image_tag("delete.png", :size => "15x15", :border => 0), 
                     milestone_path(milestone), :method => :delete, :confirm => "really delete #{milestone.name}") %></span>

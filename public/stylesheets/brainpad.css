@@ -29,7 +29,7 @@ ul { margin: 4px 0px; }
 #copyright { width: 25%; float: right; text-align: right; }
 
 /* forms */
-.form { background: #f6f6f6; border: 1px solid #bbb; padding: 10px 5px 10px 5px; border-radius: 6px 6px; }
+.form { background: #f6f6f6; border: 1px solid #bbb; padding: 10px 5px 10px 5px; border-radius: 6px 6px; margin-bottom: 1em; }
 label {  text-align: right; float: left; width: 7em; margin-right: 1em; color: #666; clear: both; }
 label.page { float: none; width: auto; color: #666; }
 input.error, select.error, textarea.error { background: yellow; }

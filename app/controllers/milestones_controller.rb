@@ -19,7 +19,13 @@ class MilestonesController < ApplicationController
   # GET /milestones/1/edit
   def edit
     @milestone = Milestone.find(params[:id])
-    render(:partial => 'form')
+    respond_to do |format|
+      format.html 
+      format.js {
+        logger.debug('format is js')
+        render :layout => false
+      }
+    end
   end
 
   # POST /milestones

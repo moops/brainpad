@@ -1,0 +1,8 @@
+jQuery('#form')
+	.html("foo<%= escape_javascript(render(:partial => 'form')) %>")
+	.dialog({ autoOpen: true, width: 500, title: 'milestone form', modal: true, show: 'fade' });
+	
+jQuery("input.calendar").datepicker();
+jQuery("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
+jQuery("#milestone_milestone_at").val('<%= @milestone.milestone_at %>');
+validate('edit_milestone_' + <%= @milestone.id %>);
