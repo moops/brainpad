@@ -55,11 +55,10 @@
 		    
 		    <%= render(:partial => 'data_rows', :collection => @workouts) %>
 		</table>
+		<%= will_paginate @workouts %>
     </div>
 </div> <!-- end workouts -->		
 		
 <% end %>
-
-<%= will_paginate @workouts %>
 
 <div class="clear">&nbsp;</div>
