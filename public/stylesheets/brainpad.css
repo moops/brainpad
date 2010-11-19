@@ -31,7 +31,7 @@ ul { margin: 4px 0px; }
 /* forms */
 .form { background: #f6f6f6; border: 1px solid #bbb; padding: 10px 5px 10px 5px; border-radius: 6px 6px; }
 label {  text-align: right; float: left; width: 7em; margin-right: 1em; color: #666; clear: both; }
-label.error { color: red; }
+label.page { float: none; width: auto; color: #666; }
 input.error, select.error, textarea.error { background: yellow; }
 fieldset { background: #f6f6f6; margin: 1.5em 0 0 0; padding: 0; border: 1px solid #bbb; border-radius: 6px 6px; } 
 fieldset ol { padding: 1em 1em 0 1em; list-style: none; }  

@@ -2,7 +2,7 @@
   <h3><a href="#">links</a></h3>
   <div class="links"> <!-- start links div -->
     <div class="left">
-        <label>often</label>
+        <label class="page">often</label>
         <ul>
         <% for cur_link in @most_often_1 or Array.new %>
             <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
@@ -20,7 +20,7 @@
     </div>
     
     <div class="left">
-        <label>recent</label>
+        <label class="page">recent</label>
         <ul>
         <% for cur_link in @recently_clicked or Array.new %>
             <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
@@ -29,7 +29,7 @@
     </div>
     
     <div class="left">
-        <label>new</label>
+        <label class="page">new</label>
         <ul>
         <% for cur_link in @recently_added or Array.new %>
             <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
@@ -38,7 +38,7 @@
     </div>
     
     <div class="left">
-        <label>random</label>
+        <label class="page">random</label>
         <ul>
         <% for cur_link in @random or Array.new %>
             <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
@@ -49,7 +49,7 @@
     <div style="clear: left;"></div>
     
     <div class="left">
-        <label>other</label>
+        <label class="page">other</label>
         
         <% if @user.mail_url %>
             <a href="<%=@user.mail_url%>">mail</a>,
@@ -68,7 +68,7 @@
     <div style="clear: left;"></div>
     
     <div>
-        <label>tags</label>       
+        <label class="page">tags</label>       
         <%= link_to_remote('refresh', :url => refresh_tags_links_path, :update => "tags") %> |
         <%= link_to('clean', clean_links_path) %><br/>
         <div id="tags">
@@ -86,7 +86,7 @@
   
     <% @feeds.each do |feed| %>
     <div style="width:48%;" class="left">
-        <label><%= feed.channel.title %></label>
+        <label class="page"><%= feed.channel.title %></label>
         <ul>
         <% feed.items.each_with_index { |cur_item,i| %>
             <% if i < 6 %>
@@ -103,7 +103,7 @@
 </div> <!-- end accordian div -->
 
 <% unless @due_today.empty? %>
-<label>due today:</label>
+<label class="page">due today:</label>
 <ul class="due">
     <% for reminder in @due_today %>
     <li><%= reminder.description[0,40] + (reminder.description.length > 40 ? '...' : '') %></li>
@@ -113,7 +113,7 @@
 
 <% if @milestone %>
 <div>
-    <label>next milestone:</label>  
+    <label class="page">next milestone:</label>  
     <%= @milestone.name %>
     <input type="text" class="milestone_time" id="<%= @milestone.id %>" size="30" />
     
