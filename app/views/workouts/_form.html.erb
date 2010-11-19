@@ -12,28 +12,28 @@
         <%= f.select('workout_type', Lookup.get_list('work_type').collect {|l| [ l.description, l.id ] }) %></li>
     <li>
         <%= f.label(:location) %>
-        <%= f.text_field('location', :size => '25', :class => 'text') %></li>
+        <%= f.text_field('location', :size => '25', :class => 'required') %></li>
 	<li>
         <%= f.label(:race) %>
-        <%= f.text_field('race', :size => '25', :class => 'text') %></li>
+        <%= f.text_field('race', :size => '25') %></li>
     <li>
         <%= f.label(:route) %>
         <%= f.select('route', Lookup.get_list('route').collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %></li>
 	<li>
         <%= f.label(:workout_on, 'date') %>
-        <%= f.text_field(:workout_on, :size => '12', :class => 'text calendar today') %></li>
+        <%= f.text_field(:workout_on, :size => '12', :class => 'calendar today required') %></li>
 	<li>
         <%= f.label(:distance) %>
-        <%= f.text_field('distance', :size => '12', :class => 'text') %></li>
+        <%= f.text_field('distance', :size => '12') %></li>
 	<li>
         <%= f.label(:duration) %>
-        <%= f.text_field('duration', :size => '12', :class => 'text') %></li>
+        <%= f.text_field('duration', :size => '12', :class => 'required') %></li>
 	<li>
         <%= f.label(:intensity) %>
         <%= f.select('intensity', [['1',1],['2',2],['3',3],['4',4],['5',5],['6',6],['7',7],['8',8],['9',9],['10',10]]) %></li>
 	<li>
         <%= f.label(:weight) %>
-        <%= f.text_field('weight', :size => '12', :class => 'text') %></li>
+        <%= f.text_field('weight', :size => '12') %></li>
     <li>
         <%= f.label(:description) %>
         <%= f.text_area('description', :cols => 50, :rows => 4) %></li></ol></fieldset>

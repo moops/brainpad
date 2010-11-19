@@ -11,13 +11,13 @@
   		<%= f.text_field(:name, :size => '25') %></li>
 	<li>
 		<%= f.label(:username) %>
-		<%= f.text_field(:username, :size => '25') %></li>
+		<%= f.text_field(:username, :size => '25', :class => 'required') %></li>
 	<li>
 		<%= f.label(:password) %>
-		<%= f.text_field(:password, :size => '25') %></li>
+		<%= f.text_field(:password, :size => '25', :class => 'required') %></li>
 	<li>
 		<%= f.label(:url) %></td>
-		<%= f.text_field(:url, :size => '50') %></li>
+		<%= f.text_field(:url, :size => '50', :class => 'required') %></li>
 	<li>
 		<%= f.label(:description) %></td>
 		<%= f.text_area(:description, :cols => '50', :rows => '3') %></li></ol></fieldset>

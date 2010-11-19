@@ -30,17 +30,17 @@
 		<%= f.select(:payment_type, @payment_types, {}, :onchange => 'paymentType()') %></li>
     <li>
 		<%= f.label(:account) %>
-		<%= f.select(:account_id, @accounts.collect {|a| [a.name, a.id] }, :include_blank => true) %></li>
+		<%= f.select(:account_id, @accounts.collect {|a| [a.name, a.id] }, :include_blank => true, :class => 'required') %></li>
     <li>
 		<%= f.label(:from) %>
 		<%= f.select(:transfer_from, @accounts.collect {|a| [a.name, a.id] }, {:include_blank => true}, {:disabled => true}) %>
 		<script type="text/javascript">paymentType();</script></li>
     <li>
 		<%= f.label(:amount) %>
-		<%= f.text_field(:amount, :size => '7') %></li>
+		<%= f.text_field(:amount, :size => '7', :class => 'required') %></li>
     <li>
 		<%= label(:payment, :payment_on, "Date") %>
-		<%= f.text_field(:payment_on, :size => '12', :class => 'calendar today') %></li>
+		<%= f.text_field(:payment_on, :size => '12', :class => 'calendar today required') %></li>
     <li>
 		<%= f.label(:name) %>
 		<%= f.text_field(:description, :size => '25') %></td></li>

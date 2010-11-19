@@ -15,10 +15,10 @@
         <%= f.select(:priority, Lookup.get_list('priority').collect {|l| [ l.description, l.id ] }) %></li>
 	<li>
         <%= f.label(:due_on, 'Due') %>
-        <%= f.text_field(:due_on, :size => 12, :class => 'calendar today') %></li>
+        <%= f.text_field(:due_on, :size => 12, :class => 'calendar today required') %></li>
 	<li>
         <%= f.label(:description) %>
-        <%= f.text_area(:description, :cols => 50, :rows => 5) %></li>
+        <%= f.text_area(:description, :cols => 50, :rows => 5, :class => 'required') %></li>
 	<li>
 		<%= f.label(:done) %>
         <%= f.check_box(:done) %></li></ol></fieldset>

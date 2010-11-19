@@ -9,7 +9,7 @@
 	<ol>   
 	<li>
 		<%= f.label(:name) %>
-        <%= f.text_field(:name, :size => '25') %></li>
+        <%= f.text_field(:name, :size => '25', :class => 'required') %></li>
     <li>
         <%= f.label(:address) %>
         <%= f.text_field(:address, :size => '25') %></li>
@@ -27,7 +27,7 @@
     <ol>
     <li>
         <%= f.label(:email) %>
-        <%= f.text_field(:email, :size => '25') %></li>
+        <%= f.text_field(:email, :size => '25', :class => 'email') %></li>
 	<li>
         <%= f.label(:phone_home, 'Home') %>
         <%= f.text_field(:phone_home, :size => '25') %></li>
