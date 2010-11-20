@@ -21,10 +21,18 @@ class MilestonesController < ApplicationController
     @milestone = Milestone.find(params[:id])
     respond_to do |format|
       format.html 
-      format.js {
-        logger.debug('format is js')
-        render :layout => false
-      }
+      format.js { render :layout => false }
+    end
+  end
+  
+  # GET /milestones/1
+  # GET /milestones/1.xml
+  def show
+    @milestone = Milestone.find(params[:id])
+
+    respond_to do |format|
+      format.js { render :layout => false }
+      format.xml  { render :xml => @milestone }
     end
   end
 

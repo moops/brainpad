@@ -1,3 +1,5 @@
+<div id="show" style="display:none;"></div>
+
 <div id="form" style="display:none;"><%= render(:partial => 'form') %></div>
 
 <script type="text/javascript">
@@ -9,16 +11,16 @@
 
 <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_form') %>
 
+<table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
 <% @milestones.each do |milestone| %>
-<div>
-	<%= link_to(milestone.name, edit_milestone_path(milestone), {:class => 'remote_edit_link', :id => "milestones_#{milestone.id}"}) %>
-    <input type="text" class="milestone_time" id="<%= milestone.id %>" size="30"/>
-  <span class="right"><%= link_to(image_tag("delete.png", :size => "15x15", :border => 0), 
+    <tr>
+        <td><%= link_to(milestone.name, edit_milestone_path(milestone), :class => 'get') %></td>
+        <td><input type="text" class="milestone_time" id="<%= milestone.id %>" size="30"/></td>
+        <td><span class="right"><%= link_to(image_tag("delete.png", :size => "15x15", :border => 0), 
                     milestone_path(milestone), :method => :delete, :confirm => "really delete #{milestone.name}") %></span>
-</div>
-
-<script type="text/javascript">
-  count('<%= milestone.id %>', '<%= milestone.milestone_at %>');
-</script>
+            <script type="text/javascript">
+              count('<%= milestone.id %>', '<%= milestone.milestone_at %>');
+            </script></td></tr>
   
 <% end %>
+</table>

@@ -20,7 +20,7 @@ ul { margin: 4px 0px; }
 /* containers */
 #header { margin-right: auto; margin-left: auto; width: 700px; }
 #content { margin-right: auto; margin-left: auto; margin-bottom: 10px; width: 700px; }
-#footer { font-size: .9em; margin-right: auto; margin-left: auto; background: #fff; width: 690px; border: 1px solid #bbb; border-radius: 6px 6px; padding: 5px; border: 1px solid green; }
+#footer { font-size: .9em; margin-right: auto; margin-left: auto; background: #fff; width: 690px; border: 1px solid #bbb; border-radius: 6px 6px; padding: 5px; }
 #styleLinks { margin-right: 15px; float: left; }
 #user { float: left; } 
 #search { font-size: .9em; margin-right: auto; margin-left: auto; margin-top: 5px; background: #fff; width: 700px; text-align: center; }
@@ -30,7 +30,7 @@ ul { margin: 4px 0px; }
 
 /* forms */
 .form { background: #f6f6f6; border: 1px solid #bbb; padding: 10px 5px 10px 5px; border-radius: 6px 6px; margin-bottom: 1em; }
-label {  text-align: right; float: left; width: 7em; margin-right: 1em; color: #666; clear: both; }
+label {  text-align: right; float: left; vertical-align: top; width: 7em; margin-right: 1em; color: #666; clear: both; }
 label.page { float: none; width: auto; color: #666; }
 input.error, select.error, textarea.error { background: yellow; }
 fieldset { background: #f6f6f6; margin: 1.5em 0 0 0; padding: 0; border: 1px solid #bbb; border-radius: 6px 6px; } 

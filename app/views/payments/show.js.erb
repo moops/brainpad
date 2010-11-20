@@ -1,0 +1,3 @@
+jQuery('#show')
+    .html("<%= escape_javascript(render(:partial => 'show')) %>")
+    .dialog({ autoOpen: true, width: 500, title: 'payment details', modal: true, show: 'fade' });

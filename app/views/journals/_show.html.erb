@@ -1,0 +1,10 @@
+<table cellpadding="3" cellspacing="0" border="0" align="center">
+    <tr>
+        <td><label>type</label></td><td><%= Lookup.find_by_id(@journal.journal_type).description %></td></tr>
+    <tr>
+        <td><label>date</label></td><td><%= @journal.entry_on.strftime("%a %b %d, %y") %></td></tr>
+    <tr>
+        <td><label>created on</label></td><td><%= @journal.created_at.strftime("%a %b %d, %y") %></td></tr>
+    <tr>
+        <td><label>entry</label></td><td><%= @journal.entry %></td></tr>
+</table>

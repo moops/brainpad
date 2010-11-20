@@ -23,8 +23,8 @@ class JournalsController < ApplicationController
     @journal = Journal.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @journal }
+      format.js { render :layout => false }
+      format.xml { render :xml => @journal }
     end
   end
 
@@ -33,7 +33,7 @@ class JournalsController < ApplicationController
     @journal = Journal.find(params[:id])
     respond_to do |format|
       format.html 
-      format.js {render :layout => false}
+      format.js { render :layout => false }
     end
   end
 

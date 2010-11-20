@@ -11,9 +11,11 @@
     </div>
 <% end %>
 
+<div id="show" style="display:none;"></div>
+
 <div id="form" style="display:none;"><%= render(:partial => 'form') %></div>
 
-<script>
+<script type="text/javascript">
   jQuery(document).ready(function() {
     buildFormDialog('payment');
     validate('new_payment');

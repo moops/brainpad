@@ -11,8 +11,8 @@ end
     <td <%= @class %>><%= data_rows['due_on'].strftime("%a %b %d, %y") %></td>
     <td <%= @class %>><%= Lookup.find_by_id(data_rows['reminder_type']).description %></td>
     <td <%= @class %>><%= Lookup.find_by_id(data_rows['priority']).description %></td>
-    <td <%= @class %>><%= data_rows['description'][0,40] + (data_rows['description'].length > 40 ? '...' : '') %></td>
+    <td <%= @class %>><%=  %>
+        <%= link_to(data_rows['description'][0,40] + (data_rows['description'].length > 40 ? '...' : ''), edit_reminder_path(data_rows), :class => 'get') %></td>
     <td><%= check_box_tag("reminder[" + data_rows.id.to_s + "][done]","1",data_rows["done"]==1) %></td>
-    <td><%= link_to(image_tag('detail.png', :size => '15x15', :border => 0), reminder_path(data_rows),{:target => 'detail', :onClick => "openWindow(500,500,'detail');"}) %></td>
-    <td><%= link_to(image_tag("edit.png", :size => "15x15", :border => 0), edit_reminder_path(data_rows), {:class => 'remote_edit_link', :id => "reminders_#{data_rows.id}"}) %></td>
+    <td><%= link_to(image_tag('detail.png', :size => '15x15', :border => 0), reminder_path(data_rows), :class => 'get') %></td>
     <td><%= link_to(image_tag('delete.png', :size => '15x15', :border => 0), reminder_path(data_rows), :method => :delete, :confirm => "really delete - #{data_rows['description']}?") %></td></tr>

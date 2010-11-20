@@ -1,8 +1,7 @@
 <tr class="<%= data_rows_counter.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
-    <td><a href="<%= data_rows['url'] %>"><%= data_rows['name'] %></a></td>
+    <td><%= link_to(data_rows['name'], edit_connection_path(data_rows), :class => 'get') %></td>
     <td><%= data_rows['username'] %></td>
     <td><%= data_rows['password'] %></td>
-    <td><%= data_rows['url'] %></td>
-    <td><%= link_to(image_tag('detail.png', :size => '15x15', :border => 0), connection_path(data_rows), {:target => 'detail', :onClick => "openWindow(500,500,'detail');"}) %></td>
-    <td><%= link_to(image_tag("edit.png", :size => "15x15", :border => 0), edit_connection_path(data_rows), {:class => 'remote_edit_link', :id => "connections_#{data_rows.id}"}) %></td>
+    <td><a href="<%= data_rows['url'] %>"><%= data_rows['url'] %></a></td>
+    <td><%= link_to(image_tag('detail.png', :size => '15x15', :border => 0), connection_path(data_rows), :class => 'get') %></td>
     <td><%= link_to(image_tag('delete.png', :size => '15x15', :border => 0), connection_path(data_rows), :method => :delete, :confirm => "really delete connection?") %></td></tr>

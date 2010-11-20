@@ -26,7 +26,7 @@ class WorkoutsController < ApplicationController
     @workout = Workout.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.js { render :layout => false }
       format.xml  { render :xml => @workout }
     end
   end
@@ -47,7 +47,7 @@ class WorkoutsController < ApplicationController
     @workout = Workout.find(params[:id])
     respond_to do |format|
       format.html 
-      format.js {render :layout => false}
+      format.js { render :layout => false }
     end
   end
 

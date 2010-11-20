@@ -11,6 +11,8 @@
     </div>
 <% end %>
 
+<div id="show" style="display:none;"></div>
+
 <div id="form" style="display:none;"><%= render(:partial => 'form') %></div>
 
 <script type="text/javascript">
@@ -22,17 +24,17 @@
 
 <div id="money_left">
     <div id="money_by_tag" class="box">
-	    <div class="box_header">workout duration</div>
-	    <div class="box_content">
-	        <% for w in @workout_duration_by_type %>
-				<% percentage = ((w[1].to_f / @workout_summary.duration) * 100).to_i %>
-	            <%= "#{w[0]} #{(Time.mktime(0)+(w[1]*60)).strftime("%H:%M")} [#{percentage}%]" %><br/>
-	            <% percentage = '1' if percentage.eql?'0' %>
-	            <%= image_tag('redbar.gif', :size => "#{(percentage*1.5).to_i}x12") %><br/>
-	        <% end %>
-	    </div>
-	    <div class="box_buttons"></div>
-	</div> <!-- end money_by_tag -->
+      <div class="box_header">workout duration</div>
+      <div class="box_content">
+          <% for w in @workout_duration_by_type %>
+        <% percentage = ((w[1].to_f / @workout_summary.duration) * 100).to_i %>
+              <%= "#{w[0]} #{(Time.mktime(0)+(w[1]*60)).strftime("%H:%M")} [#{percentage}%]" %><br/>
+              <% percentage = '1' if percentage.eql?'0' %>
+              <%= image_tag('redbar.gif', :size => "#{(percentage*1.5).to_i}x12") %><br/>
+          <% end %>
+      </div>
+      <div class="box_buttons"></div>
+  </div> <!-- end money_by_tag -->
 </div> <!-- end money_left -->
 
 <% if (@workouts and @workouts.size > 0) %>
@@ -44,21 +46,21 @@
         </span>
     </div>
     <div class="box_content">
-		<table width="100% cellpadding="2" cellspacing="0" class="searchResult">
-		    <tr>
-		        <th>date</th>
-		        <th>type</th>
-		        <th>location</th>
-		        <th>km</th>
-		        <th>min</th>
-		        <th colspan="2">&nbsp;</th></tr>
-		    
-		    <%= render(:partial => 'data_rows', :collection => @workouts) %>
-		</table>
-		<%= will_paginate @workouts %>
+    <table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
+        <tr>
+            <th>date</th>
+            <th>type</th>
+            <th>location</th>
+            <th>km</th>
+            <th>min</th>
+            <th colspan="2">&nbsp;</th></tr>
+        
+        <%= render(:partial => 'data_rows', :collection => @workouts) %>
+    </table>
+    <%= will_paginate @workouts %>
     </div>
-</div> <!-- end workouts -->		
-		
+</div> <!-- end workouts -->    
+    
 <% end %>
 
 <div class="clear">&nbsp;</div>

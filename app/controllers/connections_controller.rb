@@ -21,7 +21,7 @@ class ConnectionsController < ApplicationController
     @connection = Connection.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.js { render :layout => false }
       format.xml  { render :xml => @connection }
     end
   end
@@ -32,7 +32,7 @@ class ConnectionsController < ApplicationController
     @connection = Connection.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.js { render :layout => false }
       format.xml  { render :xml => @connection }
     end
   end
@@ -40,6 +40,10 @@ class ConnectionsController < ApplicationController
   # GET /connections/1/edit
   def edit
     @connection = Connection.find(params[:id])
+    respond_to do |format|
+      format.html 
+      format.js { render :layout => false }
+    end
   end
 
   # POST /connections

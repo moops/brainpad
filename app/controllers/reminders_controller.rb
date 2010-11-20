@@ -24,7 +24,7 @@ class RemindersController < ApplicationController
     @reminder = Reminder.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.js { render :layout => false }
       format.xml  { render :xml => @reminder }
     end
   end
@@ -45,7 +45,7 @@ class RemindersController < ApplicationController
     @reminder = Reminder.find(params[:id])
     respond_to do |format|
       format.html 
-      format.js {render :layout => false}
+      format.js { render :layout => false }
     end
   end
 
