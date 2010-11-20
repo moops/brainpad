@@ -13,7 +13,9 @@
 
 <div id="show" style="display:none;"></div>
 
-<div id="form" style="display:none;"><%= render(:partial => 'form') %></div>
+<div id="account_form" style="display:none;"></div>
+
+<div id="payment_form" style="display:none;"><%= render(:partial => 'form') %></div>
 
 <script type="text/javascript">
   jQuery(document).ready(function() {
@@ -31,7 +33,7 @@
             </table>
         </div>
         <div class="box_buttons">
-            <%= link_to('new account', new_account_path ) %>
+            <%= link_to('new account', new_account_path, :class => 'get' ) %>
         </div>
     </div> <!-- end money_accounts -->
     <div id="money_by_tag" class="box">
@@ -65,7 +67,7 @@
     <div class="box_header">
         transactions
         <span style="float:right">
-            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_form') %>
+            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_payment_form') %>
         </span>
     </div>
     <div class="box_content">

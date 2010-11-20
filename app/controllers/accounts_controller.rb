@@ -31,7 +31,7 @@ class AccountsController < ApplicationController
     @account = Account.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.js { render :layout => false }
       format.xml  { render :xml => @account }
     end
   end
@@ -39,6 +39,10 @@ class AccountsController < ApplicationController
   # GET /accounts/1/edit
   def edit
     @account = Account.find(params[:id])
+    respond_to do |format|
+      format.html 
+      format.js { render :layout => false }
+    end
   end
 
   # POST /accounts

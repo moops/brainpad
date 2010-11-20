@@ -1,6 +1,6 @@
 <div id="show" style="display:none;"></div>
 
-<div id="form" style="display:none;"><%= render(:partial => 'form') %></div>
+<div id="reminder_form" style="display:none;"><%= render(:partial => 'form') %></div>
 
 <script type="text/javascript">
   jQuery(document).ready(function() {
@@ -9,7 +9,7 @@
   });
 </script>
 
-<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_form') %>
+<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_reminder_form') %>
 
 <% if (@reminders and @reminders.size > 0) %>
 <% form_tag(:action => 'finish') do %>

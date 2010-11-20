@@ -1,5 +1,5 @@
 <tr class="<%= data_rows_counter.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
-    <td><%= link_to(data_rows['workout_on'].strftime("%a %b %d, %y"), edit_workout_path(data_rows), {:class => 'remote_edit_link', :id => "workouts_#{data_rows.id}"}) %></td>
+    <td><%= link_to(data_rows['workout_on'].strftime("%a %b %d, %y"), edit_workout_path(data_rows), :class => 'get') %></td>
     <td><%= Lookup.find_by_id(data_rows['workout_type']).description %></td>
     <td>
         <% if data_rows['route'] %>

@@ -3,43 +3,30 @@
 <% if @user %>
     <%= hidden_field_tag('account[person_id]', @user.id) %>
 <% end %>
-<table cellpadding="3" cellspacing="0" border="0">
-    <tr>
-        <td id="errors" colspan="4">
-            <% unless @account.errors.empty? %>
-                <ul>
-                <% @account.errors.each_full do |message| %>
-                    <li><%= message %></li>
-                <% end %>
-                </ul>
-            <% end %></td>
-            <% if flash[:notice] %>
-                <div class="notice"><%=h flash["notice"] %></div>
-            <% end %></td></tr>
-    <tr>
-        <td><%= f.label(:name, 'Short Name') %></td>
-        <td><%= f.text_field(:name, :size => '25', :class => 'text') %></td>
-        <td><%= f.label(:units) %></td>
-        <td><%= f.text_field(:units, :size => '6', :class => 'text') %></td></tr>
-    <tr>
-        <td><%= f.label(:description, 'Name') %></td>
-        <td><%= f.text_field(:description, :size => '25', :class => 'text') %></td>
-        <td><%= f.label(:price) %></td>
-        <td><%= f.text_field(:price, :size => '6', :class => 'text') %></td></tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td><%= f.label(:active, 'active?') %></td>
-        <td><%= f.check_box(:active) %></td></tr>
-    <tr>
-        <td><%= f.label(:url) %></td>
-        <td colspan="3"><%= f.text_field(:url, :size => '78', :class => 'text') %></td></tr>
-    <tr>
-        <td><%= f.label(:price_url) %></td>
-        <td colspan="3"><%= f.text_field(:price_url, :size => '78', :class => 'text') %></td></tr>
-    <tr>
-        <td class="submit" colspan="4">
-            <%= f.submit(@account.id ? 'update' : 'create') %></td></tr>
-</table>
+<fieldset>   
+    <ol>   
+	<li>
+		<%= f.label(:name) %>
+        <%= f.text_field(:name, :size => '25', :class => 'required') %></li>
+	<li>
+        <%= f.label(:units) %>
+        <%= f.text_field(:units, :size => '6', :class => 'required') %></li>
+    <li>
+        <%= f.label(:description) %>
+        <%= f.text_field(:description, :size => '25') %></li>
+	<li>
+        <%= f.label(:price) %>
+        <%= f.text_field(:price, :size => '6', :class => 'required') %></li>
+    <li>
+        <%= f.label(:active, 'active?') %>
+        <%= f.check_box(:active) %></li>
+    <li>
+        <%= f.label(:url) %>
+        <td colspan="3"><%= f.text_field(:url, :size => '50') %></li>
+    <li>
+        <%= f.label(:price_url) %>
+        <%= f.text_field(:price_url, :size => '50') %></li></ol></fieldset>
+<fieldset class="submit">
+	<%= f.submit(@account.id ? 'update' : 'create') %></fieldset> 
 
 <% end %>

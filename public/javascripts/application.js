@@ -82,7 +82,7 @@ function ajaxLinks(){
 //build a form dialog
 function buildFormDialog(name) {
   var f = jQuery('#form').dialog({ autoOpen: false, width: 600, title: name + ' form', modal: true, show: 'fade' });
-  jQuery('.show_form').click(function() {
+  jQuery('.show_' + name + 'form').click(function() {
     f.dialog('open');
     return false;
   });
@@ -118,13 +118,6 @@ jQuery(document).ready(function() {
   jQuery("input.calendar").datepicker();
   jQuery("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
   jQuery("input.today").datepicker('setDate', new Date());
-    
-  jQuery(".remote_edit_link").click(function() {
-    // the id of the link needs to be of the form 'controller_id' i.e. 'workouts_123'
-    var parts = this.id.split('_',2);
-    jQuery.get("/"+parts[0]+"/"+parts[1]+"/edit", null, null, "script");
-      return false; 
-  });
 });
 
 function count(id,until) {

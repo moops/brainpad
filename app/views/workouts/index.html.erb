@@ -13,7 +13,7 @@
 
 <div id="show" style="display:none;"></div>
 
-<div id="form" style="display:none;"><%= render(:partial => 'form') %></div>
+<div id="workout_form" style="display:none;"><%= render(:partial => 'form') %></div>
 
 <script type="text/javascript">
   jQuery(document).ready(function() {
@@ -42,7 +42,7 @@
     <div class="box_header">
         workouts
         <span style="float:right">
-            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_form') %>
+            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_workout_form') %>
         </span>
     </div>
     <div class="box_content">
