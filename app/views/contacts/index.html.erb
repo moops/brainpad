@@ -9,18 +9,30 @@
   });
 </script>
 
-<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_contact_form') %>
-
 <% if (@contacts and @contacts.size > 0) %>
-<table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
-    <tr>
-        <th>name</th><th>email</th><th>home</th><th>work</th><th>cell</th>
-        <th colspan="2">&nbsp;</th></tr>
-
-    <%= render(:partial => 'data_rows', :collection => @contacts) %>
-</table>
-<%= will_paginate @contacts %>
+<div id="primary_panel_full">
+	<div class="box">
+	    <div class="box_header">
+	        contacts
+	        <span style="float:right">
+	            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_contact_form') %>
+	        </span>
+	    </div>
+	    <div class="box_content">
+		    <table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
+		        <tr>
+		            <th>name</th><th>email</th><th>home</th><th>work</th><th>cell</th>
+        			<th colspan="2">&nbsp;</th></tr>
+		        
+		        <%= render(:partial => 'data_rows', :collection => @contacts) %>
+		    </table>
+		    <%= will_paginate @contacts %>
+	    </div>
+	</div> <!-- end contacts -->
+</div> <!-- end primary_panel_full -->  
 <% end %>
+
+<div class="clear"/>
 
 <p>
 tags

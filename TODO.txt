@@ -6,8 +6,11 @@ x Nov 18 - create form validation - Nov 18
 x Nov 18 - update form validation - Nov 19
 x Nov 18 - fix milestone editing - Nov 19
 x Nov 19 - add dashboard report to workouts - Nov 19
-- Nov 19 - generalize money_left etc css selectors
+x Nov 19 - generalize money_left etc css selectors - Nov 20 [added primary_panel and secondary_panel]
 x Nov 19 - look into replacing remote_edit_link with one of the js ajax methods in application.js - Nov 19
 x Nov 19 - turn show detail windows into modal dialogs - Nov 19
-- Nov 20 - new account link in popup form
-- Nov 20 - replace reminder list formating with green/yellow/red image in extra column
+x Nov 20 - new account link in popup form - Nov 20
+x Nov 20 - replace reminder list formating with green/yellow/red dates - Nov 20
+x Nov 20 - add dashboard report to calendar
+- Nov 20 - add search to journal
+x Nov 20 - add remaining entity lists to header box divs - Nov 20

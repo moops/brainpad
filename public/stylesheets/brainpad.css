@@ -20,6 +20,9 @@ ul { margin: 4px 0px; }
 /* containers */
 #header { margin-right: auto; margin-left: auto; width: 700px; }
 #content { margin-right: auto; margin-left: auto; margin-bottom: 10px; width: 700px; }
+#primary_panel { width: 73%; float: right; }
+#primary_panel_full { width: 100%; float: right; }
+#secondary_panel { width: 25%; float: left; }
 #footer { font-size: .9em; margin-right: auto; margin-left: auto; background: #fff; width: 690px; border: 1px solid #bbb; border-radius: 6px 6px; padding: 5px; }
 #styleLinks { margin-right: 15px; float: left; }
 #user { float: left; } 
@@ -38,17 +41,12 @@ fieldset ol { padding: 1em 1em 0 1em; list-style: none; }
 fieldset li { padding-bottom: 1em; }  
 fieldset.submit { border-style: none; background: #fff; }
 legend { margin-left: 1em; color: #333; font-weight: bold; } 
-input[type="text"], textarea, select { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 1em; color: #333; }
+input[type="text"], input[type="password"], textarea, select { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 1em; color: #333; }
 
 #errors li { font-weight: bold; color: #930; text-align: center; }
 
 div.links a { line-height: 140%; color: #3333ff; font-size: .9em; }
 div.links ul { list-style-type: circle; padding-left: 1em; margin-left: 1em; }
-
-#money_left { width: 25%; float: left; }
-#money_payment_form { display: none; }
-#money_upcoming { width: 73%; float: right; }
-#money_payments { width: 73%; float: right; }
 
 .left { float: left; padding: 1px; }
 .right { float: right; }
@@ -59,8 +57,9 @@ div.links ul { list-style-type: circle; padding-left: 1em; margin-left: 1em; }
 .submit input { font-size: 1.2em; font-weight: bold; }
 .dataOn { background-color: #f6f6f6; text-align: center; }
 .dataOff { background-color: #fff; text-align: center; }
-.overdue { font-weight: bold; color: #666; }
-.due { font-weight: bold; color: #390; }
+.reminder_overdue { color: red; }
+.reminder_due { font-weight: bold; color: orange; }
+.reminder_future { color: green; }
 .summary_data { color: #666; font-weight: bold; font-size: 2em; }
 ul.due li { display:inline; }
 ul.due li:after { content: ", "; }

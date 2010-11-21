@@ -1,5 +1,18 @@
-<div id="show" style="display:none;"></div>
+<% if @reminder_summary %>
+    <div class="dashboard">
+        <table width="100%" border="0">
+            <tr>
+                <td>last 30 days:</td>
+                <td><div class="summary_data"><%= @reminder_summary.created %></div>created</td>
+                <td><div class="summary_data"><%= @reminder_summary.completed %></div>completed</td>
+                <td><div class="summary_data"><%= number_to_percentage(@reminder_summary.completion_rate, :precision => 0) %></div>completion rate</td>
+                <td><div class="summary_data"><%= @reminder_summary.on_time %></div>on time</td></tr>
+        </table>
+    </div>
+<% end %>
 
+<!-- hidden elements -->
+<div id="show" style="display:none;"></div>
 <div id="reminder_form" style="display:none;"><%= render(:partial => 'form') %></div>
 
 <script type="text/javascript">
@@ -9,24 +22,35 @@
   });
 </script>
 
-<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_reminder_form') %>
-
 <% if (@reminders and @reminders.size > 0) %>
 <% form_tag(:action => 'finish') do %>
-<table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
-    <tr>
-        <th>date</th>
-        <th>type</th>
-        <th>priority</th>
-        <th>description</th>
-        <th>done</th>
-        <th colspan="2">&nbsp;</th></tr>
+<div id="primary_panel_full">
+	<div class="box">
+	    <div class="box_header">
+	    	reminders
+	        <span style="float:right">
+	            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_reminder_form') %>
+	        </span>
+	    </div>
+	    <div class="box_content">
 
-    <%= render(:partial => 'data_rows', :collection => @reminders) %>
-    <tr>
-        <td colspan="4"><%= will_paginate @reminders %></td>
-        <td><%= submit_tag('>>') %></td>
-        <td colspan="3">&nbsp;</td></tr>
-</table>
+			<table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
+			    <tr>
+					<th>date</th>
+					<th>type</th>
+			        <th>priority</th>
+			        <th>description</th>
+			        <th>done</th>
+			        <th colspan="2">&nbsp;</th></tr>
+			
+			    <%= render(:partial => 'data_rows', :collection => @reminders) %>
+			    <tr>
+			        <td><%= submit_tag('>>') %></td>
+			        <td colspan="3">&nbsp;</td></tr>
+			</table>
+			<%= will_paginate @reminders %>
+		</div>
+	</div> <!-- end reminders -->
+</div> <!-- end primary_panel_full -->  
 <% end %>
 <% end %>

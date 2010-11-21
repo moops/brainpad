@@ -5,11 +5,11 @@ class Workout < ActiveRecord::Base
   validates_presence_of :person, :location, :duration, :workout_on
   
   def self.recent_workouts(user, days)
-    Workout.find(:all, :conditions => [ "person_id = ? AND workout_on > ?", user.id, Date.today - (days + 1) ])
+    Workout.find(:all, :conditions => [ "person_id = ? and workout_on > ?", user.id, Date.today - (days + 1) ])
   end
   
   def self.days_with_workouts?(user,days)
-    ActiveRecord::Base.connection.select_one("SELECT count( distinct workout_on) as s FROM workouts WHERE person_id = #{user.id} and workout_on between '#{Date.today - days}' and '#{Date.today+(1)}'")['s'].to_i
+    ActiveRecord::Base.connection.select_one("select count( distinct workout_on) as s from workouts where person_id = #{user.id} and workout_on between '#{Date.today - days}' and '#{Date.today+(1)}'")['s'].to_i
   end
   
   def self.workout_duration_by_type(user,days)

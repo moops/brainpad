@@ -12,4 +12,8 @@ class Reminder < ActiveRecord::Base
     Reminder.find(:all, :conditions => "person_id = #{person_id} and due_on = '#{Date.today}' and not done")
   end
   
+  def self.recent_reminders(user, days)
+    Reminder.find(:all, :conditions => [ "person_id = ? and due_on > ?", user.id, Date.today - (days + 1) ])
+  end
+  
 end

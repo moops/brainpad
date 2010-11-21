@@ -6,11 +6,12 @@ class RemindersController < ApplicationController
   # GET /reminders
   # GET /reminders.xml
   def index
-    @order = params[:order] ? params[:order] : 'due_on'
-    @reminders = Reminder.paginate :page => params[:page], :conditions => "not done and person_id = #{@user.id}", :order => @order, :per_page => 10
+    @reminders = Reminder.paginate :page => params[:page], :conditions => "not done and person_id = #{@user.id}", :order => 'due_on', :per_page => 10
 
     @reminder = Reminder.new #for the 'new' form
     @reminder.due_on = Date.today.strftime("%b %d, %Y")
+    
+    @reminder_summary = ReminderSummary.new(@user,31)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -96,7 +97,6 @@ class RemindersController < ApplicationController
   end
   
   def finish
-    logger.info "finishing: #{params[:reminder].inspect}"
     params[:reminder].each { |reminder_id, attr|
       reminder = Reminder.find(reminder_id)
       reminder.update_attribute(:done,attr[:done])
@@ -104,4 +104,22 @@ class RemindersController < ApplicationController
     redirect_to reminders_path
   end
  
+end
+
+class ReminderSummary
+
+  attr_reader :created, :completed, :completion_rate, :on_time
+
+  def initialize(user,days)
+    reminders = Reminder.recent_reminders(user,days)
+    @created = reminders.length
+    @completed = 0
+    @on_time = 0
+    for r in reminders
+      @completed += 1 if r.done
+      @on_time += 1 if r.done and r.due_on > r.updated_at.to_date
+    end
+    @completion_rate = (@completed.to_f / @created.to_f) * 100
+  end
+    
 end

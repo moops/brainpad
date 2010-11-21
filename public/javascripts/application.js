@@ -81,8 +81,8 @@ function ajaxLinks(){
 
 //build a form dialog
 function buildFormDialog(name) {
-  var f = jQuery('#form').dialog({ autoOpen: false, width: 600, title: name + ' form', modal: true, show: 'fade' });
-  jQuery('.show_' + name + 'form').click(function() {
+  var f = jQuery('#' + name + '_form').dialog({ autoOpen: false, width: 600, title: name + ' form', modal: true, show: 'fade' });
+  jQuery('.show_' + name + '_form').click(function() {
     f.dialog('open');
     return false;
   });
