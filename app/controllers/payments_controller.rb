@@ -16,7 +16,7 @@ class PaymentsController < ApplicationController
     end
     
     @upcoming_payments = Payment.find_upcoming(@user)
-    @payments = Payment.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'payment_on desc', :per_page => 2
+    @payments = Payment.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'payment_on desc', :per_page => 25
     get_stuff_for_form
     @money_summary = MoneySummary.new(@user,31)
     @expenses_by_tag = Payment.expenses_by_tag(@user,31)
