@@ -8,6 +8,17 @@
                 <td><div class="summary_data"><%= @workout_summary.duration / 60 %></div>hours</td>
                 <td><div class="summary_data"><%= @workout_summary.weight_range %></div>weight</td></tr>
         </table>
+		<% form_tag({:action => 'index'}, :method => 'get') do %>
+			<label class="inline">location</label>
+			<%= text_field_tag :location, h(params[:location]) %>
+			<label class="inline">type</label>
+			<%= select_tag :type, h(params[:type]) %>
+			<label class="inline">from</label>
+			<%= text_field_tag :start_on, h(params[:start_on]), :size => 12, :class => 'calendar' %>
+			<label class="inline">to</label>
+			<%= text_field_tag :end_on, h(params[:end_on]), :size => 12, :class => 'calendar' %>
+			<%= submit_tag 'search' %>
+		<% end %>
     </div>
 <% end %>
 
