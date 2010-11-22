@@ -11,6 +11,7 @@ x Nov 19 - look into replacing remote_edit_link with one of the js ajax methods 
 x Nov 19 - turn show detail windows into modal dialogs - Nov 19
 x Nov 20 - new account link in popup form - Nov 20
 x Nov 20 - replace reminder list formating with green/yellow/red dates - Nov 20
-x Nov 20 - add dashboard report to calendar
-- Nov 20 - add search to journal
+x Nov 20 - add dashboard report to calendar - Nov 20
+x Nov 20 - add search to journal - Nov 21
 x Nov 20 - add remaining entity lists to header box divs - Nov 20
+- Nov 21 - add search to workouts
