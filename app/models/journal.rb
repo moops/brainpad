@@ -7,7 +7,7 @@ class Journal < ActiveRecord::Base
   def self.search(condition_params, page)
     condition_params[:entry] = "%#{condition_params[:entry]}%"
     logger.debug("Journal::search condition_params[#{condition_params.inspect}]")
-    Journal.paginate :page => page, :conditions => get_search_conditions(condition_params), :order => 'entry_on desc', :per_page => 3
+    Journal.paginate :page => page, :conditions => get_search_conditions(condition_params), :order => 'entry_on desc', :per_page => 12
   end
   
   def self.get_search_conditions(condition_params)
