@@ -27,6 +27,7 @@
 		        <%= render(:partial => 'data_rows', :collection => @contacts) %>
 		    </table>
 		    <%= will_paginate @contacts %>
+			<%= @contacts.total_entries %> contacts
 	    </div>
 	</div> <!-- end contacts -->
 </div> <!-- end primary_panel_full -->  

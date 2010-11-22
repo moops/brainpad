@@ -30,6 +30,7 @@
 		        <%= render(:partial => 'data_rows', :collection => @connections) %>
 		    </table>
 		    <%= will_paginate @connections %>
+			<%= @connections.total_entries %> connections
 	    </div>
 	</div> <!-- end connections -->
 </div> <!-- end primary_panel_full -->

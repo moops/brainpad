@@ -39,7 +39,6 @@ class Person < ActiveRecord::Base
   end
     
   def age_in_days?
-    logger.debug("Person.age_in_days?: auth_profile.born_on[#{auth_profile.born_on.inspect}]...")
     Date.today - auth_profile.born_on
   end
   

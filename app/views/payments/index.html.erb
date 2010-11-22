@@ -72,6 +72,8 @@
 	        <table width="100%" border="0" cellspacing="0" cellpadding="2">
 	        <%= render(:partial => 'payment', :collection => @payments) %>
 	        </table>
+			<%= will_paginate @payments %>
+			<%= @payments.total_entries %> payments
 	    </div>
 	</div> <!-- end transactions -->
 </div>

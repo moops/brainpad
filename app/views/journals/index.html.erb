@@ -1,3 +1,15 @@
+<div class="dashboard">
+    <% form_tag({:action => 'index'}, :method => 'get') do %>
+		<label class="inline">entry</label>
+		<%= text_field_tag :entry, h(params[:entry]) %>
+		<label class="inline">from</label>
+		<%= text_field_tag :start_on, h(params[:start_on]), :size => 12, :class => 'calendar' %>
+		<label class="inline">to</label>
+		<%= text_field_tag :end_on, h(params[:end_on]), :size => 12, :class => 'calendar' %>
+		<%= submit_tag 'search' %>
+	<% end %>
+</div>
+
 <div id="show" style="display:none;"></div>
 
 <div id="journal_form" style="display:none;"><%= render(:partial => 'form') %></div>
@@ -29,6 +41,7 @@
 		        <%= render(:partial => 'data_rows', :collection => @journals) %>
 		    </table>
 		    <%= will_paginate @journals %>
+			<%= @journals.total_entries %> journal entries
 	    </div>
 	</div> <!-- end entries -->
 </div> <!-- end primary_panel_full --> 

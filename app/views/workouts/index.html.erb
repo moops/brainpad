@@ -59,6 +59,7 @@
 		        <%= render(:partial => 'data_rows', :collection => @workouts) %>
 		    </table>
 		    <%= will_paginate @workouts %>
+			<%= @workouts.total_entries %> workouts
 	    </div>
 	</div> <!-- end workouts -->
 </div> <!-- end primary panel -->   

@@ -6,7 +6,7 @@ class MilestonesController < ApplicationController
   # GET /milestones
   # GET /milestones.xml
   def index    
-    @milestones = get_milestones
+    @milestones = Milestone.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'milestone_at', :per_page => 10
 
     @milestone = Milestone.new #for the 'new' form
 
@@ -46,10 +46,7 @@ class MilestonesController < ApplicationController
         format.html { redirect_to(milestones_path) }
         format.xml  { render :xml => @milestone, :status => :created, :location => @milestone }
       else
-        format.html { 
-          @milestones = get_milestones
-          render(:action => 'index') 
-        }
+        format.html { redirect_to(milestones_path) }
         format.xml  { render :xml => @milestone.errors, :status => :unprocessable_entity }
       end
     end
@@ -82,12 +79,6 @@ class MilestonesController < ApplicationController
       format.html { redirect_to(milestones_url) }
       format.xml  { head :ok }
     end
-  end
-  
-  private
-  
-  def get_milestones
-    Milestone.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'milestone_at', :per_page => 10
   end
    
 end

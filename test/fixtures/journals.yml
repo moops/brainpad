@@ -1,18 +1,90 @@
 one:
   entry: test first entry
-  entry_on: <%= 10.days.ago.to_s(:db) %>
+  entry_on: <%= 1.days.ago.to_s(:db) %>
   journal_type: 8
   person: adam
 
 two:
-  entry: test second entry
-  entry_on: <%= 15.days.ago.to_s(:db) %>
+  entry: test second entry with a few extra thing to search for.
+  entry_on: <%= 2.days.ago.to_s(:db) %>
   journal_type: 8
   person: adam
 
 three:
   entry: test third entry. this one is a long one so we can see some wrapping in the list view or the show view. this one is a long one so we can see some wrapping in the list view or the show view. this one is a long one so we can see some wrapping in the list view or the show view.
-  entry_on: <%= 5.days.ago.to_s(:db) %>
+  entry_on: <%= 3.days.ago.to_s(:db) %>
   journal_type: 9
+  person: adam
+  
+four:
+  entry: test fourth entry. spent the day on the couch watching football.
+  entry_on: <%= 4.days.ago.to_s(:db) %>
+  journal_type: 8
+  person: adam
+  
+five:
+  entry: test fifth entry. spent a lot of money and went for a long run. * home
+  entry_on: <%= 5.days.ago.to_s(:db) %>
+  journal_type: 8
+  person: adam
+  
+six:
+  entry: test sixth entry
+  entry_on: <%= 6.days.ago.to_s(:db) %>
+  journal_type: 8
+  person: adam
+  
+seven:
+  entry: test seventh entry
+  entry_on: <%= 7.days.ago.to_s(:db) %>
+  journal_type: 8
+  person: adam
+  
+eight:
+  entry: test eighth entry
+  entry_on: <%= 8.days.ago.to_s(:db) %>
+  journal_type: 8
+  person: adam
+  
+nine:
+  entry: test ninth entry, vacation, * hotel pool
+  entry_on: <%= 9.days.ago.to_s(:db) %>
+  journal_type: 8
+  person: adam
+  
+ten:
+  entry: test tenth entry. saw a movie, worked a little.
+  entry_on: <%= 10.days.ago.to_s(:db) %>
+  journal_type: 8
+  person: adam
+  
+eleven:
+  entry: test eleventh entry. * mail truck
+  entry_on: <%= 11.days.ago.to_s(:db) %>
+  journal_type: 8
+  person: adam
+
+twelve:
+  entry: test twelfth entry. took the kids to see a movie, argued with them about going for a bike ride.
+  entry_on: <%= 12.days.ago.to_s(:db) %>
+  journal_type: 8
+  person: adam
+
+thrirteen:
+  entry: test thirteenth entry. this one is a long one so we can see some wrapping but it's not the same as the first long one. * home. this one is a long one so we can see some wrapping in the list view or the show view.
+  entry_on: <%= 13.days.ago.to_s(:db) %>
+  journal_type: 9
+  person: adam
+  
+fourteen:
+  entry: test fourteenth entry. this one is also a bit long and has some other stuff to search for. * cate's house
+  entry_on: <%= 14.days.ago.to_s(:db) %>
+  journal_type: 8
+  person: adam
+  
+fifteen:
+  entry: test fifteenth entry
+  entry_on: <%= 15.days.ago.to_s(:db) %>
+  journal_type: 8
   person: adam
 
