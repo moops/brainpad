@@ -6,7 +6,7 @@ class MilestonesController < ApplicationController
   # GET /milestones
   # GET /milestones.xml
   def index    
-    @milestones = Milestone.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'milestone_at', :per_page => 13, :inner_window => 4, :outer_window => 5
+    @milestones = Milestone.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'milestone_at', :per_page => 13
 
     @milestone = Milestone.new #for the 'new' form
 
