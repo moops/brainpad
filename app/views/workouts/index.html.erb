@@ -10,7 +10,7 @@
     </table>
 </div>
 <% end %>
-<div class="dashboard">
+<div class="dashboard search_form" style="display:none;">
     <% form_tag({:action => 'index'}, :method => 'get') do %>
         <label class="inline">location</label>
         <%= text_field_tag :q, h(params[:q]) %>
@@ -58,6 +58,7 @@
       <div class="box_header">
           workouts
           <span style="float:right">
+              <%= link_to(image_tag('search.png', :size => '15x15', :border => 0), '#', :class => 'toggle_search_form') %>
               <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_workout_form') %>
           </span>
       </div>

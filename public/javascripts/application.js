@@ -118,6 +118,10 @@ jQuery(document).ready(function() {
   jQuery("input.calendar").datepicker();
   jQuery("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
   jQuery("input.today").datepicker('setDate', new Date());
+  
+  jQuery(".toggle_search_form").click(function() {
+    jQuery('.search_form').toggle('fast', 'swing', null)
+  });
 });
 
 function count(id,until) {
