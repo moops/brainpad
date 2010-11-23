@@ -6,10 +6,8 @@ class WorkoutsController < ApplicationController
   # GET /workouts
   # GET /workouts.xml
   def index    
-    @workouts = Workout.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'workout_on desc', :per_page => 12
-
+    @workouts = Workout.search({ :q => params[:q], :type => params[:type], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
     @workout = Workout.new #for the 'new' form
-    @workout.workout_on = Date.today.strftime("%b %d, %Y")
     
     @workout_summary = WorkoutSummary.new(@user,31)
     @workout_duration_by_type = Workout.workout_duration_by_type(@user,31)

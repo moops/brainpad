@@ -13,7 +13,7 @@ class ContactsController < ApplicationController
       conditions = "tags like '%#{params[:tag]}%' and #{conditions}"
       @tag = params[:tag]
     end
-    @contacts = Contact.paginate :page => params[:page], :conditions => conditions, :order => 'name', :per_page => 12
+    @contacts = Contact.paginate :page => params[:page], :conditions => conditions, :order => 'name', :per_page => 13, :inner_window => 4, :outer_window => 5
     @contact = Contact.new #for the 'new' form
     
     respond_to do |format|

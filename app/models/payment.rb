@@ -7,6 +7,30 @@ class Payment < ActiveRecord::Base
   validates_presence_of :person, :account, :amount, :payment_on
 
   attr_accessor :payment_type
+    
+  def self.search(condition_params, page)
+    condition_params[:q] = "%#{condition_params[:q]}%"
+    logger.debug("Payment::search condition_params[#{condition_params.inspect}]")
+    Payment.paginate(:page => page, :conditions => get_search_conditions(condition_params), :order => 'payment_on desc', :per_page => 25)
+  end
+    
+  def self.get_search_conditions(condition_params)
+    conditions = []
+    query = 'payments.person_id = :user'
+    if !condition_params[:q].blank?
+      query << ' and payments.description like :q' if condition_params[:q]
+    end
+    if !condition_params[:start_on].blank? && !condition_params[:end_on].blank?
+      query << ' and payments.payment_on between :start_on and :end_on'
+    elsif !condition_params[:start_on].blank?
+      query << ' and payments.payment_on >= :start_on'
+    elsif !condition_params[:end_on].blank?
+      query << ' and payments.payment_on <= :end_on'
+    end
+    logger.debug("Payment::get_search_conditions query[#{query}]")
+    conditions << query
+    conditions << condition_params
+  end
 
   def payment_type?
     if transfer_account

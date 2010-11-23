@@ -25,33 +25,33 @@
 <% if (@reminders and @reminders.size > 0) %>
 <% form_tag(:action => 'finish') do %>
 <div id="primary_panel_full">
-	<div class="box">
-	    <div class="box_header">
-	    	reminders
-	        <span style="float:right">
-	            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_reminder_form') %>
-	        </span>
-	    </div>
-	    <div class="box_content">
+  <div class="box">
+      <div class="box_header">
+        reminders
+          <span style="float:right">
+              <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_reminder_form') %>
+          </span>
+      </div>
+      <div class="box_content">
 
-			<table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
-			    <tr>
-					<th>date</th>
-					<th>type</th>
-			        <th>priority</th>
-			        <th>description</th>
-			        <th>done</th>
-			        <th colspan="2">&nbsp;</th></tr>
-			
-			    <%= render(:partial => 'data_rows', :collection => @reminders) %>
-			    <tr>
-			        <td><%= submit_tag('>>') %></td>
-			        <td colspan="3">&nbsp;</td></tr>
-			</table>
-			<%= will_paginate @reminders %>
-			<%= @reminders.total_entries %> reminders
-		</div>
-	</div> <!-- end reminders -->
+      <table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
+          <tr>
+          <th>date</th>
+          <th>type</th>
+              <th>priority</th>
+              <th>description</th>
+              <th>done</th>
+              <th colspan="2">&nbsp;</th></tr>
+      
+          <%= render(:partial => 'data_rows', :collection => @reminders) %>
+          <tr>
+              <td><%= submit_tag('>>') %></td>
+              <td colspan="3">&nbsp;</td></tr>
+      </table>
+      <%= will_paginate @reminders, :inner_window => 1, :outer_window => 3  %>
+      <%= @reminders.total_entries %> reminders
+    </div>
+  </div> <!-- end reminders -->
 </div> <!-- end primary_panel_full -->  
 <% end %>
 <% end %>

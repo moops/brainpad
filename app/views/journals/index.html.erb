@@ -1,17 +1,18 @@
 <div class="dashboard">
     <% form_tag({:action => 'index'}, :method => 'get') do %>
-		<label class="inline">entry</label>
-		<%= text_field_tag :entry, h(params[:entry]) %>
-		<label class="inline">from</label>
-		<%= text_field_tag :start_on, h(params[:start_on]), :size => 12, :class => 'calendar' %>
-		<label class="inline">to</label>
-		<%= text_field_tag :end_on, h(params[:end_on]), :size => 12, :class => 'calendar' %>
-		<%= submit_tag 'search' %>
-	<% end %>
+        <label class="inline">entry</label>
+        <%= text_field_tag :q, h(params[:q]) %>
+        <label class="inline">from</label>
+        <%= text_field_tag :start_on, h(params[:start_on]), :size => 12, :class => 'calendar' %>
+        <label class="inline">to</label>
+        <%= text_field_tag :end_on, h(params[:end_on]), :size => 12, :class => 'calendar' %>
+        <%= submit_tag 'search' %>
+        <%= submit_tag("x", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
+    <% end %>
 </div>
 
+<!-- hidden elements -->
 <div id="show" style="display:none;"></div>
-
 <div id="journal_form" style="display:none;"><%= render(:partial => 'form') %></div>
 
 <script type="text/javascript">
@@ -23,27 +24,27 @@
 
 <% if (@journals and @journals.size > 0) %>
 <div id="primary_panel_full">
-	<div class="box">
-	    <div class="box_header">
-	        entries
-	        <span style="float:right">
-	            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_journal_form') %>
-	        </span>
-	    </div>
-	    <div class="box_content">
-		    <table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
-		        <tr>
-		            <th>date</th>
-			        <th>type</th>
-			        <th>entry</th>
-			        <th colspan="2">&nbsp;</th></tr>
-		        
-		        <%= render(:partial => 'data_rows', :collection => @journals) %>
-		    </table>
-		    <%= will_paginate @journals %>
-			<%= @journals.total_entries %> journal entries
-	    </div>
-	</div> <!-- end entries -->
+  <div class="box">
+      <div class="box_header">
+          entries
+          <span style="float:right">
+              <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_journal_form') %>
+          </span>
+      </div>
+      <div class="box_content">
+        <table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
+            <tr>
+                <th>date</th>
+              <th>type</th>
+              <th>entry</th>
+              <th colspan="2">&nbsp;</th></tr>
+            
+            <%= render(:partial => 'data_rows', :collection => @journals) %>
+        </table>
+        <%= will_paginate @journals, :inner_window => 1, :outer_window => 3 %>
+      <%= @journals.total_entries %> journal entries
+      </div>
+  </div> <!-- end entries -->
 </div> <!-- end primary_panel_full --> 
 <% end %>
 

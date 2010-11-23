@@ -11,6 +11,19 @@
     </div>
 <% end %>
 
+<div class="dashboard">
+    <% form_tag({:action => 'index'}, :method => 'get') do %>
+        <label class="inline">desc</label>
+        <%= text_field_tag :q, h(params[:q]) %>
+        <label class="inline">from</label>
+        <%= text_field_tag :start_on, h(params[:start_on]), :size => 12, :class => 'calendar' %>
+        <label class="inline">to</label>
+        <%= text_field_tag :end_on, h(params[:end_on]), :size => 12, :class => 'calendar' %>
+        <%= submit_tag 'search' %>
+        <%= submit_tag("x", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
+    <% end %>
+</div>
+
 <!-- hidden elements -->
 <div id="show" style="display:none;"></div>
 <div id="account_form" style="display:none;"></div>
@@ -36,21 +49,21 @@
         </div>
     </div> <!-- end money_accounts -->
     <div class="box">
-	    <div class="box_header">expenses by tag</div>
-	    <div class="box_content">
-	        <% for e in @expenses_by_tag %>
-	            <% percentage = ((e[1] / @money_summary.total) * 100).to_i.to_s %>
-	            <%= "#{e[0]} #{number_to_currency(e[1])} [#{percentage}%]" %><br/>
-	            <% percentage = '1' if percentage.eql?'0' %>
-	            <%= image_tag('redbar.gif', :size => "#{percentage.to_i * 2}x12") %><br/>
-	        <% end %>
-	    </div>
-	    <div class="box_buttons"></div>
-	</div> <!-- end box -->
+      <div class="box_header">expenses by tag</div>
+      <div class="box_content">
+          <% for e in @expenses_by_tag %>
+              <% percentage = ((e[1] / @money_summary.total) * 100).to_i.to_s %>
+              <%= "#{e[0]} #{number_to_currency(e[1])} [#{percentage}%]" %><br/>
+              <% percentage = '1' if percentage.eql?'0' %>
+              <%= image_tag('redbar.gif', :size => "#{percentage.to_i * 2}x12") %><br/>
+          <% end %>
+      </div>
+      <div class="box_buttons"></div>
+  </div> <!-- end box -->
 </div> <!-- end secondary_panel -->
 
 <div id="primary_panel">
-	<% unless @upcoming_payments.empty? %>
+  <% unless @upcoming_payments.empty? %>
     <div class="box">
         <div class="box_header">upcoming</div>
         <div class="box_content">
@@ -59,23 +72,23 @@
             </table>
         </div>
     </div> <!-- end upcoming -->
-	<% end %>
+  <% end %>
 
-	<div class="box">
-	    <div class="box_header">
-	        transactions
-	        <span style="float:right">
-	            <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_payment_form') %>
-	        </span>
-	    </div>
-	    <div class="box_content">
-	        <table width="100%" border="0" cellspacing="0" cellpadding="2">
-	        <%= render(:partial => 'payment', :collection => @payments) %>
-	        </table>
-			<%= will_paginate @payments %>
-			<%= @payments.total_entries %> payments
-	    </div>
-	</div> <!-- end transactions -->
+  <div class="box">
+      <div class="box_header">
+          transactions
+          <span style="float:right">
+              <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_payment_form') %>
+          </span>
+      </div>
+      <div class="box_content">
+          <table width="100%" border="0" cellspacing="0" cellpadding="2">
+          <%= render(:partial => 'payment', :collection => @payments) %>
+          </table>
+      <%= will_paginate @payments, :inner_window => 1, :outer_window => 3 %>
+      <%= @payments.total_entries %> payments
+      </div>
+  </div> <!-- end transactions -->
 </div>
 
 <div class="clear"/>

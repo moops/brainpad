@@ -6,7 +6,7 @@ class JournalsController < ApplicationController
   # GET /journals
   # GET /journals.xml
   def index
-    @journals = Journal.search({ :entry => params[:entry], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
+    @journals = Journal.search({ :q => params[:q], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
 
     @journal = Journal.new #for the 'new' form
     @journal.entry_on = Date.today.strftime("%b %d, %Y")

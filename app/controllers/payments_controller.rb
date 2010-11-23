@@ -11,12 +11,10 @@ class PaymentsController < ApplicationController
       @payment.amount = @payment.amount.abs
     else
       @payment = Payment.new
-      @payment.payment_type = 'expense'
-      @payment.payment_on = Date.today.strftime('%Y-%m-%d')
     end
     
+    @payments = Payment.search({ :q => params[:q], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
     @upcoming_payments = Payment.find_upcoming(@user)
-    @payments = Payment.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'payment_on desc', :per_page => 25
     get_stuff_for_form
     @money_summary = MoneySummary.new(@user,31)
     @expenses_by_tag = Payment.expenses_by_tag(@user,31)
