@@ -7,7 +7,7 @@ class Reminder < ActiveRecord::Base
   def self.search(condition_params, page)
     condition_params[:q] = "%#{condition_params[:q]}%"
     logger.debug("Reminder::search condition_params[#{condition_params.inspect}]")
-    Reminder.paginate :page => page, :conditions => get_search_conditions(condition_params), :order => 'due_on desc', :per_page => 13
+    Reminder.paginate :page => page, :conditions => get_search_conditions(condition_params), :order => 'due_on', :per_page => 13
   end
   
   def self.get_search_conditions(condition_params)
