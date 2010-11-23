@@ -14,4 +14,7 @@ x Nov 20 - replace reminder list formating with green/yellow/red dates - Nov 20
 x Nov 20 - add dashboard report to calendar - Nov 20
 x Nov 20 - add search to journal - Nov 21
 x Nov 20 - add remaining entity lists to header box divs - Nov 20
-- Nov 21 - add search to workouts
+x Nov 21 - add search to workouts - Nov 21
+x Nov 21 - toggle search forms - Nov 21
+x Nov 21 - add search to payments, contacts, calendar and connections - Nov 21
+- Nov 21 - move contact tag links to search form select list

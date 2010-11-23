@@ -6,8 +6,8 @@ class RemindersController < ApplicationController
   # GET /reminders
   # GET /reminders.xml
   def index
-    @reminders = Reminder.paginate :page => params[:page], :conditions => "not done and person_id = #{@user.id}", :order => 'due_on', :per_page => 13
-
+    @reminders = Reminder.search({ :q => params[:q], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
+    
     @reminder = Reminder.new #for the 'new' form
     @reminder.due_on = Date.today.strftime("%b %d, %Y")
     

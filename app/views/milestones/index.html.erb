@@ -1,5 +1,5 @@
+<!-- hidden elements -->
 <div id="show" style="display:none;"></div>
-
 <div id="milestone_form" style="display:none;"><%= render(:partial => 'form') %></div>
 
 <script type="text/javascript">
@@ -11,34 +11,34 @@
 
 <% if (@milestones and @milestones.size > 0) %>
 <div id="primary_panel_full">
-  <div class="box">
-      <div class="box_header">
-          milestones
-          <span style="float:right">
-              <%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_milestone_form') %>
-          </span>
-      </div>
-      <div class="box_content">
-        <table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
-            <tr>
-                <th>description</th><th>when</th><th>&nbsp;</th></tr>
-            
-            <% @milestones.each do |milestone| %>
-          <tr>
-              <td><%= link_to(milestone.name, edit_milestone_path(milestone), :class => 'get') %></td>
-              <td><input type="text" class="milestone_time" id="<%= milestone.id %>" size="30"/></td>
-              <td><span class="right"><%= link_to(image_tag("delete.png", :size => "15x15", :border => 0), 
-                          milestone_path(milestone), :method => :delete, :confirm => "really delete #{milestone.name}") %></span>
-                  <script type="text/javascript">
-                    count('<%= milestone.id %>', '<%= milestone.milestone_at %>');
-                  </script></td></tr>
-        
-        <% end %>
-        </table>
-        <%= will_paginate @milestones, :inner_window => 1, :outer_window => 3  %>
-      <%= @milestones.total_entries %> milestones
-      </div>
-  </div> <!-- end contacts -->
+	<div class="box">
+		<div class="box_header">
+			milestones
+			<span style="float:right">
+				<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_milestone_form') %>
+			</span>
+		</div>
+		<div class="box_content">
+			<table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
+			    <tr>
+			        <th>description</th><th>when</th><th>&nbsp;</th></tr>
+			    
+			    <% @milestones.each do |milestone| %>
+				<tr>
+				  <td><%= link_to(milestone.name, edit_milestone_path(milestone), :class => 'get') %></td>
+				  <td><input type="text" class="milestone_time" id="<%= milestone.id %>" size="30"/></td>
+				  <td><span class="right"><%= link_to(image_tag("delete.png", :size => "15x15", :border => 0), 
+				              milestone_path(milestone), :method => :delete, :confirm => "really delete #{milestone.name}") %></span>
+				      <script type="text/javascript">
+				        count('<%= milestone.id %>', '<%= milestone.milestone_at %>');
+				      </script></td></tr>
+			
+				<% end %>
+			</table>
+			<%= will_paginate @milestones, :inner_window => 1, :outer_window => 3  %>
+			<%= @milestones.total_entries %> milestones
+		</div>
+	</div> <!-- end contacts -->
 </div> <!-- end primary_panel_full -->  
 <% end %>
 
