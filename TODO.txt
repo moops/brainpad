@@ -18,3 +18,4 @@ x Nov 21 - add search to workouts - Nov 21
 x Nov 21 - toggle search forms - Nov 21
 x Nov 21 - add search to payments, contacts, calendar and connections - Nov 21
 - Nov 21 - move contact tag links to search form select list
+- Nov 23 - fix workout searching with no type
