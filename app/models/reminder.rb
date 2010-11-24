@@ -13,9 +13,7 @@ class Reminder < ActiveRecord::Base
   def self.get_search_conditions(condition_params)
     conditions = []
     query = 'reminders.person_id = :user and not done'
-    if !condition_params[:q].blank?
-      query << ' and reminders.description like :q' if condition_params[:q]
-    end
+    query << ' and reminders.description like :q' unless condition_params[:q].blank?
     if !condition_params[:start_on].blank? && !condition_params[:end_on].blank?
       query << ' and reminders.due_on between :start_on and :end_on'
     elsif !condition_params[:start_on].blank?

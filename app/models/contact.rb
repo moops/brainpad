@@ -13,9 +13,7 @@ class Contact < ActiveRecord::Base
   def self.get_search_conditions(condition_params)
     conditions = []
     query = 'contacts.person_id = :user'
-    if !condition_params[:q].blank?
-      query << ' and contacts.name like :q' if condition_params[:q]
-    end
+    query << ' and contacts.name like :q' unless condition_params[:q].blank?
     logger.debug("Contact::get_search_conditions query[#{query}]")
     conditions << query
     conditions << condition_params

@@ -13,9 +13,7 @@ class Journal < ActiveRecord::Base
   def self.get_search_conditions(condition_params)
     conditions = []
     query = 'journals.person_id = :user'
-    if !condition_params[:q].blank?
-      query << ' and journals.entry like :q' if condition_params[:q]
-    end
+    query << ' and journals.entry like :q' unless condition_params[:q].blank?
     if !condition_params[:start_on].blank? && !condition_params[:end_on].blank?
       query << ' and journals.entry_on between :start_on and :end_on'
     elsif !condition_params[:start_on].blank?

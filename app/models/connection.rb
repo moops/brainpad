@@ -13,9 +13,7 @@ class Connection < ActiveRecord::Base
   def self.get_search_conditions(condition_params)
     conditions = []
     query = 'connections.person_id = :user'
-    if !condition_params[:q].blank?
-      query << ' and connections.name like :q' if condition_params[:q]
-    end
+    query << ' and connections.name like :q' unless condition_params[:q].blank?
     logger.debug("Connection::get_search_conditions query[#{query}]")
     conditions << query
     conditions << condition_params

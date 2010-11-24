@@ -17,9 +17,7 @@ class Payment < ActiveRecord::Base
   def self.get_search_conditions(condition_params)
     conditions = []
     query = 'payments.person_id = :user'
-    if !condition_params[:q].blank?
-      query << ' and payments.description like :q' if condition_params[:q]
-    end
+    query << ' and payments.description like :q' unless condition_params[:q].blank?
     if !condition_params[:start_on].blank? && !condition_params[:end_on].blank?
       query << ' and payments.payment_on between :start_on and :end_on'
     elsif !condition_params[:start_on].blank?
