@@ -21,3 +21,4 @@ x Nov 21 - add search to payments, contacts, calendar and connections - Nov 21
 x Nov 23 - fix workout searching with no type - Nov 24
 x Nov 24 - change submit button label on payment form from 'go' to 'create/update' - Nov 24
 x Nov 24 - expand units field on account form - Nov 24
+- Nov 24 - fix link tag links (link_to_remote change to jquery)
