@@ -107,8 +107,8 @@ class WorkoutSummary
     max_weight = 0
     min_weight = 999
     for w in workouts
-      @mileage += w.distance
-      @duration += w.duration
+      @mileage += w.distance if w.distance
+      @duration += w.duration if w.duration
       max_weight = w.weight if w.weight and w.weight > max_weight
       min_weight = w.weight if w.weight and w.weight < min_weight
     end
