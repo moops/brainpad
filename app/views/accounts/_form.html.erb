@@ -5,21 +5,22 @@
 <% end %>
 <fieldset>   
     <ol>   
-	<li>
-		<%= f.label(:name) %>
-        <%= f.text_field(:name, :size => '25', :class => 'required') %></li>
-	<li>
-        <%= f.label(:units) %>
-        <%= f.text_field(:units, :size => '6', :class => 'required') %></li>
     <li>
-        <%= f.label(:description) %>
-        <%= f.text_field(:description, :size => '25') %></li>
-	<li>
+        <%= f.label(:name) %>
+        <%= f.text_field(:name, :size => '25', :class => 'required') %></li>
+    <li>
+        <%= f.label(:units) %>
+        <%= f.text_field(:units, :size => '25', :class => 'required') %></li>
+    
+    <li>
         <%= f.label(:price) %>
         <%= f.text_field(:price, :size => '6', :class => 'required') %></li>
     <li>
         <%= f.label(:active, 'active?') %>
         <%= f.check_box(:active) %></li>
+    <li>
+        <%= f.label(:description) %>
+        <%= f.text_field(:description, :size => '50') %></li>
     <li>
         <%= f.label(:url) %>
         <td colspan="3"><%= f.text_field(:url, :size => '50') %></li>
@@ -27,6 +28,6 @@
         <%= f.label(:price_url) %>
         <%= f.text_field(:price_url, :size => '50') %></li></ol></fieldset>
 <fieldset class="submit">
-	<%= f.submit(@account.id ? 'update' : 'create') %></fieldset> 
+    <%= f.submit(@account.id ? 'update' : 'create') %></fieldset> 
 
 <% end %>

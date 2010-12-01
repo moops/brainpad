@@ -31,12 +31,8 @@ class Workout < ActiveRecord::Base
   def self.get_search_conditions(condition_params)
     conditions = []
     query = 'workouts.person_id = :user'
-    if !condition_params[:q].blank?
-      query << ' and workouts.location like :q' if condition_params[:q]
-    end
-    if !condition_params[:q].blank?
-      query << ' and workouts.workout_type = :type' if condition_params[:type]
-    end
+    query << ' and workouts.location like :q' unless condition_params[:q].blank?
+    query << ' and workouts.workout_type = :type' unless condition_params[:type].blank?
     if !condition_params[:start_on].blank? && !condition_params[:end_on].blank?
       query << ' and workouts.workout_on between :start_on and :end_on'
     elsif !condition_params[:start_on].blank?
