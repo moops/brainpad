@@ -1,4 +1,4 @@
-require 'feeds'
+# require 'feeds'
 
 class LinksController < ApplicationController
 
@@ -20,7 +20,7 @@ class LinksController < ApplicationController
     @random = @all.sort_by { rand }[0,9]
     @milestone = Milestone.next_milestone(@user)
     @due_today = Reminder.todays(@user.id)
-    @feeds = Feeds.get_feeds
+    # @feeds = Feeds.get_feeds
     
     respond_to do |format|
       format.html # index.html.erb

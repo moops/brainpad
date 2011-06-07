@@ -84,20 +84,7 @@
   <h3><a href="#">feeds</a></h3>
   <div class="links"> <!-- start feeds div -->
   
-    <% @feeds.each do |feed| %>
-    <div style="width:48%;" class="left">
-        <label class="page"><%= feed.channel.title %></label>
-        <ul>
-        <% feed.items.each_with_index { |cur_item,i| %>
-            <% if i < 6 %>
-            <li><a href="<%= cur_item.link %>" title="<%= clean_feed_description(cur_item.description) %>" target="_blank"><%= cur_item.title[0,48] if cur_item.title %></a></li>
-            <% end %>
-        <% } %>
-        </ul>
-    </div>
-    <% end %>
     
-    <div style="clear: left;"></div>
 
   </div> <!-- end feeds div -->
 </div> <!-- end accordian div -->
