@@ -1,3 +1,5 @@
 config/database.yml
+.bundle
+tmp/**/*
 *.log
 *~
