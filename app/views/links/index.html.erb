@@ -69,11 +69,11 @@
     
     <div>
         <label class="page">tags</label>       
-        <%= link_to_remote('refresh', :url => refresh_tags_links_path, :update => "tags") %> |
+        <%= link_to('refresh', :remote => true, :url => refresh_tags_links_path, :update => "tags") %> |
         <%= link_to('clean', clean_links_path) %><br/>
         <div id="tags">
             <% for cur_tag in session[:tags] %>
-                <%= link_to_remote(cur_tag, :url => find_links_url(:tag => cur_tag), :update => "found_links") %>,
+                <%= link_to(cur_tag, :remote => true, :url => find_links_url(:tag => cur_tag), :update => "found_links") %>,
             <% end %><p/>
         </div>
     

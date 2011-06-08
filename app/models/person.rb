@@ -18,7 +18,7 @@ class Person < ActiveRecord::Base
   def self.authenticate(name, password)
     profile = nil
     resp = nil
-    url = "#{APP_CONFIG['auth_host']}/users/find.xml?user_name=#{name}&password=#{password}"
+    url = "#{APP_CONFIG['auth_host']}/users.xml?user_name=#{name}&password=#{password}"
     logger.debug("Person.authenticate: authenticating with url[#{url}]...")
     open(url) do |http|
       resp = http.read
@@ -27,11 +27,13 @@ class Person < ActiveRecord::Base
     
     if !resp.empty?
       root = REXML::Document.new(resp).root
-      user = Person.find_by_user_name(root.elements["user-name"].text)
+      user_name = root.elements["user/user-name"].text
+      logger.info("user_name = #{user_name}")
+      user = Person.find_by_user_name(user_name)
       if user
-        name = (root.elements["name"].text) if root.elements["name"].text
-        authority = (root.elements["authority"].text.to_i) if root.elements["authority"].text
-        born_on = (Date.parse(root.elements["born-on"].text)) if root.elements["born-on"].text
+        #name = (root.elements["name"].text) if root.elements["name"].text
+        authority = (root.elements["user/authority"].text.to_i) if root.elements["user/authority"].text
+        born_on = (Date.parse(root.elements["user/born-on"].text)) if root.elements["user/born-on"].text
         profile = AuthProfile.new(user.id, name, authority, born_on)
       end
     end

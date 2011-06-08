@@ -17,7 +17,13 @@ Brainpad::Application.routes.draw do
 
   resources :people
 
-  resources :links, :collection => { :find => :get, :clean => :get, :refresh_tags => :get }
+  resources :links do
+    collection do
+      get 'find'
+      get 'clean'
+      get 'refresh_tags'
+    end
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
