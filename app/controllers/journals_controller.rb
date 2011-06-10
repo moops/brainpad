@@ -6,8 +6,15 @@ class JournalsController < ApplicationController
   # GET /journals
   # GET /journals.xml
   def index
-    @journals = Journal.search({ :q => params[:q], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
+    #@journals = Journal.search({ :q => params[:q], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
 
+    @journals = @user.journals.order(:entry)
+    if params[:tag]
+      @journals = @journals.where('tags like :tag', :tag => params[:tag])
+      @tag = params[:tag]
+    end
+    @journals = @journals.page(params[:page]).per(10)
+    
     @journal = Journal.new #for the 'new' form
     @journal.entry_on = Date.today.strftime("%b %d, %Y")
 

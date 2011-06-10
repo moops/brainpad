@@ -6,7 +6,12 @@ class ConnectionsController < ApplicationController
   # GET /connections
   # GET /connections.xml
   def index
-    @connections = Connection.search({ :q => params[:q], :user => @user.id }, params[:page])
+    @connections = @user.connections.order(:name)
+    if params[:tag]
+      @connections = @connections.where('tags like :tag', :tag => params[:tag])
+      @tag = params[:tag]
+    end
+    @connections = @connections.page(params[:page]).per(10)
     @connection = Connection.new #for the 'new' form
     
     respond_to do |format|

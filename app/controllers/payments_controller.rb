@@ -13,7 +13,14 @@ class PaymentsController < ApplicationController
       @payment = Payment.new
     end
     
-    @payments = Payment.search({ :q => params[:q], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
+    #@payments = Payment.search({ :q => params[:q], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
+    @payments = @user.payments.order('payment_on desc')
+    if params[:tag]
+      @payments = @payments.where('tags like :tag', :tag => params[:tag])
+      @tag = params[:tag]
+    end
+    @payments = @payments.page(params[:page]).per(25)
+    
     @upcoming_payments = Payment.find_upcoming(@user)
     get_stuff_for_form
     @money_summary = MoneySummary.new(@user,31)

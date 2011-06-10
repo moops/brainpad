@@ -6,8 +6,15 @@ class MilestonesController < ApplicationController
   # GET /milestones
   # GET /milestones.xml
   def index    
-    @milestones = Milestone.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'milestone_at', :per_page => 13
+    #@milestones = Milestone.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'milestone_at', :per_page => 13
 
+    @milestones = @user.milestones.order(:milestone_at)
+    if params[:tag]
+      @milestones = @milestones.where('tags like :tag', :tag => params[:tag])
+      @tag = params[:tag]
+    end
+    @milestones = @milestones.page(params[:page]).per(10)
+    
     @milestone = Milestone.new #for the 'new' form
 
     respond_to do |format|

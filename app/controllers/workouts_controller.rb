@@ -6,7 +6,14 @@ class WorkoutsController < ApplicationController
   # GET /workouts
   # GET /workouts.xml
   def index    
-    @workouts = Workout.search({ :q => params[:q], :type => params[:type], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
+    #@workouts = Workout.search({ :q => params[:q], :type => params[:type], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
+    @workouts = @user.workouts.order('workout_on desc')
+    if params[:tag]
+      @workouts = @workouts.where('tags like :tag', :tag => params[:tag])
+      @tag = params[:tag]
+    end
+    @workouts = @workouts.page(params[:page]).per(13)
+    
     @workout = Workout.new #for the 'new' form
     
     @workout_summary = WorkoutSummary.new(@user,31)

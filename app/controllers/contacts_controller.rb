@@ -8,12 +8,12 @@ class ContactsController < ApplicationController
   def index
     session[:contact_tags] = getUniqueTags
     
-    conditions = "person_id = #{@user.id}"
+    @contacts = @user.contacts.order(:name)
     if params[:tag]
-      conditions = "tags like '%#{params[:tag]}%' and #{conditions}"
+      @contacts = @contacts.where('tags like :tag', :tag => params[:tag])
       @tag = params[:tag]
     end
-    @contacts = Contact.search({ :q => params[:q], :user => @user.id }, params[:page])
+    @contacts = @contacts.page(params[:page]).per(10)
     @contact = Contact.new #for the 'new' form
     
     respond_to do |format|
