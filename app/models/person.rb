@@ -60,13 +60,13 @@ class Person < ActiveRecord::Base
     a.sort_by{|a| a.name }
   end
   
-  def payments
-    p = Array.new
-    for a in active_accounts
-      p += a.payments
-    end
-    p
-  end
+  #def payments
+  #  p = Array.new
+  #  for a in active_accounts
+  #    p += a.payments
+  #  end
+  #  p
+  #end
   
   def name?
     auth_profile.name ? auth_profile.name : user_name
