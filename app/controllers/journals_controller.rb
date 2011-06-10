@@ -8,7 +8,7 @@ class JournalsController < ApplicationController
   def index
     #@journals = Journal.search({ :q => params[:q], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
 
-    @journals = @user.journals.order(:entry)
+    @journals = @user.journals.order('entry_on desc')
     if params[:tag]
       @journals = @journals.where('tags like :tag', :tag => params[:tag])
       @tag = params[:tag]
