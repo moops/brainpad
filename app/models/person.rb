@@ -10,6 +10,7 @@ class Person < ActiveRecord::Base
   has_many :links
   has_many :reminders
   has_many :workouts
+  has_many :payments, :through => :accounts
   
   validates_presence_of :user_name
   
