@@ -6,7 +6,13 @@ class RemindersController < ApplicationController
   # GET /reminders
   # GET /reminders.xml
   def index
-    @reminders = Reminder.search({ :q => params[:q], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
+    #@reminders = Reminder.search({ :q => params[:q], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
+    @reminders = @user.reminders.order(:due_on)
+    if params[:tag]
+      @reminders = @reminders.where('tags like :tag', :tag => params[:tag])
+      @tag = params[:tag]
+    end
+    @reminders = @reminders.page(params[:page]).per(13)
     
     @reminder = Reminder.new #for the 'new' form
     @reminder.due_on = Date.today.strftime("%b %d, %Y")

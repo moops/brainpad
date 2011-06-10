@@ -35,8 +35,7 @@
 			
 				<% end %>
 			</table>
-			<%= will_paginate @milestones, :inner_window => 1, :outer_window => 3  %>
-			<%= @milestones.total_entries %> milestones
+			<%= paginate @milestones %>
 		</div>
 	</div> <!-- end contacts -->
 </div> <!-- end primary_panel_full -->  

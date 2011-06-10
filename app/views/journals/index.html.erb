@@ -40,8 +40,7 @@
 			    
 			    <%= render(:partial => 'data_rows', :collection => @journals) %>
 			</table>
-			<%= will_paginate @journals, :inner_window => 1, :outer_window => 3 %>
-			<%= @journals.total_entries %> journal entries
+			<%= paginate @journals %>
 		</div>
 	</div> <!-- end entries -->
 </div> <!-- end primary_panel_full --> 

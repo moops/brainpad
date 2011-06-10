@@ -86,8 +86,7 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="2">
 			<%= render(:partial => 'payment', :collection => @payments) %>
 			</table>
-			<%= will_paginate @payments, :inner_window => 1, :outer_window => 3 %>
-			<%= @payments.total_entries %> payments
+			<%= paginate @payments %>
 		</div>
 	</div> <!-- end transactions -->
 </div>

@@ -57,8 +57,7 @@
 					  <td><%= submit_tag('>>') %></td>
 					  <td colspan="3">&nbsp;</td></tr>
 			</table>
-			<%= will_paginate @reminders, :inner_window => 1, :outer_window => 3  %>
-			<%= @reminders.total_entries %> reminders
+			<%= paginate @reminders %>
 		</div>
 	</div> <!-- end reminders -->
 </div> <!-- end primary_panel_full -->  

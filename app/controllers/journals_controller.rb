@@ -13,7 +13,7 @@ class JournalsController < ApplicationController
       @journals = @journals.where('tags like :tag', :tag => params[:tag])
       @tag = params[:tag]
     end
-    @journals = @journals.page(params[:page]).per(10)
+    @journals = @journals.page(params[:page]).per(13)
     
     @journal = Journal.new #for the 'new' form
     @journal.entry_on = Date.today.strftime("%b %d, %Y")

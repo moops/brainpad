@@ -83,4 +83,4 @@ DEPENDENCIES
   kaminari
   mongrel (>= 1.1.5)
   mysql2
-  rails (= 3.0.3)
+  rails

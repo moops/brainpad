@@ -13,7 +13,7 @@ class MilestonesController < ApplicationController
       @milestones = @milestones.where('tags like :tag', :tag => params[:tag])
       @tag = params[:tag]
     end
-    @milestones = @milestones.page(params[:page]).per(10)
+    @milestones = @milestones.page(params[:page]).per(13)
     
     @milestone = Milestone.new #for the 'new' form
 

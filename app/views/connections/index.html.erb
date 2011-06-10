@@ -36,8 +36,7 @@
 			    
 			    <%= render(:partial => 'data_rows', :collection => @connections) %>
 			</table>
-			<%= will_paginate @connections, :inner_window => 1, :outer_window => 3  %>
-			<%= @connections.total_entries %> connections
+			<%= paginate @connections %>
 		</div>
 	</div> <!-- end connections -->
 </div> <!-- end primary_panel_full -->

@@ -11,7 +11,7 @@ class ConnectionsController < ApplicationController
       @connections = @connections.where('tags like :tag', :tag => params[:tag])
       @tag = params[:tag]
     end
-    @connections = @connections.page(params[:page]).per(10)
+    @connections = @connections.page(params[:page]).per(13)
     @connection = Connection.new #for the 'new' form
     
     respond_to do |format|
