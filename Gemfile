@@ -10,7 +10,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'mongo_mapper'            # mongodb
+gem "mongoid", "~> 2.4"       # mongodb
+gem "bson_ext", "~> 1.5"
 gem 'json'                    # json api
 gem 'kaminari'                # pagination
 gem 'bcrypt-ruby', '~> 3.0.0' # password encryption
