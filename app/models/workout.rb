@@ -1,4 +1,19 @@
-class Workout < ActiveRecord::Base
+class Workout
+  include Mongoid::Document
+  
+  field :location, type: String
+  field :race, type: String
+  field :route, type: Integer
+  field :description, type: String
+  field :duration, type: Integer
+  field :intensity, type: Integer
+  field :weight, type: Integer
+  field :distance, type: Float
+  field :workout_type, type: Integer
+  field :workout_on, type: Date
+  field :person_id, type: Integer
+  field :created_at, type: DateTime
+  field :updated_at, type: DateTime
 
   belongs_to :person
   

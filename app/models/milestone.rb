@@ -1,4 +1,11 @@
-class Milestone < ActiveRecord::Base
+class Milestone
+  include Mongoid::Document
+  
+  field :name, type: String
+  field :milestone_at, type: Date
+  field :person_id, type: Integer
+  field :created_at, type: DateTime
+  field :updated_at, type: DateTime
 
   belongs_to :person
   

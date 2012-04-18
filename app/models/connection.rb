@@ -1,4 +1,14 @@
-class Connection < ActiveRecord::Base
+class Connection
+  include Mongoid::Document
+  
+  field :name, type: String
+  field :username, type: String
+  field :password, type: String
+  field :url, type: String
+  field :description, type: String
+  field :person_id, type: Integer
+  field :created_at, type: DateTime
+  field :updated_at, type: DateTime
 
   belongs_to :person
   

@@ -1,4 +1,17 @@
-class Payment < ActiveRecord::Base
+class Payment
+  include Mongoid::Document
+  
+  field :description, type: String
+  field :tags, type: String
+  field :amount, type: Float
+  field :payment_on, type: Date
+  field :frequency, type: Integer
+  field :until, type: Date
+  field :account_id, type: Integer
+  field :transfer_from, type: Integer
+  field :person_id, type: Integer
+  field :created_at, type: DateTime
+  field :updated_at, type: DateTime
 
   belongs_to :person
   belongs_to :account

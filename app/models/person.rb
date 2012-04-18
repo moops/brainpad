@@ -1,7 +1,15 @@
 require 'open-uri'
 require 'rexml/document'
 
-class Person < ActiveRecord::Base
+class Person
+  include Mongoid::Document
+  
+  field :user_name, type: String
+  field :mail_url, type: String
+  field :banking_url, type: String
+  field :map_center, type: String
+  field :created_at, type: DateTime
+  field :updated_at, type: DateTime
 
   has_many :accounts
   has_many :connections

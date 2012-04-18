@@ -1,4 +1,18 @@
-class Contact < ActiveRecord::Base
+class Contact
+  include Mongoid::Document
+  
+  field :name, type: String
+  field :email, type: String
+  field :phone_home, type: String
+  field :phone_work, type: String
+  field :phone_cell, type: String
+  field :address, type: String
+  field :city, type: String
+  field :tags, type: String
+  field :comments, type: String
+  field :person_id, type: Integer
+  field :created_at, type: DateTime
+  field :updated_at, type: DateTime
 
   belongs_to :person
   

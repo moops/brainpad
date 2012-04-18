@@ -1,4 +1,12 @@
-class Journal < ActiveRecord::Base
+class Journal
+  include Mongoid::Document
+  
+  field :entry, type: String
+  field :entry_on, type: String
+  field :journal_type, type: String
+  field :person_id, type: Integer
+  field :created_at, type: DateTime
+  field :updated_at, type: DateTime
 
   belongs_to :person
   
