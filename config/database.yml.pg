@@ -1,0 +1,30 @@
+
+development:
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: brainpad_development
+  pool: 5
+  username: postgres
+  password: 
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: brainpad_test
+  pool: 5
+  username: postgres
+  password: 
+  host: localhost
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: brainpad_production
+  pool: 5
+  username: postgres
+  password: 
+  host: localhost
