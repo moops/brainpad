@@ -4,12 +4,12 @@ require 'rexml/document'
 class Person
   include Mongoid::Document
   
-  field :user_name, type: String
-  field :mail_url, type: String
-  field :banking_url, type: String
-  field :map_center, type: String
-  field :created_at, type: DateTime
-  field :updated_at, type: DateTime
+  field :user_name
+  field :mail_url
+  field :banking_url
+  field :map_center
+  field :created_at, :type => DateTime
+  field :updated_at, :type => DateTime
 
   has_many :accounts
   has_many :connections

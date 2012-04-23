@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       @user = Person.find(session[:user].user_id)
       @user.auth_profile = session[:user]
     else
-      session[:return_to] = request.request_uri
+      session[:return_to] = request.fullpath
       redirect_to :controller => 'login' 
       return false
     end

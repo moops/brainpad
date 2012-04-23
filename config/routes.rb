@@ -1,4 +1,10 @@
 Brainpad::Application.routes.draw do
+
+  root :to => "links#index"
+  get 'signup', to: 'users#new', as: 'signup'
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+
   resources :milestones
   resources :workouts
   resources :reminders
@@ -15,13 +21,5 @@ Brainpad::Application.routes.draw do
       get 'refresh_tags'
     end
   end
-  
-  match 'login/logout' => 'login#logout'
 
-  root :to => "links#index"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  match ':controller(/:action(/:id(.:format)))'
-  
 end

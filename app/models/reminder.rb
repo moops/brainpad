@@ -1,16 +1,16 @@
 class Reminder
   include Mongoid::Document
   
-  field :description, type: String
-  field :done, type: Boolean
-  field :priority, type: Integer
-  field :reminder_type, type: Integer
-  field :frequency, type: Integer
-  field :repeat_until, type: Date
-  field :due_on, type: Date
-  field :person_id, type: Integer
-  field :created_at, type: DateTime
-  field :updated_at, type: DateTime
+  field :description
+  field :done, :type => Boolean
+  field :priority, :type => Integer
+  field :reminder_type, :type => Integer
+  field :frequency, :type => Integer
+  field :repeat_until, :type => Date
+  field :due_on, :type => Date
+  field :person_id, :type => Integer
+  field :created_at, :type => DateTime
+  field :updated_at, :type => DateTime
 
   belongs_to :person
   
