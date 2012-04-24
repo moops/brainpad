@@ -1,3 +1,17 @@
+//js in gems
+//= require jquery
+//= require jquery_ujs
+
+//js in lib/assets
+//= require jquery-ui
+//= require jquery.easing
+//= require jquery.tooltip
+//= require jquery.validate
+
+//js in app/assets
+//= require_self
+//= require_tree .
+
 jQuery.ajaxSetup({ 'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")} })
 
 function _ajax_request(url, data, callback, type, method) {

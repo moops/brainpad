@@ -1,3 +1,9 @@
+/*
+*= require jquery-ui
+*= require jquery.tooltip
+*= require_self
+*/
+
 a           { color: #3333ff; text-decoration: none; font-family: verdana; }
 a:visited   { color: #3333ff; text-decoration: none; font-family: verdana; }
 a:active    { color: #3333ff; text-decoration: none; font-family: verdana; }
