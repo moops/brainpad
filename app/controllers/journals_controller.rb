@@ -1,6 +1,6 @@
 class JournalsController < ApplicationController
   
-  before_filter :authorize
+  load_and_authorize_resource
   layout 'standard.html', :except => :show
   
   # GET /journals
@@ -27,8 +27,6 @@ class JournalsController < ApplicationController
   # GET /journals/1
   # GET /journals/1.xml
   def show
-    @journal = Journal.find(params[:id])
-
     respond_to do |format|
       format.js { render :layout => false }
       format.xml { render :xml => @journal }
@@ -47,8 +45,6 @@ class JournalsController < ApplicationController
   # POST /journals
   # POST /journals.xml
   def create
-    @journal = Journal.new(params[:journal])
-    
     respond_to do |format|
       if @journal.save
         flash[:notice] = 'Journal was successfully created.'
@@ -65,9 +61,6 @@ class JournalsController < ApplicationController
   # PUT /journals/1
   # PUT /journals/1.xml
   def update
-    logger.info('updating a journal')
-    @journal = Journal.find(params[:id])
-
     respond_to do |format|
       if @journal.update_attributes(params[:journal])
         flash[:notice] = 'Journal was successfully updated.'
@@ -84,7 +77,6 @@ class JournalsController < ApplicationController
   # DELETE /journals/1
   # DELETE /journals/1.xml
   def destroy
-    @journal = Journal.find(params[:id])
     @journal.destroy
 
     respond_to do |format|

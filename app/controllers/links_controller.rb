@@ -2,7 +2,7 @@
 
 class LinksController < ApplicationController
 
-  before_filter :authorize
+  load_and_authorize_resource
   layout 'standard.html'
   
   # GET /links
@@ -12,7 +12,7 @@ class LinksController < ApplicationController
       session[:tags] = getUniqueTags
     end
     @all = Link.find(:all, :conditions => "person_id = #{@user.id}")
-    
+
     @recently_clicked = @all.sort { |a,b| (a.last_clicked and b.last_clicked) ? b.last_clicked<=>(a.last_clicked) : 0 }[0,9]
     @recently_added = @all.sort { |a,b| b.created_at<=>(a.created_at) }[0,9]
     @most_often_1 = @all.sort { |a,b| (b.clicks and a.clicks) ? b.clicks<=>a.clicks : 0 }[0,9]
@@ -21,7 +21,7 @@ class LinksController < ApplicationController
     @milestone = Milestone.next_milestone(@user)
     @due_today = Reminder.todays(@user.id)
     # @feeds = Feeds.get_feeds
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @links }
@@ -31,8 +31,6 @@ class LinksController < ApplicationController
   # GET /links/1
   # GET /links/1.xml
   def show
-    @link = Link.find(params[:id])
-
     respond_to do |format|
       format.html { 
         clicks = @link.clicks ? @link.clicks += 1 : 1
@@ -64,17 +62,12 @@ class LinksController < ApplicationController
 
   # GET /links/1/edit
   def edit
-    @link = Link.find(params[:id])
   end
 
   # POST /links
   # POST /links.xml
   def create
-    logger.info('create called')
-    @link = Link.new(params[:link])
     @link.person = @user
-    logger.info('@link: ' + @link.inspect)
-    
     respond_to do |format|
       if @link.save
         flash[:notice] = 'Link was successfully created.'
@@ -90,8 +83,6 @@ class LinksController < ApplicationController
   # PUT /links/1
   # PUT /links/1.xml
   def update
-    @link = Link.find(params[:id])
-
     respond_to do |format|
       if @link.update_attributes(params[:link])
         flash[:notice] = 'Link was successfully updated.'
@@ -107,7 +98,6 @@ class LinksController < ApplicationController
   # DELETE /links/1
   # DELETE /links/1.xml
   def destroy
-    @link = Link.find(params[:id])
     @link.destroy
 
     respond_to do |format|
@@ -115,7 +105,7 @@ class LinksController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   # GET /links/find
   # GET /links/find.xml
   def find
@@ -127,18 +117,18 @@ class LinksController < ApplicationController
       format.xml  { render :xml => @found_links }
     end
   end
-  
+
   # GET /links/clean
   def clean
     @links = Link.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => :name, :per_page => 15
   end
-  
+
   # GET /link/refresh_tags
   def refresh_tags
     session[:tags] = getUniqueTags
     render(:partial => 'tags')
   end
-  
+
   # non-restfull inline editors
   def update_field
     link = Link.find(params[:id])
@@ -146,22 +136,22 @@ class LinksController < ApplicationController
     render(:text => params[:value])
   end
   # end non-restfull inline editors
-  
-  private
-  
-    def getUniqueTags
-      unique_tags = []
-      #all_links = Link.find(:all)
-      all_links = Link.find_by_sql("select * from links where person_id = #{@user.id}")
-      all_links.each { |cur_link|
-        if cur_link.tags
-          cur_link.tags.split(' ').each { |cur_tag|
-            unique_tags.push(cur_tag.strip)
-          }
-        end
-      }
-      unique_tags.uniq!
-      unique_tags.sort!
-      return unique_tags
-    end
+
+private
+
+  def getUniqueTags
+    unique_tags = []
+    #all_links = Link.find(:all)
+    all_links = Link.find_by_sql("select * from links where person_id = #{@user.id}")
+    all_links.each { |cur_link|
+      if cur_link.tags
+        cur_link.tags.split(' ').each { |cur_tag|
+          unique_tags.push(cur_tag.strip)
+        }
+      end
+    }
+    unique_tags.uniq!
+    unique_tags.sort!
+    return unique_tags
+  end
 end

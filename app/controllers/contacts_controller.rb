@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   
-  before_filter :authorize
+  load_and_authorize_resource
   layout 'standard', :except => :show
   
   # GET /contacts
@@ -25,8 +25,6 @@ class ContactsController < ApplicationController
   # GET /contacts/1
   # GET /contacts/1.xml
   def show
-    @contact = Contact.find(params[:id])
-
     respond_to do |format|
       format.js { render :layout => false }
       format.xml  { render :xml => @contact }
@@ -35,7 +33,6 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1/edit
   def edit
-    @contact = Contact.find(params[:id])
     respond_to do |format|
       format.html 
       format.js { render :layout => false }
@@ -45,8 +42,6 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.xml
   def create
-    @contact = Contact.new(params[:contact])
-
     respond_to do |format|
       if @contact.save
         flash[:notice] = 'Contact was successfully created.'
@@ -62,8 +57,6 @@ class ContactsController < ApplicationController
   # PUT /contacts/1
   # PUT /contacts/1.xml
   def update
-    @contact = Contact.find(params[:id])
-
     respond_to do |format|
       if @contact.update_attributes(params[:contact])
         flash[:notice] = 'Contact was successfully updated.'
@@ -79,28 +72,25 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1
   # DELETE /contacts/1.xml
   def destroy
-    @contact = Contact.find(params[:id])
     @contact.destroy
-
     respond_to do |format|
       format.html { redirect_to(contacts_url) }
       format.xml  { head :ok }
     end
   end
-  
-  private
-  
-    def getUniqueTags
-      unique_tags = []
-      all_contacts = Contact.find(:all, :conditions => "person_id = #{@user.id}")
-      all_contacts.each { |cur_contact|
-        cur_contact.tags.split.each { |cur_tag|
-          unique_tags.push(cur_tag.strip)
-        }
+
+private
+
+  def getUniqueTags
+    unique_tags = []
+    all_contacts = Contact.find(:all, :conditions => "person_id = #{@user.id}")
+    all_contacts.each { |cur_contact|
+      cur_contact.tags.split.each { |cur_tag|
+        unique_tags.push(cur_tag.strip)
       }
-      unique_tags.uniq!
-      unique_tags.sort!
-      return unique_tags
-    end
-    
+    }
+    unique_tags.uniq!
+    unique_tags.sort!
+    return unique_tags
+  end
 end

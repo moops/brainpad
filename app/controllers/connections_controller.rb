@@ -1,6 +1,6 @@
 class ConnectionsController < ApplicationController
   
-  before_filter :authorize
+  load_and_authorize_resource
   layout 'standard', :except => :show
   
   # GET /connections
@@ -23,7 +23,6 @@ class ConnectionsController < ApplicationController
   # GET /connections/1
   # GET /connections/1.xml
   def show
-    @connection = Connection.find(params[:id])
 
     respond_to do |format|
       format.js { render :layout => false }
@@ -34,7 +33,6 @@ class ConnectionsController < ApplicationController
   # GET /connections/new
   # GET /connections/new.xml
   def new
-    @connection = Connection.new
 
     respond_to do |format|
       format.js { render :layout => false }
@@ -44,7 +42,6 @@ class ConnectionsController < ApplicationController
 
   # GET /connections/1/edit
   def edit
-    @connection = Connection.find(params[:id])
     respond_to do |format|
       format.html 
       format.js { render :layout => false }
@@ -54,7 +51,6 @@ class ConnectionsController < ApplicationController
   # POST /connections
   # POST /connections.xml
   def create
-    @connection = Connection.new(params[:connection])
 
     respond_to do |format|
       if @connection.save
@@ -71,7 +67,6 @@ class ConnectionsController < ApplicationController
   # PUT /connections/1
   # PUT /connections/1.xml
   def update
-    @connection = Connection.find(params[:id])
 
     respond_to do |format|
       if @connection.update_attributes(params[:connection])
@@ -88,7 +83,6 @@ class ConnectionsController < ApplicationController
   # DELETE /connections/1
   # DELETE /connections/1.xml
   def destroy
-    @connection = Connection.find(params[:id])
     @connection.destroy
 
     respond_to do |format|

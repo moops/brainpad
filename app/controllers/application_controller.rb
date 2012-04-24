@@ -1,22 +1,22 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
-  helper :all # include all helpers, all the time
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
-
-  # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  protect_from_forgery
+  helper_method :current_user
+  after_filter :store_last_good_page
   
-  def authorize
-    if session[:user]
-      @user = Person.find(session[:user].user_id)
-      @user.auth_profile = session[:user]
-    else
-      session[:return_to] = request.fullpath
-      redirect_to :controller => 'login' 
-      return false
-    end
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:notice] = "Access denied."
+    redirect_to root_url
   end
   
+  def store_last_good_page
+    session[:last_good_page] = request.fullpath
+    flash[:notice] = "last good page: #{session[:last_good_page]}"
+  end
+  
+  private
+  
+  def current_user
+    @current_user_session ||= Session.find(session[:user_session]) if session[:user_session]
+    @current_user ||= @current_user_session.user if @current_user_session
+  end
 end

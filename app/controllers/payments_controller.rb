@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   
-  before_filter :authorize
+  load_and_authorize_resource
   layout 'standard.html', :except => :show
   
   # GET /payments
@@ -20,7 +20,7 @@ class PaymentsController < ApplicationController
       @tag = params[:tag]
     end
     @payments = @payments.page(params[:page]).per(25)
-    
+  
     @upcoming_payments = Payment.find_upcoming(@user)
     get_stuff_for_form
     @money_summary = MoneySummary.new(@user,31)
@@ -35,7 +35,6 @@ class PaymentsController < ApplicationController
   # GET /payments/1
   # GET /payments/1.xml
   def show
-    @payment = Payment.find(params[:id])
 
     respond_to do |format|
       format.js { render :layout => false }
@@ -45,7 +44,6 @@ class PaymentsController < ApplicationController
 
   # GET /payments/1/edit
   def edit
-    @payment = Payment.find(params[:id])
     @payment.amount = @payment.amount.abs
     get_stuff_for_form
     respond_to do |format|
@@ -57,7 +55,6 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.xml
   def create
-    @payment = Payment.new(params[:payment])
     @payment.amount *= -1 if @payment.payment_type.eql?('expense')
     @payment.apply_to_account
     respond_to do |format|
@@ -75,7 +72,6 @@ class PaymentsController < ApplicationController
   # PUT /payments/1
   # PUT /payments/1.xml
   def update
-    @payment = Payment.find(params[:id])
     new_amount = params[:payment][:amount].to_f
     logger.info("new_amount: #{new_amount}, payment type: #{params[:payment][:payment_type]}")
     new_amount = -new_amount if 'expense'.eql? params[:payment][:payment_type]
@@ -99,7 +95,6 @@ class PaymentsController < ApplicationController
   # DELETE /payments/1
   # DELETE /payments/1.xml
   def destroy
-    @payment = Payment.find(params[:id])
     @payment.destroy
 
     respond_to do |format|
@@ -107,15 +102,14 @@ class PaymentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  private
-    
-    def get_stuff_for_form
-      @payment_types = %w{ expense deposit transfer }
-      @accounts = @user.active_accounts
-      @tags = Payment.user_tags(@user)
+
+private
+
+  def get_stuff_for_form
+    @payment_types = %w{ expense deposit transfer }
+    @accounts = @user.active_accounts
+    @tags = Payment.user_tags(@user)
   end
-  
 end
 
 class MoneySummary
@@ -141,5 +135,4 @@ class MoneySummary
       @balance += account.balance?
     end
   end
-    
 end

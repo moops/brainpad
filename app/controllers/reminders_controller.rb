@@ -1,6 +1,6 @@
 class RemindersController < ApplicationController
 
-  before_filter :authorize
+  load_and_authorize_resource
   layout 'standard.html', :except => :show
 
   # GET /reminders
@@ -28,7 +28,6 @@ class RemindersController < ApplicationController
   # GET /reminders/1
   # GET /reminders/1.xml
   def show
-    @reminder = Reminder.find(params[:id])
 
     respond_to do |format|
       format.js { render :layout => false }
@@ -39,7 +38,6 @@ class RemindersController < ApplicationController
   # GET /reminders/new
   # GET /reminders/new.xml
   def new
-    @reminder = Reminder.new
 
     respond_to do |format|  
       format.html # new.html.erb
@@ -49,7 +47,6 @@ class RemindersController < ApplicationController
 
   # GET /reminders/1/edit
   def edit
-    @reminder = Reminder.find(params[:id])
     respond_to do |format|
       format.html 
       format.js { render :layout => false }
@@ -59,7 +56,6 @@ class RemindersController < ApplicationController
   # POST /reminders
   # POST /reminders.xml
   def create
-    @reminder = Reminder.new(params[:reminder])
 
     respond_to do |format|
       if @reminder.save
@@ -76,7 +72,6 @@ class RemindersController < ApplicationController
   # PUT /reminders/1
   # PUT /reminders/1.xml
   def update
-    @reminder = Reminder.find(params[:id])
 
     respond_to do |format|
       if @reminder.update_attributes(params[:reminder])
@@ -93,7 +88,6 @@ class RemindersController < ApplicationController
   # DELETE /reminders/1
   # DELETE /reminders/1.xml
   def destroy
-    @reminder = Reminder.find(params[:id])
     @reminder.destroy
 
     respond_to do |format|

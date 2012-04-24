@@ -1,6 +1,6 @@
 class WorkoutsController < ApplicationController
   
-  before_filter :authorize
+  load_and_authorize_resource
   layout 'standard.html', :except => :show
   
   # GET /workouts
@@ -28,7 +28,6 @@ class WorkoutsController < ApplicationController
   # GET /workouts/1
   # GET /workouts/1.xml
   def show
-    @workout = Workout.find(params[:id])
 
     respond_to do |format|
       format.js { render :layout => false }
@@ -39,7 +38,6 @@ class WorkoutsController < ApplicationController
   # GET /workouts/new
   # GET /workouts/new.xml
   def new
-    @workout = Workout.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -49,7 +47,6 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts/1/edit
   def edit
-    @workout = Workout.find(params[:id])
     respond_to do |format|
       format.html 
       format.js { render :layout => false }
@@ -59,7 +56,6 @@ class WorkoutsController < ApplicationController
   # POST /workouts
   # POST /workouts.xml
   def create
-    @workout = Workout.new(params[:workout])
 
     respond_to do |format|
       if @workout.save
@@ -76,7 +72,6 @@ class WorkoutsController < ApplicationController
   # PUT /workouts/1
   # PUT /workouts/1.xml
   def update
-    @workout = Workout.find(params[:id])
 
     respond_to do |format|
       if @workout.update_attributes(params[:workout])
@@ -93,7 +88,6 @@ class WorkoutsController < ApplicationController
   # DELETE /workouts/1
   # DELETE /workouts/1.xml
   def destroy
-    @workout = Workout.find(params[:id])
     @workout.destroy
 
     respond_to do |format|
