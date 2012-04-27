@@ -141,8 +141,8 @@ private
 
   def getUniqueTags
     unique_tags = []
-    #all_links = Link.find(:all)
-    all_links = Link.find_by_sql("select * from links where person_id = #{@user.id}")
+    all_links = Link.find(:all)
+    #all_links = Link.find_by_sql("select * from links where person_id = #{@user.id}")
     all_links.each { |cur_link|
       if cur_link.tags
         cur_link.tags.split(' ').each { |cur_tag|
