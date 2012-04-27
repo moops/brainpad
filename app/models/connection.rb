@@ -1,18 +1,16 @@
 class Connection
   include Mongoid::Document
+  include Mongoid::Timestamps
   
   field :name
   field :username
   field :password
   field :url
-  field :description,
-  field :person_id, :type => Integer
-  field :created_at, :type => DateTime
-  field :updated_at, :type => DateTime
+  field :description
 
   belongs_to :person
   
-  validates_presence_of :person, :username, :password, :url
+  validates_presence_of :username, :password, :url
   
   def self.search(condition_params, page)
     condition_params[:q] = "%#{condition_params[:q]}%"

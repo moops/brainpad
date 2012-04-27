@@ -1,16 +1,14 @@
 class Journal
   include Mongoid::Document
+  include Mongoid::Timestamps
   
   field :entry
   field :entry_on
   field :journal_type
-  field :person_id, :type => Integer
-  field :created_at, :type => DateTime
-  field :updated_at, :type => DateTime
 
   belongs_to :person
   
-  validates_presence_of :person, :entry, :entry_on
+  validates_presence_of :entry, :entry_on
   
   def self.search(condition_params, page)
     condition_params[:q] = "%#{condition_params[:q]}%"

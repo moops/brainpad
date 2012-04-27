@@ -3,13 +3,12 @@ require 'rexml/document'
 
 class Person
   include Mongoid::Document
+  include Mongoid::Timestamps
   
   field :user_name
   field :mail_url
   field :banking_url
   field :map_center
-  field :created_at, :type => DateTime
-  field :updated_at, :type => DateTime
 
   has_many :accounts
   has_many :connections
@@ -18,7 +17,7 @@ class Person
   has_many :links
   has_many :reminders
   has_many :workouts
-  has_many :payments, :through => :accounts
+  #has_many :payments, :through => :accounts
   
   validates_presence_of :user_name
   

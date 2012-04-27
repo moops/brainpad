@@ -1,5 +1,6 @@
 class Payment
   include Mongoid::Document
+  include Mongoid::Timestamps
   
   field :description
   field :tags
@@ -9,15 +10,12 @@ class Payment
   field :until, :type => Date
   field :account_id, :type => Integer
   field :transfer_from, :type => Integer
-  field :person_id, :type => Integer
-  field :created_at, :type => DateTime
-  field :updated_at, :type => DateTime
 
   belongs_to :person
   belongs_to :account
   belongs_to :transfer_account, :class_name => 'Account', :foreign_key => 'transfer_from'
   
-  validates_presence_of :person, :account, :amount, :payment_on
+  validates_presence_of :account, :amount, :payment_on
 
   attr_accessor :payment_type
     

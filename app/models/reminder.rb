@@ -1,5 +1,6 @@
 class Reminder
   include Mongoid::Document
+  include Mongoid::Timestamps
   
   field :description
   field :done, :type => Boolean
@@ -8,13 +9,10 @@ class Reminder
   field :frequency, :type => Integer
   field :repeat_until, :type => Date
   field :due_on, :type => Date
-  field :person_id, :type => Integer
-  field :created_at, :type => DateTime
-  field :updated_at, :type => DateTime
 
   belongs_to :person
   
-  validates_presence_of :person, :description, :due_on
+  validates_presence_of :description, :due_on
   
   def self.search(condition_params, page)
     condition_params[:q] = "%#{condition_params[:q]}%"
