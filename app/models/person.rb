@@ -1,12 +1,14 @@
 class Person
   include Mongoid::Document
   include Mongoid::Timestamps
+  include ActiveModel::SecurePassword
 
   field :user_name
   field :mail_url
   field :banking_url
   field :map_center
   field :authority, :type => Integer
+  field :password_digest
 
   has_many :accounts
   has_many :connections
@@ -17,7 +19,10 @@ class Person
   has_many :workouts
   #has_many :payments, :through => :accounts
 
+  has_secure_password
   validates_presence_of :user_name
+  validates_uniqueness_of :user_name
+  attr_accessible :user_name, :password, :password_confirmation
 
   ROLES = %w[admin user]
 
