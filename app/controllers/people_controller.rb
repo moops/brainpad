@@ -31,16 +31,13 @@ class PeopleController < ApplicationController
   # POST /people.xml
   def create
 
-    respond_to do |format|
+    @person = User.new(params[:user])
       if @person.save
-        flash[:notice] = 'Person was successfully created.'
-        format.html { redirect_to(@person) }
-        format.xml  { render :xml => @person, :status => :created, :location => @person }
+        session[:user_id] = @user.id
+        redirect_to root_url, notice: "Thank you for signing up!"
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
+        render "new"
       end
-    end
   end
 
   # PUT /people/1

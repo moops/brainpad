@@ -11,15 +11,15 @@ class LinksController < ApplicationController
     unless session[:tags]
       session[:tags] = getUniqueTags
     end
-    @all = Link.find(:all, :conditions => "person_id = #{@user.id}")
+    @all = Link.find(:all, :conditions => "person_id = #{current_user.id}")
 
     @recently_clicked = @all.sort { |a,b| (a.last_clicked and b.last_clicked) ? b.last_clicked<=>(a.last_clicked) : 0 }[0,9]
     @recently_added = @all.sort { |a,b| b.created_at<=>(a.created_at) }[0,9]
     @most_often_1 = @all.sort { |a,b| (b.clicks and a.clicks) ? b.clicks<=>a.clicks : 0 }[0,9]
     @most_often_2 = @all.sort { |a,b| (b.clicks and a.clicks) ? b.clicks<=>a.clicks : 0 }[9,9]
     @random = @all.sort_by { rand }[0,9]
-    @milestone = Milestone.next_milestone(@user)
-    @due_today = Reminder.todays(@user.id)
+    @milestone = Milestone.next_milestone(current_user)
+    @due_today = Reminder.todays(current_user.id)
     # @feeds = Feeds.get_feeds
 
     respond_to do |format|
@@ -67,7 +67,7 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.xml
   def create
-    @link.person = @user
+    @link.person = current_user
     respond_to do |format|
       if @link.save
         flash[:notice] = 'Link was successfully created.'
@@ -110,7 +110,7 @@ class LinksController < ApplicationController
   # GET /links/find.xml
   def find
     logger.info('finding links...')
-    @found_links = Link.find(:all, :conditions => "person_id = #{@user.id} and tags like '%#{params[:tag]}%'")
+    @found_links = Link.find(:all, :conditions => "person_id = #{current_user.id} and tags like '%#{params[:tag]}%'")
     logger.info("found links: #{@found_links.inspect}")
     respond_to do |format|
       format.html { render :partial => 'found_links' }
@@ -120,7 +120,7 @@ class LinksController < ApplicationController
 
   # GET /links/clean
   def clean
-    @links = Link.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => :name, :per_page => 15
+    @links = Link.paginate :page => params[:page], :conditions => "person_id = #{@current_user.id}", :order => :name, :per_page => 15
   end
 
   # GET /link/refresh_tags
