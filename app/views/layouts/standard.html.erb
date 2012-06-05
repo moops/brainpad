@@ -40,6 +40,9 @@
                 <%= link_to('log out', logout_path, {:title => 'get me out of here', :id => 'logoutlink'}) %>
                 <br/>
                 <% if @current_user.born_on %>you've used <%= @current_user.age_in_days? %> days and have <%= @current_user.days_left? %> left.<% end %>
+            <% else %>
+                <%= link_to "Sign Up", signup_path %> or
+                <%= link_to "Log In", login_path %>
             <% end %></div>
         <div id="copyright">
             &copy <%= Date.today.year %> raceweb.ca victoria bc<br>

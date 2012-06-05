@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   rescue_from CanCan::AccessDenied do |exception|
     flash[:notice] = "Access denied."
-    redirect_to root_url
+    redirect_to login_path
   end
   
   def store_last_good_page
@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
   
   def current_user
     @current_user_session ||= Session.find(session[:user_session]) if session[:user_session]
-    @current_user ||= @current_user_session.user if @current_user_session
+    @current_user ||= @current_user_session.user.id if @current_user_session and @current_user_session.user
   end
 end

@@ -1,27 +1,41 @@
-<h1>New person</h1>
+<h1>sign up</h1>
 
 <% form_for(@person) do |f| %>
-  <%= f.error_messages %>
+  <% if @person.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% @person.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <p>
-    <%= f.label :user_name %><br />
-    <%= f.text_field :user_name %>
-  </p>
-  <p>
-    <%= f.label :mail_url %><br />
-    <%= f.text_field :mail_url %>
-  </p>
-  <p>
-    <%= f.label :banking_url %><br />
-    <%= f.text_field :banking_url %>
-  </p>
-  <p>
-    <%= f.label :map_center %><br />
-    <%= f.text_field :map_center %>
-  </p>
-  <p>
+<fieldset>
+    <legend>details</legend> 
+    <ol>   
+        <li>
+            <%= f.label :user_name %><br />
+            <%= f.text_field :user_name %>
+        </li>
+        <li>
+            <%= f.label :mail_url %><br />
+            <%= f.text_field :mail_url %>
+        </li>
+        <li>
+            <%= f.label :banking_url %><br />
+            <%= f.text_field :banking_url %>
+        </li>
+        <li>
+            <%= f.label :map_center %><br />
+            <%= f.text_field :map_center %>
+        </li>
+    </ol></fieldset>
+<fieldset class="submit">
     <%= f.submit 'Create' %>
-  </p>
+</fieldset>
+
 <% end %>
 
 <%= link_to 'Back', people_path %>

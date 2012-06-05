@@ -14,12 +14,13 @@ class PeopleController < ApplicationController
   end
 
   # GET /people/new
-  # GET /people/new.xml
+  # GET /people/new.json
   def new
-
+    @person = Person.new
+    
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @person }
+      format.json  { render :json => @person }
     end
   end
 
