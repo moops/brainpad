@@ -5,7 +5,10 @@ class ApplicationController < ActionController::Base
   
   rescue_from CanCan::AccessDenied do |exception|
     flash[:notice] = "Access denied."
-    redirect_to login_path
+    redirect_to login_path, :format => :js
+   # render :action => '/sessions/new', 
+    #       :content_type => 'application/javascript',
+    #       :layout => false
   end
   
   def store_last_good_page
