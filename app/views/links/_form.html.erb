@@ -1,0 +1,11 @@
+<%= simple_form_for(@link, :html => {:class => 'form-horizontal' }) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input(:name) %>
+    <%= f.input(:url) %>
+    <%= f.input(:tags) %>
+    <%= f.input(:comments) %>
+    <%= f.input(:expires_on) %>
+    <%= f.input(:clicks) %>
+    <%= f.input(:last_clicked_on) %>
+    <%= f.button(:submit) %>
+<% end %>

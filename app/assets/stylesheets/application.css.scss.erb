@@ -1,0 +1,93 @@
+//@import "slate"; //bootstrap theme
+@import "bootstrap";
+@import "bootstrap-responsive";
+@import "datepicker";
+
+body {
+    background-image: url(<%= asset_path('grgrad.gif') %>) repeat-x;
+}
+
+/*
+ ************************************************
+ nav bar
+ ************************************************
+ */
+ul, li {
+    margin: 0; padding: 0;
+}
+
+#blob {
+    border-right: 1px solid #0059ec;
+    border-left: 1px solid #0059ec;
+    position: absolute;
+    top: 0;
+    z-index : 1;
+    background: #0b2b61;
+    background: -moz-linear-gradient(top, #0b2b61, #1153c0);
+    background: -webkit-gradient(linear, left top, left bottom, from(#0b2b61), to(#1153c0));
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-box-shadow: 2px 3px 10px #011331;
+    -webkit-box-shadow: 2px 3px 10px #011331;
+}
+
+#nav {
+    position: relative;
+    background: #333;
+    float: left;
+}
+
+#nav li {
+    float: left;
+    list-style: none;
+    border-right: 1px solid #4a4a4a;
+    border-left: 1px solid black;
+}
+
+#nav li a {
+    color: #e3e3e3;
+    position: relative;
+    z-index: 2;
+    float: left;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+/*
+ ************************************************
+ bootstrap fixes
+ ************************************************
+ */
+div.modal form {
+    margin-bottom: 0px;
+}
+
+/*
+ ************************************************
+ containers
+ ************************************************
+ */
+#container {
+    margin: auto;
+    padding-top: 10px;
+    width: 920px;
+}
+
+#nav {
+    margin: auto;
+    width:100%;
+    margin-bottom: 25px;
+}
+
+footer {
+    margin: auto;
+    width: 920px;
+    font-size: .9em;
+    border: 1px solid #bbb;
+    border-radius: 6px 6px;
+    padding: 5px;
+}
+
+footer .search form {
+    display: inline;
+}

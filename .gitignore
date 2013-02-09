@@ -1,6 +1,8 @@
 config/database.yml
 .bundle
-tmp/**/*
 *.log
+*.dat
+*.dump
 *~
 .DS_Store
+tmp

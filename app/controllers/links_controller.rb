@@ -2,22 +2,23 @@
 
 class LinksController < ApplicationController
 
-  load_and_authorize_resource
-  layout 'standard.html'
+  # load_and_authorize_resource
+  load_resource
   
   # GET /links
   # GET /links.xml
   def index
+    @user = Person.first
     unless session[:tags]
       session[:tags] = getUniqueTags
     end
     @all = Link.all
 
-    @recently_clicked = @all.sort { |a,b| (a.last_clicked and b.last_clicked) ? b.last_clicked<=>(a.last_clicked) : 0 }[0,9]
-    @recently_added = @all.sort { |a,b| b.created_at<=>(a.created_at) }[0,9]
-    @most_often_1 = @all.sort { |a,b| (b.clicks and a.clicks) ? b.clicks<=>a.clicks : 0 }[0,9]
-    @most_often_2 = @all.sort { |a,b| (b.clicks and a.clicks) ? b.clicks<=>a.clicks : 0 }[9,9]
-    @random = @all.sort_by { rand }[0,9]
+    @recently_clicked = @all.desc(:last_clicked_on).limit(4).all
+    @recently_added = @all.desc(:created_at).limit(4).all
+    @most_often_1 = @all.desc(:clicks).limit(4).all
+    @random = @all.sort_by { rand }[0,4]
+    
     @milestone = Milestone.next_milestone(current_user)
     @due_today = Reminder.todays(current_user)
     # @feeds = Feeds.get_feeds
@@ -34,7 +35,7 @@ class LinksController < ApplicationController
     respond_to do |format|
       format.html { 
         clicks = @link.clicks ? @link.clicks += 1 : 1
-        @link.update_attributes({'clicks' => clicks, 'last_clicked' => Time.now})
+        @link.update_attributes({'clicks' => clicks, 'last_clicked_on' => Time.now})
         redirect_to "http://#{@link.url}" 
       }
       format.xml  { render :xml => @link }
@@ -44,15 +45,14 @@ class LinksController < ApplicationController
   # GET /links/new
   # GET /links/new.xml
   def new
-    @link = Link.find_by_url(params[:url].sub('http://',''))
+    @link = Link.where(url: params[:url]).first if params[:url]
     if @link
       flash[:notice] = "#{@link.url} already exists"
       redirect_to(links_path)
     end
     @link = Link.new unless @link 
-    @link.name = params[:name].downcase
+    @link.name = params[:name].downcase if params[:name]
     @link.url = params[:url]
-    @link.url.sub!('http://','')
 
     respond_to do |format|
       format.html # new.html.erb
@@ -67,7 +67,7 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.xml
   def create
-    @link.person = current_user
+    @link.person = current_user if current_user
     respond_to do |format|
       if @link.save
         flash[:notice] = 'Link was successfully created.'
@@ -141,7 +141,7 @@ private
 
   def getUniqueTags
     unique_tags = []
-    all_links = Link.find(:all)
+    all_links = Link.all
     #all_links = Link.find_by_sql("select * from links where person_id = #{@user.id}")
     all_links.each { |cur_link|
       if cur_link.tags

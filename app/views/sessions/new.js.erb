@@ -1,11 +1,9 @@
-alert('show login form');
-
-jQuery('#log-in-form')
-    .html("<%= escape_javascript(render(:partial => 'sessions/form')) %>");
-
-jQuery('#log-in-form').modal();
-
+$('#login-form')
+    .html("<%= escape_javascript(render(:partial => 'form')) %>")
+    .modal('show');
+/*
 validate('user-session-form', {
     'email': "required",
     'password': "required"
 });
+*/

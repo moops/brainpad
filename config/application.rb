@@ -63,7 +63,9 @@ module Brainpad
     config.assets.version = '1.0'
     
     config.time_zone = 'Pacific Time (US & Canada)'
-    DATE_FORMAT = '%B %d %Y'  
+    DATE_FORMAT = '%B %d %Y' 
+    
+    Mongoid.logger.level = Logger::DEBUG
   end
 
 end

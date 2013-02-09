@@ -7,8 +7,8 @@ class Link
   field :tags
   field :comments
   field :clicks, :type => Integer
-  field :last_clicked, :type => DateTime
-  field :expires_on, :type => DateTime
+  field :last_clicked_on, :type => Date
+  field :expires_on, :type => Date
 
   belongs_to :person
   

@@ -1,19 +1,24 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.11'
 
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
   gem 'sass-rails', "  ~> 3.2.3"
   gem 'coffee-rails', "~> 3.2.1"
   gem 'uglifier', '>= 1.0.3'
+  gem 'bootstrap-sass'
 end
 
-gem "mongoid", "~> 2.4"       # mongodb
-gem "bson_ext", "~> 1.5"
+group :test do
+  gem 'factory_girl_rails'
+end
+
+gem "mongoid"                 # mongodb
+gem "bson_ext"                # used by mongoid
 gem 'json'                    # json api
 gem 'kaminari'                # pagination
-gem 'bcrypt-ruby', '~> 3.0.0' # password encryption
+gem 'bcrypt-ruby'             # password encryption
 gem 'cancan'                  # authorization
 gem 'jquery-rails'            # unobtrusive javascript
+gem 'simple_form'
+gem 'debugger', group: [:development, :test]

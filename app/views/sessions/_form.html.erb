@@ -1,15 +1,23 @@
-<%= form_tag('/sessions/create', :id => 'user-session-form') do %>
-<div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>log in here</h3>
-</div>
-<div class="modal-body">
-  	<%= label_tag(:email, nil, :class => 'inline') %>
-  	<%= text_field_tag('email', '', :size => '15') %>
-  	<%= label_tag(:password, nil, :class => 'inline') %>
-  	<%= password_field_tag('password', '', :size => '15') %>
-</div>
-<div class="modal-footer">
-    <%= submit_tag('log in', :class => 'btn btn-primary') %>
-</div>
+<%= form_tag(sessions_path, :class => 'form-horizontal') do %>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>login</h3>
+    </div>
+    <div class="modal-body">
+        <div class="control-group">
+            <%= label_tag :username, nil, :class => "control-label" %>
+            <div class="controls">
+                <%= text_field_tag :username, params[:username] %>
+            </div>
+        </div>
+        <div class="control-group">
+            <%= label_tag :password, nil, :class => "control-label" %>
+            <div class="controls">
+                <%= password_field_tag :password %>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <%= submit_tag("log in", :class => 'btn btn-primary') %>
+    </div>
 <% end %>

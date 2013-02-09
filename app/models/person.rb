@@ -3,11 +3,12 @@ class Person
   include Mongoid::Timestamps
   include ActiveModel::SecurePassword
 
-  field :user_name
+  field :username
+  field :born_on, type: Date
   field :mail_url
   field :banking_url
   field :map_center
-  field :authority, :type => Integer
+  field :authority, type: Integer
   field :password_digest
 
   has_many :accounts
@@ -20,9 +21,9 @@ class Person
   #has_many :payments, :through => :accounts
 
   has_secure_password
-  validates_presence_of :user_name
-  validates_uniqueness_of :user_name
-  attr_accessible :user_name, :password, :password_confirmation
+  validates_presence_of :username
+  validates_uniqueness_of :username
+  attr_accessible :username, :password, :password_confirmation, :born_on, :authority, :mail_url, :map_center
 
   ROLES = %w[admin user]
 
@@ -42,19 +43,19 @@ class Person
     roles.map(&:to_sym)
   end
 
-  def age_in_days?
-    Date.today - auth_profile.born_on
+  def age_in_days
+    Date.today - born_on
   end
 
-  def age_in_years?
-    y = Date.today.year - auth_profile.born_on.year
-    y -= 1 if (Date.today.yday < auth_profile.born_on.yday)
+  def age_in_years
+    y = Date.today.year - born_on.year
+    y -= 1 if (Date.today.yday < born_on.yday)
     y
   end
 
-  def days_left?
+  def days_left
     #based on 84 year life expectancy 
-    (auth_profile.born_on>>(84*12)) - Date.today
+    (born_on>>(84*12)) - Date.today
   end
 
   def active_accounts
@@ -62,15 +63,4 @@ class Person
     a.sort_by{|a| a.name }
   end
 
-  #def payments
-  #  p = Array.new
-  #  for a in active_accounts
-  #    p += a.payments
-  #  end
-  #  p
-  #end
-
-  def name?
-    auth_profile.name ? auth_profile.name : user_name
-  end
 end

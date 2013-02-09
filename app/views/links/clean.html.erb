@@ -19,9 +19,9 @@
         <td>
             <%= inline_edit("tag_#{i.to_s}", cur_link.tags, "/links/update_field/#{cur_link.id}", 25, highlight, 'tags') %></td>
             
-        <% if cur_link.last_clicked %>
+        <% if cur_link.last_clicked_on %>
             <td>
-                <%= inline_edit("clicked_#{i.to_s}", cur_link.last_clicked.strftime(DATE_FORMAT), "/links/update_field/#{cur_link.id}", 12, highlight, 'last_clicked') %></td>
+                <%= inline_edit("clicked_#{i.to_s}", cur_link.last_clicked_on.strftime(DATE_FORMAT), "/links/update_field/#{cur_link.id}", 12, highlight, 'last_clicked_on') %></td>
         <% else %>
             <td>never</td>
         <% end %>

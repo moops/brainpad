@@ -1,93 +1,55 @@
-<div class="accordion">
-  <h3><a href="#">links</a></h3>
-  <div class="links"> <!-- start links div -->
-    <div class="left">
-        <label class="page">often</label>
-        <ul>
-        <% for cur_link in @most_often_1 or Array.new %>
-            <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
-        <% end %>
-        </ul>
-    </div>
-    
-    <div class="left">
-        <div>&nbsp;</div>
-        <ul>
-        <% for cur_link in @most_often_2 or Array.new %>
-            <li>(<%=link_to(cur_link.clicks, edit_link_path(cur_link)) %>)<%=link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
-        <% end %>
-        </ul>
-    </div>
-    
-    <div class="left">
-        <label class="page">recent</label>
-        <ul>
-        <% for cur_link in @recently_clicked or Array.new %>
-            <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
-        <% end %>
-        </ul>
-    </div>
-    
-    <div class="left">
-        <label class="page">new</label>
-        <ul>
-        <% for cur_link in @recently_added or Array.new %>
-            <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
-        <% end %>
-        </ul>
-    </div>
-    
-    <div class="left">
-        <label class="page">random</label>
-        <ul>
-        <% for cur_link in @random or Array.new %>
-            <li><%= link_to(cur_link.name[0,14], cur_link, :title => cur_link.get_description) %></li>
-        <% end %>
-        </ul>
-    </div>
-    
-    <div style="clear: left;"></div>
-    
-    <div class="left">
-        <label class="page">other</label>
-        
-        <% if @user.mail_url %>
-            <a href="<%=@user.mail_url%>">mail</a>,
-        <% end %>
-        <% if @user.banking_url %>
-            <a href="<%=@user.banking_url%>">banking</a>,
-        <% end %>
-        <% if @user.map_center %>
-            <a href="http://maps.google.ca/maps?ll=<%=@user.map_center%>&spn=0.127157,0.246901&hl=en">maps</a>,
-        <% end %>
-        <a href="http://tvlistings3.zap2it.com/partners/grid.asp?partner_id=097">tv</a>,
-        <a href="javascript:location.href='http://localhost:3000/links/new?url='+encodeURIComponent(location.href)+'&name='+encodeURIComponent(document.title)">poster</a>
-
-    </div>
-    
-    <div style="clear: left;"></div>
-    
-    <div>
-        <label class="page">tags</label>       
-        <%= link_to('refresh', :remote => true, :url => refresh_tags_links_path, :update => "tags") %> |
-        <%= link_to('clean', clean_links_path) %><br/>
-        <div id="tags">
-            <% for cur_tag in session[:tags] %>
-                <%= link_to(cur_tag, :remote => true, :url => find_links_url(:tag => cur_tag), :update => "found_links") %>,
-            <% end %><p/>
+<div class="accordion" id="foobar">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#foobar" href="#collapse-links">links</a>
         </div>
-    
-        <div id="found_links"></div>
+        <div id="collapse-links" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="span3">
+                            <h4>often</h4>
+                            <ul>
+                            <%= render @most_often_1 %>
+                            </ul>
+                        </div>
+                        <div class="span2">
+                            <h4>recent</h4>
+                            <ul>
+                            <%= render @recently_clicked %>
+                            </ul>
+                        </div>
+                        <div class="span2">
+                            <h4>new</h4>
+                            <ul>
+                            <%= render @recently_added %>
+                            </ul>
+                        </div>
+                        <div class="span2">
+                            <h4>random</h4>
+                            <ul>
+                            <%= render @random %>
+                            </ul>
+                        </div>
+                    </div> <!-- end .row -->
+                </div>
+            </div>
+        </div>
     </div>
-    
-  </div> <!-- end links div -->
-  <h3><a href="#">feeds</a></h3>
-  <div class="links"> <!-- start feeds div -->
-  
-    
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#foobar" href="#collapse-feeds">feeds</a>
+        </div>
+        <div id="collapse-feeds" class="accordion-body collapse">
+            <div class="accordion-inner">
+                Anim pariatur cliche feeds...
+            </div>
+        </div>
+    </div>
+</div>
 
-  </div> <!-- end feeds div -->
-</div> <!-- end accordian div -->
+
+
 
 <% unless @due_today.empty? %>
 <label class="page">due today:</label>

@@ -12,38 +12,35 @@ class SessionsController < ApplicationController
   # POST /sessions.js
   def create
     
-    user = User.find_by_email(params[:email])
+    user = Person.find_by(email: params[:email])
 
     if user && user.authenticate(params[:password])
-      user.session = UserSession.new(:user_id => user.id) unless user.session
-      user.session.login_at= Time.now
-      user.session.logout_at= nil
-      user.session.count= (user.session.count or 0) + 1
-      user.session.save
-      session[:user_session] = user.session.id
-      
-      go_to = session[:last_good_page] || user_path(user.to_param)
+      session[:user_id] = user.id
+      flash[:notice] = "logged in as #{user.username}"
+      go_to = session[:last_good_page] || user_path(user)
     else
       flash[:warning] = 'who are you talking about?'
       go_to = session[:last_good_page] || root_url
     end
-    
-    flash[:notice] = "logged in as #{user.name}"
+
     redirect_to go_to
+
+    # from photo app
+    #user = User.find_by_email(params[:email])
+    #if user && user.authenticate(params[:password])
+    #  session[:user_id] = user.id
+    #  redirect_to root_url, notice: "Logged in!"
+    #else
+    #  flash.now.alert = "Email or password is invalid"
+    #  render "new"
+    #end
   end
   
   # logout
   # DELETE /sessions/1
   # DELETE /sessions/1.js
   def destroy
-    begin
-      @session = Session.find(params[:id])
-      @session.logout_at = Time.now
-      @session.save
-    rescue ActiveRecord::RecordNotFound
-    end
-    
-    reset_session 
-    redirect_to :root, :notice => "succesfully logged out."
+    session[:user_id] = nil
+    redirect_to root_url, notice: "Logged out!"
   end
 end

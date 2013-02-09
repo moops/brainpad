@@ -41,7 +41,8 @@ class Reminder
   end
   
   def self.todays(person_id)
-    Reminder.find(:all, :conditions => "person_id = #{person_id} and due_on = '#{Date.today}' and not done")
+    Reminder.where(due_on: Date.today, done: false)
+    #Reminder.find(:all, :conditions => "person_id = #{person_id} and due_on = '#{Date.today}' and not done")
   end
   
   def self.recent_reminders(user, days)

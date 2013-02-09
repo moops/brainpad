@@ -41,4 +41,6 @@ Lookup.create({:category => 36, :code => '15', :description => 'twice monthly' }
 Lookup.create({:category => 36, :code => '30', :description => 'monthly' })
 Lookup.create({:category => 36, :code => '365', :description => 'annualy' })
 
-adam = Person.create({ :id => 1, :user_name => 'adam', :password => 'adam_pass', :password_confirmation => 'adam_pass', :authority => '3', :mail_url => 'http://mail.google.com/mail', :map_center => '48.468141,-123.358612'})
+adam = Person.create({ :username => 'adam', :password => 'adam_pass', :password_confirmation => 'adam_pass', :born_on => 35.years.ago, :authority => '3', :mail_url => 'http://mail.google.com', :map_center => '48.468141,-123.358612'})
+quinn = Person.create({ :username => 'quinn', :password => 'quinn_pass', :password_confirmation => 'quinn_pass', :born_on => 45.years.ago, :authority => '3', :mail_url => 'http://mail.yahoo.com', :map_center => '48.468141,-123.358612'})
+dave = Person.create({ :username => 'dave', :password => 'dave_pass', :password_confirmation => 'dave_pass', :born_on => 55.years.ago, :authority => '3', :mail_url => 'http://mail.hotmail.com', :map_center => '48.468141,-123.358612'})

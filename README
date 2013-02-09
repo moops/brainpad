@@ -1,3 +1,37 @@
 == mongodb
 
 set up with instructions from: http://shiftcommathree.com/articles/how-to-install-mongodb-on-os-x
+
+
+nav bar - http://net.tutsplus.com/tutorials/html-css-techniques/how-to-build-a-lava-lamp-style-navigation-menu/
+        - http://nettuts.s3.amazonaws.com/600_spasticNav/index.html
+
+2010
+- Nov 01 - replace reminder_type with tags
+- Nov 01 - fix workout.route
+x Nov 10 - popup forms - Nov 18
+x Nov 18 - create form validation - Nov 18
+x Nov 18 - update form validation - Nov 19
+x Nov 18 - fix milestone editing - Nov 19
+x Nov 19 - add dashboard report to workouts - Nov 19
+x Nov 19 - generalize money_left etc css selectors - Nov 20 [added primary_panel and secondary_panel]
+x Nov 19 - look into replacing remote_edit_link with one of the js ajax methods in application.js - Nov 19
+x Nov 19 - turn show detail windows into modal dialogs - Nov 19
+x Nov 20 - new account link in popup form - Nov 20
+x Nov 20 - replace reminder list formating with green/yellow/red dates - Nov 20
+x Nov 20 - add dashboard report to calendar - Nov 20
+x Nov 20 - add search to journal - Nov 21
+x Nov 20 - add remaining entity lists to header box divs - Nov 20
+x Nov 21 - add search to workouts - Nov 21
+x Nov 21 - toggle search forms - Nov 21
+x Nov 21 - add search to payments, contacts, calendar and connections - Nov 21
+- Nov 21 - move contact tag links to search form select list
+x Nov 23 - fix workout searching with no type - Nov 24
+x Nov 24 - change submit button label on payment form from 'go' to 'create/update' - Nov 24
+x Nov 24 - expand units field on account form - Nov 24
+- Nov 24 - fix link tag links (link_to_remote change to jquery)
+2011
+x Jun 10 - replace will_paginate with kaminari
+- Aug 31 - add delete for expenses
+- Aug 31 - add validation for add expense form
+- Aug 31 - add update expense to be not recurring

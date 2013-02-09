@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
   private
   
   def current_user
-    @current_user_session ||= Session.find(session[:user_session]) if session[:user_session]
-    @current_user ||= @current_user_session.user.id if @current_user_session and @current_user_session.user
+    @current_user ||= Person.find(session[:user_id]) if session[:user_id]
   end
 end

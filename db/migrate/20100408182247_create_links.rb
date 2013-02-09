@@ -6,7 +6,7 @@ class CreateLinks < ActiveRecord::Migration
       t.string :tags
       t.string :comments
       t.integer :clicks
-      t.datetime :last_clicked
+      t.datetime :last_clicked_on
       t.datetime :expires_on
       t.integer :person_id
 
