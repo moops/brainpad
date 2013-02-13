@@ -1,44 +1,20 @@
-<% form_for(@contact) do |f| %>
-
-<% if @user %>
-    <%= hidden_field_tag('contact[person_id]', @user.id) %>
-<% end %>
-
-<fieldset>
-	<legend>details</legend> 
-	<ol>   
-	<li>
-		<%= f.label(:name) %>
-        <%= f.text_field(:name, :size => '25', :class => 'required') %></li>
-    <li>
-        <%= f.label(:address) %>
-        <%= f.text_field(:address, :size => '25') %></li>
-	<li>
-        <%= f.label(:city) %></td>
-        <%= f.text_field(:city, :size => '25') %></li>
-	<li>
-        <%= f.label(:tags) %>
-        <%= f.text_field(:tags, :size => '50') %></li>
-    <li>
-        <%= f.label(:comments) %>
-        <%= f.text_area(:comments, :cols => 50, :rows => 3) %></li></ol></fieldset>
-<fieldset>
-	<legend>contact</legend>
-    <ol>
-    <li>
-        <%= f.label(:email) %>
-        <%= f.text_field(:email, :size => '25', :class => 'email') %></li>
-	<li>
-        <%= f.label(:phone_home, 'Home') %>
-        <%= f.text_field(:phone_home, :size => '25') %></li>
-	<li>
-        <%= f.label(:phone_cell, 'Cell') %>
-        <%= f.text_field(:phone_cell, :size => '25') %></li>
-	<li>
-        <%= f.label(:phone_work, 'Work') %>
-        <%= f.text_field(:phone_work, :size => '25') %></li></ol></fieldset>
-<fieldset class="submit">
-    <%= f.submit(@contact.id ? 'update' : 'create') %>
-</fieldset>
-
+<%= simple_form_for(@contact, :remote => true, :html => {:class => 'form-horizontal' }) do |f| %>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>new contact</h3>
+    </div>
+    <div class="modal-body">
+        <%= f.input :person_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+        <%= f.input(:name) %>
+        <%= f.input(:address) %>
+        <%= f.input(:city) %>
+        <%= f.input(:tags) %>
+        <%= f.input(:comments) %>
+        <%= f.input(:email) %>
+        <%= f.input(:phone_home) %>
+        <%= f.input(:phone_work) %>
+    </div>
+    <div class="modal-footer">
+        <%= f.button(:submit) %>
+    </div>
 <% end %>

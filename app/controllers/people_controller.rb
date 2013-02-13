@@ -5,7 +5,6 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.xml
   def show
-    @person = current_user
 
     respond_to do |format|
       format.html # show.html.erb
@@ -16,11 +15,10 @@ class PeopleController < ApplicationController
   # GET /people/new
   # GET /people/new.json
   def new
-    @person = Person.new
     
     respond_to do |format|
       format.html # new.html.erb
-      format.json  { render :json => @person }
+      format.js 
     end
   end
 
@@ -31,14 +29,13 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.xml
   def create
-
-    @person = User.new(params[:user])
-      if @person.save
-        session[:user_id] = @user.id
-        redirect_to root_url, notice: "Thank you for signing up!"
-      else
-        render "new"
-      end
+    @person.roles=(['user'])
+    if @person.save
+      session[:user_id] = @person.id
+      redirect_to links_path, notice: "welcome #{@person.username}, thank you for signing up!"
+    else
+      render "new"
+    end
   end
 
   # PUT /people/1

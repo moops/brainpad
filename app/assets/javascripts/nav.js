@@ -13,7 +13,7 @@
 		return this.each(function() {
 		
 		 	var nav = $(this),
-		 		currentPageItem = $('.selected', nav),
+		 		currentPageItem = $('#selected', nav),
 		 		blob,
 		 		reset;
 		 		
@@ -50,6 +50,11 @@
 					}, options.speed)
 				}, options.reset);
 				
+			});
+			
+			$('li:not(#blob)', nav).click(function() {
+				currentPageItem.removeAttr('id');
+				this.attr('id', 'selected');
 			});
 		}); // end each
 	};

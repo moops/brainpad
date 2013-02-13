@@ -44,3 +44,9 @@ Lookup.create({:category => 36, :code => '365', :description => 'annualy' })
 adam = Person.create({ :username => 'adam', :password => 'adam_pass', :password_confirmation => 'adam_pass', :born_on => 35.years.ago, :authority => '3', :mail_url => 'http://mail.google.com', :map_center => '48.468141,-123.358612'})
 quinn = Person.create({ :username => 'quinn', :password => 'quinn_pass', :password_confirmation => 'quinn_pass', :born_on => 45.years.ago, :authority => '3', :mail_url => 'http://mail.yahoo.com', :map_center => '48.468141,-123.358612'})
 dave = Person.create({ :username => 'dave', :password => 'dave_pass', :password_confirmation => 'dave_pass', :born_on => 55.years.ago, :authority => '3', :mail_url => 'http://mail.hotmail.com', :map_center => '48.468141,-123.358612'})
+
+Link.create({ :person => adam, :url => 'http://www.nba.com', :name => 'nba', :tags => 'sports', :comments => 'stupid league', :clicks => 15, :last_clicked_on => '2013-02-01', :expires_on => nil })
+Link.create({ :person => adam, :url => 'http://www.nhl.com', :name => 'nhl', :tags => 'sports', :comments => 'greedy fuckers', :clicks => 5, :last_clicked_on => '2013-02-10', :expires_on => nil })
+
+Contact.create({ :person => adam, :name => 'mom', :email => 'lizburke48@hotmail.com', :phone_home => '250-347-9021', :phone_work => '250-342-6416', :address => 'box 100', :city => 'radium', :tags => 'family', :comments => 'makes cookies'})
+Contact.create({ :person => adam, :name => 'dad', :email => 'jerrylawr@gmail.com', :phone_home => '250-344-6584', :phone_work => '250-344-6584', :address => 'box 200', :city => 'golden', :tags => 'family', :comments => 'makes houses'})

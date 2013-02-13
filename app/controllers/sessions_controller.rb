@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  skip_after_filter :store_last_good_page
   
   # GET /sessions/new
   def new
@@ -11,29 +10,18 @@ class SessionsController < ApplicationController
   # login
   # POST /sessions.js
   def create
-    
-    user = Person.find_by(email: params[:email])
+    user = Person.find_by(username: params[:username])
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:notice] = "logged in as #{user.username}"
-      go_to = session[:last_good_page] || user_path(user)
+      redirect_to links_path
     else
       flash[:warning] = 'who are you talking about?'
-      go_to = session[:last_good_page] || root_url
+      redirect_to root_path
     end
 
-    redirect_to go_to
-
-    # from photo app
-    #user = User.find_by_email(params[:email])
-    #if user && user.authenticate(params[:password])
-    #  session[:user_id] = user.id
-    #  redirect_to root_url, notice: "Logged in!"
-    #else
-    #  flash.now.alert = "Email or password is invalid"
-    #  render "new"
-    #end
+    
   end
   
   # logout

@@ -8,43 +8,18 @@
 </div>
 
 <!-- hidden elements -->
-<div id="show" style="display:none;"></div>
-<div id="contact_form" style="display:none;"><%= render(:partial => 'form') %></div>
+<div id="contact-show" class="modal hide fade"></div>
+<div id="contact-form" class="modal hide fade"></div>
 
-<script type="text/javascript">
-  jQuery(document).ready(function() {
-    buildFormDialog('contact');
-    validate('new_contact');         
-  });
-</script>
+<div class="pull-right">
+    <%= link_to(new_contact_path, :remote => true, :class => "btn btn-primary") do %>
+        <i class="icon-plus icon-white"></i> add
+    <% end %>
+</div>
 
-<% if (@contacts and @contacts.size > 0) %>
-<div id="primary_panel_full">
-	<div class="box">
-		<div class="box_header">
-			contacts
-			<span style="float:right">
-				<%= link_to(image_tag('search.png', :size => '15x15', :border => 0), '#', :class => 'toggle_search_form') %>
-				<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_contact_form') %>
-			</span>
-		</div>
-		<div class="box_content">
-			<table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
-			    <tr>
-			        <th>name</th><th>email</th><th>home</th><th>work</th><th>cell</th>
-					<th colspan="2">&nbsp;</th></tr>
-			    
-				<%= render(:partial => 'data_rows', :collection => @contacts) %>
-			</table>
-			<%= paginate @contacts %>
-			
-			
-		</div>
-	</div> <!-- end contacts -->
-</div> <!-- end primary_panel_full -->  
-<% end %>
-
-<div class="clear"/>
+<div id="contact-list">
+    <%= render(:partial => 'contacts') %>
+</div>
 
 <p>
 tags

@@ -1,8 +1,0 @@
-<tr class="<%= data_rows_counter.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
-    <td><%= link_to(data_rows["name"], edit_contact_path(data_rows), :class => 'get') %></td>
-    <td><a href="mailto:<%= data_rows['email'] %>"><%= data_rows['email'] %></a></td>
-    <td><%= data_rows["phone_home"] %></td>
-    <td><%= data_rows["phone_work"] %></td>
-    <td><%= data_rows["phone_cell"] %></td>
-    <td><%= link_to(image_tag("detail.png", :size => "15x15", :border => 0), contact_path(data_rows), :class => "get") %></td>
-    <td><%= link_to(image_tag("delete.png", :size => "15x15", :border => 0), contact_path(data_rows), :method => :delete, :confirm => "really delete #{data_rows["name"]}?") %></td></tr>

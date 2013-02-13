@@ -1,14 +1,13 @@
 class ContactsController < ApplicationController
   
   load_and_authorize_resource
-  layout 'standard', :except => :show
   
   # GET /contacts
   # GET /contacts.xml
   def index
     session[:contact_tags] = getUniqueTags
     
-    @contacts = @user.contacts.order(:name)
+    @contacts = @current_user.contacts.asc(:name)
     if params[:tag]
       @contacts = @contacts.where('tags like :tag', :tag => params[:tag])
       @tag = params[:tag]
@@ -30,52 +29,49 @@ class ContactsController < ApplicationController
       format.xml  { render :xml => @contact }
     end
   end
+  
+  # GET /contacts/1/new
+  def new
+  end
 
   # GET /contacts/1/edit
   def edit
     respond_to do |format|
       format.html 
-      format.js { render :layout => false }
+      format.js
     end
   end
 
-  # POST /contacts
-  # POST /contacts.xml
+  # POST /contacts.js
   def create
     respond_to do |format|
       if @contact.save
+        @contacts = @current_user.contacts.asc(:name).page(params[:page]).per(13)
         flash[:notice] = 'Contact was successfully created.'
-        format.html { redirect_to(contacts_path) }
-        format.xml  { render :xml => @contact, :status => :created, :location => @contact }
+        format.js
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @contact.errors, :status => :unprocessable_entity }
+        format.js 
       end
     end
   end
 
   # PUT /contacts/1
-  # PUT /contacts/1.xml
   def update
     respond_to do |format|
       if @contact.update_attributes(params[:contact])
         flash[:notice] = 'Contact was successfully updated.'
         format.html { redirect_to(contacts_path) }
-        format.xml  { head :ok }
       else
         format.html { redirect_to(contacts_path) }
-        format.xml  { render :xml => @contact.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   # DELETE /contacts/1
-  # DELETE /contacts/1.xml
   def destroy
     @contact.destroy
     respond_to do |format|
       format.html { redirect_to(contacts_url) }
-      format.xml  { head :ok }
     end
   end
 
@@ -83,7 +79,7 @@ private
 
   def getUniqueTags
     unique_tags = []
-    all_contacts = Contact.find(:all, :conditions => "person_id = #{@user.id}")
+    all_contacts = @current_user.contacts
     all_contacts.each { |cur_contact|
       cur_contact.tags.split.each { |cur_tag|
         unique_tags.push(cur_tag.strip)

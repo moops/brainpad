@@ -1,0 +1,32 @@
+<% if (@contacts and @contacts.size > 0) %>
+    <h4>contacts</h4>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>name</th><th>email</th><th>home</th><th>work</th><th>cell</th><th colspan="2">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @contacts.each do |contact| %>
+                <tr>
+                    <td><%= link_to(contact["name"], edit_contact_path(contact), :remote => true) %></td>
+                    <td><a href="mailto:<%= contact['email'] %>"><%= contact['email'] %></a></td>
+                    <td><%= contact["phone_home"] %></td>
+                    <td><%= contact["phone_work"] %></td>
+                    <td><%= contact["phone_cell"] %></td>
+                    <td>
+                        <%= link_to(contact_path(contact), :class => "get", :remote => true) do %>
+                            <i class="icon-eye-open"></i>
+                        <% end %>
+                    </td>
+                    <td>
+                        <%= link_to(contact_path(contact), :method => :delete, :confirm => "really delete #{contact["name"]}?") do %>
+                            <i class="icon-remove"></i>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= paginate @contacts %>
+<% end %>

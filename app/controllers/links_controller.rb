@@ -2,22 +2,23 @@
 
 class LinksController < ApplicationController
 
-  # load_and_authorize_resource
-  load_resource
+  load_and_authorize_resource
   
   # GET /links
   # GET /links.xml
   def index
-    @user = Person.first
+    #@current_user = Person.first
     unless session[:tags]
       session[:tags] = getUniqueTags
     end
-    @all = Link.all
 
-    @recently_clicked = @all.desc(:last_clicked_on).limit(4).all
-    @recently_added = @all.desc(:created_at).limit(4).all
-    @most_often_1 = @all.desc(:clicks).limit(4).all
-    @random = @all.sort_by { rand }[0,4]
+    links = Link.all
+    links = @current_user.links if @current_user
+
+    @recently_clicked = links.desc(:last_clicked_on).limit(4).all
+    @recently_added = links.desc(:created_at).limit(4).all
+    @most_often_1 = links.desc(:clicks).limit(4).all
+    @random = links.sort_by { rand }[0,4]
     
     @milestone = Milestone.next_milestone(current_user)
     @due_today = Reminder.todays(current_user)
@@ -36,7 +37,7 @@ class LinksController < ApplicationController
       format.html { 
         clicks = @link.clicks ? @link.clicks += 1 : 1
         @link.update_attributes({'clicks' => clicks, 'last_clicked_on' => Time.now})
-        redirect_to "http://#{@link.url}" 
+        redirect_to @link.url
       }
       format.xml  { render :xml => @link }
     end

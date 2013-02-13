@@ -4,8 +4,8 @@
     <%= f.input(:url) %>
     <%= f.input(:tags) %>
     <%= f.input(:comments) %>
-    <%= f.input(:expires_on) %>
+    <%= f.input(:expires_on, :as => :string, input_html: {'data-date-format' => "yyyy-mm-dd"}) %>
     <%= f.input(:clicks) %>
-    <%= f.input(:last_clicked_on) %>
+    <%= f.input(:last_clicked_on, :as => :string, input_html: {'data-date-format' => "yyyy-mm-dd"}) %>
     <%= f.button(:submit) %>
 <% end %>
