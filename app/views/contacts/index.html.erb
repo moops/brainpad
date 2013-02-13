@@ -21,8 +21,7 @@
     <%= render(:partial => 'contacts') %>
 </div>
 
-<p>
-tags
-<% for cur_tag in session[:contact_tags] %>
-    <%= link_to(cur_tag, :controller => 'contacts', :tag => cur_tag) %>,
-<% end %><p/>
+<div class="tag-list">
+    tags:
+    <%= tag_list(session[:contact_tags], 'contacts') %>
+</div>

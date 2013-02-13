@@ -9,11 +9,10 @@ class ContactsController < ApplicationController
     
     @contacts = @current_user.contacts.asc(:name)
     if params[:tag]
-      @contacts = @contacts.where('tags like :tag', :tag => params[:tag])
+      @contacts = @contacts.where(tags: /#{params[:tag]}/)
       @tag = params[:tag]
     end
     @contacts = @contacts.page(params[:page]).per(13)
-    @contact = Contact.new #for the 'new' form
     
     respond_to do |format|
       format.html # index.html.erb

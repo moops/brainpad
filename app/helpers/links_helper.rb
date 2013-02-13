@@ -4,5 +4,4 @@ module LinksHelper
   def clean_feed_description(str)
     str.gsub(/<.*>/,'').gsub(/"/,'')
   end
-  
 end
