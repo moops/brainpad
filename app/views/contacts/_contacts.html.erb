@@ -9,7 +9,7 @@
         <tbody>
             <% @contacts.each do |contact| %>
                 <tr>
-                    <td><%= link_to(contact["name"], edit_contact_path(contact), :remote => true) %></td>
+                    <td><%= link_to(contact.name, edit_contact_path(contact), :remote => true) %></td>
                     <td><a href="mailto:<%= contact['email'] %>"><%= contact['email'] %></a></td>
                     <td><%= contact["phone_home"] %></td>
                     <td><%= contact["phone_work"] %></td>

@@ -1,21 +1,29 @@
-<div class="dashboard search_form" style="display:none;">
-    <% form_tag({:action => 'index'}, :method => 'get') do %>
-        <label class="inline">name</label>
-        <%= text_field_tag :q, h(params[:q]) %>
-        <%= submit_tag 'search' %>
-        <%= submit_tag("x", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
-    <% end %>
-</div>
-
 <!-- hidden elements -->
 <div id="contact-show" class="modal hide fade"></div>
 <div id="contact-form" class="modal hide fade"></div>
 
+<!-- search form -->
+<div id="search" class="collapse">
+    <%= form_tag({:action => 'index'}, :method => 'get', :class => 'form-search') do %>
+        <div class="input-append">
+            <%= text_field_tag(:q, h(params[:q]), :class => 'input-medium search-query') %>
+            <%= submit_tag('search', :class => 'btn') %>
+        </div>
+    <% end %>
+</div>
+    
 <div class="pull-right">
     <%= link_to(new_contact_path, :remote => true, :class => "btn btn-primary") do %>
         <i class="icon-plus icon-white"></i> add
     <% end %>
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#search">
+      <i class="icon-search icon-white"></i> find
+    </button>
 </div>
+
+
+ 
+
 
 <div id="contact-list">
     <%= render(:partial => 'contacts') %>

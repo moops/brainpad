@@ -8,11 +8,15 @@ class ContactsController < ApplicationController
     session[:contact_tags] = getUniqueTags
     
     @contacts = @current_user.contacts.asc(:name)
+    if params[:q]
+      @contacts = @contacts.where(name: /#{params[:q]}/i)
+    end
     if params[:tag]
       @contacts = @contacts.where(tags: /#{params[:tag]}/)
+      flash[:notice] = "showing only #{params[:tag]} contacts."
       @tag = params[:tag]
     end
-    @contacts = @contacts.page(params[:page]).per(13)
+    @contacts = @contacts.page(params[:page])
     
     respond_to do |format|
       format.html # index.html.erb
@@ -21,11 +25,9 @@ class ContactsController < ApplicationController
   end
 
   # GET /contacts/1
-  # GET /contacts/1.xml
   def show
     respond_to do |format|
       format.js { render :layout => false }
-      format.xml  { render :xml => @contact }
     end
   end
   
@@ -35,18 +37,14 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1/edit
   def edit
-    respond_to do |format|
-      format.html 
-      format.js
-    end
   end
 
   # POST /contacts.js
   def create
     respond_to do |format|
       if @contact.save
-        @contacts = @current_user.contacts.asc(:name).page(params[:page]).per(13)
-        flash[:notice] = 'Contact was successfully created.'
+        @contacts = @current_user.contacts.asc(:name).page(params[:page])
+        flash[:notice] = "contact #{@contact.name} was created."
         format.js
       else
         format.js 
@@ -58,10 +56,11 @@ class ContactsController < ApplicationController
   def update
     respond_to do |format|
       if @contact.update_attributes(params[:contact])
-        flash[:notice] = 'Contact was successfully updated.'
-        format.html { redirect_to(contacts_path) }
+        @contacts = @current_user.contacts.asc(:name).page(params[:page])
+        flash[:notice] = 'contact #{@contact.name} was updated.'
+        format.js
       else
-        format.html { redirect_to(contacts_path) }
+        format.js
       end
     end
   end
@@ -79,13 +78,12 @@ private
   def getUniqueTags
     unique_tags = []
     all_contacts = @current_user.contacts
-    all_contacts.each { |cur_contact|
-      cur_contact.tags.split.each { |cur_tag|
-        unique_tags.push(cur_tag.strip)
-      }
-    }
+    all_contacts.each do |contact|
+      contact.tags.split.each do |tag|
+        unique_tags.push(tag.strip)
+      end
+    end
     unique_tags.uniq!
     unique_tags.sort!
-    return unique_tags
   end
 end
