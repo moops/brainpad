@@ -1,120 +1,53 @@
 class WorkoutsController < ApplicationController
   
   load_and_authorize_resource
-  layout 'standard.html', :except => :show
   
   # GET /workouts
-  # GET /workouts.xml
   def index    
-    #@workouts = Workout.search({ :q => params[:q], :type => params[:type], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
-    @workouts = @user.workouts.order('workout_on desc')
-    if params[:tag]
-      @workouts = @workouts.where('tags like :tag', :tag => params[:tag])
-      @tag = params[:tag]
+    @workouts = @current_user.workouts.desc(:workout_on)
+    if params[:q]
+      @workouts = @workouts.where(location: /#{params[:q]}/i)
     end
-    @workouts = @workouts.page(params[:page]).per(13)
+    @workouts = @workouts.page(params[:page])
     
-    @workout = Workout.new #for the 'new' form
-    
-    @workout_summary = WorkoutSummary.new(@user,31)
-    @workout_duration_by_type = Workout.workout_duration_by_type(@user,31)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @workouts }
-    end
+    @workout_summary = Workout.summary(@current_user,31)
+    @workout_duration_by_type = Workout.workout_duration_by_type(@current_user,31)
   end
 
-  # GET /workouts/1
-  # GET /workouts/1.xml
+  # GET /workouts/1.js
   def show
-
-    respond_to do |format|
-      format.js { render :layout => false }
-      format.xml  { render :xml => @workout }
-    end
   end
 
-  # GET /workouts/new
-  # GET /workouts/new.xml
+  # GET /workouts/new.js
   def new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @workout }
+    if (params[:workout_id])
+      @workout = Workout.find(params[:workout_id]).dup
     end
   end
 
-  # GET /workouts/1/edit
+  # GET /workouts/1/edit.js
   def edit
-    respond_to do |format|
-      format.html 
-      format.js { render :layout => false }
-    end
   end
 
-  # POST /workouts
-  # POST /workouts.xml
+  # POST /workouts.js
   def create
-
-    respond_to do |format|
-      if @workout.save
-        flash[:notice] = 'Workout was successfully created.'
-        format.html { redirect_to(workouts_path) }
-        format.xml  { render :xml => @workout, :status => :created, :location => @workout }
-      else
-        format.html { redirect_to(workouts_path) }
-        format.xml  { render :xml => @workout.errors, :status => :unprocessable_entity }
-      end
+    if @workout.save
+      @workouts = @current_user.workouts.desc(:workout_on).page(params[:page])
+      flash[:notice] = 'workout was created.'
     end
   end
 
-  # PUT /workouts/1
-  # PUT /workouts/1.xml
+  # PUT /workouts/1.js
   def update
-
-    respond_to do |format|
-      if @workout.update_attributes(params[:workout])
-        flash[:notice] = 'Workout was successfully updated.'
-        format.html { redirect_to(workouts_path) }
-        format.xml  { head :ok }
-      else
-        format.html { redirect_to(workouts_path) }
-        format.xml  { render :xml => @workout.errors, :status => :unprocessable_entity }
-      end
+    if @workout.update_attributes(params[:workout])
+      @workouts = @current_user.workouts.desc(:workout_on).page(params[:page])
+      flash[:notice] = 'workout was updated.'
     end
   end
 
   # DELETE /workouts/1
-  # DELETE /workouts/1.xml
   def destroy
     @workout.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(workouts_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(workouts_path)
   end
-end
-
-class WorkoutSummary
-
-  attr_reader :workout_days, :mileage, :duration, :weight_range
-
-  def initialize(user,days)
-    workouts = Workout.recent_workouts(user,days)
-    @mileage = 0
-    @duration = 0
-    max_weight = 0
-    min_weight = 999
-    for w in workouts
-      @mileage += w.distance if w.distance
-      @duration += w.duration if w.duration
-      max_weight = w.weight if w.weight and w.weight > max_weight
-      min_weight = w.weight if w.weight and w.weight < min_weight
-    end
-    @weight_range = "#{min_weight}-#{max_weight}"
-    @workout_days = Workout.days_with_workouts?(user,days)
-  end
-    
 end

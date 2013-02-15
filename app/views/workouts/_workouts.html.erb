@@ -1,0 +1,40 @@
+<% if (@workouts and @workouts.size > 0) %>
+    <h4>workouts</h4>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>date</th><th>type</th><th>location</th><th>km</th><th>min</th><th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @workouts.each do |workout| %>
+                <tr>
+                    <td><%= link_to(workout.workout_on.strftime("%a %b %d, %y"), edit_workout_path(workout), :remote => true) %></td>
+                    <td><%= Lookup.find('511d63deffc2f99e59000003').description %></td>
+                    <td>
+                        <% if workout.route %>
+                      <% route = Lookup.find(workout.route) %>
+                            <a href="http://www.gmap-pedometer.com/?r=<%= route.code %>" target="_blank">
+                                <%= workout.location %></a>
+                        <% else %>
+                            <%= workout.location %>
+                        <% end %></td>
+                    <td><%= workout.distance %></td>
+                    <td><%= workout.duration %></td>
+                    <td class="actions" width="80px">
+                        <%= link_to(workout_path(workout), :remote => true, :title => 'show details') do %>
+                            <i class="icon-eye-open"></i>
+                        <% end %>
+                        <%= link_to(new_workout_path(:workout_id => workout), :remote => true, :title => 'copy workout') do %>
+                            <i class="icon-share"></i>
+                        <% end %>
+                        <%= link_to(workout_path(workout), :method => :delete, :confirm => "really delete #{workout.location} workout?", :title => 'delete workout') do %>
+                            <i class="icon-remove"></i>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= paginate @workouts %>
+<% end %>

@@ -6,6 +6,10 @@ nav bar
     - http://nettuts.s3.amazonaws.com/600_spasticNav/index.html
 
 2013
+- Feb 14 - embed lookup for workout type
+- Feb 14 - change delete to ajax request
+x Feb 14 - get copying working for contacts and workouts
+x Feb 14 - update workouts
 x Feb 13 - fix contact updating
 x Feb 13 - contact bootstrap kaminari pagination
 x Feb 13 - get contact tags working

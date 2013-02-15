@@ -1,79 +1,57 @@
-<% if @workout_summary %>
-<div class="dashboard">
-    <table width="100%" border="0">
-        <tr>
-            <td>last 30 days:</td>
-            <td><div class="summary_data"><%= @workout_summary.workout_days %></div>workout days</td>
-            <td><div class="summary_data"><%= @workout_summary.mileage %></div>km</td>
-            <td><div class="summary_data"><%= @workout_summary.duration / 60 %></div>hours</td>
-            <td><div class="summary_data"><%= @workout_summary.weight_range %></div>weight</td></tr>
-    </table>
-</div>
-<% end %>
-<div class="dashboard search_form" style="display:none;">
-    <% form_tag({:action => 'index'}, :method => 'get') do %>
-        <label class="inline">location</label>
-        <%= text_field_tag :q, h(params[:q]) %>
-        <label class="inline">type</label>
-        <%= select_tag(:type, options_for_select(Lookup.get_list('work_type').collect {|l| [ l.description, l.id ] }.insert(0, ''))) %>
-        <label class="inline">from</label>
-        <%= text_field_tag :start_on, h(params[:start_on]), :size => 12, :class => 'calendar' %>
-        <label class="inline">to</label>
-        <%= text_field_tag :end_on, h(params[:end_on]), :size => 12, :class => 'calendar' %>
-        <%= submit_tag 'search' %>
-        <%= submit_tag("x", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
-    <% end %>
-</div>
-
 <!-- hidden elements -->
-<div id="show" style="display:none;"></div>
-<div id="workout_form" style="display:none;"><%= render(:partial => 'form') %></div>
+<div id="workout-show" class="modal hide fade"></div>
+<div id="workout-form" class="modal hide fade"></div>
 
-<script type="text/javascript">
-  jQuery(document).ready(function() {
-    buildFormDialog('workout');
-    validate('new_workout');         
-  });
-</script>
 
-<div id="secondary_panel">
-	<div class="box">
-		<div class="box_header">workout duration</div>
-		<div class="box_content">
-			<% for w in @workout_duration_by_type %>
-				<% percentage = ((w[1].to_f / @workout_summary.duration) * 100).to_i %>
-				<%= "#{w[0]} #{(Time.mktime(0)+(w[1]*60)).strftime("%H:%M")} [#{percentage}%]" %><br/>
-				<% percentage = '1' if percentage.eql?'0' %>
-				<%= image_tag('redbar.gif', :size => "#{(percentage*1.5).to_i}x12") %><br/>
-			<% end %>
-		</div>
-		<div class="box_buttons"></div>
-	</div> <!-- end box -->
-</div> <!-- end secondary_panel -->
-
-<% if (@workouts and @workouts.size > 0) %>
-<div id="primary_panel">
-	<div class="box">
-		<div class="box_header">
-			workouts
-			<span style="float:right">
-				<%= link_to(image_tag('search.png', :size => '15x15', :border => 0), '#', :class => 'toggle_search_form') %>
-				<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_workout_form') %>
-			</span>
-		</div>
-		<div class="box_content">
-			<table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
-			    <tr>
-			        <th>date</th><th>type</th><th>location</th><th>km</th><th>min</th>
-			        <th colspan="2">&nbsp;</th></tr>
-			    
-			    <%= render(:partial => 'data_rows', :collection => @workouts) %>
-			</table>
-			<%= paginate @workouts %>
-		</div>
-	</div> <!-- end workouts -->
-</div> <!-- end primary panel -->   
-    
+<% if @workout_summary %>
+    <div class="workout-dashboard">
+        <div class="item">last 30 days:</div>
+        <div class="item"><div class="data"><%= @workout_summary[:workout_days] %></div>workout days</div>
+        <div class="item"><div class="data"><%= @workout_summary[:mileage] %></div>km</div>
+        <div class="item"><div class="data"><%= @workout_summary[:duration] %></div>hours</div>
+        <div class="item"><div class="data"><%= @workout_summary[:weight_range] %></div>weight</div>
+        <div class="clear"></div>
+    </div> <!-- end .dashboard -->
 <% end %>
 
-<div class="clear"/>
+<div class="workouts-panel">
+    <div class="reports-panel">
+	    <div class="box">
+    		<div class="boxhead">workout duration</div>
+    		<div class="boxcontent">
+    			<% for w in @workout_duration_by_type %>
+    				<% percentage = ((w[1].to_f / @workout_summary[:duration]) * 100).to_i %>
+    				<%= "#{w[0]} #{(Time.mktime(0)+(w[1]*60)).strftime("%H:%M")} [#{percentage}%]" %><br/>
+    				<% percentage = '1' if percentage.eql?'0' %>
+    				<%= image_tag('redbar.gif', :width => "#{(percentage*1.5).to_i}", :class => 'bar') %><br/>
+    			<% end %>
+    		</div>
+    	</div> <!-- end box -->
+    </div>
+    <div class="list-panel">
+        
+        <!-- search form -->
+        <div id="search" class="collapse">
+            <%= form_tag({:action => 'index'}, :method => 'get', :class => 'form-search') do %>
+                <div class="input-append">
+                    <%= text_field_tag(:q, h(params[:q]), :class => 'input-medium search-query') %>
+                    <%= submit_tag('search', :class => 'btn') %>
+                </div>
+            <% end %>
+        </div>
+       
+        <!-- add and search buttons --> 
+        <div class="pull-right">
+            <%= link_to(new_workout_path, :remote => true, :class => "btn btn-primary") do %>
+                <i class="icon-plus icon-white"></i> add
+            <% end %>
+            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#search">
+              <i class="icon-search icon-white"></i> find
+            </button>
+        </div>
+        <div id="workout-list">
+            <%= render(:partial => 'workouts') %>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div> <!-- end .workouts-panel -->

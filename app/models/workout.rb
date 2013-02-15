@@ -19,26 +19,25 @@ class Workout
   
   def self.search(condition_params, page)
     condition_params[:q] = "%#{condition_params[:q]}%"
-    logger.debug("Workout::search condition_params[#{condition_params.inspect}]")
     Workout.paginate :page => page, :conditions => get_search_conditions(condition_params), :order => 'workout_on desc', :per_page => 13
   end
   
   def self.recent_workouts(user, days)
-    Workout.find(:all, :conditions => [ "person_id = ? and workout_on > ?", user.id, Date.today - (days + 1) ])
+    user.workouts.where(:workout_on.gte => Date.today - days)
   end
   
   def self.days_with_workouts?(user,days)
-    ActiveRecord::Base.connection.select_one("select count( distinct workout_on) as s from workouts where person_id = #{user.id} and workout_on between '#{Date.today - days}' and '#{Date.today+(1)}'")['s'].to_i
+    user.workouts.and({:workout_on.gte => Date.today - days}, {:workout_on.lt => Date.today + 1}).distinct(:workout_on).count
   end
   
   def self.workout_duration_by_type(user,days)
     result_hash = Hash.new
     for w in recent_workouts(user,days)
-        key = Lookup.find(w.workout_type).description
+        key = Lookup.find('511d63deffc2f99e59000003').description
         result_hash[key] ||= 0
         result_hash[key] = result_hash[key] + w.duration
     end
-    result_array = result_hash.sort{|a,b| b[1]<=>a[1]}
+    result_hash.sort{|a,b| b[1]<=>a[1]}
   end
   
   def self.get_search_conditions(condition_params)
@@ -56,6 +55,26 @@ class Workout
     logger.debug("Workout::get_search_conditions query[#{query}]")
     conditions << query
     conditions << condition_params
+  end
+  
+  def self.summary(user,days)
+    workouts = Workout.recent_workouts(user,days)
+    mileage = 0
+    duration = 0
+    max_weight = 0
+    min_weight = 999
+    for w in workouts
+      mileage += w.distance if w.distance
+      duration += w.duration if w.duration
+      max_weight = w.weight if w.weight and w.weight > max_weight
+      min_weight = w.weight if w.weight and w.weight < min_weight
+    end
+    {
+      weight_range: "#{min_weight}-#{max_weight}",
+      workout_days: Workout.days_with_workouts?(user,days),
+      mileage: mileage,
+      duration: duration
+    }
   end
   
 end

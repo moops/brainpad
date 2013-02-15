@@ -1,0 +1,6 @@
+<% if @workout.valid? %>
+	$('#workout-form').modal('hide');
+	$('#workout-list').html("<%= escape_javascript(render(:partial => 'workouts')) %>");
+<% else %>
+	$('#workout-form').html("<%= escape_javascript(render(:partial => 'form')) %>").modal('show');
+<% end %>

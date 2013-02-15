@@ -3,7 +3,6 @@ class ContactsController < ApplicationController
   load_and_authorize_resource
   
   # GET /contacts
-  # GET /contacts.xml
   def index
     session[:contact_tags] = getUniqueTags
     
@@ -17,60 +16,43 @@ class ContactsController < ApplicationController
       @tag = params[:tag]
     end
     @contacts = @contacts.page(params[:page])
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @contacts }
-    end
   end
 
-  # GET /contacts/1
+  # GET /contacts/1.js
   def show
-    respond_to do |format|
-      format.js { render :layout => false }
-    end
   end
   
-  # GET /contacts/1/new
+  # GET /contacts/1/new.js
   def new
+    if (params[:contact_id])
+      @contact = Contact.find(params[:contact_id]).dup
+    end
   end
 
-  # GET /contacts/1/edit
+  # GET /contacts/1/edit.js
   def edit
   end
 
   # POST /contacts.js
   def create
-    respond_to do |format|
-      if @contact.save
-        @contacts = @current_user.contacts.asc(:name).page(params[:page])
-        flash[:notice] = "contact #{@contact.name} was created."
-        format.js
-      else
-        format.js 
-      end
+    if @contact.save
+      @contacts = @current_user.contacts.asc(:name).page(params[:page])
+      flash[:notice] = "contact #{@contact.name} was created."
     end
   end
 
-  # PUT /contacts/1
+  # PUT /contacts/1.js
   def update
-    respond_to do |format|
-      if @contact.update_attributes(params[:contact])
-        @contacts = @current_user.contacts.asc(:name).page(params[:page])
-        flash[:notice] = 'contact #{@contact.name} was updated.'
-        format.js
-      else
-        format.js
-      end
+    if @contact.update_attributes(params[:contact])
+      @contacts = @current_user.contacts.asc(:name).page(params[:page])
+      flash[:notice] = "contact #{@contact.name} was updated."
     end
   end
 
   # DELETE /contacts/1
   def destroy
     @contact.destroy
-    respond_to do |format|
-      format.html { redirect_to(contacts_url) }
-    end
+    redirect_to(contacts_path)
   end
 
 private

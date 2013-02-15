@@ -1,11 +1,3 @@
 $('#contact-form')
     .html("<%= escape_javascript(render(:partial => 'form')) %>")
     .modal('show');
-
-/*
-jQuery('#contact_form')
-    .html("<%= escape_javascript(render(:partial => 'form')) %>")
-    .dialog({ autoOpen: true, width: 500, title: 'contact form', modal: true, show: 'fade' });
-ajaxLinks();
-validate('edit_contact_' + <%= @contact.id %>);
-*/

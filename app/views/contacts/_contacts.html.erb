@@ -3,7 +3,7 @@
     <table class="table table-condensed table-hover">
         <thead>
             <tr>
-                <th>name</th><th>email</th><th>home</th><th>work</th><th>cell</th><th colspan="2">&nbsp;</th>
+                <th>name</th><th>email</th><th>home</th><th>work</th><th>cell</th><th>actions</th>
             </tr>
         </thead>
         <tbody>
@@ -14,13 +14,14 @@
                     <td><%= contact["phone_home"] %></td>
                     <td><%= contact["phone_work"] %></td>
                     <td><%= contact["phone_cell"] %></td>
-                    <td>
+                    <td class="actions">
                         <%= link_to(contact_path(contact), :class => "get", :remote => true) do %>
                             <i class="icon-eye-open"></i>
                         <% end %>
-                    </td>
-                    <td>
-                        <%= link_to(contact_path(contact), :method => :delete, :confirm => "really delete #{contact["name"]}?") do %>
+                        <%= link_to(new_contact_path(:contact_id => contact), :remote => true, :title => 'copy contact') do %>
+                            <i class="icon-share"></i>
+                        <% end %>
+                        <%= link_to(contact_path(contact), :method => :delete, :confirm => "really delete #{contact.name}?") do %>
                             <i class="icon-remove"></i>
                         <% end %>
                     </td>

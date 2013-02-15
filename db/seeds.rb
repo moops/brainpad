@@ -60,3 +60,8 @@ Contact.create({ :person => adam, :name => 'mark', :email => 'mark@raceweb,ca', 
 Contact.create({ :person => adam, :name => 'eva', :email => 'eva@raceweb,ca', :phone_home => '250-514-4727', :phone_work => '250-342-6416', :address => '123 belton ave', :city => 'victoria', :tags => 'friend', :comments => 'makes dinner'})
 Contact.create({ :person => quinn, :name => 'mom', :email => 'mom@raceweb,ca', :phone_home => '250-414-0106', :phone_work => '250-342-6416', :address => '123 paradise st', :city => 'victoria', :tags => 'family', :comments => 'makes dinner'})
 Contact.create({ :person => quinn, :name => 'dad', :email => 'dad@raceweb,ca', :phone_home => '250-881-2818', :phone_work => '250-342-6416', :address => '42-330 tyee rd', :city => 'victoria', :tags => 'family', :comments => 'makes dinner'})
+
+Workout.create({:person => adam, :location => 'thetis', :duration => 60, :distance => 10, :intensity => 5, :workout_type => 'run', :workout_on => '2013-02-01', :description => 'easy run around thetis'})
+Workout.create({:person => adam, :location => 'elk lake', :duration => 60, :distance => 10, :intensity => 5, :workout_type => 'run', :workout_on => '2013-02-02', :description => 'easy run around elk lake'})
+Workout.create({:person => adam, :location => 'goose', :duration => 60, :distance => 10, :intensity => 5, :workout_type => 'run', :workout_on => '2013-02-03', :description => 'easy run on the goose'})
+  
