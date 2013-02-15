@@ -5,16 +5,16 @@
     </div>
     <div class="modal-body">
         <%= f.input :person_id, :as => :hidden, :input_html => { :value => current_user.id } %>
-        <%= f.input(:workout_type) %>
-        <%= f.input(:location) %>
-        <%= f.input(:race) %>
-        <%= f.input(:route) %>
-        <%= f.input(:workout_on) %>
-        <%= f.input(:distance) %>
-        <%= f.input(:duration) %>
-        <%= f.input(:intensity) %>
-        <%= f.input(:weight) %>
-        <%= f.input(:description) %>
+        <%= f.input :workout_type, :collection => @types, :value_method => '_id', :label_method => 'description' %>
+        <%= f.input :location %>
+        <%= f.input :race %>
+        <%= f.input :route, :collection => @routes, :value_method => '_id', :label_method => 'description' %>
+        <%= f.input :workout_on %>
+        <%= f.input :distance %>
+        <%= f.input :duration %>
+        <%= f.input :intensity %>
+        <%= f.input :weight %>
+        <%= f.input :description %>
     </div>
     <div class="modal-footer">
         <%= f.button(:submit) %>

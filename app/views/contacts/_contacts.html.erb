@@ -10,10 +10,10 @@
             <% @contacts.each do |contact| %>
                 <tr>
                     <td><%= link_to(contact.name, edit_contact_path(contact), :remote => true) %></td>
-                    <td><a href="mailto:<%= contact['email'] %>"><%= contact['email'] %></a></td>
-                    <td><%= contact["phone_home"] %></td>
-                    <td><%= contact["phone_work"] %></td>
-                    <td><%= contact["phone_cell"] %></td>
+                    <td><a href="mailto:<%= contact.email %>"><%= contact.email %></a></td>
+                    <td><%= contact.phone_home %></td>
+                    <td><%= contact.phone_work %></td>
+                    <td><%= contact.phone_cell %></td>
                     <td class="actions">
                         <%= link_to(contact_path(contact), :class => "get", :remote => true) do %>
                             <i class="icon-eye-open"></i>

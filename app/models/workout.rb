@@ -10,17 +10,18 @@ class Workout
   field :intensity, :type => Integer
   field :weight, :type => Integer
   field :distance, :type => Float
-  field :workout_type, :type => Integer
   field :workout_on, :type => Date
 
   belongs_to :person
   
+  embeds_one :workout_type, class_name: "Lookup"
+  embeds_one :route, class_name: "Lookup"
+  
   validates_presence_of :location, :duration, :workout_on
   
-  def self.search(condition_params, page)
-    condition_params[:q] = "%#{condition_params[:q]}%"
-    Workout.paginate :page => page, :conditions => get_search_conditions(condition_params), :order => 'workout_on desc', :per_page => 13
-  end
+  #def workout_type=(id)
+  #  self.workout_type = Lookup.find(id)
+  #end
   
   def self.recent_workouts(user, days)
     user.workouts.where(:workout_on.gte => Date.today - days)
@@ -33,28 +34,13 @@ class Workout
   def self.workout_duration_by_type(user,days)
     result_hash = Hash.new
     for w in recent_workouts(user,days)
-        key = Lookup.find('511d63deffc2f99e59000003').description
-        result_hash[key] ||= 0
-        result_hash[key] = result_hash[key] + w.duration
+        if (w.workout_type)
+          key = w.workout_type.description
+          result_hash[key] ||= 0
+          result_hash[key] = result_hash[key] + w.duration
+        end
     end
     result_hash.sort{|a,b| b[1]<=>a[1]}
-  end
-  
-  def self.get_search_conditions(condition_params)
-    conditions = []
-    query = 'workouts.person_id = :user'
-    query << ' and workouts.location like :q' unless condition_params[:q].blank?
-    query << ' and workouts.workout_type = :type' unless condition_params[:type].blank?
-    if !condition_params[:start_on].blank? && !condition_params[:end_on].blank?
-      query << ' and workouts.workout_on between :start_on and :end_on'
-    elsif !condition_params[:start_on].blank?
-      query << ' and workouts.workout_on >= :start_on'
-    elsif !condition_params[:end_on].blank?
-      query << ' and workouts.workout_on <= :end_on'
-    end
-    logger.debug("Workout::get_search_conditions query[#{query}]")
-    conditions << query
-    conditions << condition_params
   end
   
   def self.summary(user,days)
@@ -72,8 +58,8 @@ class Workout
     {
       weight_range: "#{min_weight}-#{max_weight}",
       workout_days: Workout.days_with_workouts?(user,days),
-      mileage: mileage,
-      duration: duration
+      mileage: (mileage*10).ceil/10.0, # tenths of kms
+      duration: (duration/60*10).ceil/10.0 # minutes to tenths of hours
     }
   end
   
