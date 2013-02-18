@@ -1,11 +1,13 @@
 mongodb
     - set up with instructions from: http://shiftcommathree.com/articles/how-to-install-mongodb-on-os-x
-
 nav bar 
     - http://net.tutsplus.com/tutorials/html-css-techniques/how-to-build-a-lava-lamp-style-navigation-menu/
     - http://nettuts.s3.amazonaws.com/600_spasticNav/index.html
+client side validations:
+    - https://github.com/bcardarella/client_side_validations
 
 2013
+- Feb 15 - look into client side validations
 - Feb 14 - embed lookup for workout type
 - Feb 14 - change delete to ajax request
 x Feb 14 - get copying working for contacts and workouts

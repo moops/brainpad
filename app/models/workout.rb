@@ -4,23 +4,28 @@ class Workout
   
   field :location
   field :race
-  field :route, :type => Integer
   field :description
   field :duration, :type => Integer
   field :intensity, :type => Integer
   field :weight, :type => Integer
   field :distance, :type => Float
   field :workout_on, :type => Date
+  #field :route_id
+  #field :workout_type_id
 
   belongs_to :person
   
-  embeds_one :workout_type, class_name: "Lookup"
-  embeds_one :route, class_name: "Lookup"
+  belongs_to :workout_type, class_name: "Lookup"
+  belongs_to :route, class_name: "Lookup"
   
   validates_presence_of :location, :duration, :workout_on
   
   #def workout_type=(id)
-  #  self.workout_type = Lookup.find(id)
+  #  write_attribute(:workout_type, Lookup.find(id)) unless id.empty?
+  #end
+  
+  #def route=(id)
+  #  write_attribute(:route, Lookup.find(id)) unless id.empty?
   #end
   
   def self.recent_workouts(user, days)

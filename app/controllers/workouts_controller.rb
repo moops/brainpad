@@ -1,6 +1,6 @@
 class WorkoutsController < ApplicationController
   
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:create, :update]
   
   # GET /workouts
   def index    
@@ -35,17 +35,36 @@ class WorkoutsController < ApplicationController
 
   # POST /workouts.js
   def create
+    #get_lookups(params[:workout])
+    #debugger
+    #workout_type =  Lookup.find(params[:workout][:workout_type])
+    @workout = Workout.new(params[:workout])
+    #@workout.workout_type = workout_type unless workout_type.nil?
     if @workout.save
-      @workouts = @current_user.workouts.desc(:workout_on).page(params[:page])
+      @workouts = current_user.workouts.desc(:workout_on).page(params[:page])
       flash[:notice] = 'workout was created.'
     end
   end
 
   # PUT /workouts/1.js
   def update
-    if @workout.update_attributes(params[:workout])
-      @workouts = @current_user.workouts.desc(:workout_on).page(params[:page])
+    #p = get_lookups(params[:workout])
+    if params[:workout][:workout_type].empty?
+      params[:workout][:workout_type] = nil
+    else
+      params[:workout][:workout_type] = Lookup.find(params[:workout][:workout_type])
+    end
+
+    @workout = Workout.find(params[:id])
+    logger.info("updating attributes with #{params[:workout].inspect}")
+    if @workout.update_attributes!(params[:workout])
+      #@workout.save
+      #@workout.route = params[:workout][:route]
+      logger.info("updated workout #{@workout.inspect}")
+      @workouts = current_user.workouts.desc(:workout_on).page(params[:page])
       flash[:notice] = 'workout was updated.'
+    else
+      logger.info("WTF?")
     end
   end
 
@@ -53,5 +72,26 @@ class WorkoutsController < ApplicationController
   def destroy
     @workout.destroy
     redirect_to(workouts_path)
+  end
+
+  private
+
+  def get_lookups(p)
+    logger.info("get_lookups with #{p.inspect}")
+    debugger
+    if p[:workout_type].empty?
+      p[:workout_type] = nil
+    else
+      p[:workout_type] = Lookup.find(p[:workout_type])
+    end
+
+    if p[:route].empty?
+      logger.info("setting route to nil")
+      p[:route] = nil
+    else
+      p[:route] = Lookup.find(p[:route])
+      logger.info("set route to #{Lookup.find(p[:route]).description}")
+    end
+    p
   end
 end
