@@ -1,4 +1,3 @@
-//js in gems
 //= require jquery
 //= require jquery_ujs
 //= require jquery.easing
@@ -6,37 +5,9 @@
 //= require bootstrap-datepicker
 //= require_tree .
 
-
-//build a form dialog
-function buildFormDialog(name) {
-  var f = jQuery('#' + name + '_form').dialog({ autoOpen: false, width: 600, title: name + ' form', modal: true, show: 'fade' });
-  $('.show_' + name + '_form').click(function() {
-    f.dialog('open');
-    return false;
-  });
-}
-
-//validate a form
-function validate(form_id) {
-  $('#' + form_id).validate({
-        errorPlacement: function(error, element) {
-          jQuery(element).attr('title', jQuery(error).html());
-          jQuery(element).tooltip();
-        }
-  });
-}
-
 $(document).ready(function() {
   $('#nav').spasticNav();
   $("#logoutlink").tooltip();
-  $(".accordion").accordion();
-  $("input.calendar").datepicker();
-  $("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
-  $("input.today").datepicker('setDate', new Date());
-  
-  $(".toggle_search_form").click(function() {
-    $('.search_form').toggle('fast', 'swing', null)
-  });
 });
 
 function count(id,until) {
@@ -72,5 +43,3 @@ function count(id,until) {
   document.getElementById(id).value = val;
   setTimeout("count('" + id + "','" + until + "')", 1000);
 }
-
-

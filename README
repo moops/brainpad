@@ -5,6 +5,8 @@ nav bar
     - http://nettuts.s3.amazonaws.com/600_spasticNav/index.html
 client side validations:
     - https://github.com/bcardarella/client_side_validations
+javascript: datepicker 
+    - http://www.eyecon.ro/bootstrap-datepicker/
 
 2013
 - Feb 15 - look into client side validations
