@@ -10,23 +10,12 @@ class Workout
   field :weight, :type => Integer
   field :distance, :type => Float
   field :workout_on, :type => Date
-  #field :route_id
-  #field :workout_type_id
 
   belongs_to :person
-  
   belongs_to :workout_type, class_name: "Lookup"
   belongs_to :route, class_name: "Lookup"
   
   validates_presence_of :location, :duration, :workout_on
-  
-  #def workout_type=(id)
-  #  write_attribute(:workout_type, Lookup.find(id)) unless id.empty?
-  #end
-  
-  #def route=(id)
-  #  write_attribute(:route, Lookup.find(id)) unless id.empty?
-  #end
   
   def self.recent_workouts(user, days)
     user.workouts.where(:workout_on.gte => Date.today - days)
@@ -37,15 +26,23 @@ class Workout
   end
   
   def self.workout_duration_by_type(user,days)
-    result_hash = Hash.new
-    for w in recent_workouts(user,days)
-        if (w.workout_type)
-          key = w.workout_type.description
-          result_hash[key] ||= 0
-          result_hash[key] = result_hash[key] + w.duration
+    types = Hash.new
+    total_duration = 0
+    workouts = recent_workouts(user,days)
+    workouts.each do |w|
+      if w.workout_type
+        total_duration += w.duration 
+        if types.has_key?(w.workout_type.description)
+           types[w.workout_type.description]['duration'] += w.duration
+        else
+          types[w.workout_type.description] = { 'duration' => w.duration }
         end
+      end
     end
-    result_hash.sort{|a,b| b[1]<=>a[1]}
+    types.values.each do |type|
+      type['percentage'] = ((type['duration']/total_duration.to_f) * 100).to_i || 1
+    end
+    types.sort{|a,b| b[1]['duration']<=>a[1]['duration']}
   end
   
   def self.summary(user,days)

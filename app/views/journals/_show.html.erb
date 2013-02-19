@@ -1,10 +1,16 @@
-<table cellpadding="3" cellspacing="0" border="0" align="center">
-    <tr>
-        <td><label>type</label></td><td><%= Lookup.find_by_id(@journal.journal_type).description %></td></tr>
-    <tr>
-        <td><label>date</label></td><td><%= @journal.entry_on.strftime("%a %b %d, %y") %></td></tr>
-    <tr>
-        <td><label>created on</label></td><td><%= @journal.created_at.strftime("%a %b %d, %y") %></td></tr>
-    <tr>
-        <td><label>entry</label></td><td><%= @journal.entry %></td></tr>
-</table>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>entry details</h3>
+</div>
+<div class="modal-body">
+    <table class="table table-condensed data-display">
+        <tbody>
+            <tr>
+                <td class="display-label">date</td><td><%= @journal.entry_on.strftime("%a %b %d, %y") %></td></tr>
+            <tr>
+                <td class="display-label">type</td><td><%= @journal.journal_type.description if @journal.journal_type %></td></tr>
+            <tr>
+                <td class="display-label">entry</td><td><%= @journal.entry %></td></tr>
+        <tbody>
+    </table>
+</div>

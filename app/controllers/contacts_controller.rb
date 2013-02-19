@@ -36,7 +36,7 @@ class ContactsController < ApplicationController
   # POST /contacts.js
   def create
     if @contact.save
-      @contacts = @current_user.contacts.asc(:name).page(params[:page])
+      @contacts = current_user.contacts.asc(:name).page(params[:page])
       flash[:notice] = "contact #{@contact.name} was created."
     end
   end
@@ -55,12 +55,11 @@ class ContactsController < ApplicationController
     redirect_to(contacts_path)
   end
 
-private
+  private
 
   def getUniqueTags
     unique_tags = []
-    all_contacts = @current_user.contacts
-    all_contacts.each do |contact|
+    current_user.contacts.each do |contact|
       contact.tags.split.each do |tag|
         unique_tags.push(tag.strip)
       end

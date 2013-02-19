@@ -173,4 +173,28 @@ class Payment
     result_array.first(8)
   end
   
+  def self.summary(user,days=31)
+    deposits = Payment.recent_deposits(user,days)
+    total = 0
+    balance = 0
+    income = 0
+    
+    deposits.each do |dep|
+      income += dep.amount
+    end
+    expenses = Payment.recent_expenses(user,days)
+    expenses.each do |exp|
+      total += exp.amount.abs
+    end
+    user.active_accounts.each do |account|
+      balance += account.balance?
+    end
+    {
+      total: total,
+      net_change: income - total,
+      per_day: total/days,
+      buy_nothing_days: days - Payment.days_with_expenses?(user,days),
+      balance: balance
+    }
+  end
 end

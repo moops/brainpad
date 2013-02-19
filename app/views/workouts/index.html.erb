@@ -15,21 +15,10 @@
 <% end %>
 
 <div class="workouts-panel">
-    <div class="reports-panel">
-	    <div class="box">
-    		<div class="boxhead">workout duration</div>
-    		<div class="boxcontent">
-    			<% for w in @workout_duration_by_type %>
-    				<% percentage = ((w[1].to_f / @workout_summary[:duration]) * 100).to_i %>
-    				<%= "#{w[0]} #{(Time.mktime(0)+(w[1]*60)).strftime("%H:%M")} [#{percentage}%]" %><br/>
-    				<% percentage = '1' if percentage.eql?'0' %>
-    				<%= image_tag('redbar.gif', :width => "#{(percentage*1.5).to_i}", :class => 'bar') %><br/>
-    			<% end %>
-    		</div>
-    	</div> <!-- end box -->
+    <div class="reports-panel" id="duration-by-type">
+	    <%= render 'duration_by_type' %>
     </div>
     <div class="list-panel">
-        
         <!-- search form -->
         <div id="search" class="collapse">
             <%= form_tag({:action => 'index'}, :method => 'get', :class => 'form-search') do %>

@@ -6,17 +6,17 @@
     <table class="table table-condensed data-display">
         <tbody>
             <tr>
-                <td class="display-label">date</td><td><%= @contact.workout_on %></td></tr>
+                <td class="display-label">date</td><td><%= @workout.workout_on %></td></tr>
             <tr>
-                <td class="display-label">type</td><td><%= @contact.type %></td></tr>
+                <td class="display-label">type</td><td><%= @workout.workout_type.description if @workout.workout_type %></td></tr>
             <tr>
-                <td class="display-label">location</td><td><%= @contact.location %></td></tr>
+                <td class="display-label">location</td><td><%= @workout.location %></td></tr>
             <tr>
-                <td class="display-label">description</td><td><%= @contact.description %></td></tr>
+                <td class="display-label">description</td><td><%= @workout.description %></td></tr>
             <tr>
-                <td class="display-label">duration</td><td><%= @contact.duration %></td></tr>
+                <td class="display-label">duration</td><td><%= @workout.duration %></td></tr>
             <tr>
-                <td class="display-label">distance</td><td><%= @contact.distance %></td></tr>
+                <td class="display-label">distance</td><td><%= @workout.distance %></td></tr>
         <tbody>
     </table>
 </div>

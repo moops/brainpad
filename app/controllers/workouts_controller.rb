@@ -1,17 +1,17 @@
 class WorkoutsController < ApplicationController
   
-  load_and_authorize_resource :except => [:create, :update]
+  load_and_authorize_resource
   
   # GET /workouts
   def index    
-    @workouts = @current_user.workouts.desc(:workout_on)
+    @workouts = current_user.workouts.desc(:workout_on)
     if params[:q]
       @workouts = @workouts.where(location: /#{params[:q]}/i)
     end
     @workouts = @workouts.page(params[:page])
     
     @workout_summary = Workout.summary(@current_user,31)
-    @workout_duration_by_type = Workout.workout_duration_by_type(@current_user,31)
+    @workout_duration_by_type = Workout.workout_duration_by_type(current_user,31)
   end
 
   # GET /workouts/1.js
@@ -33,29 +33,25 @@ class WorkoutsController < ApplicationController
     @routes = Lookup.where(:category => 25).all
   end
 
-  # POST /workouts.js
+  # POST /workouts
   def create
-    @workout = Workout.new(params[:workout])
     if @workout.save
-      @workouts = current_user.workouts.desc(:workout_on).page(params[:page])
       flash[:notice] = 'workout was created.'
+      redirect_to workouts_path
     end
   end
 
-  # PUT /workouts/1.js
+  # PUT /workouts/1
   def update
-    @workout = Workout.find(params[:id])
     if @workout.update_attributes!(params[:workout])
-      @workouts = current_user.workouts.desc(:workout_on).page(params[:page])
       flash[:notice] = 'workout was updated.'
-    else
-      logger.info("WTF?")
+      redirect_to workouts_path
     end
   end
 
   # DELETE /workouts/1
   def destroy
     @workout.destroy
-    redirect_to(workouts_path)
+    redirect_to workouts_path
   end
 end

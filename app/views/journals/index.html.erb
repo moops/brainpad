@@ -1,49 +1,31 @@
-<div class="dashboard search_form" style="display:none;">
-    <% form_tag({:action => 'index'}, :method => 'get') do %>
-        <label class="inline">entry</label>
-        <%= text_field_tag :q, h(params[:q]) %>
-        <label class="inline">from</label>
-        <%= text_field_tag :start_on, h(params[:start_on]), :size => 12, :class => 'calendar' %>
-        <label class="inline">to</label>
-        <%= text_field_tag :end_on, h(params[:end_on]), :size => 12, :class => 'calendar' %>
-        <%= submit_tag 'search' %>
-        <%= submit_tag("x", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
+<!-- hidden elements -->
+<div id="journal-show" class="modal hide fade"></div>
+<div id="journal-form" class="modal hide fade"></div>
+
+<!-- search form -->
+<div id="search" class="collapse">
+    <%= form_tag({:action => 'index'}, :method => 'get', :class => 'form-search') do %>
+        <div class="input-append">
+            <%= text_field_tag(:q, h(params[:q]), :class => 'input-medium search-query') %>
+            <%= submit_tag('search', :class => 'btn') %>
+        </div>
     <% end %>
 </div>
+    
+<div class="pull-right">
+    <%= link_to(new_journal_path, :remote => true, :class => "btn btn-primary") do %>
+        <i class="icon-plus icon-white"></i> add
+    <% end %>
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#search">
+      <i class="icon-search icon-white"></i> find
+    </button>
+</div>
 
-<!-- hidden elements -->
-<div id="show" style="display:none;"></div>
-<div id="journal_form" style="display:none;"><%= render(:partial => 'form') %></div>
+<div id="journal-list">
+    <%= render(:partial => 'journals') %>
+</div>
 
-<script type="text/javascript">
-  jQuery(document).ready(function() {
-    buildFormDialog('journal');
-    validate('new_journal');         
-  });
-</script>
-
-<% if (@journals and @journals.size > 0) %>
-<div id="primary_panel_full">
-	<div class="box">
-		<div class="box_header">
-			entries
-			<span style="float:right">
-				<%= link_to(image_tag('search.png', :size => '15x15', :border => 0), '#', :class => 'toggle_search_form') %>
-				<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_journal_form') %>
-			</span>
-		</div>
-		<div class="box_content">
-			<table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
-			    <tr>
-					<th>date</th><th>type</th><th>entry</th>
-					<th colspan="2">&nbsp;</th></tr>
-			    
-			    <%= render(:partial => 'data_rows', :collection => @journals) %>
-			</table>
-			<%= paginate @journals %>
-		</div>
-	</div> <!-- end entries -->
-</div> <!-- end primary_panel_full --> 
-<% end %>
-
-<div class="clear"/>
+<div class="tag-list">
+    tags:
+    <%= tag_list(session[:journal_tags], 'journals') %>
+</div>

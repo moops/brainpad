@@ -1,35 +1,24 @@
 class PaymentsController < ApplicationController
   
   load_and_authorize_resource
-  layout 'standard.html', :except => :show
   
   # GET /payments
-  # GET /payments.xml
   def index
-    if params[:id]
-      @payment = Payment.find(params[:id])
-      @payment.amount = @payment.amount.abs
-    else
-      @payment = Payment.new
+    @payments = current_user.payments.desc(:payment_on)
+    if params[:q]
+      @payments = @payments.where(name: /#{params[:q]}/i)
     end
-    
-    #@payments = Payment.search({ :q => params[:q], :user => @user.id, :start_on => params[:start_on], :end_on => params[:end_on] }, params[:page])
-    @payments = @user.payments.order('payment_on desc')
     if params[:tag]
-      @payments = @payments.where('tags like :tag', :tag => params[:tag])
+      @payments = @payments.where(tags: /#{params[:tag]}/)
+      flash[:notice] = "showing only #{params[:tag]} payments."
       @tag = params[:tag]
     end
-    @payments = @payments.page(params[:page]).per(25)
+    @payments = @payments.page(params[:page])
   
-    @upcoming_payments = Payment.find_upcoming(@user)
+    @upcoming_payments = Payment.find_upcoming(current_user)
     get_stuff_for_form
-    @money_summary = MoneySummary.new(@user,31)
-    @expenses_by_tag = Payment.expenses_by_tag(@user,31)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @payments }
-    end
+    @money_summary = MoneySummary.new(current_user,31)
+    @expenses_by_tag = Payment.expenses_by_tag(current_user,31)
   end
 
   # GET /payments/1
@@ -109,30 +98,5 @@ private
     @payment_types = %w{ expense deposit transfer }
     @accounts = @user.active_accounts
     @tags = Payment.user_tags(@user)
-  end
-end
-
-class MoneySummary
-
-  attr_reader :buy_nothing_days, :net_change, :per_day, :days_with_expenses, :balance, :total
-
-  def initialize(user,days)
-    deposits = Payment.recent_deposits(user,days)
-    income = 0
-    for dep in deposits
-      income += dep.amount
-    end
-    expenses = Payment.recent_expenses(user,days)
-    @total = 0
-    for exp in expenses
-      @total += exp.amount.abs
-    end
-    @net_change = income - @total
-    @per_day     = @total/days if days > 0
-    @buy_nothing_days = days - Payment.days_with_expenses?(user,days)
-    @balance = 0
-    for account in user.active_accounts
-      @balance += account.balance?
-    end
   end
 end

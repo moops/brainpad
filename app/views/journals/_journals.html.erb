@@ -1,0 +1,31 @@
+<% if (@journals and !@journals.empty?) %>
+    <h4>entries</h4>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>date</th><th>type</th><th>entry</th><th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @journals.each do |journal| %>
+                <tr>
+                    <td><%= link_to(journal.entry_on.strftime("%a %b %d, %y"), edit_journal_path(journal), :remote => true) %></td>
+                    <td><%= journal.journal_type.description if journal.journal_type %></td>
+                    <td><%= journal.entry[0,60] %></td>
+                    <td class="actions">
+                        <%= link_to(journal_path(journal), :class => "get", :remote => true) do %>
+                            <i class="icon-eye-open"></i>
+                        <% end %>
+                        <%= link_to(new_journal_path(:journal_id => journal), :remote => true, :title => 'copy entry') do %>
+                            <i class="icon-share"></i>
+                        <% end %>
+                        <%= link_to(journal_path(journal), :method => :delete, :confirm => "really delete entry?") do %>
+                            <i class="icon-remove"></i>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= paginate @journals %>
+<% end %>
