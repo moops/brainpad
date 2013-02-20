@@ -68,29 +68,35 @@
         </div>
         <div class="clearfix"></div>
         <div class="footer-search">
-            <form method="get" action="http://www.google.ca/custom" target="_top">
-                <input type="hidden" name="domains" value=""></input>
-                <input type="text" name="q" size="22" maxlength="255" value="" class="text"></input>
-                <input type="hidden" name="client" value="pub-2435759852249095"></input>
-                <input type="hidden" name="forid" value="1"></input>
-                <input type="hidden" name="ie" value="ISO-8859-1"></input>
-                <input type="hidden" name="oe" value="ISO-8859-1"></input>
-                <input type="hidden" name="cof" value="GALT:#0066CC;GL:1;DIV:#999999;VLC:336633;AH:center;BGC:FFFFFF;LBGC:FF9900;ALC:0066CC;LC:0066CC;T:000000;GFNT:666666;GIMP:666666;LH:40;LW:100;L:http://www.raceweb.ca/images/raceweb_logo.gif;S:http://www.raceweb.ca;LP:1;FORID:1;"></input>
-                <input type="hidden" name="hl" value="en"></input>
-                <input type="submit" name="sa" value="google"></input>
+            <form method="get" action="http://www.google.ca/custom" class="form-search">
+                <div class="input-append">
+                    <input type="hidden" name="domains" value=""></input>
+                    <input type="text" name="q" size="22" maxlength="255" value="" class="input-large search-query"></input>
+                    <input type="hidden" name="client" value="pub-2435759852249095"></input>
+                    <input type="hidden" name="forid" value="1"></input>
+                    <input type="hidden" name="ie" value="ISO-8859-1"></input>
+                    <input type="hidden" name="oe" value="ISO-8859-1"></input>
+                    <input type="hidden" name="cof" value="GALT:#0066CC;GL:1;DIV:#999999;VLC:336633;AH:center;BGC:FFFFFF;LBGC:FF9900;ALC:0066CC;LC:0066CC;T:000000;GFNT:666666;GIMP:666666;LH:40;LW:100;L:http://www.raceweb.ca/images/raceweb_logo.gif;S:http://www.raceweb.ca;LP:1;FORID:1;"></input>
+                    <input type="hidden" name="hl" value="en"></input>
+                    <input type="submit" name="sa" value="google" class="btn"></input>
+                </div>
             </form>
-            <form action="http://en.wikipedia.org/wiki/Special:Search" id="searchform">
-                <input id="searchInput" name="search" type="text" accesskey="f" size="22" value="" class="text" />
-                <input type='submit' name="fulltext" class="searchButton" value="wikipedia" />
+            <form action="http://en.wikipedia.org/wiki/Special:Search" class="form-search">
+                <div class="input-append">
+                    <input id="searchInput" name="search" type="text" accesskey="f" size="22" class="input-medium search-query" />
+                    <input type="submit" name="fulltext" class="btn" value="wikipedia" />
+                </div>
             </form>
-            <form name=gs method=GET action=http://www.google.com/custom target="_top">
-                <input type="hidden" name="hl" value="en">
-                <input type="hidden" name="lr" value="">
-                <input type="hidden" name="client" value="google-coop">
-                <input type="hidden" name="cof" value="L:http://vdoogle.com/logo.jpg;LH:30;LP:1;LC:#FF0000;VLC:#663399;GALT:#0000FF;DIV:#000000;AH:left;S:http://www.vdoogle.com;CX:VDoogle%20Shared%20Video%20Search;">
-                <input type="text" name="q" size="22" maxlength="2048" value="" title="Search" class="text">
-                <input type="submit" name="btnG" value="video">
-                <input type="hidden" id="custom" name="cx" value="000107741605447063584:pet3xpnnzve">
+            <form method="get" action="http://www.google.com/custom" class="form-search">
+                <div class="input-append">
+                    <input type="hidden" name="hl" value="en">
+                    <input type="hidden" name="lr" value="">
+                    <input type="hidden" name="client" value="google-coop">
+                    <input type="hidden" name="cof" value="L:http://vdoogle.com/logo.jpg;LH:30;LP:1;LC:#FF0000;VLC:#663399;GALT:#0000FF;DIV:#000000;AH:left;S:http://www.vdoogle.com;CX:VDoogle%20Shared%20Video%20Search;">
+                    <input type="text" name="q" size="22" maxlength="2048" class="input-large search-query">
+                    <input type="submit" name="btnG" value="video" class="btn">
+                    <input type="hidden" id="custom" name="cx" value="000107741605447063584:pet3xpnnzve">
+                </div>
             </form>
         </div>
     </footer>
