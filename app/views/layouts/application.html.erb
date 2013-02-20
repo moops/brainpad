@@ -36,6 +36,10 @@
 
         <!-- main content -->
         <div id="content">
+            
+            <!-- hidden show details -->
+            <div id="details-show" class="modal hide fade"></div>
+            
             <% flash.each do |key, value| %>
                 <div class="alert alert-block alert-<%= key == :notice ? "success" : key %>" data-dismiss="alert">
                     <a class="close">×</a>

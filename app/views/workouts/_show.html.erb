@@ -6,7 +6,7 @@
     <table class="table table-condensed data-display">
         <tbody>
             <tr>
-                <td class="display-label">date</td><td><%= @workout.workout_on %></td></tr>
+                <td class="display-label">date</td><td><%= @workout.workout_on.strftime("%a %b %d, %y") %></td></tr>
             <tr>
                 <td class="display-label">type</td><td><%= @workout.workout_type.description if @workout.workout_type %></td></tr>
             <tr>

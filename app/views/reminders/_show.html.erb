@@ -1,14 +1,22 @@
-<table cellpadding="3" cellspacing="0" border="0" align="center">
-    <tr>
-        <td><label>type</label></td><td><%= Lookup.find_by_id(@reminder.reminder_type).description %></td></tr>
-    <tr>
-        <td><label>priority</label></td><td><%= Lookup.find_by_id(@reminder.priority).description %></td></tr>
-    <tr>
-        <td><label>due</label></td><td><%= @reminder.due_on.strftime("%a %b %d, %y") %></td></tr>
-    <tr>
-        <td><label valign="top">tags</label></td><td><%= @reminder.tags %></td></tr>
-    <tr>
-        <td><label valign="top">description</label></td><td><%= @reminder.description %></td></tr>
-    <tr>
-        <td><label>created on</label></td><td><%= @reminder.created_at.strftime("%a %b %d, %y") %></td></tr>
-</table>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>reminder details</h3>
+</div>
+<div class="modal-body">
+    <table class="table table-condensed data-display">
+        <tbody>
+            <tr>
+                <td class="display-label">type</td><td><%= @reminder.reminder_type.description if @reminder.reminder_type %></td></tr>
+            <tr>
+                <td class="display-label">priority</td><td><%= @reminder.priority.description if @reminder.priority %></td></tr>
+            <tr>
+                <td class="display-label">due</td><td><%= @reminder.due_on.strftime("%a %b %d, %y") %></td></tr>
+            <tr>
+                <td class="display-label">tags</td><td><%= @reminder.tags %></td></tr>
+            <tr>
+                <td class="display-label">description</td><td><%= @reminder.description %></td></tr>
+            <tr>
+                <td class="display-label">created on</td><td><%= @reminder.created_at.strftime("%a %b %d, %y") %></td></tr>
+        <tbody>
+    </table>
+</div>
