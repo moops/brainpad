@@ -6,6 +6,8 @@
     <tr>
         <td><label>due</label></td><td><%= @reminder.due_on.strftime("%a %b %d, %y") %></td></tr>
     <tr>
+        <td><label valign="top">tags</label></td><td><%= @reminder.tags %></td></tr>
+    <tr>
         <td><label valign="top">description</label></td><td><%= @reminder.description %></td></tr>
     <tr>
         <td><label>created on</label></td><td><%= @reminder.created_at.strftime("%a %b %d, %y") %></td></tr>

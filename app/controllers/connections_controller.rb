@@ -44,7 +44,7 @@ class ConnectionsController < ApplicationController
   # PUT /connections/1.js
   def update
     if @connection.update_attributes(params[:connection])
-      @connections = @current_user.connections.asc(:name).page(params[:page])
+      @connections = current_user.connections.asc(:name).page(params[:page])
       flash[:notice] = "connection #{@connection.name} was updated."
     end
   end

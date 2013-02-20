@@ -1,67 +1,36 @@
+<!-- hidden elements -->
+<div id="reminder-show" class="modal hide fade"></div>
+<div id="reminder-form" class="modal hide fade"></div>
+
 <% if @reminder_summary %>
-    <div class="dashboard">
-        <table width="100%" border="0">
-            <tr>
-                <td>last 30 days:</td>
-                <td><div class="summary_data"><%= @reminder_summary.created %></div>created</td>
-                <td><div class="summary_data"><%= @reminder_summary.completed %></div>completed</td>
-                <td><div class="summary_data"><%= number_to_percentage(@reminder_summary.completion_rate, :precision => 0) %></div>completion rate</td>
-                <td><div class="summary_data"><%= @reminder_summary.on_time %></div>on time</td></tr>
-        </table>
-    </div>
+    <div class="reminder-dashboard">
+        <div class="item">last 30 days:</div>
+        <div class="item"><div class="data"><%= @reminder_summary[:created] %></div>created</div>
+        <div class="item"><div class="data"><%= @reminder_summary[:completed] %></div>completed</div>
+        <div class="item"><div class="data"><%= number_to_percentage(@reminder_summary[:completion_rate], :precision => 0) %></div>rate</div>
+        <div class="item"><div class="data"><%= @reminder_summary[:on_time] %></div>on time</div>
+        <div class="clear"></div>
+    </div> <!-- end .dashboard -->
 <% end %>
 
-<div class="dashboard search_form" style="display:none;">
-    <% form_tag({:action => 'index'}, :method => 'get') do %>
-        <label class="inline">description</label>
-        <%= text_field_tag :q, h(params[:q]) %>
-		<label class="inline">from</label>
-        <%= text_field_tag :start_on, h(params[:start_on]), :size => 12, :class => 'calendar' %>
-        <label class="inline">to</label>
-        <%= text_field_tag :end_on, h(params[:end_on]), :size => 12, :class => 'calendar' %>
-        <%= submit_tag 'search' %>
-        <%= submit_tag("x", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
+<!-- search form -->
+<%= render 'shared/search_form' %>
+
+<!-- add and search buttons --> 
+<div class="pull-right">
+    <%= link_to(new_reminder_path, :remote => true, :class => "btn btn-primary") do %>
+        <i class="icon-plus icon-white"></i> add
     <% end %>
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#search">
+        <i class="icon-search icon-white"></i> find
+    </button>
 </div>
 
-<!-- hidden elements -->
-<div id="show" style="display:none;"></div>
-<div id="reminder_form" style="display:none;"><%= render(:partial => 'form') %></div>
+<div id="reminder-list" class="data-list">
+    <%= render(:partial => 'reminders') %>
+</div>
 
-<script type="text/javascript">
-  jQuery(document).ready(function() {
-    buildFormDialog('reminder');
-    validate('new_reminder');         
-  });
-</script>
-
-<% if (@reminders and @reminders.size > 0) %>
-<% form_tag(:action => 'finish') do %>
-<div id="primary_panel_full">
-	<div class="box">
-		<div class="box_header">
-			reminders
-			<span style="float:right">
-				<%= link_to(image_tag('search.png', :size => '15x15', :border => 0), '#', :class => 'toggle_search_form') %>
-				<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_reminder_form') %>
-			</span>
-		</div>
-		<div class="box_content">
-			<table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
-				<tr>
-					<th>date</th><th>type</th><th>priority</th><th>description</th><th>done</th>
-					<th colspan="2">&nbsp;</th></tr>
-				
-				<%= render(:partial => 'data_rows', :collection => @reminders) %>
-				<tr>
-					  <td><%= submit_tag('>>') %></td>
-					  <td colspan="3">&nbsp;</td></tr>
-			</table>
-			<%= paginate @reminders %>
-		</div>
-	</div> <!-- end reminders -->
-</div> <!-- end primary_panel_full -->  
-<% end %>
-<% end %>
-
-<div class="clear"/>
+<div class="tag-list">
+    tags:
+    <%= tag_list(session[:reminder_tags], 'reminders') %>
+</div>

@@ -1,0 +1,37 @@
+<% if (@reminders and !@reminders.empty?) %>
+    <h4>reminders</h4>
+    <%= form_tag(finish_reminders_path, method: 'put') do %>
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>date</th><th>type</th><th>priority</th><th>description</th><th>actions</th><th>done</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @reminders.each do |reminder| %>
+                    <tr>
+                        <td><%= due_with_class(reminder) %></td>
+                        <td><%= reminder.reminder_type.description if reminder.reminder_type %></td>
+                        <td><%= reminder.priority.description if reminder.priority %></td>
+                        <td><%= link_to(reminder.description_condensed, edit_reminder_path(reminder), :remote => true) %></td>
+                        <td class="actions">
+                            <%= link_to(reminder_path(reminder), :remote => true, :title => 'show details') do %>
+                                <i class="icon-eye-open"></i>
+                            <% end %>
+                            <%= link_to(new_reminder_path(:reminder_id => reminder), :remote => true, :title => "copy #{reminder.description_condensed}") do %>
+                                <i class="icon-share"></i>
+                            <% end %>
+                            <%= link_to(reminder_path(reminder), :method => :delete, :confirm => "really delete #{reminder.description_condensed} reminder?", :title => 'delete reminder') do %>
+                                <i class="icon-remove"></i>
+                            <% end %>
+                        </td>
+                        <td width="5%"><%= check_box_tag("reminder[#{reminder.id.to_s}][done]", "1", reminder.done==1) %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <div class="pull-right"><%= submit_tag('done', :class => 'btn') %></div>
+        <div class="clear"></div>
+    <% end %>
+    <%= paginate @reminders %>
+<% end %>

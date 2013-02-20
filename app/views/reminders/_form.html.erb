@@ -1,37 +1,20 @@
-<% form_for(@reminder) do |f| %>
-
-<% if @user %>
-    <%= hidden_field_tag('reminder[person_id]', @user.id) %>
-<% end %>
-
-<fieldset>
-	<legend>details</legend> 
-	<ol>   
-	<li>
-        <%= f.label(:reminder_type, 'Type') %>
-        <%= f.select(:reminder_type, Lookup.get_list('task_type').collect {|l| [ l.description, l.id ] }) %></li>
-    <li>
-        <%= f.label(:priority) %>
-        <%= f.select(:priority, Lookup.get_list('priority').collect {|l| [ l.description, l.id ] }) %></li>
-	<li>
-        <%= f.label(:due_on, 'Due') %>
-        <%= f.text_field(:due_on, :size => 12, :class => 'calendar today required') %></li>
-	<li>
-        <%= f.label(:description) %>
-        <%= f.text_area(:description, :cols => 50, :rows => 5, :class => 'required') %></li>
-	<li>
-		<%= f.label(:done) %>
-        <%= f.check_box(:done) %></li></ol></fieldset>
-<fieldset>
-	<legend>repeat</legend> 
-	<ol>
-		<li>
-        <%= f.label(:frequency, 'Every') %>
-        <%= f.select(:frequency, Lookup.get_list('freq').collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %></li>
-	<li>
-        <%= f.label(:repeat_until, 'Until') %>
-        <%= f.text_field(:repeat_until, :size => '12', :class => 'calendar') %></li></ol></fieldset>
-<fieldset class="submit">	
-    <%= f.submit(@reminder.id ? 'update' : 'create') %></fieldset>
-
+<%= simple_form_for(@reminder, :html => {:class => 'form-horizontal' }) do |f| %>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>new reminder</h3>
+    </div>
+    <div class="modal-body">
+        <%= f.input :person_id, as: :hidden, input_html: { value: current_user.id } %>
+        <%= f.input :reminder_type_id, collection: @types, value_method: '_id', label_method: 'description' %>
+        <%= f.input :priority_id, collection: @priorities, value_method: '_id', label_method: 'description' %>
+        <%= f.input(:due_on, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
+        <%= f.input :tags %>
+        <%= f.input :description %>
+        <%= f.input :done %>
+        <%= f.input :frequency_id, collection: @frequencies, value_method: '_id', label_method: 'description' %>
+        <%= f.input(:repeat_until, as: :string, input_html: {class: 'calendar', 'data-date-format' => "yyyy-mm-dd"}) %>
+    </div>
+    <div class="modal-footer">
+        <%= f.button(:submit) %>
+    </div>
 <% end %>

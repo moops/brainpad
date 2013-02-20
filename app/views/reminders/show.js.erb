@@ -1,3 +1,1 @@
-jQuery('#show')
-    .html("<%= escape_javascript(render(:partial => 'show')) %>")
-    .dialog({ autoOpen: true, width: 500, title: 'reminder details', modal: true, show: 'fade' });
+$('#reminder-show').html("<%= escape_javascript(render(:partial => 'show')) %>").modal('show');

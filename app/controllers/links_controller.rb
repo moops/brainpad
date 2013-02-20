@@ -7,13 +7,12 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.xml
   def index
-    #@current_user = Person.first
     unless session[:tags]
       session[:tags] = getUniqueTags
     end
 
     links = Link.all
-    links = @current_user.links if @current_user
+    links = current_user.links if current_user
 
     @recently_clicked = links.desc(:last_clicked_on).limit(4).all
     @recently_added = links.desc(:created_at).limit(4).all
@@ -121,7 +120,7 @@ class LinksController < ApplicationController
 
   # GET /links/clean
   def clean
-    @links = Link.paginate :page => params[:page], :conditions => "person_id = #{@current_user.id}", :order => :name, :per_page => 15
+    @links = Link.paginate :page => params[:page], :conditions => "person_id = #{current_user.id}", :order => :name, :per_page => 15
   end
 
   # GET /link/refresh_tags

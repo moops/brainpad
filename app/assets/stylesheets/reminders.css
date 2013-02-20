@@ -1,0 +1,30 @@
+.reminder-dashboard {
+	margin: auto;
+	margin-bottom: 20px;
+	border: 1px solid #bbb;
+	background: #ddd;
+	border-radius: 6px;
+	box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+}
+
+.reminder-dashboard .item {
+	width: 17%;
+	padding: 10px;
+	float: left;
+	color: #666;
+}
+
+.reminder-dashboard .item .data {
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.overdue {
+	color: red;
+	font-weight: bold;
+}
+
+.due {
+	color: green;
+	font-weight: bold;
+}

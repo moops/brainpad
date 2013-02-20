@@ -6,7 +6,7 @@ class ContactsController < ApplicationController
   def index
     session[:contact_tags] = getUniqueTags
     
-    @contacts = @current_user.contacts.asc(:name)
+    @contacts = current_user.contacts.asc(:name)
     if params[:q]
       @contacts = @contacts.where(name: /#{params[:q]}/i)
     end
@@ -44,7 +44,7 @@ class ContactsController < ApplicationController
   # PUT /contacts/1.js
   def update
     if @contact.update_attributes(params[:contact])
-      @contacts = @current_user.contacts.asc(:name).page(params[:page])
+      @contacts = current_user.contacts.asc(:name).page(params[:page])
       flash[:notice] = "contact #{@contact.name} was updated."
     end
   end

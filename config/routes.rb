@@ -10,7 +10,11 @@ Brainpad::Application.routes.draw do
 
   resources :milestones
   resources :workouts
-  resources :reminders
+  resources :reminders do
+    collection do
+      put 'finish'
+    end
+  end
   resources :journals
   resources :contacts
   resources :connections

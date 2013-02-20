@@ -9,8 +9,7 @@ class WorkoutsController < ApplicationController
       @workouts = @workouts.where(location: /#{params[:q]}/i)
     end
     @workouts = @workouts.page(params[:page])
-    
-    @workout_summary = Workout.summary(@current_user,31)
+    @workout_summary = Workout.summary(current_user,31)
     @workout_duration_by_type = Workout.workout_duration_by_type(current_user,31)
   end
 
