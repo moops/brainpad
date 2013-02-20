@@ -13,7 +13,7 @@
                     <td><%= journal.journal_type.description if journal.journal_type %></td>
                     <td><%= journal.entry[0,60] %></td>
                     <td class="actions">
-                        <%= link_to(journal_path(journal), :remote => true) do %>
+                        <%= link_to(journal_path(journal), :remote => true, :title => "show details") do %>
                             <i class="icon-eye-open"></i>
                         <% end %>
                         <%= link_to(new_journal_path(:journal_id => journal), :remote => true, :title => 'copy entry') do %>

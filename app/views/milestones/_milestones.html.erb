@@ -17,7 +17,7 @@
     				    </script>
     				</td>
                     <td class="actions">
-                        <%= link_to(milestone_path(milestone), :remote => true) do %>
+                        <%= link_to(milestone_path(milestone), :remote => true, :title => "show details") do %>
                             <i class="icon-eye-open"></i>
                         <% end %>
                         <%= link_to(new_milestone_path(:milestone_id => milestone), :remote => true, :title => "copy #{milestone.name}") do %>

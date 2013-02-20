@@ -14,7 +14,7 @@
                     <td><%= connection.password %></td>
                     <td><%= link_to connection.url, connection.url %></td>
                     <td class="actions">
-                        <%= link_to(connection_path(connection), :remote => true) do %>
+                        <%= link_to(connection_path(connection), :remote => true, :title => "show details") do %>
                             <i class="icon-eye-open"></i>
                         <% end %>
                         <%= link_to(new_connection_path(:connection_id => connection), :remote => true, :title => 'copy connection') do %>
