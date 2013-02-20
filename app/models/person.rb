@@ -11,7 +11,7 @@ class Person
   field :authority, type: Integer
   field :password_digest
 
-  has_many :accounts
+  embeds_many :accounts
   has_many :connections
   has_many :contacts
   has_many :journals
@@ -19,7 +19,7 @@ class Person
   has_many :reminders
   has_many :workouts
   has_many :milestones
-  #has_many :payments, :through => :accounts
+  has_many :payments
 
   has_secure_password
   validates_presence_of :username
