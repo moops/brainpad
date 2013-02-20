@@ -1,93 +1,70 @@
 class ConnectionsController < ApplicationController
   
   load_and_authorize_resource
-  layout 'standard', :except => :show
   
   # GET /connections
-  # GET /connections.xml
   def index
-    @connections = @user.connections.order(:name)
+    session[:connection_tags] = getUniqueTags
+    
+    @connections = current_user.connections.asc(:name)
+    if params[:q]
+      @connections = @connections.where(name: /#{params[:q]}/i)
+    end
     if params[:tag]
-      @connections = @connections.where('tags like :tag', :tag => params[:tag])
+      @connections = @connections.where(tags: /#{params[:tag]}/)
+      flash[:notice] = "showing only #{params[:tag]} connections."
       @tag = params[:tag]
     end
-    @connections = @connections.page(params[:page]).per(13)
-    @connection = Connection.new #for the 'new' form
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @connections }
-    end
+    @connections = @connections.page(params[:page])
   end
 
-  # GET /connections/1
-  # GET /connections/1.xml
+  # GET /connections/1.js
   def show
-
-    respond_to do |format|
-      format.js { render :layout => false }
-      format.xml  { render :xml => @connection }
-    end
   end
 
-  # GET /connections/new
-  # GET /connections/new.xml
+  # GET /connections/new.js
   def new
-
-    respond_to do |format|
-      format.js { render :layout => false }
-      format.xml  { render :xml => @connection }
+    if (params[:connection_id])
+      @connection = Connection.find(params[:connection_id]).dup
     end
   end
 
-  # GET /connections/1/edit
+  # GET /connections/1/edit.js
   def edit
-    respond_to do |format|
-      format.html 
-      format.js { render :layout => false }
-    end
   end
 
-  # POST /connections
-  # POST /connections.xml
+  # POST /connections.js
   def create
-
-    respond_to do |format|
-      if @connection.save
-        flash[:notice] = 'Connection was successfully created.'
-        format.html { redirect_to(connections_path) }
-        format.xml  { render :xml => @connection, :status => :created, :location => @connection }
-      else
-        format.html { redirect_to(connections_path) }
-        format.xml  { render :xml => @connection.errors, :status => :unprocessable_entity }
-      end
+    if @connection.save
+      @connections = current_user.connections.asc(:name).page(params[:page])
+      flash[:notice] = "connection #{@connection.name} was created."
     end
   end
 
-  # PUT /connections/1
-  # PUT /connections/1.xml
+  # PUT /connections/1.js
   def update
-
-    respond_to do |format|
-      if @connection.update_attributes(params[:connection])
-        flash[:notice] = 'Connection was successfully updated.'
-        format.html { redirect_to(connections_path) }
-        format.xml  { head :ok }
-      else
-        format.html { redirect_to(connections_path) }
-        format.xml  { render :xml => @connection.errors, :status => :unprocessable_entity }
-      end
+    if @connection.update_attributes(params[:connection])
+      @connections = @current_user.connections.asc(:name).page(params[:page])
+      flash[:notice] = "connection #{@connection.name} was updated."
     end
   end
 
   # DELETE /connections/1
-  # DELETE /connections/1.xml
   def destroy
     @connection.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(connections_url) }
-      format.xml  { head :ok }
+    redirect_to connections_url
+  end
+  
+  private
+  
+  def getUniqueTags
+    unique_tags = []
+    current_user.contacts.each do |contact|
+      contact.tags.split.each do |tag|
+        unique_tags.push(tag.strip)
+      end
     end
+    unique_tags.uniq!
+    unique_tags.sort!
   end
 end

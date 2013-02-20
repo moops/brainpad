@@ -1,0 +1,32 @@
+<% if (@connections and @connections.size > 0) %>
+    <h4>connections</h4>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>name</th><th>username</th><th>password</th><th>url</th><th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @connections.each do |connection| %>
+                <tr>
+                    <td><%= link_to(connection.name, edit_connection_path(connection), :remote => true) %></td>
+                    <td><%= connection.username %></td>
+                    <td><%= connection.password %></td>
+                    <td><%= link_to connection.url, connection.url %></td>
+                    <td class="actions">
+                        <%= link_to(connection_path(connection), :remote => true) do %>
+                            <i class="icon-eye-open"></i>
+                        <% end %>
+                        <%= link_to(new_connection_path(:connection_id => connection), :remote => true, :title => 'copy connection') do %>
+                            <i class="icon-share"></i>
+                        <% end %>
+                        <%= link_to(connection_path(connection), :method => :delete, :confirm => "really delete #{connection.name}?") do %>
+                            <i class="icon-remove"></i>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= paginate @connections %>
+<% end %>

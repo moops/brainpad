@@ -1,84 +1,50 @@
 class MilestonesController < ApplicationController
 
   load_and_authorize_resource
-  layout 'standard.html', :except => :show
   
   # GET /milestones
-  # GET /milestones.xml
   def index    
-    #@milestones = Milestone.paginate :page => params[:page], :conditions => "person_id = #{@user.id}", :order => 'milestone_at', :per_page => 13
-
-    @milestones = @user.milestones.order(:milestone_at)
-    if params[:tag]
-      @milestones = @milestones.where('tags like :tag', :tag => params[:tag])
-      @tag = params[:tag]
+    @milestones = current_user.milestones.desc(:milestone_at)
+    if params[:q]
+      @milestones = @milestones.where(name: /#{params[:q]}/i)
     end
-    @milestones = @milestones.page(params[:page]).per(13)
-    
-    @milestone = Milestone.new #for the 'new' form
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @milestones }
-    end
+    @milestones = @milestones.page(params[:page])
   end
 
-  # GET /milestones/1/edit
-  def edit
-    respond_to do |format|
-      format.html 
-      format.js { render :layout => false }
-    end
-  end
-
-  # GET /milestones/1
-  # GET /milestones/1.xml
+  # GET /milestones/1.js
   def show
-    respond_to do |format|
-      format.js { render :layout => false }
-      format.xml  { render :xml => @milestone }
+  end
+  
+  # GET /milestones/1/new.js
+  def new
+    if (params[:milestone_id])
+      @milestone = Milestone.find(params[:milestone_id]).dup
     end
   end
+  
+  # GET /milestones/1/edit.js
+  def edit
+  end
 
-  # POST /milestones
-  # POST /milestones.xml
+  # POST /milestones.js
   def create
-    respond_to do |format|
-      if @milestone.save
-        flash[:notice] = 'Milestone was successfully created.'
-        format.html { redirect_to(milestones_path) }
-        format.xml  { render :xml => @milestone, :status => :created, :location => @milestone }
-      else
-        format.html { redirect_to(milestones_path) }
-        format.xml  { render :xml => @milestone.errors, :status => :unprocessable_entity }
-      end
+    if @milestone.save
+      @milestones = current_user.milestones.desc(:milestone_at).page(params[:page])
+      flash[:notice] = "milestone #{@milestone.name} was created."
     end
   end
 
-  # PUT /milestones/1
-  # PUT /milestones/1.xml
+  # PUT /milestones/1.js
   def update
-    respond_to do |format|
-      if @milestone.update_attributes(params[:milestone])
-        flash[:notice] = 'Milestone was successfully updated.'
-        format.html { redirect_to(milestones_path) }
-        format.xml  { head :ok }
-      else
-        format.html { redirect_to(milestones_path) }
-        format.xml  { render :xml => @milestone.errors, :status => :unprocessable_entity }
-      end
+    if @milestone.update_attributes(params[:milestone])
+      @milestones = current_user.milestones.desc(:milestone_at).page(params[:page])
+      flash[:notice] = "milestone #{@milestone.name} was updated."
     end
   end
 
   # DELETE /milestones/1
-  # DELETE /milestones/1.xml
   def destroy
     @milestone.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(milestones_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to milestones_url
   end
-  
 end

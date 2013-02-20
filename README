@@ -9,11 +9,13 @@ javascript: datepicker
     - http://www.eyecon.ro/bootstrap-datepicker/
 
 2013
+- Feb 19 - put search forms into a helper partial
+- Feb 19 - fix tags and maybe put getUniqueTags into each model or a helper
 - Feb 18 - maybe don't need Lookup has_many relationship for workouts (and other entities)?
-- Feb 18 - add space for empty list
+x Feb 18 - add space for empty list
 - Feb 15 - look into client side validations
 - Feb 14 - embed lookup for workout type
-- Feb 14 - change delete to ajax request
+- Feb 14 - change delete to ajax request for non report entities (contact, connection, milestone etc)
 x Feb 14 - get copying working for contacts and workouts
 x Feb 14 - update workouts
 x Feb 13 - fix contact updating

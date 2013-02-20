@@ -18,6 +18,7 @@ class Person
   has_many :links
   has_many :reminders
   has_many :workouts
+  has_many :milestones
   #has_many :payments, :through => :accounts
 
   has_secure_password

@@ -8,8 +8,8 @@
 $(document).ready(function() {
   $('#nav').spasticNav();
   $("#logoutlink").tooltip();
-});
 
+});
 function count(id,until) {
   var val = "";
   var now = new Date();
@@ -39,7 +39,8 @@ function count(id,until) {
   if (then < now) {
     val += " ago";
   }
-  
+
   document.getElementById(id).value = val;
   setTimeout("count('" + id + "','" + until + "')", 1000);
 }
+

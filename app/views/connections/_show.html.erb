@@ -1,12 +1,22 @@
-<table cellpadding="3" cellspacing="0" border="0" align="center">
-    <tr>
-        <td><label>name</label></td><td><%= @connection.name %></td></tr>
-    <tr>
-        <td><label>username</label></td><td><%= @connection.username %></td></tr>
-    <tr>
-        <td><label>password</label></td><td><%= @connection.password %></td></tr>
-    <tr>
-        <td><label>url</label></td><td><%= @connection.url %></td></tr>
-    <tr>
-        <td><label>description</label></td><td><%= @connection.description %></td></tr>
-</table>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>connection details</h3>
+</div>
+<div class="modal-body">
+    <table class="table table-condensed data-display">
+        <tbody>
+            <tr>
+                <td class="display-label">name</td><td><%= @connection.name %></td></tr>
+            <tr>
+                <td class="display-label">username</td><td><%= @connection.username %></td></tr>
+            <tr>
+                <td class="display-label">password</td><td><%= @connection.password %></td></tr>
+            <tr>
+                <td class="display-label">url</td><td><%= @connection.url %></td></tr>
+            <tr>
+                <td class="display-label">url</td><td><%= @connection.tags %></td></tr>
+            <tr>
+                <td class="display-label">description</td><td><%= @connection.description %></td></tr>
+        <tbody>
+    </table>
+</div>

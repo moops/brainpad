@@ -14,7 +14,6 @@ group :test do
 end
 
 gem "mongoid"                 # mongodb
-#gem "bson_ext"                # used by mongoid
 gem 'json'                    # json api
 gem 'kaminari'                # pagination
 gem 'bcrypt-ruby'             # password encryption

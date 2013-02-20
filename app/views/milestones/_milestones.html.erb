@@ -1,0 +1,35 @@
+<% if (@milestones and !@milestones.empty?) %>
+    <h4>milestones</h4>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>description</th><th>when</th><th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @milestones.each do |milestone| %>
+                <tr>
+                    <td><%= link_to(milestone.name, edit_milestone_path(milestone), :remote => true) %></td>
+                    <td>
+                        <input class="milestone-time" id="<%= milestone.id %>"/>
+                        <script type="text/javascript">
+    				        count('<%= milestone.id %>', '<%= milestone.milestone_at %>');
+    				    </script>
+    				</td>
+                    <td class="actions">
+                        <%= link_to(milestone_path(milestone), :remote => true) do %>
+                            <i class="icon-eye-open"></i>
+                        <% end %>
+                        <%= link_to(new_milestone_path(:milestone_id => milestone), :remote => true, :title => "copy #{milestone.name}") do %>
+                            <i class="icon-share"></i>
+                        <% end %>
+                        <%= link_to(milestone_path(milestone), :method => :delete, :confirm => "really delete #{milestone.name}?") do %>
+                            <i class="icon-remove"></i>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= paginate @milestones %>
+<% end %>

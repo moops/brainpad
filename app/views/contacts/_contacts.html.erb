@@ -15,7 +15,7 @@
                     <td><%= contact.phone_work %></td>
                     <td><%= contact.phone_cell %></td>
                     <td class="actions">
-                        <%= link_to(contact_path(contact), :class => "get", :remote => true) do %>
+                        <%= link_to(contact_path(contact), :remote => true) do %>
                             <i class="icon-eye-open"></i>
                         <% end %>
                         <%= link_to(new_contact_path(:contact_id => contact), :remote => true, :title => 'copy contact') do %>

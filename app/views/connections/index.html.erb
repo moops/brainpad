@@ -1,45 +1,31 @@
-<div class="dashboard search_form" style="display:none;">
-    <% form_tag({:action => 'index'}, :method => 'get') do %>
-        <label class="inline">name</label>
-        <%= text_field_tag :q, h(params[:q]) %>
-        <%= submit_tag 'search' %>
-        <%= submit_tag("x", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
+<!-- hidden elements -->
+<div id="connection-show" class="modal hide fade"></div>
+<div id="connection-form" class="modal hide fade"></div>
+
+<!-- search form -->
+<div id="search" class="collapse">
+    <%= form_tag({:action => 'index'}, :method => 'get', :class => 'form-search') do %>
+        <div class="input-append">
+            <%= text_field_tag(:q, h(params[:q]), :class => 'input-medium search-query') %>
+            <%= submit_tag('search', :class => 'btn') %>
+        </div>
     <% end %>
 </div>
+    
+<div class="pull-right">
+    <%= link_to(new_connection_path, :remote => true, :class => "btn btn-primary") do %>
+        <i class="icon-plus icon-white"></i> add
+    <% end %>
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#search">
+      <i class="icon-search icon-white"></i> find
+    </button>
+</div>
 
-<!-- hidden elements -->
-<div id="show" style="display:none;"></div>
-<div id="connection_form" style="display:none;"><%= render(:partial => 'form') %></div>
+<div id="connection-list" class="data-list">
+    <%= render(:partial => 'connections') %>
+</div>
 
-<script type="text/javascript">
-  jQuery(document).ready(function() {
-    buildFormDialog('connection');
-    validate('new_connection'); 
-  });
-</script>
-
-<% if (@connections and @connections.size > 0) %>
-<div id="primary_panel_full">
-	<div class="box">
-		<div class="box_header">
-			connections
-			<span style="float:right">
-				<%= link_to(image_tag('search.png', :size => '15x15', :border => 0), '#', :class => 'toggle_search_form') %>
-				<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_connection_form') %>
-			</span>
-		</div>
-		<div class="box_content">
-			<table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
-			    <tr>
-			        <th>name</th><th>username</th><th>password</th><th>url</th>
-			      	<th colspan="2">&nbsp;</th></tr>
-			    
-			    <%= render(:partial => 'data_rows', :collection => @connections) %>
-			</table>
-			<%= paginate @connections %>
-		</div>
-	</div> <!-- end connections -->
-</div> <!-- end primary_panel_full -->
-<% end %>
-
-<div class="clear"/>
+<div class="tag-list">
+    tags:
+    <%= tag_list(session[:connection_tags], 'connections') %>
+</div>
