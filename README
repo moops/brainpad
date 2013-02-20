@@ -9,7 +9,7 @@ javascript: datepicker
     - http://www.eyecon.ro/bootstrap-datepicker/
 
 2013
-- Feb 19 - put search forms into a helper partial
+x Feb 19 - put search forms into a helper partial
 - Feb 19 - fix tags and maybe put getUniqueTags into each model or a helper
 - Feb 18 - maybe don't need Lookup has_many relationship for workouts (and other entities)?
 x Feb 18 - add space for empty list
