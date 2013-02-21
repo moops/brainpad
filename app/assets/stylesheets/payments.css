@@ -1,4 +1,4 @@
-.workout-dashboard {
+.payment-dashboard {
 	margin: auto;
 	margin-bottom: 20px;
 	border: 1px solid #bbb;
@@ -7,28 +7,28 @@
 	box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
 }
 
-.workout-dashboard .item {
+.payment-dashboard .item {
 	width: 17%;
 	padding: 10px;
 	float: left;
 	color: #666;
 }
 
-.workout-dashboard .item .data {
+.payment-dashboard .item .data {
 	font-weight: bold;
 	font-size: 1.5em;
 }
 
-.workouts-panel {
+.payments-panel {
 	width: 100%;
 }
 
-.workouts-panel .reports-panel {
+.payments-panel .reports-panel {
 	width: 20%;
 	float: left;
 }
 
-.workouts-panel .list-panel {
+.payments-panel .list-panel {
 	width: 77%;
 	float: left;
 	margin-left: 3%;

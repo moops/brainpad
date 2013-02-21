@@ -1,94 +1,44 @@
+<!-- hidden elements -->
+<div id="account-form" class="modal hide fade"></div>
+<div id="payment-form" class="modal hide fade"></div>
+
 <% if @money_summary %>
-	<div class="dashboard">
-	    <table width="100%" border="0">
-	        <tr>
-	            <td>last 30 days:</td>
-	            <td><div class="summary_data"><%= number_to_currency @money_summary.net_change %></div>net change</td>
-	            <td><div class="summary_data"><%= number_to_currency @money_summary.per_day %></div>per day</td>
-	            <td><div class="summary_data"><%= @money_summary.buy_nothing_days %></div>buy nothing days</td>
-	            <td><div class="summary_data"><%= number_to_currency @money_summary.balance %></div>net worth</td></tr>
-	    </table>
-	</div>
+    <div class="payment-dashboard">
+        <div class="item">last 30 days:</div>
+        <div class="item"><div class="data"><%= number_to_currency @money_summary[:net_change] %></div>net change</div>
+        <div class="item"><div class="data"><%= number_to_currency @money_summary[:per_day] %></div>per day</div>
+        <div class="item"><div class="data"><%= @money_summary[:buy_nothing_days] %></div>buy nothing days</div>
+        <div class="item"><div class="data"><%= number_to_currency @money_summary[:balance] %></div>net worth</div>
+        <div class="clear"></div>
+    </div> <!-- end .dashboard -->
 <% end %>
 
-<div class="dashboard search_form" style="display:none;">
-    <% form_tag({:action => 'index'}, :method => 'get') do %>
-        <label class="inline">desc</label>
-        <%= text_field_tag :q, h(params[:q]) %>
-        <label class="inline">from</label>
-        <%= text_field_tag :start_on, h(params[:start_on]), :size => 12, :class => 'calendar' %>
-        <label class="inline">to</label>
-        <%= text_field_tag :end_on, h(params[:end_on]), :size => 12, :class => 'calendar' %>
-        <%= submit_tag 'search' %>
-        <%= submit_tag("x", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
-    <% end %>
-</div>
-
-<!-- hidden elements -->
-<div id="show" style="display:none;"></div>
-<div id="account_form" style="display:none;"></div>
-<div id="payment_form" style="display:none;"><%= render(:partial => 'form') %></div>
-
-<script type="text/javascript">
-  jQuery(document).ready(function() {
-    buildFormDialog('payment');
-    validate('new_payment');
-  });
-</script>
-
-<div id="secondary_panel">
-    <div class="box">
-        <div class="box_header">accounts</div>
-        <div class="box_content">
-            <table width="100%" border="0" cellspacing="0" cellpadding="2">
-            <%= render(:partial => 'accounts/account.html', :collection => @accounts) %>
-            </table>
+<div class="payments-panel">
+    <div class="reports-panel" id="accounts">
+	    <%= render 'accounts' %>
+    </div>
+    <div class="reports-panel" id="expenses_by_tag">
+        <%= render 'expenses_by_tag' %>
+    </div>
+    <div class="list-panel">
+        <!-- search form -->
+        <%= render 'shared/search_form' %>
+       
+        <!-- add and search buttons --> 
+        <div class="pull-right">
+            <%= link_to(new_payment_path, :remote => true, :class => "btn btn-primary") do %>
+                <i class="icon-plus icon-white"></i> add
+            <% end %>
+            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#search">
+                <i class="icon-search icon-white"></i> find
+            </button>
         </div>
-        <div class="box_buttons">
-            <%= link_to('new account', new_account_path, :class => 'get' ) %>
+        <div id="future-payment-list">
+            <%= render partial: 'upcoming' %>
         </div>
-    </div> <!-- end money_accounts -->
-    <div class="box">
-		<div class="box_header">expenses by tag</div>
-		<div class="box_content">
-		  <% for e in @expenses_by_tag %>
-		      <% percentage = ((e[1] / @money_summary.total) * 100).to_i.to_s %>
-		      <%= "#{e[0]} #{number_to_currency(e[1])} [#{percentage}%]" %><br/>
-		      <% percentage = '1' if percentage.eql?'0' %>
-		      <%= image_tag('redbar.gif', :size => "#{percentage.to_i * 2}x12") %><br/>
-		  <% end %>
-		</div>
-		<div class="box_buttons"></div>
-	</div> <!-- end box -->
-</div> <!-- end secondary_panel -->
-
-<div id="primary_panel">
-	<% unless @upcoming_payments.empty? %>
-	<div class="box">
-	    <div class="box_header">upcoming</div>
-	    <div class="box_content">
-	        <table width="100%" border="0" cellspacing="0" cellpadding="2">
-	        <%= render :partial => 'upcoming', :collection => @upcoming_payments %>
-	        </table>
-	    </div>
-	</div> <!-- end upcoming -->
-	<% end %>
-
-	<div class="box">
-		<div class="box_header">
-			transactions
-			<span style="float:right">
-				<%= link_to(image_tag('search.png', :size => '15x15', :border => 0), '#', :class => 'toggle_search_form') %>
-			  	<%= link_to(image_tag('add.png', :size => '15x15', :border => 0), '#', :class => 'show_payment_form') %>
-			</span>
-		</div>
-		<div class="box_content">
-			<table width="100%" border="0" cellspacing="0" cellpadding="2">
-			<%= render(:partial => 'payment', :collection => @payments) %>
-			</table>
-			<%= paginate @payments %>
-		</div>
-	</div> <!-- end transactions -->
-</div>
-
-<div class="clear"/>
+        <div id="payment-list">
+            <%= render partial: 'payments' %>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div> <!-- end .payments-panel -->

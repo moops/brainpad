@@ -11,7 +11,8 @@ class Person
   field :authority, type: Integer
   field :password_digest
 
-  embeds_many :accounts
+  has_many :accounts
+  has_many :payments
   has_many :connections
   has_many :contacts
   has_many :journals
@@ -19,7 +20,6 @@ class Person
   has_many :reminders
   has_many :workouts
   has_many :milestones
-  has_many :payments
 
   has_secure_password
   validates_presence_of :username
@@ -43,7 +43,7 @@ class Person
   def role_symbols
     roles.map(&:to_sym)
   end
-
+  
   def age_in_days
     Date.today - born_on
   end

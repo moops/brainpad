@@ -10,9 +10,11 @@ class Account
   field :price, :type => Float
   field :active, :type => Boolean
 
-  embedded_in :person
+  belongs_to :person
 
   validates_presence_of :name, :units, :price
+  
+  scope :active, where(active: true)
 
   def balance
     units * price

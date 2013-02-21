@@ -1,8 +1,19 @@
-<table cellpadding="3" cellspacing="0" border="0" align="center">
-    <tr>
-        <td><label>date</label></td><td><%= @payment.payment_on %></td></tr>
-    <tr>
-        <td><label>amount</label></td><td><%= @payment.amount %></td></tr>
-    <tr>
-        <td><label>description</label></td><td><%= @payment.description %></td></tr>
-</table>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>transaction details</h3>
+</div>
+<div class="modal-body">
+    <table class="table table-condensed data-display">
+        <tbody>
+            <tr>
+                <td class="display-label">date</td><td><%= @payment.payment_on.strftime("%a %b %d, %y") %></td></tr>
+            <tr>
+                <td class="display-label">account</td><td><%= @payment.account_name %></td></tr>
+            <tr>
+                <td class="display-label">amount</td><td><%= @payment.amount %></td></tr>
+            <tr>
+                <td class="display-label">description</td><td><%= @payment.description %></td></tr>
+        <tbody>
+    </table>
+</div>
+

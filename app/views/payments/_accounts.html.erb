@@ -1,0 +1,9 @@
+<div class="box">
+	<div class="boxhead">accounts</div>
+	<div class="boxcontent">
+		<%= render(:partial => 'accounts/account.html', :collection => @accounts) %>
+		<div class="pull-right">
+            <%= link_to('new account', new_account_path, class: 'btn btn-small' ) %>
+        </div>
+	</div>
+</div> <!-- end box -->

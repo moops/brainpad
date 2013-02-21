@@ -6,39 +6,25 @@ class Payment
   field :tags
   field :amount, :type => Float
   field :payment_on, :type => Date
-  field :frequency, :type => Integer
   field :until, :type => Date
-  field :account_id, :type => Integer
-  field :transfer_from, :type => Integer
 
   belongs_to :person
-  belongs_to :account
-  belongs_to :transfer_account, :class_name => 'Account', :foreign_key => 'transfer_from'
+  belongs_to :from_account, :class_name => 'Account'
+  belongs_to :to_account, :class_name => 'Account'
+  belongs_to :frequency, class_name: "Lookup"
   
-  validates_presence_of :account, :amount, :payment_on
+  validates_presence_of :amount, :payment_on
 
   attr_accessor :payment_type
-    
-  def self.search(condition_params, page)
-    condition_params[:q] = "%#{condition_params[:q]}%"
-    logger.debug("Payment::search condition_params[#{condition_params.inspect}]")
-    Payment.paginate(:page => page, :conditions => get_search_conditions(condition_params), :order => 'payment_on desc', :per_page => 25)
+  
+  def description_condensed
+    description.length > 25 ? "#{description[0,25]}..." : description if description
   end
-    
-  def self.get_search_conditions(condition_params)
-    conditions = []
-    query = 'payments.person_id = :user'
-    query << ' and payments.description like :q' unless condition_params[:q].blank?
-    if !condition_params[:start_on].blank? && !condition_params[:end_on].blank?
-      query << ' and payments.payment_on between :start_on and :end_on'
-    elsif !condition_params[:start_on].blank?
-      query << ' and payments.payment_on >= :start_on'
-    elsif !condition_params[:end_on].blank?
-      query << ' and payments.payment_on <= :end_on'
-    end
-    logger.debug("Payment::get_search_conditions query[#{query}]")
-    conditions << query
-    conditions << condition_params
+  
+  def account_name
+    return "#{from_account.name} -> #{to_account.name}" if from_account and to_account
+    return from_account.name if from_account
+    return to_account.name if to_account
   end
 
   def payment_type?
@@ -87,7 +73,7 @@ class Payment
   end
   
   def next_due
-    freq_code = Lookup.find(frequency).code.to_i
+    freq_code = frequency.code.to_i
     if (freq_code < 15) # daily, weekly or biweekly
       due = payment_on + freq_code
     elsif (freq_code == 15) # twice monthly
@@ -108,18 +94,15 @@ class Payment
   end
 
   def self.recent_expenses(user, days)
-    query = "select p.* from payments p, accounts a where p.account_id = a.id and a.active and a.person_id = ? and p.amount < 0 and payment_on > ?"
-    Payment.find_by_sql([query,user.id,Date.today()- days])
+    user.payments.ne(from_account: nil).gt(payment_on: Date.today - days)
   end
 
   def self.recent_transfers(user, days)
-    query = "select p.* from payments p, accounts a where p.account_id = a.id and a.active and a.person_id = ? and p.transfer_from is not null and payment_on > ?"
-    Payment.find_by_sql([query,user.id,Date.today()- days])
+    user.payments.ne(from_account: nil).ne(to_account: nil).gt(payment_on: Date.today - days)
   end
 
   def self.recent_deposits(user, days)
-    query = "select p.* from payments p, accounts a where p.account_id = a.id and a.active and a.person_id = ? and p.transfer_from is null and p.amount > 0 and payment_on > ?"
-    Payment.find_by_sql([query,user.id,Date.today()- days])
+    user.payments.ne(to_account: nil).gt(payment_on: Date.today - days)
   end
   
   def self.find_recent(user, days)
@@ -129,24 +112,20 @@ class Payment
     all.sort!{|x,y| y.payment_on <=> x.payment_on }
   end
   
-  def self.find_upcoming(user)
-    query = "select p.* from payments p where p.frequency is not null and p.person_id = ?"
-    repeating = Payment.find_by_sql([query,user.id])
-    for p in repeating
+  def self.upcoming(user)
+    user.payments.ne(frequency: nil).each do |p|
       p.build_repeat
     end
-    upcoming = Payment.find_by_sql([query,user.id])
-    upcoming.sort! {|x,y| x.payment_on <=> y.payment_on }
+    user.payments.ne(frequency: nil).desc(:payment_on)
   end
 
   def self.days_with_expenses?(user,days)
-    ActiveRecord::Base.connection.select_one("SELECT count( distinct payment_on) as s FROM payments WHERE account_id in (select account_id from accounts where person_id = #{user.id}) and amount < 0 and payment_on between '#{Date.today - days}' and '#{Date.today+(1)}'")['s'].to_i
+    user.payments.ne(from_account: nil).between(payment_on: Date.today - days..Date.today + 1).distinct(:payment_on).count
   end
 
   def self.user_tags(user)
     tags = []
-    payments = Payment.find(:all, :conditions => "account_id in(select id from accounts where person_id = #{user.id})")
-    payments.each { |p|
+    user.payments.each { |p|
       if p.tags 
         p.tags.split.each { |t|
           tags.push(t.strip)

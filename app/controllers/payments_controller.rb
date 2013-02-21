@@ -15,10 +15,10 @@ class PaymentsController < ApplicationController
     end
     @payments = @payments.page(params[:page])
   
-    @upcoming_payments = Payment.find_upcoming(current_user)
+    @upcoming_payments = Payment.upcoming(current_user)
     get_stuff_for_form
-    @money_summary = MoneySummary.new(current_user,31)
-    @expenses_by_tag = Payment.expenses_by_tag(current_user,31)
+    @money_summary = Payment.summary(current_user, 31)
+    @expenses_by_tag = Payment.expenses_by_tag(current_user, 31)
   end
 
   # GET /payments/1
@@ -96,7 +96,7 @@ private
 
   def get_stuff_for_form
     @payment_types = %w{ expense deposit transfer }
-    @accounts = @user.active_accounts
-    @tags = Payment.user_tags(@user)
+    @accounts = current_user.accounts.active
+    @tags = Payment.user_tags(current_user)
   end
 end

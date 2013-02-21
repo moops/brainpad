@@ -1,0 +1,32 @@
+<% if (@payments and !@payments.empty?) %>
+    <h4>transactions</h4>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>description</th><th>type</th><th>account</th><th>date</th><th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @payments.each do |payment| %>
+                <tr>
+                    <td><%= link_to(payment.description_condensed, edit_payment_path(payment), :remote => true) %></td>
+                    <td><%= payment.payment_type %></td>
+                    <td><%= payment.account_name %></td>
+                    <td><%= payment.payment_on.strftime("%a %b %d, %y") %></td>
+                    <td class="actions">
+                        <%= link_to(payment_path(payment), :remote => true, :title => 'show details') do %>
+                            <i class="icon-eye-open"></i>
+                        <% end %>
+                        <%= link_to(new_payment_path(:payment_id => payment), :remote => true, :title => "copy #{payment.description_condensed}") do %>
+                            <i class="icon-share"></i>
+                        <% end %>
+                        <%= link_to(payment_path(payment), :method => :delete, :confirm => "really delete #{payment.description_condensed}?", :title => 'delete payment') do %>
+                            <i class="icon-remove"></i>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= paginate @payments %>
+<% end %>
