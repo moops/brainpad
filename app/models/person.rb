@@ -6,6 +6,7 @@ class Person
   field :username
   field :born_on, type: Date
   field :mail_url
+  field :phone
   field :banking_url
   field :map_center
   field :authority, type: Integer
@@ -24,7 +25,7 @@ class Person
   has_secure_password
   validates_presence_of :username
   validates_uniqueness_of :username
-  attr_accessible :username, :password, :password_confirmation, :born_on, :authority, :mail_url, :map_center
+  attr_accessible :username, :password, :password_confirmation, :born_on, :authority, :mail_url, :map_center, :phone
 
   ROLES = %w[admin user]
 

@@ -1,0 +1,12 @@
+development:
+  from: ''
+  sid: ''
+  token: ''
+test:
+  from: ''
+  sid: ''
+  token: ''
+production:
+  from: ''
+  sid: ''
+  token: ''

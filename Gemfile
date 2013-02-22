@@ -19,5 +19,6 @@ gem 'kaminari'                # pagination
 gem 'bcrypt-ruby'             # password encryption
 gem 'cancan'                  # authorization
 gem 'jquery-rails'            # unobtrusive javascript
-gem 'simple_form'
+gem 'simple_form'             # form builder
+gem 'twilio-ruby'             # sms sending
 gem 'debugger', group: [:development, :test]
