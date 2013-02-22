@@ -1,3 +1,4 @@
+config/twilio.yml
 .bundle
 *.log
 *.dat
