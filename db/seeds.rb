@@ -65,20 +65,20 @@ Workout.create({ person: adam, location: 'thetis', duration: 60, distance: 10, i
 Workout.create({ person: adam, location: 'elk lake', duration: 60, distance: 10, intensity: 5, workout_type: run, workout_on: '2013-02-02', description: 'easy run around elk lake' })
 Workout.create({ person: adam, location: 'goose', duration: 60, distance: 40, intensity: 5, workout_type: bike, workout_on: '2013-02-03', description: 'easy ride on the goose' })
 
-chequing = Account.create({ person: adam, name: 'chequing', price: 1, units: 1000 })
-savings  = Account.create({ person: adam, name: 'savings', price: 1, units: 200 })
-visa     = Account.create({ person: adam, name: 'visa', price: 1, units: -200 })
+chequing = Account.create({ person: adam, name: 'chequing', price: 1, units: 1000, active: true })
+savings  = Account.create({ person: adam, name: 'savings', price: 1, units: 200, active: true })
+visa     = Account.create({ person: adam, name: 'visa', price: 1, units: -200, active: true })
 
-ch1 = Payment.create({ person: adam, from_account: chequing, amount: 10, payment_on: Date.today })
-ch2 = Payment.create({ person: adam, from_account: chequing, amount: 10, payment_on: Date.today - 1 })
-ch3 = Payment.create({ person: adam, to_account: chequing, amount: 10, payment_on: Date.today - 2 })
-sa1 = Payment.create({ person: adam, from_account: savings, amount: 20, payment_on: Date.today })
-sa2 = Payment.create({ person: adam, from_account: savings, amount: 20, payment_on: Date.today - 1 })
-sa3 = Payment.create({ person: adam, to_account: savings, amount: 20, payment_on: Date.today - 2 })
-vi1 = Payment.create({ person: adam, from_account: visa, amount: 30, payment_on: Date.today })
-vi2 = Payment.create({ person: adam, from_account: visa, amount: 30, payment_on: Date.today - 1 })
-vi3 = Payment.create({ person: adam, to_account: visa, amount: 30, payment_on: Date.today - 2 })
-tr1 = Payment.create({ person: adam, from_account: chequing, to_account: visa, amount: 30, payment_on: Date.today - 2 })
+ch1 = Payment.create({ person: adam, from_account: chequing, description: 'groceries', tags: 'food', amount: 10, payment_on: Date.today })
+ch2 = Payment.create({ person: adam, from_account: chequing, description: 'movie', tags: 'entertainment', amount: 10, payment_on: Date.today - 1 })
+ch3 = Payment.create({ person: adam, to_account: chequing, description: 'salary', amount: 1000, payment_on: Date.today - 2 })
+sa1 = Payment.create({ person: adam, from_account: savings, description: 'groceries', tags: 'food', amount: 20, payment_on: Date.today })
+sa2 = Payment.create({ person: adam, from_account: savings, description: 'bike stuff', tags: 'recreation', amount: 20, payment_on: Date.today - 1 })
+sa3 = Payment.create({ person: adam, to_account: savings, description: 'birthday gift', tags: 'gift', amount: 200, payment_on: Date.today - 2 })
+vi1 = Payment.create({ person: adam, from_account: visa, description: 'clothes', tags: 'clothes', amount: 30, payment_on: Date.today })
+vi2 = Payment.create({ person: adam, from_account: visa, description: 'groceries', tags: 'food', amount: 30, payment_on: Date.today - 1 })
+vi3 = Payment.create({ person: adam, to_account: visa, description: 'refund', amount: 30, payment_on: Date.today - 2 })
+tr1 = Payment.create({ person: adam, from_account: chequing, to_account: visa, description: 'bill payment', amount: 30, payment_on: Date.today - 2 })
 
 
 

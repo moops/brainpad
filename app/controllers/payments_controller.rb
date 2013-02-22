@@ -21,82 +21,55 @@ class PaymentsController < ApplicationController
     @expenses_by_tag = Payment.expenses_by_tag(current_user, 31)
   end
 
-  # GET /payments/1
-  # GET /payments/1.xml
+  # GET /payments/1.js
   def show
-
-    respond_to do |format|
-      format.js { render :layout => false }
-      format.xml  { render :xml => @payment }
+  end
+  
+  # GET /payments/new.js
+  def new
+    get_stuff_for_form
+    if (params[:payment_id])
+      @payment = Payment.find(params[:payment_id]).dup
     end
   end
 
-  # GET /payments/1/edit
+  # GET /payments/1/edit.js
   def edit
-    @payment.amount = @payment.amount.abs
     get_stuff_for_form
-    respond_to do |format|
-      format.html 
-      format.js { render :layout => false }
-    end
   end
 
   # POST /payments
-  # POST /payments.xml
   def create
-    @payment.amount *= -1 if @payment.payment_type.eql?('expense')
-    @payment.apply_to_account
-    respond_to do |format|
-      if @payment.save
-        flash[:notice] = 'Payment was successfully created.'
-        format.html { redirect_to(payments_path) }
-        format.xml  { render :xml => @payment, :status => :created, :location => @payment }
-      else
-        format.html { redirect_to(payments_path)  }
-        format.xml  { render :xml => @payment.errors, :status => :unprocessable_entity }
-      end
+    @payment.apply
+    if @payment.save
+      flash[:notice] = 'payment was created.'
+      redirect_to payments_path
     end
   end
 
   # PUT /payments/1
-  # PUT /payments/1.xml
   def update
     new_amount = params[:payment][:amount].to_f
-    logger.info("new_amount: #{new_amount}, payment type: #{params[:payment][:payment_type]}")
-    new_amount = -new_amount if 'expense'.eql? params[:payment][:payment_type]
-    logger.info("new_amount: #{new_amount}, payment type: #{params[:payment][:payment_type]}")
-    logger.info("@payment: #{@payment.inspect}")
     @payment.update_amount_and_adjust_account(new_amount)
-    logger.info("@payment: #{@payment.inspect}")
     params[:payment].delete('amount')
-    respond_to do |format|
-      if @payment.update_attributes(params[:payment])
-        flash[:notice] = 'Payment was successfully updated.'
-        format.html { redirect_to(payments_path)  }
-        format.xml  { head :ok }
-      else
-        format.html { redirect_to(payments_path) }
-        format.xml  { render :xml => @payment.errors, :status => :unprocessable_entity }
-      end
+    if @payment.update_attributes(params[:payment])
+      flash[:notice] = 'payment was updated.'
+      redirect_to payments_path
     end
   end
 
   # DELETE /payments/1
-  # DELETE /payments/1.xml
   def destroy
+    @payment.apply(true)
     @payment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(payments_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to payments_path
   end
 
-private
+  private
 
   def get_stuff_for_form
-    @payment_types = %w{ expense deposit transfer }
     @accounts = current_user.accounts.active
+    @frequencies = Lookup.where(:category => 36).all
     @tags = Payment.user_tags(current_user)
   end
 end

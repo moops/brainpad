@@ -14,13 +14,15 @@
 <% end %>
 
 <div class="payments-panel">
-    <div class="reports-panel" id="accounts">
+    <div class="reports-panel">
 	    <%= render 'accounts' %>
-    </div>
-    <div class="reports-panel" id="expenses_by_tag">
-        <%= render 'expenses_by_tag' %>
+	    <%= render 'expenses_by_tag' %>
     </div>
     <div class="list-panel">
+        <div id="future-payment-list">
+            <%= render partial: 'upcoming' %>
+        </div>
+        
         <!-- search form -->
         <%= render 'shared/search_form' %>
        
@@ -33,9 +35,7 @@
                 <i class="icon-search icon-white"></i> find
             </button>
         </div>
-        <div id="future-payment-list">
-            <%= render partial: 'upcoming' %>
-        </div>
+        
         <div id="payment-list">
             <%= render partial: 'payments' %>
         </div>

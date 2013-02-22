@@ -1,18 +1,18 @@
-<% if @upcoming_payments and @upcoming_payments.empty? %>
+<% if @upcoming_payments and !@upcoming_payments.empty? %>
     <div class="box">
-        <div class="box_header">upcoming</div>
-        <div class="box_content">
+        <div class="boxhead">upcoming</div>
+        <div class="boxcontent">
             <table class="table table-condensed table-hover">
                 <tbody>
                     <% @upcoming_payments.each do |payment| %>
                         <tr>
                             <td><%= payment.description_condensed %></td>
-                            <td class="<%= payment.payment_type? %>_amount"><%= number_to_currency(payment.amount) %></td>
+                            <td><div class="<%= "#{payment.type}-amount" %>"><%= number_to_currency payment.amount %></div></td>
                             <td><%= payment.account_name %></td>
                             <td>in <%= (payment.next_due - Date.today).to_i %> days</td></tr>
                     <% end %>
                 </tbody>
             </table>
         </div>
-    </div> <!-- end upcoming -->
+    </div> <!-- end .box -->
 <% end %>

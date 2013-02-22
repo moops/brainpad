@@ -141,17 +141,11 @@ private
 
   def getUniqueTags
     unique_tags = []
-    all_links = Link.all
-    #all_links = Link.find_by_sql("select * from links where person_id = #{@user.id}")
-    all_links.each { |cur_link|
-      if cur_link.tags
-        cur_link.tags.split(' ').each { |cur_tag|
-          unique_tags.push(cur_tag.strip)
-        }
+    current_user.links.each do |link|
+      link.tags.split.each do |tag|
+        unique_tags.push(tag.strip)
       end
-    }
-    unique_tags.uniq!
-    unique_tags.sort!
-    return unique_tags
+    end
+    unique_tags.uniq!.sort!
   end
 end

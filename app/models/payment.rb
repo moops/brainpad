@@ -27,34 +27,33 @@ class Payment
     return to_account.name if to_account
   end
 
-  def payment_type?
-    if transfer_account
-      return 'transfer'
-    elsif amount and amount > 0
-      return 'deposit'
-    elsif amount and amount <= 0
-      return 'expense'
+  def type
+    return 'transfer' if from_account and to_account
+    return 'deposit' if to_account
+    return 'expense' if from_account
+  end
+
+  def apply(reverse= false)
+    amt = amount
+    amt *= -1 if reverse
+    if from_account
+      from_account.units -= (amt / from_account.price)
+      from_account.save
+    end
+    if to_account
+      to_account.units += (amt / to_account.price)
+      to_account.save
     end
   end
-  
-  def apply_to_account(reverse= false)
-    amt = reverse ? -amount : amount
-    account.units += (amt / account.price)
-    account.save
-    if transfer_account
-      transfer_account.units -= (amt / transfer_account.price)
-      transfer_account.save
-    end
-  end
-  
+
   def update_amount_and_adjust_account(new_amount)
     # reverse it
-    apply_to_account(true)
+    apply(true)
     # apply new amount
     self.amount = new_amount
     self.save
     # apply it
-    apply_to_account
+    apply
   end
   
   def build_repeat
@@ -63,7 +62,7 @@ class Payment
       new_payment = self.clone
       new_payment.payment_on = next_due
       new_payment.save
-      new_payment.apply_to_account
+      new_payment.apply
       # recursion
       new_payment.build_repeat
       self.frequency = nil
@@ -124,18 +123,15 @@ class Payment
   end
 
   def self.user_tags(user)
-    tags = []
-    user.payments.each { |p|
-      if p.tags 
-        p.tags.split.each { |t|
-          tags.push(t.strip)
-        }
+    unique_tags = []
+    user.payments.each do |payment|
+      if payment.tags
+        payment.tags.split.each do |tag|
+          unique_tags.push(tag.strip)
+        end
       end
-    }
-    tags.push('')
-    tags.uniq!
-    tags.sort!
-    tags
+    end
+    unique_tags.uniq.sort unless unique_tags.uniq.nil?
   end
 
   def self.expenses_by_tag(user,days)
@@ -166,7 +162,7 @@ class Payment
       total += exp.amount.abs
     end
     user.active_accounts.each do |account|
-      balance += account.balance?
+      balance += account.balance
     end
     {
       total: total,

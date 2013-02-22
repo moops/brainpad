@@ -1,33 +1,19 @@
-<% form_for(@account) do |f| %>
-
-<% if @user %>
-    <%= hidden_field_tag('account[person_id]', @user.id) %>
-<% end %>
-<fieldset>   
-    <ol>   
-    <li>
-        <%= f.label(:name) %>
-        <%= f.text_field(:name, :size => '25', :class => 'required') %></li>
-    <li>
-        <%= f.label(:units) %>
-        <%= f.text_field(:units, :size => '25', :class => 'required') %></li>
-    
-    <li>
-        <%= f.label(:price) %>
-        <%= f.text_field(:price, :size => '6', :class => 'required') %></li>
-    <li>
-        <%= f.label(:active, 'active?') %>
-        <%= f.check_box(:active) %></li>
-    <li>
-        <%= f.label(:description) %>
-        <%= f.text_field(:description, :size => '50') %></li>
-    <li>
-        <%= f.label(:url) %>
-        <td colspan="3"><%= f.text_field(:url, :size => '50') %></li>
-    <li>
-        <%= f.label(:price_url) %>
-        <%= f.text_field(:price_url, :size => '50') %></li></ol></fieldset>
-<fieldset class="submit">
-    <%= f.submit(@account.id ? 'update' : 'create') %></fieldset> 
-
+<%= simple_form_for(@account, :html => {:class => 'form-horizontal' }) do |f| %>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>new account</h3>
+    </div>
+    <div class="modal-body">
+        <%= f.input :person_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+        <%= f.input :name %>
+        <%= f.input :units %>
+        <%= f.input :price %>
+        <%= f.input :active, as: :boolean %>
+        <%= f.input :description %>
+        <%= f.input :url %>
+        <%= f.input :price_url %>
+    </div>
+    <div class="modal-footer">
+        <%= f.button(:submit) %>
+    </div>
 <% end %>

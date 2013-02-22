@@ -1,5 +1,1 @@
-jQuery('#account_form')
-    .html("<%= escape_javascript(render(:partial => 'form')) %>")
-    .dialog({ autoOpen: true, width: 500, title: 'account form', modal: true, show: 'fade' });
-ajaxLinks();
-validate('edit_account_' + <%= @account.id %>);
+$('#account-form').html("<%= escape_javascript(render(:partial => 'form')) %>").modal('show');

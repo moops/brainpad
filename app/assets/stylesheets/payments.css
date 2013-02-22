@@ -1,8 +1,8 @@
 .payment-dashboard {
 	margin: auto;
 	margin-bottom: 20px;
-	border: 1px solid #bbb;
-	background: #ddd;
+	border: 1px solid #f93;
+	background-color: #ddd;
 	border-radius: 6px;
 	box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
 }
@@ -24,12 +24,50 @@
 }
 
 .payments-panel .reports-panel {
-	width: 20%;
+	width: 23%;
 	float: left;
 }
 
 .payments-panel .list-panel {
-	width: 77%;
+	width: 74%;
 	float: left;
 	margin-left: 3%;
+}
+
+.reports-panel .table td i {
+    opacity: 0.4;
+}
+
+.reports-panel .table td i:hover {
+    opacity: 1.0;
+}
+
+#payment-list .deposit-amount {
+	font-weight: bold;
+}
+
+#payment-list .transfer-amount {
+	font-style: italic;
+}
+
+/*
+ ************************************************
+ bootstrap fixes
+ ************************************************
+ */
+
+#future-payment-list .table tr:first-child td {
+	border-top: 0;
+}
+
+#future-payment-list .table {
+	margin-bottom: 0;
+}
+
+.reports-panel .table {
+	margin-bottom: 0;
+}
+
+.reports-panel .table tr:first-child td {
+	border-top: 0;
 }

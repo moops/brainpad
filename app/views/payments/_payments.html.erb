@@ -3,14 +3,14 @@
     <table class="table table-condensed table-hover">
         <thead>
             <tr>
-                <th>description</th><th>type</th><th>account</th><th>date</th><th>actions</th>
+                <th>description</th><th>amount</th><th>account</th><th>date</th><th>actions</th>
             </tr>
         </thead>
         <tbody>
             <% @payments.each do |payment| %>
                 <tr>
                     <td><%= link_to(payment.description_condensed, edit_payment_path(payment), :remote => true) %></td>
-                    <td><%= payment.payment_type %></td>
+                    <td><div class="<%= "#{payment.type}-amount" %>"><%= number_to_currency payment.amount %></div></td>
                     <td><%= payment.account_name %></td>
                     <td><%= payment.payment_on.strftime("%a %b %d, %y") %></td>
                     <td class="actions">

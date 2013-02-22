@@ -1,12 +1,4 @@
 <script type="text/javascript">
-    function paymentType() {
-        if ('transfer' == jQuery('#payment_payment_type').val()) {
-            jQuery('#payment_transfer_from').removeAttr('disabled');
-        } else {
-            jQuery('#payment_transfer_from').val('');
-            jQuery('#payment_transfer_from').attr('disabled', 'disabled');
-        }
-    }
     function addTag() {
         var tag = jQuery('#tags').val();
         jQuery('#payment_tags').val(jQuery('#payment_tags').val() + tag + ' ');
@@ -16,48 +8,26 @@
     }
 </script>
 
-<% form_for(@payment) do |f| %>
-
-<% if @user %>
-  <%= hidden_field_tag('payment[person_id]', @user.id) %>
-<% end %>
-
-<fieldset>   
-  <legend>details</legend>   
-  <ol>   
-    <li> 
-    <%= f.label(:type) %>
-    <%= f.select(:payment_type, @payment_types, {}, :onchange => 'paymentType()') %></li>
-    <li>
-    <%= f.label(:account) %>
-    <%= f.select(:account_id, @accounts.collect {|a| [a.name, a.id] }, :include_blank => true, :class => 'required') %></li>
-    <li>
-    <%= f.label(:from) %>
-    <%= f.select(:transfer_from, @accounts.collect {|a| [a.name, a.id] }, {:include_blank => true}, {:disabled => true}) %>
-    <script type="text/javascript">paymentType();</script></li>
-    <li>
-    <%= f.label(:amount) %>
-    <%= f.text_field(:amount, :size => '7', :class => 'required') %></li>
-    <li>
-    <%= label(:payment, :payment_on, "Date") %>
-    <%= f.text_field(:payment_on, :size => '12', :class => 'calendar today required') %></li>
-    <li>
-    <%= f.label(:name) %>
-    <%= f.text_field(:description, :size => '25') %></td></li>
-    <li>
-    <%= f.label(:tags) %>
-    <%= select_tag('tags', options_for_select(@tags), :onchange => 'addTag()') %>
-    <%= f.text_field(:tags, :size => '30') %></li></ol></fieldset>
-<fieldset>   
-    <legend>schedule</legend>
-  <ol>
-    <li>
-    <%= f.label(:frequency) %>
-    <%= f.select(:frequency, Lookup.get_list('freq').collect {|l| [ l.description, l.id ] }, { :include_blank => true }) %></li>
-  <li>
-    <%= label(:payment, :until) %>
-    <%= f.text_field(:until, :size => '12', :class => 'text calendar') %></li></ol></fieldset>
-<fieldset class="submit">
-    <%= f.submit(@payment.id ? 'update' : 'create') %></fieldset>
-
+<%= simple_form_for(@payment, :html => {:class => 'form-horizontal' }) do |f| %>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>new payment</h3>
+    </div>
+    <div class="modal-body">
+        <%= f.input :person_id, as: :hidden, input_html: { value: current_user.id } %>
+        <%= f.input(:payment_on, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
+        <%= f.input :from_account_id, collection: @accounts, value_method: '_id', label_method: 'name' %>
+        <%= f.input :to_account_id, collection: @accounts, value_method: '_id', label_method: 'name' %>
+        <%= f.input :amount %>
+        <%= f.input :tags %>
+        <%= f.input :description %>
+        <fieldset>
+            <legend>schedule</legend>
+                <%= f.input :frequency, collection: @frequencies, value_method: '_id', label_method: 'description' %>
+                <%= f.input(:until, as: :string, input_html: {class: 'calendar', 'data-date-format' => "yyyy-mm-dd"}) %>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <%= f.button(:submit) %>
+    </div>
 <% end %>

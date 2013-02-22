@@ -32,10 +32,10 @@ class PaymentTest < ActiveSupport::TestCase
     chq = accounts(:chequing)
     assert chq.balance? == 1500, 'starting chequing balance is not 1500, fixture issue?'
     a = Payment.new(:person => people(:adam), :account => accounts(:chequing), :amount => -100, :payment_on => Date.today)
-    a.apply_to_account
+    a.apply
     assert chq.balance? == 1400, 'expense not applied to chequing account'
     # reverse it
-    a.apply_to_account(true)
+    a.apply(true)
     assert chq.balance? == 1500, 'expense not reversed from chequing account'
   end
   
@@ -43,10 +43,10 @@ class PaymentTest < ActiveSupport::TestCase
     chq = accounts(:chequing)
     assert chq.balance? == 1500, 'starting chequing balance is not 1500, fixture issue?'
     a = Payment.new(:person => people(:adam), :account => accounts(:chequing), :amount => 100, :payment_on => Date.today)
-    a.apply_to_account
+    a.apply
     assert chq.balance? == 1600, 'deposit not applied to chequing account'
     # reverse it
-    a.apply_to_account(true)
+    a.apply(true)
     assert chq.balance? == 1500, 'deposit not reversed from chequing account'
   end
   
@@ -56,11 +56,11 @@ class PaymentTest < ActiveSupport::TestCase
     assert from.balance? == 1500, 'starting chequing balance is not 1500, fixture issue?'
     assert to.balance? == 500, 'starting cash balance is not 500, fixture issue?'
     a = Payment.new(:person => people(:adam), :transfer_account => accounts(:chequing), :account => accounts(:cash), :amount => 100, :payment_on => Date.today)
-    a.apply_to_account
+    a.apply
     assert from.balance? == 1400, 'transfer not applied to chequing account'
     assert to.balance? == 600, 'transfer not applied to cash account'
     # reverse it
-    a.apply_to_account(true) 
+    a.apply(true) 
     assert from.balance? == 1500, 'transfer not reversed from chequing account'
     assert to.balance? == 500, 'transfer not reversed from cash account'
   end
