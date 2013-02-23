@@ -64,5 +64,4 @@ class Person
     a = accounts.reject { |a| not a.active }
     a.sort_by{|a| a.name }
   end
-
 end

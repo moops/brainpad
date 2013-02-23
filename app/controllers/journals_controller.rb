@@ -66,6 +66,6 @@ class JournalsController < ApplicationController
         unique_tags.push(tag.strip)
       end
     end
-    unique_tags.uniq!.sort!
+    unique_tags.uniq.sort if unique_tags.uniq
   end
 end

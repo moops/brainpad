@@ -20,7 +20,7 @@ class LinksController < ApplicationController
     @random = links.sort_by { rand }[0,4]
     
     @milestone = Milestone.next_milestone(current_user)
-    @due_today = Reminder.todays(current_user)
+    @due_today = Reminder.due_on_for(current_user)
     # @feeds = Feeds.get_feeds
 
     respond_to do |format|
