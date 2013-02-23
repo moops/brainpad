@@ -13,8 +13,8 @@ group :test do
   gem 'factory_girl_rails'
 end
 
-gem "mongoid"                 # mongodb
-gem 'json'                    # json api
+gem "mongoid"                 # mongodb driver
+gem 'bson_ext'                # for mongodb
 gem 'kaminari'                # pagination
 gem 'bcrypt-ruby'             # password encryption
 gem 'cancan'                  # authorization

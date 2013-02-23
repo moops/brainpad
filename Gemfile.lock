@@ -32,6 +32,9 @@ GEM
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
+    bson (1.8.2)
+    bson_ext (1.8.2)
+      bson (~> 1.8.2)
     builder (3.0.4)
     cancan (1.6.9)
     coffee-rails (3.2.2)
@@ -141,12 +144,12 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   bootstrap-sass
+  bson_ext
   cancan
   coffee-rails (~> 3.2.1)
   debugger
   factory_girl_rails
   jquery-rails
-  json
   kaminari
   mongoid
   rails (= 3.2.11)
