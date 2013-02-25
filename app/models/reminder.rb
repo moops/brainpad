@@ -44,7 +44,7 @@ class Reminder
 
   def self.summary(user, days)
     reminders = Reminder.recent(user,days)
-    created = reminders.length
+    created = [reminders.length, 1].max
     completed = 0
     on_time = 0
     reminders.each do |r|
