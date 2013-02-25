@@ -1,9 +1,10 @@
 class AccountPrice
   include Mongoid::Document
-  include Mongoid::Timestamps
+  include Mongoid::Timestamps::Short
   
-  field :account_id, :type => Integer
   field :price, :type => Float
   field :price_on, :type => Date
+  
+  embedded_in :account
 
 end

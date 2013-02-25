@@ -1,16 +1,15 @@
 class Person
   include Mongoid::Document
-  include Mongoid::Timestamps
+  include Mongoid::Timestamps::Short
   include ActiveModel::SecurePassword
 
-  field :username
-  field :born_on, type: Date
-  field :mail_url
-  field :phone
-  field :banking_url
-  field :map_center
-  field :authority, type: Integer
-  field :password_digest
+  field :un, as: :username
+  field :b_on, as: :born_on, type: Date
+  field :m_url, as: :mail_url
+  field :b_url, as: :banking_url
+  field :m_c, as: :map_center
+  field :auth, as: :authority, type: Integer
+  field :pwd, as: :password_digest
 
   has_many :accounts
   has_many :payments
@@ -25,7 +24,7 @@ class Person
   has_secure_password
   validates_presence_of :username
   validates_uniqueness_of :username
-  attr_accessible :username, :password, :password_confirmation, :born_on, :authority, :mail_url, :map_center, :phone
+  attr_accessible :_id, :username, :password, :password_confirmation, :born_on, :authority, :mail_url, :banking_url, :map_center
 
   ROLES = %w[admin user]
 
@@ -64,4 +63,5 @@ class Person
     a = accounts.reject { |a| not a.active }
     a.sort_by{|a| a.name }
   end
+
 end

@@ -1,14 +1,14 @@
 class Link
   include Mongoid::Document
-  include Mongoid::Timestamps
+  include Mongoid::Timestamps::Short
   
   field :url
-  field :name
-  field :tags
-  field :comments
-  field :clicks, :type => Integer
-  field :last_clicked_on, :type => Date
-  field :expires_on, :type => Date
+  field :nm, as: :name
+  field :tg, as: :tags
+  field :cm, as: :comments
+  field :cl, as: :clicks, :type => Integer
+  field :l_on, as: :last_clicked_on, :type => Date
+  field :e_on, as: :expires_on, :type => Date
 
   belongs_to :person
   

@@ -1,12 +1,12 @@
 class Payment
   include Mongoid::Document
-  include Mongoid::Timestamps
+  include Mongoid::Timestamps::Short
   
-  field :description
-  field :tags
-  field :amount, :type => Float
-  field :payment_on, :type => Date
-  field :until, :type => Date
+  field :dsc, as: :description
+  field :tg, as: :tags
+  field :am, as: :amount, :type => Float
+  field :p_on, as: :payment_on, :type => Date
+  field :un, as: :until, :type => Date
 
   belongs_to :person
   belongs_to :from_account, :class_name => 'Account'

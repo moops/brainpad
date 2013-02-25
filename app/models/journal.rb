@@ -1,9 +1,9 @@
 class Journal
   include Mongoid::Document
-  include Mongoid::Timestamps
+  include Mongoid::Timestamps::Short
 
-  field :entry
-  field :entry_on, :type => Date
+  field :en, as: :entry
+  field :e_on, as: :entry_on, :type => Date
 
   belongs_to :person
   belongs_to :journal_type, class_name: "Lookup"

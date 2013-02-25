@@ -1,9 +1,9 @@
 class Milestone
   include Mongoid::Document
-  include Mongoid::Timestamps
+  include Mongoid::Timestamps::Short
   
-  field :name
-  field :milestone_at, :type => Date
+  field :nm, as: :name
+  field :m_at, as: :milestone_at, :type => Date
 
   belongs_to :person
   

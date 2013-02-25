@@ -85,6 +85,7 @@ GEM
     moped (1.4.2)
     multi_json (1.6.1)
     origin (1.0.11)
+    pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -152,6 +153,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mongoid
+  pg
   rails (= 3.2.11)
   sass-rails (~> 3.2.3)
   simple_form

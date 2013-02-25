@@ -1,16 +1,16 @@
 class Contact
   include Mongoid::Document
-  include Mongoid::Timestamps
+  include Mongoid::Timestamps::Short
   
-  field :name
-  field :email
-  field :phone_home
-  field :phone_work
-  field :phone_cell
-  field :address
-  field :city
-  field :tags
-  field :comments
+  field :nm, as: :name
+  field :em, as: :email
+  field :p_h, as: :phone_home
+  field :p_w, as: :phone_work
+  field :p_c, as: :phone_cell
+  field :ad, as: :address
+  field :ct, as: :city
+  field :tg, as: :tags
+  field :cm, as: :comments
 
   belongs_to :person
   
