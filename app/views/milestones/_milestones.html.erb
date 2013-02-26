@@ -9,7 +9,7 @@
         <tbody>
             <% @milestones.each do |milestone| %>
                 <tr>
-                    <td><%= link_to(milestone.name, edit_milestone_path(milestone), :remote => true) %></td>
+                    <td><%= link_to(milestone.name, edit_milestone_path(milestone), remote: true) %></td>
                     <td>
                         <input class="milestone-time" id="<%= milestone.id %>"/>
                         <script type="text/javascript">
@@ -17,7 +17,7 @@
     				    </script>
     				</td>
                     <td class="actions">
-                        <%= link_to(new_milestone_path(:milestone_id => milestone), :remote => true, :title => "copy #{milestone.name}") do %>
+                        <%= link_to(new_milestone_path(:milestone_id => milestone), remote: true, title: "copy #{milestone.name}") do %>
                             <i class="icon-share"></i>
                         <% end %>
                         <%= link_to(milestone_path(milestone), :method => :delete, :confirm => "really delete #{milestone.name}?") do %>

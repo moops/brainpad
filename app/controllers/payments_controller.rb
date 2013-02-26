@@ -69,7 +69,7 @@ class PaymentsController < ApplicationController
 
   def get_stuff_for_form
     @accounts = current_user.accounts.active
-    @frequencies = Lookup.where(:category => 36).all
+    @frequencies = Lookup.where(category: 36).all
     @tags = Payment.user_tags(current_user)
   end
 end

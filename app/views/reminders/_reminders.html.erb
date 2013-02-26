@@ -13,15 +13,15 @@
                         <td><%= due_with_class(reminder) %></td>
                         <td><%= reminder.reminder_type.description if reminder.reminder_type %></td>
                         <td><%= reminder.priority.description if reminder.priority %></td>
-                        <td><%= link_to(reminder.description_condensed, edit_reminder_path(reminder), :remote => true) %></td>
+                        <td><%= link_to(reminder.description_condensed, edit_reminder_path(reminder), remote: true) %></td>
                         <td class="actions">
-                            <%= link_to(reminder_path(reminder), :remote => true, :title => 'show details') do %>
+                            <%= link_to(reminder_path(reminder), remote: true, title: 'show details') do %>
                                 <i class="icon-eye-open"></i>
                             <% end %>
-                            <%= link_to(new_reminder_path(:reminder_id => reminder), :remote => true, :title => "copy #{reminder.description_condensed}") do %>
+                            <%= link_to(new_reminder_path(:reminder_id => reminder), remote: true, title: "copy #{reminder.description_condensed}") do %>
                                 <i class="icon-share"></i>
                             <% end %>
-                            <%= link_to(reminder_path(reminder), :method => :delete, :confirm => "really delete #{reminder.description_condensed} reminder?", :title => 'delete reminder') do %>
+                            <%= link_to(reminder_path(reminder), :method => :delete, :confirm => "really delete #{reminder.description_condensed} reminder?", title: 'delete reminder') do %>
                                 <i class="icon-remove"></i>
                             <% end %>
                         </td>

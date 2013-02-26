@@ -9,15 +9,15 @@
         <tbody>
             <% @connections.each do |connection| %>
                 <tr>
-                    <td><%= link_to(connection.name, edit_connection_path(connection), :remote => true) %></td>
+                    <td><%= link_to(connection.name, edit_connection_path(connection), remote: true) %></td>
                     <td><%= connection.username %></td>
                     <td><%= connection.password %></td>
                     <td><%= link_to connection.url, connection.url %></td>
                     <td class="actions">
-                        <%= link_to(connection_path(connection), :remote => true, :title => "show details") do %>
+                        <%= link_to(connection_path(connection), remote: true, title: 'show details') do %>
                             <i class="icon-eye-open"></i>
                         <% end %>
-                        <%= link_to(new_connection_path(:connection_id => connection), :remote => true, :title => 'copy connection') do %>
+                        <%= link_to(new_connection_path(:connection_id => connection), remote: true, title: 'copy connection') do %>
                             <i class="icon-share"></i>
                         <% end %>
                         <%= link_to(connection_path(connection), :method => :delete, :confirm => "really delete #{connection.name}?") do %>
