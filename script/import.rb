@@ -9,6 +9,7 @@ count = 0
 conn.exec( "SELECT * FROM lookups" ) do |result| 
   result.each do |row|
     l = Lookup.create!(
+      _id: row['id'],
       category: row['category'],
       code: row['code'], 
       description: row['description'])
@@ -24,13 +25,13 @@ conn.exec( "SELECT * FROM people" ) do |result|
   result.each do |row|
     p = Person.create!(
       _id: row['id'],
-      username: row['user_name'], 
-      born_on: row['born_on'], 
-      mail_url: row['mail_url'], 
-      banking_url: row['banking_url'], 
-      map_center: row['map_center'], 
-      authority: row['authority'], 
-      password: "#{row['user_name']}_pass", 
+      username: row['user_name'],
+      born_on: row['born_on'],
+      mail_url: row['mail_url'],
+      banking_url: row['banking_url'],
+      map_center: row['map_center'],
+      authority: 'adam'.eql?(row['user_name']) ? 3 : 1,
+      password: "#{row['user_name']}_pass",
       password_confirmation: "#{row['user_name']}_pass")
     count += 1
     # puts p.inspect
@@ -47,12 +48,12 @@ Person.all.each do |person|
       a = Account.new(
         _id: row['id'],
         person: person,
-        name: row['name'], 
-        url: row['url'], 
-        price_url: row['price_url'], 
-        description: row['description'], 
-        units: row['units'], 
-        price: row['price'], 
+        name: row['name'],
+        url: row['url'],
+        price_url: row['price_url'],
+        description: row['description'],
+        units: row['units'],
+        price: row['price'],
         active: row['active'])
       a.account_prices = []
       conn.exec( "SELECT * FROM account_prices p WHERE p.account_id = #{row['id']}" ) do |prices|
@@ -73,11 +74,11 @@ Person.all.each do |person|
     result.each do |row|
       c = Connection.create!(
         person: person,
-        name: row['name'], 
-        username: row['username'], 
-        password: row['password'], 
-        url: row['url'], 
-        description: row['description'], 
+        name: row['name'],
+        username: row['username'],
+        password: row['password'],
+        url: row['url'],
+        description: row['description'],
         tags: row['tags'])
       count += 1
       # puts c.inspect
@@ -91,14 +92,14 @@ Person.all.each do |person|
     result.each do |row|
       c = Contact.create!(
         person: person,
-        name: row['name'], 
-        email: row['email'], 
-        phone_home: row['phone_home'], 
-        phone_work: row['phone_work'], 
-        phone_cell: row['phone_cell'], 
-        address: row['address'],  
-        city: row['city'], 
-        tags: row['tags'], 
+        name: row['name'],
+        email: row['email'],
+        phone_home: row['phone_home'],
+        phone_work: row['phone_work'],
+        phone_cell: row['phone_cell'],
+        address: row['address'],
+        city: row['city'],
+        tags: row['tags'],
         comments: row['comments'])
       count += 1
       # puts c.inspect
@@ -112,7 +113,8 @@ Person.all.each do |person|
     result.each do |row|
       j = Journal.create!(
         person: person,
-        entry: row['entry'], 
+        journal_type: row['journal_type'].blank? ? nil : Lookup.find(row['journal_type']),
+        entry: row['entry'],
         entry_on: row['entry_on'])
       count += 1
       # puts j.inspect
@@ -126,12 +128,12 @@ Person.all.each do |person|
     result.each do |row|
       l = Link.create!(
         person: person,
-        url: row['url'], 
-        name: row['name'], 
-        tags: row['tags'], 
-        comments: row['comments'], 
-        clicks: row['clicks'], 
-        last_clicked_on: row['last_clicked_on'],  
+        url: row['url'],
+        name: row['name'],
+        tags: row['tags'],
+        comments: row['comments'],
+        clicks: row['clicks'],
+        last_clicked_on: row['last_clicked_on'],
         expires_on: row['expires_on'])
       count += 1
       # puts l.inspect
@@ -151,9 +153,9 @@ Person.all.each do |person|
     result.each do |row|
       p = Payment.new(
         person: person,
-        description: row['description'], 
-        tags: row['tags'], 
-        payment_on: row['payment_on'], 
+        description: row['description'],
+        tags: row['tags'],
+        payment_on: row['payment_on'],
         until: row['until'])
       amount = row['amount'].to_f.round(2)
       if row['transfer_from'].blank?
@@ -184,10 +186,13 @@ Person.all.each do |person|
     result.each do |row|
       r = Reminder.create!(
         person: person,
-        description: row['description'], 
-        tags: row['tags'], 
-        done: row['done'], 
-        repeat_until: row['repeat_until'], 
+        reminder_type: row['reminder_type'].blank? ? nil : Lookup.find(row['reminder_type']),
+        priority: row['priority'].blank? ? nil : Lookup.find(row['priority']),
+        frequency: row['frequency'].blank? ? nil : Lookup.find(row['frequency']),
+        description: row['description'],
+        tags: row['tags'],
+        done: row['done'],
+        repeat_until: row['repeat_until'],
         due_on: row['due_on'])
       count += 1
       # puts r.inspect
@@ -201,13 +206,15 @@ Person.all.each do |person|
     result.each do |row|
       w = Workout.create!(
         person: person,
-        location: row['location'], 
-        race: row['race'], 
-        description: row['description'], 
-        duration: row['duration'], 
-        intensity: row['intensity'], 
-        weight: row['weight'], 
-        distance: row['distance'], 
+        workout_type: row['workout_type'].blank? ? nil : Lookup.find(row['workout_type']),
+        route: row['route'].blank? ? nil : Lookup.find(row['route']),
+        location: row['location'],
+        race: row['race'],
+        description: row['description'],
+        duration: row['duration'],
+        intensity: row['intensity'],
+        weight: row['weight'],
+        distance: row['distance'],
         workout_on: row['workout_on'])
       count += 1
       # puts w.inspect

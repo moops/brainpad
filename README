@@ -7,6 +7,15 @@ client side validations:
     - https://github.com/bcardarella/client_side_validations
 javascript: datepicker 
     - http://www.eyecon.ro/bootstrap-datepicker/
+    
+build local db from postgres:
+    rake db:purge
+    rails runner script/import.rb
+dump local db:
+    mongodump --db brainpad_development --out ~/Desktop/brainpad.bson
+restore production db:
+    heroku run rake db:purge
+    mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2013
 x Feb 20 - use common details modal div rather than xxx-show modal div in each module

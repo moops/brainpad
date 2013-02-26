@@ -6,7 +6,7 @@ class Link
   field :nm, as: :name
   field :tg, as: :tags
   field :cm, as: :comments
-  field :cl, as: :clicks, :type => Integer
+  field :cl, as: :clicks, :type => Integer, default: 0
   field :l_on, as: :last_clicked_on, :type => Date
   field :e_on, as: :expires_on, :type => Date
 

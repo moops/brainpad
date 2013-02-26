@@ -20,7 +20,7 @@ class LinksController < ApplicationController
     @random = links.sort_by { rand }[0,4]
     
     @milestone = Milestone.next_milestone(current_user)
-    @due_today = Reminder.due_on_for(current_user)
+    @due_today = Reminder.todays(current_user)
     # @feeds = Feeds.get_feeds
 
     respond_to do |format|
@@ -34,9 +34,8 @@ class LinksController < ApplicationController
   def show
     respond_to do |format|
       format.html { 
-        clicks = @link.clicks ? @link.clicks += 1 : 1
-        @link.update_attributes({'clicks' => clicks, 'last_clicked_on' => Time.now})
-        redirect_to @link.url
+        @link.update_attributes({'clicks' => @link.clicks += 1, 'last_clicked_on' => Time.now})
+        redirect_to @link.url.include?("://") ? @link.url : "http://#{@link.url}"
       }
       format.xml  { render :xml => @link }
     end
