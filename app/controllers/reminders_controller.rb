@@ -35,6 +35,7 @@ class RemindersController < ApplicationController
   def edit
     @types = Lookup.where(:category => 16).all
     @priorities = Lookup.where(:category => 11).all
+    @frequencies = Lookup.where(:category => 36).all
   end
 
   # POST /reminders
@@ -48,7 +49,7 @@ class RemindersController < ApplicationController
   # PUT /reminders/1
   def update
     if @reminder.update_attributes(params[:reminder])
-      flash[:notice] = "reminder #{condense(@reminder.description)} was created."
+      flash[:notice] = "reminder #{condense(@reminder.description)} was updated."
       redirect_to reminders_path
     end
   end
