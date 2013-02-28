@@ -29,6 +29,15 @@ class Reminder
     user.reminders.gt(due_on: Date.today - (days + 1))
   end
   
+  def self.describe_due(user, on=Date.today)
+    summary = "due today:\n"
+    user.reminders.where(due_on: on, done: false).each do |r|
+      summary << "- #{r.priority.description} " if r.priority
+      summary << "- #{r.description}\n"
+    end 
+    summary
+  end
+  
   def self.summary(user,days)
     reminders = Reminder.recent(user,days)
     created = reminders.length

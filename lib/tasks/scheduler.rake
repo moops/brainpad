@@ -5,9 +5,9 @@ task :send_reminders => :environment do
   client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
 
   Person.ne(phone: nil).each do |person|
-    unless Reminder.due_on_for(person).empty?
+    unless Reminder.todays(person).empty?
       # Create and send an SMS message
-      puts "sending sms to #{person.username}..."
+      puts "sending sms to #{person.username} (#{person.phone})..."
       client.account.sms.messages.create(
         from: TWILIO_CONFIG['from'],
         to: person.phone,
