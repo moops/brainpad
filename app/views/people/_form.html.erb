@@ -9,6 +9,7 @@
         <%= f.input :password %>
         <%= f.input :password_confirmation %>
         <%= f.input :mail_url %>
+        <%= f.input :born_on, as: :string, input_html: {class: 'calendar', 'data-date-format' => "yyyy-mm-dd"}) %>
     </div>
     <div class="modal-footer">
         <%= f.button :submit, :label => 'sign up', :class => 'btn btn-primary'%>

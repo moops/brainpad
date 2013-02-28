@@ -21,10 +21,6 @@ class Reminder
     !(done == 0 or done == 'f') 
   end
   
-  def description_condensed
-    description.length > 40 ? "#{description[0,40]}..." : description
-  end
-  
   def self.todays(user)
     user.reminders.where(due_on: Date.today, done: false)
   end

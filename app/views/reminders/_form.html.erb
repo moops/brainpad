@@ -11,8 +11,11 @@
         <%= f.input :tags %>
         <%= f.input :description %>
         <%= f.input :done %>
-        <%= f.input :frequency_id, collection: @frequencies, value_method: '_id', label_method: 'description' %>
-        <%= f.input(:repeat_until, as: :string, input_html: {class: 'calendar', 'data-date-format' => "yyyy-mm-dd"}) %>
+        <fieldset>
+            <legend>schedule</legend>
+            <%= f.input :frequency_id, collection: @frequencies, value_method: '_id', label_method: 'description' %>
+            <%= f.input(:repeat_until, as: :string, input_html: {class: 'calendar', 'data-date-format' => "yyyy-mm-dd"}) %>
+        </fieldset>
     </div>
     <div class="modal-footer">
         <%= f.button(:submit) %>

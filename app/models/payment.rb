@@ -17,10 +17,6 @@ class Payment
 
   attr_accessor :payment_type
   
-  def description_condensed
-    description.length > 25 ? "#{description[0,25]}..." : description if description
-  end
-  
   def account_name
     return "#{from_account.name} -> #{to_account.name}" if from_account and to_account
     return from_account.name if from_account

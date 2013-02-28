@@ -38,7 +38,7 @@ class RemindersController < ApplicationController
   # POST /reminders
   def create
     if @reminder.save
-      flash[:notice] = "reminder #{@reminder.description_condensed} was created."
+      flash[:notice] = "reminder #{condense(@reminder.description)} was created."
       redirect_to reminders_path
     end
   end
@@ -46,7 +46,7 @@ class RemindersController < ApplicationController
   # PUT /reminders/1
   def update
     if @reminder.update_attributes(params[:reminder])
-      flash[:notice] = "reminder #{@reminder.description_condensed} was created."
+      flash[:notice] = "reminder #{condense(@reminder.description)} was created."
       redirect_to reminders_path
     end
   end
