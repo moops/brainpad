@@ -33,6 +33,8 @@ class RemindersController < ApplicationController
 
   # GET /reminders/1/edit.js
   def edit
+    @types = Lookup.where(:category => 16).all
+    @priorities = Lookup.where(:category => 11).all
   end
 
   # POST /reminders
