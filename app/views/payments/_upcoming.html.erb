@@ -6,7 +6,7 @@
                 <tbody>
                     <% @upcoming_payments.each do |payment| %>
                         <tr>
-                            <td><%= payment.description_condensed %></td>
+                            <td><%= condense(payment.description) %></td>
                             <td><div class="<%= "#{payment.type}-amount" %>"><%= number_to_currency payment.amount %></div></td>
                             <td><%= payment.account_name %></td>
                             <td>in <%= (payment.next_due - Date.today).to_i %> days</td></tr>

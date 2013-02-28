@@ -5,9 +5,6 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     flash[:notice] = "Access denied."
     redirect_to root_path
-   # render :action => '/sessions/new', 
-    #       :content_type => 'application/javascript',
-    #       :layout => false
   end
   
   private

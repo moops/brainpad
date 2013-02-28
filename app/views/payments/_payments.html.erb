@@ -9,7 +9,7 @@
         <tbody>
             <% @payments.each do |payment| %>
                 <tr>
-                    <td><%= link_to(payment.description_condensed, edit_payment_path(payment), remote: true) %></td>
+                    <td><%= link_to(condense(payment.description), edit_payment_path(payment), remote: true) %></td>
                     <td><div class="<%= "#{payment.type}-amount" %>"><%= number_to_currency payment.amount %></div></td>
                     <td><%= payment.account_name %></td>
                     <td><%= payment.payment_on.strftime("%a %b %d, %y") %></td>
@@ -17,10 +17,10 @@
                         <%= link_to(payment_path(payment), remote: true, title: 'show details') do %>
                             <i class="icon-eye-open"></i>
                         <% end %>
-                        <%= link_to(new_payment_path(:payment_id => payment), remote: true, title: "copy #{payment.description_condensed}") do %>
+                        <%= link_to(new_payment_path(:payment_id => payment), remote: true, title: "copy #{condense(payment.description)}") do %>
                             <i class="icon-share"></i>
                         <% end %>
-                        <%= link_to(payment_path(payment), :method => :delete, :confirm => "really delete #{payment.description_condensed}?", title: 'delete payment') do %>
+                        <%= link_to(payment_path(payment), :method => :delete, :confirm => "really delete #{condense(payment.description)}?", title: 'delete payment') do %>
                             <i class="icon-remove"></i>
                         <% end %>
                     </td>
