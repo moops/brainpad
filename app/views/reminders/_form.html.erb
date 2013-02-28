@@ -1,4 +1,4 @@
-<%= simple_form_for(@reminder, :html => {:class => 'form-horizontal' }) do |f| %>
+<%= simple_form_for(@reminder, :html => {:class => 'form-horizontal condensed' }) do |f| %>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>new reminder</h3>
@@ -9,8 +9,8 @@
         <%= f.input :priority_id, collection: @priorities, value_method: '_id', label_method: 'description' %>
         <%= f.input(:due_on, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
         <%= f.input :tags %>
-        <%= f.input :description %>
-        <%= f.input :done %>
+        <%= f.input :description, as: :text, input_html: { rows: 3 } %>
+        <%= f.input :done, as: :boolean %>
         <fieldset>
             <legend>schedule</legend>
             <%= f.input :frequency_id, collection: @frequencies, value_method: '_id', label_method: 'description' %>

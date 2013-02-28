@@ -9,7 +9,7 @@
         <tbody>
             <% @workouts.each do |workout| %>
                 <tr>
-                    <td><%= link_to(workout.workout_on.strftime("%a %b %d, %y"), edit_workout_path(workout), :remote => true) %></td>
+                    <td><%= link_to(workout.workout_on.strftime("%a %b %d, %y"), edit_workout_path(workout), remote: true) %></td>
                     <td><%= workout.workout_type.description if workout.workout_type %></td>
                     <td>
                         <% if workout.route %>
@@ -21,13 +21,13 @@
                     <td><%= workout.distance %></td>
                     <td><%= workout.duration %></td>
                     <td class="actions">
-                        <%= link_to(workout_path(workout), :remote => true, :title => 'show details') do %>
+                        <%= link_to(workout_path(workout), remote: true, title: 'show details') do %>
                             <i class="icon-eye-open"></i>
                         <% end %>
-                        <%= link_to(new_workout_path(:workout_id => workout), :remote => true, :title => 'copy workout') do %>
+                        <%= link_to(new_workout_path(:workout_id => workout), remote: true, title: 'copy workout') do %>
                             <i class="icon-share"></i>
                         <% end %>
-                        <%= link_to(workout_path(workout), :method => :delete, :confirm => "really delete #{workout.location} workout?", :title => 'delete workout') do %>
+                        <%= link_to(workout_path(workout), :method => :delete, :confirm => "really delete #{workout.location} workout?", title: 'delete workout') do %>
                             <i class="icon-remove"></i>
                         <% end %>
                     </td>

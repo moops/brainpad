@@ -1,4 +1,4 @@
-<%= simple_form_for(@workout, :html => {:class => 'form-horizontal' }) do |f| %>
+<%= simple_form_for(@workout, :html => {:class => 'form-horizontal condensed' }) do |f| %>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>new workout</h3>
@@ -12,9 +12,9 @@
         <%= f.input(:workout_on, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
         <%= f.input :distance %>
         <%= f.input :duration %>
-        <%= f.input :intensity %>
+        <%= f.input :intensity, collection: (1..10).to_a %>
         <%= f.input :weight %>
-        <%= f.input :description %>
+        <%= f.input :description, :as => :text, :input_html => { :rows => 5 } %>
     </div>
     <div class="modal-footer">
         <%= f.button(:submit) %>

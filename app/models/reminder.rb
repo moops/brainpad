@@ -43,7 +43,7 @@ class Reminder
       created: created,
       on_time: on_time,
       completed: completed,
-      completion_rate: (completed.to_f / created.to_f) * 100
+      completion_rate: created > 0 ? (completed.to_f / created.to_f) * 100 : 0
     }
   end
 end
