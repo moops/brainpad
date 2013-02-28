@@ -10,6 +10,7 @@ class Person
   field :m_c, as: :map_center
   field :auth, as: :authority, type: Integer
   field :pwd, as: :password_digest
+  field :ph, as: :phone
 
   has_many :accounts
   has_many :payments
@@ -24,7 +25,7 @@ class Person
   has_secure_password
   validates_presence_of :username
   validates_uniqueness_of :username
-  attr_accessible :_id, :username, :password, :password_confirmation, :born_on, :authority, :mail_url, :banking_url, :map_center
+  attr_accessible :_id, :username, :password, :password_confirmation, :born_on, :authority, :mail_url, :banking_url, :map_center, :phone
 
   ROLES = %w[admin user]
 
