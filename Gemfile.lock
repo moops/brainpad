@@ -77,6 +77,11 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.21)
+    mongo (1.8.2)
+      bson (~> 1.8.2)
+    mongo_session_store-rails3 (4.0.0)
+      actionpack (>= 3.1)
+      mongo
     mongoid (3.1.2)
       activemodel (~> 3.2)
       moped (~> 1.4.2)
@@ -152,6 +157,7 @@ DEPENDENCIES
   factory_girl_rails
   jquery-rails
   kaminari
+  mongo_session_store-rails3
   mongoid
   pg
   rails (= 3.2.11)

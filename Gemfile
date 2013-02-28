@@ -24,3 +24,5 @@ gem 'jquery-rails'            # unobtrusive javascript
 gem 'simple_form'             # form builder
 gem 'twilio-ruby'             # sms sending
 gem 'debugger', group: [:development, :test]
+
+gem 'mongo_session_store-rails3'
