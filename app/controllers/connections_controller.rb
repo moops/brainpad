@@ -4,7 +4,7 @@ class ConnectionsController < ApplicationController
   
   # GET /connections
   def index
-    session[:connection_tags] = getUniqueTags
+    session[:connection_tags] = get_unique_tags
     
     @connections = current_user.connections.asc(:name)
     if params[:q]
@@ -52,18 +52,18 @@ class ConnectionsController < ApplicationController
   # DELETE /connections/1
   def destroy
     @connection.destroy
-    redirect_to connections_url
+    redirect_to connections_path
   end
   
   private
   
-  def getUniqueTags
+  def get_unique_tags
     unique_tags = []
-    current_user.contacts.each do |contact|
-      contact.tags.split.each do |tag|
+    current_user.connections.each do |connection|
+      connection.tags.split.each do |tag|
         unique_tags.push(tag.strip)
       end
     end
-    unique_tags.uniq!.sort!
+    unique_tags.uniq.sort unless unique_tags.empty?
   end
 end

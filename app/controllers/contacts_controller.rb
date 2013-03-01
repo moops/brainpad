@@ -4,7 +4,7 @@ class ContactsController < ApplicationController
   
   # GET /contacts
   def index
-    session[:contact_tags] = getUniqueTags
+    session[:contact_tags] = get_unique_tags
     
     @contacts = current_user.contacts.asc(:name)
     if params[:q]
@@ -57,13 +57,13 @@ class ContactsController < ApplicationController
 
   private
 
-  def getUniqueTags
+  def get_unique_tags
     unique_tags = []
     current_user.contacts.each do |contact|
       contact.tags.split.each do |tag|
         unique_tags.push(tag.strip)
       end
     end
-    unique_tags.uniq!.sort!
+    unique_tags.uniq.sort unless unique_tags.empty?
   end
 end

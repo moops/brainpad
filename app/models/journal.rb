@@ -3,6 +3,7 @@ class Journal
   include Mongoid::Timestamps::Short
 
   field :en, as: :entry
+  field :tg, as: :tags
   field :e_on, as: :entry_on, :type => Date
 
   belongs_to :person

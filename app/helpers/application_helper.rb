@@ -8,6 +8,7 @@ module ApplicationHelper
   end
   
   def tag_list(links, controller)
+    links ||= []
     links.map! do |link|
       link_to(link, :controller => controller, :tag => link)
     end

@@ -4,7 +4,7 @@ class RemindersController < ApplicationController
 
   # GET /reminders
   def index
-    session[:reminder_tags] = getUniqueTags
+    session[:reminder_tags] = get_unique_tags
     @reminders = current_user.reminders.outstanding.asc(:due_on)
     if params[:tag]
       @reminders = @reminders.where(tags: /#{params[:tag]}/)
@@ -71,14 +71,13 @@ class RemindersController < ApplicationController
 
   private
 
-  def getUniqueTags
+  def get_unique_tags
     unique_tags = []
-    current_user.contacts.each do |contact|
-      contact.tags.split.each do |tag|
+    current_user.reminders.each do |reminder|
+      reminder.tags.split.each do |tag|
         unique_tags.push(tag.strip)
       end
     end
-    unique_tags.uniq!
-    unique_tags.sort!
+    unique_tags.uniq.sort unless unique_tags.empty?
   end
 end

@@ -4,6 +4,7 @@ class PaymentsController < ApplicationController
   
   # GET /payments
   def index
+    session[:payment_tags] = get_unique_tags
     @payments = current_user.payments.desc(:payment_on)
     if params[:q]
       @payments = @payments.where(name: /#{params[:q]}/i)
@@ -71,5 +72,19 @@ class PaymentsController < ApplicationController
     @accounts = current_user.accounts.active
     @frequencies = Lookup.where(category: 36).all
     @tags = Payment.user_tags(current_user)
+  end
+  
+  private
+
+  def get_unique_tags
+    unique_tags = []
+    current_user.payments.each do |payment|
+      if payment.tags
+        payment.tags.split.each do |tag|
+          unique_tags.push(tag.strip)
+        end
+      end
+    end
+    unique_tags.uniq.sort unless unique_tags.empty?
   end
 end

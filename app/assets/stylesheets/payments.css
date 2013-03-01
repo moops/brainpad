@@ -42,6 +42,10 @@
     opacity: 1.0;
 }
 
+.payments-panel .reports-panel .btn-group {
+	margin-bottom: 10px;
+}
+
 #payment-list .deposit-amount {
 	font-weight: bold;
 }

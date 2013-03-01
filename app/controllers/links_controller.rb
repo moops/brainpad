@@ -5,10 +5,9 @@ class LinksController < ApplicationController
   load_and_authorize_resource
   
   # GET /links
-  # GET /links.xml
   def index
-    unless session[:tags]
-      session[:tags] = getUniqueTags
+    unless session[:link_tags]
+      session[:link_tags] = get_unique_tags
     end
 
     links = Link.all
@@ -18,45 +17,25 @@ class LinksController < ApplicationController
     @recently_added = links.desc(:created_at).limit(4).all
     @most_often_1 = links.desc(:clicks).limit(4).all
     @random = links.sort_by { rand }[0,4]
-    
-    @milestone = Milestone.next_milestone(current_user)
-    @due_today = Reminder.todays(current_user)
     # @feeds = Feeds.get_feeds
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @links }
-    end
   end
 
   # GET /links/1
-  # GET /links/1.xml
   def show
-    respond_to do |format|
-      format.html { 
-        @link.update_attributes({'clicks' => @link.clicks += 1, 'last_clicked_on' => Time.now})
-        redirect_to @link.url.include?("://") ? @link.url : "http://#{@link.url}"
-      }
-      format.xml  { render :xml => @link }
-    end
+    @link.update_attributes({'clicks' => @link.clicks += 1, 'last_clicked_on' => Time.now})
+    redirect_to @link.url.include?("://") ? @link.url : "http://#{@link.url}"
   end
 
   # GET /links/new
-  # GET /links/new.xml
   def new
     @link = Link.where(url: params[:url]).first if params[:url]
     if @link
       flash[:notice] = "#{@link.url} already exists"
-      redirect_to(links_path)
+      redirect_to links_path
     end
     @link = Link.new unless @link 
     @link.name = params[:name].downcase if params[:name]
     @link.url = params[:url]
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @link }
-    end
   end
 
   # GET /links/1/edit
@@ -64,45 +43,30 @@ class LinksController < ApplicationController
   end
 
   # POST /links
-  # POST /links.xml
   def create
     @link.person = current_user if current_user
-    respond_to do |format|
-      if @link.save
-        flash[:notice] = 'Link was successfully created.'
-        format.html { redirect_to(links_path) }
-        format.xml  { render :xml => @link, :status => :created, :location => @link }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @link.errors, :status => :unprocessable_entity }
-      end
+    if @link.save
+      flash[:notice] = 'Link was successfully created.'
+      redirect_to links_path
+    else
+      render action: 'new'
     end
   end
 
   # PUT /links/1
-  # PUT /links/1.xml
   def update
-    respond_to do |format|
-      if @link.update_attributes(params[:link])
-        flash[:notice] = 'Link was successfully updated.'
-        format.html { redirect_to(@link) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @link.errors, :status => :unprocessable_entity }
-      end
+    if @link.update_attributes(params[:link])
+      flash[:notice] = 'Link was successfully updated.'
+      redirect_to @link
+    else
+      render action: 'edit'
     end
   end
 
   # DELETE /links/1
-  # DELETE /links/1.xml
   def destroy
     @link.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(links_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to links_path
   end
 
   # GET /links/find
@@ -119,32 +83,32 @@ class LinksController < ApplicationController
 
   # GET /links/clean
   def clean
-    @links = Link.paginate :page => params[:page], :conditions => "person_id = #{current_user.id}", :order => :name, :per_page => 15
+    @links = current_user.links.asc(:name).page(params[:page])
   end
 
   # GET /link/refresh_tags
   def refresh_tags
-    session[:tags] = getUniqueTags
-    render(:partial => 'tags')
+    session[:link_tags] = get_unique_tags
+    render partial: 'tags'
   end
 
   # non-restfull inline editors
   def update_field
     link = Link.find(params[:id])
     link.update_attribute(params[:field], params[:value])
-    render(:text => params[:value])
+    render text: params[:value]
   end
   # end non-restfull inline editors
 
 private
 
-  def getUniqueTags
+  def get_unique_tags
     unique_tags = []
     current_user.links.each do |link|
       link.tags.split.each do |tag|
         unique_tags.push(tag.strip)
       end
     end
-    unique_tags.uniq!.sort!
+    unique_tags.uniq.sort unless unique_tags.empty?
   end
 end

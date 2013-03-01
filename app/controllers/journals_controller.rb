@@ -4,7 +4,7 @@ class JournalsController < ApplicationController
   
   # GET /journals
   def index
-    session[:journal_tags] = getUniqueTags
+    session[:journal_tags] = get_unique_tags
     
     @journals = current_user.journals.desc('entry_on')
     if params[:q]
@@ -59,13 +59,15 @@ class JournalsController < ApplicationController
   
   private
 
-  def getUniqueTags
+  def get_unique_tags
     unique_tags = []
-    current_user.contacts.each do |contact|
-      contact.tags.split.each do |tag|
-        unique_tags.push(tag.strip)
+    current_user.journals.each do |j|
+      if j.tags
+        j.tags.split.each do |tag|
+          unique_tags.push(tag.strip)
+        end
       end
     end
-    unique_tags.uniq.sort if unique_tags.uniq
+    unique_tags.uniq.sort unless unique_tags.empty?
   end
 end

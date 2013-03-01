@@ -48,26 +48,7 @@
     </div>
 </div>
 
-
-
-
-<% unless @due_today.empty? %>
-<label class="page">due today:</label>
-<ul class="due">
-    <% for reminder in @due_today %>
-    <li><%= reminder.description[0,40] + (reminder.description.length > 40 ? '...' : '') %></li>
-    <% end %>
-</ul>
-<% end %>
-
-<% if @milestone %>
-<div>
-    <label class="page">next milestone:</label>  
-    <%= @milestone.name %>
-    <input type="text" class="milestone_time" id="<%= @milestone.id %>" size="30" />
-    
-    <script type="text/javascript">
-        count('<%= @milestone.id %>', '<%= @milestone.milestone_at %>');
-    </script>
+<div class="tag-list">
+    tags:
+    <%= tag_list(session[:link_tags], 'links') %>
 </div>
-<% end %>
