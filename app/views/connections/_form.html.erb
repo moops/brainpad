@@ -4,7 +4,7 @@
         <h3>new connection</h3>
     </div>
     <div class="modal-body">
-        <%= f.input :person_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+        <%= f.input :person_id, as: :hidden, input_html: { value: current_user.id } %>
         <%= f.input :name %>
         <%= f.input :username %>
         <%= f.input :password, as: :string %>
@@ -13,7 +13,7 @@
         <%= f.input :description %>
     </div>
     <div class="modal-footer">
-        <%= f.button(:submit) %>
+        <%= f.button :submit, class: 'btn btn-primary' %>
     </div>
 <% end %>
 

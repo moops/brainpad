@@ -1,11 +1,11 @@
 <%= simple_form_for(@link, :html => {:class => 'form-horizontal' }) do |f| %>
-    <%= f.error_notification %>
-    <%= f.input(:name) %>
-    <%= f.input(:url) %>
-    <%= f.input(:tags) %>
-    <%= f.input(:comments) %>
-    <%= f.input(:expires_on, :as => :string, input_html: {'data-date-format' => "yyyy-mm-dd"}) %>
-    <%= f.input(:clicks) %>
-    <%= f.input(:last_clicked_on, :as => :string, input_html: {'data-date-format' => "yyyy-mm-dd"}) %>
-    <%= f.button(:submit) %>
+    <%= f.input :person_id, as: :hidden, input_html: { value: current_user.id } %>
+    <%= f.input :name %>
+    <%= f.input :url %>
+    <%= f.input :tags %>
+    <%= f.input :comments %>
+    <%= f.input(:expires_on, as: :string, input_html: {'data-date-format' => "yyyy-mm-dd"}) %>
+    <%= f.input :clicks %>
+    <%= f.input(:last_clicked_on, as: :string, input_html: {'data-date-format' => "yyyy-mm-dd"}) %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>
