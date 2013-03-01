@@ -105,8 +105,10 @@ private
   def get_unique_tags
     unique_tags = []
     current_user.links.each do |link|
-      link.tags.split.each do |tag|
-        unique_tags.push(tag.strip)
+      if link.tags
+        link.tags.split.each do |tag|
+          unique_tags.push(tag.strip)
+        end
       end
     end
     unique_tags.uniq.sort unless unique_tags.empty?

@@ -60,8 +60,10 @@ class ContactsController < ApplicationController
   def get_unique_tags
     unique_tags = []
     current_user.contacts.each do |contact|
-      contact.tags.split.each do |tag|
-        unique_tags.push(tag.strip)
+      if contact.tags
+        contact.tags.split.each do |tag|
+          unique_tags.push(tag.strip)
+        end
       end
     end
     unique_tags.uniq.sort unless unique_tags.empty?

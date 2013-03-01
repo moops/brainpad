@@ -60,8 +60,10 @@ class ConnectionsController < ApplicationController
   def get_unique_tags
     unique_tags = []
     current_user.connections.each do |connection|
-      connection.tags.split.each do |tag|
-        unique_tags.push(tag.strip)
+      if connection.tags
+        connection.tags.split.each do |tag|
+          unique_tags.push(tag.strip)
+        end
       end
     end
     unique_tags.uniq.sort unless unique_tags.empty?

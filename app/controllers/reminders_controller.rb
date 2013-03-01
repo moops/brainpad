@@ -74,8 +74,10 @@ class RemindersController < ApplicationController
   def get_unique_tags
     unique_tags = []
     current_user.reminders.each do |reminder|
-      reminder.tags.split.each do |tag|
-        unique_tags.push(tag.strip)
+      if reminders.tags
+        reminder.tags.split.each do |tag|
+          unique_tags.push(tag.strip)
+        end
       end
     end
     unique_tags.uniq.sort unless unique_tags.empty?
