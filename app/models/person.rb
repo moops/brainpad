@@ -5,7 +5,7 @@ class Person
 
   field :un, as: :username
   field :b_on, as: :born_on, type: Date
-  field :m_url, as: :mail_url
+  field :em, as: :email
   field :b_url, as: :banking_url
   field :m_c, as: :map_center
   field :auth, as: :authority, type: Integer
@@ -25,7 +25,7 @@ class Person
   has_secure_password
   validates_presence_of :username
   validates_uniqueness_of :username
-  attr_accessible :_id, :username, :password, :password_confirmation, :born_on, :authority, :mail_url, :banking_url, :map_center, :phone
+  attr_accessible :_id, :username, :password, :password_confirmation, :born_on, :authority, :email, :banking_url, :map_center, :phone
 
   ROLES = %w[admin user]
 

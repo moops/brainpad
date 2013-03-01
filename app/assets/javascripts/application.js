@@ -5,10 +5,9 @@
 //= require bootstrap-datepicker
 //= require_tree .
 
-$(document).ready(function() {
-  $('#nav').spasticNav();
-  $("#logoutlink").tooltip();
-
+$(function() {
+	$('#nav').spasticNav();
+	$("a.tip").tooltip();
 });
 function count(id,until) {
   var val = "";

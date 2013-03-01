@@ -18,27 +18,27 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2013
-- Feb 25 - make datepicker go away on selection
+x Feb 25 - make datepicker go away on selection
 x Feb 25 - condense form spacing
 - Feb 25 - javascript for payment tags/name
 x Feb 25 - text area for workout description, resize text area for journal entry
 x Feb 20 - use common details modal div rather than xxx-show modal div in each module
 x Feb 19 - put search forms into a helper partial
 - Feb 19 - fix tags and maybe put getUniqueTags into each model or a helper
-- Feb 18 - maybe don't need Lookup has_many relationship for workouts (and other entities)?
+x Feb 18 - maybe don't need Lookup has_many relationship for workouts (and other entities)?
 x Feb 18 - add space for empty list
 - Feb 15 - look into client side validations
-- Feb 14 - embed lookup for workout type
+x Feb 14 - embed lookup for workout type
 - Feb 14 - change delete to ajax request for non report entities (contact, connection, milestone etc)
 x Feb 14 - get copying working for contacts and workouts
 x Feb 14 - update workouts
 x Feb 13 - fix contact updating
 x Feb 13 - contact bootstrap kaminari pagination
 x Feb 13 - get contact tags working
-- Feb 13 - new lavalamp nav is not keeping current page
+x Feb 13 - new lavalamp nav is not keeping current page
 
 2011
-- Aug 31 - add delete for expenses
+x Aug 31 - add delete for expenses
 - Aug 31 - add validation for add expense form
 - Aug 31 - add update expense to be not recurring
 x Jun 10 - replace will_paginate with kaminari
@@ -46,7 +46,7 @@ x Jun 10 - replace will_paginate with kaminari
 2010
 x Nov 24 - change submit button label on payment form from 'go' to 'create/update' - Nov 24
 x Nov 24 - expand units field on account form - Nov 24
-- Nov 24 - fix link tag links (link_to_remote change to jquery)
+x Nov 24 - fix link tag links (link_to_remote change to jquery)
 x Nov 23 - fix workout searching with no type - Nov 24
 x Nov 21 - add search to workouts - Nov 21
 x Nov 21 - toggle search forms - Nov 21

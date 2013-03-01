@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   # login
   # POST /sessions.js
   def create
-    user = Person.find_by(username: params[:username])
+    user = Person.where(username: params[:username]).first
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
@@ -20,8 +20,6 @@ class SessionsController < ApplicationController
       flash[:warning] = 'who are you talking about?'
       redirect_to root_path
     end
-
-    
   end
   
   # logout

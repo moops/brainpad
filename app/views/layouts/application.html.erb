@@ -58,8 +58,8 @@
         <div class="pull-left">
             <% if current_user %>
                 logged in as <%= current_user.username %>.
-                <%= link_to('log out', logout_path, {title: 'get me out of here', :id => 'logoutlink'}) %>
-                <br/>
+                <%= link_to('profile', edit_person_path(current_user), {remote: true, title: 'change my deets', class: 'tip'}) %> |
+                <%= link_to('log out', logout_path, {title: 'get me out of here', class: 'tip'}) %><br/>
                 <%= "you've used #{current_user.age_in_days.to_s} days and have #{current_user.days_left.to_s} left." if current_user.born_on %>
             <% else %>
                 <%= link_to "Sign Up", signup_path %> or
@@ -105,5 +105,7 @@
             </form>
         </div>
     </footer>
+    
+    <div id="registration-form" class="modal hide fade"></div>    
 </body>
 </html>
