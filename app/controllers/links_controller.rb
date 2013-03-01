@@ -9,20 +9,19 @@ class LinksController < ApplicationController
     unless session[:link_tags]
       session[:link_tags] = get_unique_tags
     end
-
-    links = Link.all
+    links = []
     links = current_user.links if current_user
 
-    @recently_clicked = links.desc(:last_clicked_on).limit(4).all
-    @recently_added = links.desc(:created_at).limit(4).all
-    @most_often_1 = links.desc(:clicks).limit(4).all
-    @random = links.sort_by { rand }[0,4]
+    @recently_clicked = links.desc(:last_clicked_on).limit(8).all
+    @recently_added = links.desc(:created_at).limit(8).all
+    @most_often_1 = links.desc(:clicks).limit(8).all
+    @random = links.sort_by { rand }[0,8]
     # @feeds = Feeds.get_feeds
   end
 
   # GET /links/1
   def show
-    @link.update_attributes({'clicks' => @link.clicks += 1, 'last_clicked_on' => Time.now})
+    @link.update_attributes({clicks: @link.clicks += 1, 'last_clicked_on' => Time.now})
     redirect_to @link.url.include?("://") ? @link.url : "http://#{@link.url}"
   end
 
