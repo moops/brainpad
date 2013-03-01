@@ -10,4 +10,6 @@ class Journal
   belongs_to :journal_type, class_name: "Lookup"
 
   validates_presence_of :entry, :entry_on
+
+  attr_accessible :person_id, :entry, :tags, :entry_on
 end

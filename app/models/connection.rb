@@ -10,8 +10,9 @@ class Connection
   field :tg, as: :tags
 
   belongs_to :person
-  
+
   validates_presence_of :username, :password, :url
 
-  
+  attr_accessible :person_id, :name, :username, :password, :url, :description, :tags
+
 end

@@ -1,7 +1,7 @@
 class Link
   include Mongoid::Document
   include Mongoid::Timestamps::Short
-  
+
   field :url
   field :nm, as: :name
   field :tg, as: :tags
@@ -11,10 +11,12 @@ class Link
   field :e_on, as: :expires_on, :type => Date
 
   belongs_to :person
-  
+
   validates_presence_of :url, :name
 
-  def get_description
+  attr_accessible :person_id, :url, :name, :tags, :comments, :clicks, :last_clicked_on, :expires_on
+
+  def description
     self.name + (self.comments ? " - #{self.comments}" : '')
   end
 end

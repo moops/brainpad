@@ -1,7 +1,7 @@
 class Contact
   include Mongoid::Document
   include Mongoid::Timestamps::Short
-  
+
   field :nm, as: :name
   field :em, as: :email
   field :p_h, as: :phone_home
@@ -13,7 +13,9 @@ class Contact
   field :cm, as: :comments
 
   belongs_to :person
-  
+
   validates_presence_of :name
-  
+
+  attr_accessible :person_id, :name, :email, :phone_home, :phone_work, :phone_cell, :address, :city, :tags, :comments
+
 end

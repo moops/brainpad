@@ -1,7 +1,7 @@
 class Reminder
   include Mongoid::Document
   include Mongoid::Timestamps::Short
-  
+
   field :dsc, as: :description
   field :tg, as: :tags
   field :dn, as: :done, :type => Boolean
@@ -12,11 +12,13 @@ class Reminder
   belongs_to :reminder_type, class_name: "Lookup"
   belongs_to :priority, class_name: "Lookup"
   belongs_to :frequency, class_name: "Lookup"
-  
+
   validates_presence_of :description, :due_on
-  
+
+  attr_accessible :person_id, :description, :tags, :done, :repeat_until, :due_on, :reminder_type_id, :priority_id, :frequency_id
+
   scope :outstanding, where(done: false)
-  
+
   def done?
     !(done == 0 or done == 'f') 
   end
@@ -28,7 +30,7 @@ class Reminder
   def self.recent(user, days)
     user.reminders.gt(due_on: Date.today - (days + 1))
   end
-  
+
   def self.describe_due(user, on=Date.today)
     summary = "due today:\n"
     user.reminders.where(due_on: on, done: false).each do |r|
@@ -37,7 +39,7 @@ class Reminder
     end 
     summary
   end
-  
+
   def self.summary(user,days)
     reminders = Reminder.recent(user,days)
     created = reminders.length

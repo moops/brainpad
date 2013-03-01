@@ -2,7 +2,7 @@
     <%= @found_links.inspect %>
     <label"><%= params[:tag] %></label>
     <% for cur_link in @found_links %>
-        <%= link_to(cur_link.name[0,15], cur_link, title: cur_link.get_description) %>,
+        <%= link_to(cur_link.name[0,15], cur_link, title: cur_link.description) %>,
     <% end %>
 <% else %>
     @found_links NOT found

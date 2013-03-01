@@ -12,15 +12,17 @@ class Person
   field :pwd, as: :password_digest
   field :ph, as: :phone
 
-  has_many :accounts
-  has_many :payments
-  has_many :connections
-  has_many :contacts
-  has_many :journals
-  has_many :links
-  has_many :reminders
-  has_many :workouts
-  has_many :milestones
+  with_options dependent: :destroy do |assoc|
+    assoc.has_many :accounts
+    assoc.has_many :payments
+    assoc.has_many :connections
+    assoc.has_many :contacts
+    assoc.has_many :journals
+    assoc.has_many :links
+    assoc.has_many :reminders
+    assoc.has_many :workouts
+    assoc.has_many :milestones
+  end
 
   has_secure_password
   validates_presence_of :username

@@ -1,7 +1,7 @@
 class Payment
   include Mongoid::Document
   include Mongoid::Timestamps::Short
-  
+
   field :dsc, as: :description
   field :tg, as: :tags
   field :am, as: :amount, :type => Float
@@ -12,11 +12,13 @@ class Payment
   belongs_to :from_account, :class_name => 'Account'
   belongs_to :to_account, :class_name => 'Account'
   belongs_to :frequency, class_name: "Lookup"
-  
+
   validates_presence_of :amount, :payment_on
 
+  attr_accessible :person_id, :amount, :description, :tags, :payment_on, :until, :from_account, :to_account, :frequency
+
   attr_accessor :payment_type
-  
+
   def account_name
     return "#{from_account.name} -> #{to_account.name}" if from_account and to_account
     return from_account.name if from_account
