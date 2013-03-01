@@ -7,6 +7,7 @@
         <%= f.input :person_id, as: :hidden, input_html: { value: current_user.id } %>
         <%= f.input :journal_type_id, collection: @types, value_method: '_id', label_method: 'description' %>
         <%= f.input(:entry_on, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
+        <%= f.input :tags %>
         <%= f.input :entry, as: :text, input_html: { rows: 8 } %>
     </div>
     <div class="modal-footer">

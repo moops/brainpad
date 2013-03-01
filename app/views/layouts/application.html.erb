@@ -22,15 +22,16 @@
         </div>
         
         <ul nowrap id="nav">
-            <li><%= link_to('home',       links_path, :id => "selected" ) %></li>
-            <li><%= link_to('contacts',   contacts_path ) %></li>
-            <li><%= link_to('workouts',   workouts_path ) %></li>
-            <li><%= link_to('money',      payments_path ) %></li>
-            <li><%= link_to('journal' ,   journals_path ) %></li>
-            <li><%= link_to('calendar' ,  reminders_path ) %></li>
-            <li><%= link_to('photos' ,  'http://raceweb-photo.herokuapp.com',   :target => '_blank' ) %></li>
-            <li><%= link_to('conn' ,      connections_path ) %></li>
-            <li><%= link_to('milestones', milestones_path ) %></li>
+            <% c = params[:controller] %>
+            <li><%= link_to('home',       links_path, c.include?('link') ? {id: 'selected'} : nil ) %></li>
+            <li><%= link_to('contacts',   contacts_path, c.include?('contact') ? {id: 'selected'} : nil ) %></li>
+            <li><%= link_to('workouts',   workouts_path, c.include?('workout') ? {id: 'selected'} : nil ) %></li>
+            <li><%= link_to('money',      payments_path, c.include?('payment') ? {id: 'selected'} : nil ) %></li>
+            <li><%= link_to('journal' ,   journals_path, c.include?('journal') ? {id: 'selected'} : nil ) %></li>
+            <li><%= link_to('calendar' ,  reminders_path, c.include?('reminder') ? {id: 'selected'} : nil ) %></li>
+            <li><%= link_to('photos' ,  'http://photo.brainpad.ca', target: '_blank' ) %></li>
+            <li><%= link_to('conn' ,      connections_path, c.include?('connection') ? {id: 'selected'} : nil ) %></li>
+            <li><%= link_to('milestones', milestones_path, c.include?('milestone') ? {id: 'selected'} : nil ) %></li>
         </ul>
         <div style="clear:both;"></div>
 
