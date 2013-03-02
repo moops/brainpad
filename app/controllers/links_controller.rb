@@ -1,4 +1,4 @@
-# require 'feeds'
+require 'feeds'
 
 class LinksController < ApplicationController
 
@@ -16,7 +16,7 @@ class LinksController < ApplicationController
     @recently_added = links.desc(:created_at).limit(8).all
     @most_often_1 = links.desc(:clicks).limit(8).all
     @random = links.sort_by { rand }[0,8]
-    # @feeds = Feeds.get_feeds
+    @feeds = Feeds.get_feeds
   end
 
   # GET /links/1

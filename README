@@ -22,7 +22,7 @@ x Mar  1 - fix format (xx/1) for days used and days left
 - Mar  1 - add component to datepicker fields
 - Mar  1 - manage links
 - Feb 28 - dynamic styles
-- Feb 28 - make feeds work again
+x Feb 28 - make feeds work again
 x Feb 25 - make datepicker go away on selection
 x Feb 25 - condense form spacing
 - Feb 25 - javascript for payment tags/name
