@@ -15,6 +15,27 @@ class Ability
       can :manage, Contact do |c|
         c.try(:person) == user or c.new_record?
       end
+      can :manage, Connection do |c|
+        c.try(:person) == user or c.new_record?
+      end
+      can :manage, Journal do |c|
+        c.try(:person) == user or c.new_record?
+      end
+      can :manage, Link do |c|
+        c.try(:person) == user or c.new_record?
+      end
+      can :manage, Milestone do |c|
+        c.try(:person) == user or c.new_record?
+      end
+      can :manage, Payment do |c|
+        c.try(:person) == user or c.new_record?
+      end
+      can :manage, Reminder do |c|
+        c.try(:person) == user or c.new_record?
+      end
+      can :manage, Workout do |c|
+        c.try(:person) == user or c.new_record?
+      end
       
     end
   end
