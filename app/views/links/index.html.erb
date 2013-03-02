@@ -35,7 +35,18 @@
         </div>
         <div id="collapse-feeds" class="accordion-body collapse">
             <div class="accordion-inner">
-                hgfhfg
+                <div class="container">
+                    <div class="row">
+                        <div class="span1"></div>
+                        <%= render partial: 'feed', locals: { feed: @feeds[0] } %>
+                        <%= render partial: 'feed', locals: { feed: @feeds[1] } %>
+                    </div> <!-- end .row -->
+                    <div class="row">
+                        <div class="span1"></div>
+                        <%= render partial: 'feed', locals: { feed: @feeds[2] } %>
+                        <%= render partial: 'feed', locals: { feed: @feeds[3] } %>
+                    </div> <!-- end .row -->
+                </div> <!-- end .container -->
             </div>
         </div>
     </div>
