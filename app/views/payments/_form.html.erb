@@ -14,10 +14,10 @@
         <h3>new payment</h3>
     </div>
     <div class="modal-body">
-        <%= f.input :person_id, as: :hidden, input_html: { value: current_user.id } %>
+        <%= f.input :person, as: :hidden, input_html: { value: current_user.id } %>
         <%= f.input(:payment_on, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
-        <%= f.input :from_account_id, collection: @accounts, value_method: '_id', label_method: 'name' %>
-        <%= f.input :to_account_id, collection: @accounts, value_method: '_id', label_method: 'name' %>
+        <%= f.input :from_account, collection: @accounts, value_method: '_id', label_method: 'name' %>
+        <%= f.input :to_account, collection: @accounts, value_method: '_id', label_method: 'name' %>
         <%= f.input :amount %>
         <%= f.input :tags %>
         <%= f.input :description %>

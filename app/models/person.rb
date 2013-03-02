@@ -27,7 +27,7 @@ class Person
   has_secure_password
   validates_presence_of :username
   validates_uniqueness_of :username
-  attr_accessible :_id, :username, :password, :password_confirmation, :born_on, :authority, :email, :banking_url, :map_center, :phone
+  attr_accessible :username, :password, :password_confirmation, :born_on, :authority, :email, :banking_url, :map_center, :phone
 
   ROLES = %w[admin user]
 

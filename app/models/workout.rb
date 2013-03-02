@@ -1,7 +1,7 @@
 class Workout
   include Mongoid::Document
   include Mongoid::Timestamps::Short
-  
+
   field :loc, as: :location
   field :rc, as: :race
   field :dsc, as: :description
@@ -14,17 +14,19 @@ class Workout
   belongs_to :person
   belongs_to :workout_type, class_name: "Lookup"
   belongs_to :route, class_name: "Lookup"
-  
+
   validates_presence_of :location, :duration, :workout_on
-  
+
+  attr_accessible :person, :location, :race, :description, :duration, :intensity, :weight, :distance, :workout_on, :workout_type, :route
+
   def self.recent_workouts(user, days)
     user.workouts.where(:workout_on.gte => Date.today - days)
   end
-  
+
   def self.days_with_workouts?(user,days)
     user.workouts.and({:workout_on.gte => Date.today - days}, {:workout_on.lt => Date.today + 1}).distinct(:workout_on).count
   end
-  
+
   def self.workout_duration_by_type(user,days)
     types = Hash.new
     total_duration = 0
@@ -44,7 +46,7 @@ class Workout
     end
     types.sort{|a,b| b[1]['duration']<=>a[1]['duration']}
   end
-  
+
   def self.summary(user,days)
     workouts = Workout.recent_workouts(user,days)
     mileage = 0
@@ -64,5 +66,4 @@ class Workout
       duration: (duration/60*10).ceil/10.0 # minutes to tenths of hours
     }
   end
-  
 end

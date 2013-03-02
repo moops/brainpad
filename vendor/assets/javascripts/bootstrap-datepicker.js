@@ -306,7 +306,6 @@
 						break;
 				}
 			}
-			this.picker.hide();
 		},
 		
 		mousedown: function(e){

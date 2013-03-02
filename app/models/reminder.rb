@@ -4,18 +4,18 @@ class Reminder
 
   field :dsc, as: :description
   field :tg, as: :tags
-  field :dn, as: :done, :type => Boolean
-  field :r_un, as: :repeat_until, :type => Date
-  field :d_on, as: :due_on, :type => Date
+  field :dn, as: :done, type: Boolean, default: false
+  field :r_un, as: :repeat_until, type: Date
+  field :d_on, as: :due_on, type: Date
 
   belongs_to :person
-  belongs_to :reminder_type, class_name: "Lookup"
-  belongs_to :priority, class_name: "Lookup"
-  belongs_to :frequency, class_name: "Lookup"
+  belongs_to :reminder_type, class_name: 'Lookup'
+  belongs_to :priority, class_name: 'Lookup'
+  belongs_to :frequency, class_name: 'Lookup'
 
   validates_presence_of :description, :due_on
 
-  attr_accessible :person_id, :description, :tags, :done, :repeat_until, :due_on, :reminder_type_id, :priority_id, :frequency_id
+  attr_accessible :person, :description, :tags, :done, :repeat_until, :due_on, :reminder_type, :priority, :frequency
 
   scope :outstanding, where(done: false)
 

@@ -16,6 +16,6 @@ class Contact
 
   validates_presence_of :name
 
-  attr_accessible :person_id, :name, :email, :phone_home, :phone_work, :phone_cell, :address, :city, :tags, :comments
+  attr_accessible :person, :name, :email, :phone_home, :phone_work, :phone_cell, :address, :city, :tags, :comments
 
 end

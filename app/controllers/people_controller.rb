@@ -4,6 +4,8 @@ class PeopleController < ApplicationController
 
   # GET /people/new.js
   def new
+    @person._id = nil
+    logger.info("new person; #{@person.inspect}")
   end
 
   # GET /people/1/edit.js

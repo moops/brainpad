@@ -4,18 +4,18 @@ class Payment
 
   field :dsc, as: :description
   field :tg, as: :tags
-  field :am, as: :amount, :type => Float
-  field :p_on, as: :payment_on, :type => Date
-  field :un, as: :until, :type => Date
+  field :am, as: :amount, type: Float
+  field :p_on, as: :payment_on, type: Date
+  field :un, as: :until, type: Date
 
   belongs_to :person
-  belongs_to :from_account, :class_name => 'Account'
-  belongs_to :to_account, :class_name => 'Account'
+  belongs_to :from_account, class_name: 'Account'
+  belongs_to :to_account, class_name: 'Account'
   belongs_to :frequency, class_name: "Lookup"
 
   validates_presence_of :amount, :payment_on
 
-  attr_accessible :person_id, :amount, :description, :tags, :payment_on, :until, :from_account, :to_account, :frequency
+  attr_accessible :person, :amount, :description, :tags, :payment_on, :until, :from_account, :to_account, :frequency
 
   attr_accessor :payment_type
 

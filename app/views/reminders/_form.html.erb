@@ -4,16 +4,16 @@
         <h3>new reminder</h3>
     </div>
     <div class="modal-body">
-        <%= f.input :person_id, as: :hidden, input_html: { value: current_user.id } %>
-        <%= f.input :reminder_type_id, collection: @types, value_method: '_id', label_method: 'description' %>
-        <%= f.input :priority_id, collection: @priorities, value_method: '_id', label_method: 'description' %>
+        <%= f.input :person, as: :hidden, input_html: { value: current_user.id } %>
+        <%= f.input :reminder_type, collection: @types, value_method: '_id', label_method: 'description' %>
+        <%= f.input :priority, collection: @priorities, value_method: '_id', label_method: 'description' %>
         <%= f.input(:due_on, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
         <%= f.input :tags %>
         <%= f.input :description, as: :text, input_html: { rows: 3 } %>
         <%= f.input :done, as: :boolean %>
         <fieldset>
             <legend>schedule</legend>
-            <%= f.input :frequency_id, collection: @frequencies, value_method: '_id', label_method: 'description' %>
+            <%= f.input :frequency, collection: @frequencies, value_method: '_id', label_method: 'description' %>
             <%= f.input(:repeat_until, as: :string, input_html: {class: 'calendar', 'data-date-format' => "yyyy-mm-dd"}) %>
         </fieldset>
     </div>

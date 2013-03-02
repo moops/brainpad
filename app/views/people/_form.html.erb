@@ -8,11 +8,14 @@
         <%= f.input :username %>
         <%= f.input :password %>
         <%= f.input :password_confirmation %>
-        <%= f.input(:born_on, as: :string, label: 'Birth Date', input_html: {class: 'calendar', 'data-date-format' => "yyyy-mm-dd"}) %>
+        <%= f.input(:born_on, 
+            as: :string, 
+            label: 'Birth Date', 
+            input_html: {class: 'calendar', 'data-date-format' => "yyyy-mm-dd", 'data-date-viewmode' => 'years' }) %>
         <%= f.input :email %>
         <%= f.input :phone %>
     </div>
     <div class="modal-footer">
-        <%= f.button :submit, @person.valid? ? 'update' : 'sign up', :class => 'btn btn-primary' %>
+        <%= f.button :submit, @person.valid? ? 'update' : 'sign up', class: 'btn btn-primary' %>
     </div>
 <% end %>
