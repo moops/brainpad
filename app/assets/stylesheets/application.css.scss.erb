@@ -20,18 +20,29 @@ ul, li {
 }
 
 #blob {
-    border-right: 1px solid #0059ec;
-    border-left: 1px solid #0059ec;
+    //border-right: 1px solid #0059ec;
+    //border-left: 1px solid #0059ec;
     position: absolute;
     top: 0;
     z-index : 1;
+   /*
     background: #0b2b61;
+    background: -moz-linear-gradient(top, #0b2b61, #1153c0);
+    background: -webkit-gradient(linear, left top, left bottom, from(#0b2b61), to(#1153c0));
     background: -moz-linear-gradient(top, #0b2b61, #1153c0);
     background: -webkit-gradient(linear, left top, left bottom, from(#0b2b61), to(#1153c0));
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-box-shadow: 2px 3px 10px #011331;
     -webkit-box-shadow: 2px 3px 10px #011331;
+    */
+    background: #ff9933;
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(40%,#f45d00), color-stop(100%,#ff9933));
+    background: -webkit-linear-gradient(-45deg, #f45d00 40%, #ff9933 100%);
+    background: -moz-linear-gradient(-45deg, #f45d00 40%, #ff9933 100%);
+    background: -o-linear-gradient(-45deg, #f45d00 40%, #ff9933 100%);
+    border-radius: 6px;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
 }
 
 #nav {
@@ -82,7 +93,6 @@ div.datepicker.dropdown-menu {
  */
 #container {
     margin: auto;
-    padding-top: 10px;
     width: 920px;
 }
 

@@ -6,16 +6,15 @@ class LinksController < ApplicationController
   
   # GET /links
   def index
-    unless session[:link_tags]
-      session[:link_tags] = get_unique_tags
-    end
-    links = []
+    #unless session[:link_tags]
+    #  session[:link_tags] = get_unique_tags
+    #end
     links = current_user.links if current_user
 
-    @recently_clicked = links.desc(:last_clicked_on).limit(8).all
-    @recently_added = links.desc(:created_at).limit(8).all
+    #@recently_clicked = links.desc(:last_clicked_on).limit(8).all
+    #@recently_added = links.desc(:created_at).limit(8).all
     @most_often_1 = links.desc(:clicks).limit(8).all
-    @random = links.sort_by { rand }[0,8]
+    #@random = links.sort_by { rand }[0,8]
     @feeds = Feeds.get_feeds
   end
 

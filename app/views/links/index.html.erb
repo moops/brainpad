@@ -14,15 +14,15 @@
                         </div>
                         <div class="span2">
                             <h4>recent</h4>
-                            <ul><%= render @recently_clicked %></ul>
+                            <ul><%# render @recently_clicked %></ul>
                         </div>
                         <div class="span2">
                             <h4>new</h4>
-                            <ul><%= render @recently_added %></ul>
+                            <ul><%# render @recently_added %></ul>
                         </div>
                         <div class="span2">
                             <h4>random</h4>
-                            <ul><%= render @random %></ul>
+                            <ul><%# render @random %></ul>
                         </div>
                     </div> <!-- end .row -->
                 </div>
@@ -54,5 +54,5 @@
 
 <div class="tag-list">
     tags:
-    <%= tag_list(session[:link_tags], 'links') %>
+    <%# tag_list(session[:link_tags], 'links') %>
 </div>
