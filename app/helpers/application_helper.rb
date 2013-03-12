@@ -10,7 +10,7 @@ module ApplicationHelper
   def tag_list(kind)
     tags_of_kind = current_user.tags_for(kind) || []
     tags_of_kind.map! do |tag|
-      link_to(tag, controller: pluralize(2,kind), tag: tag)
+      link_to(tag, controller: kind, tag: tag)
     end
     raw(tags_of_kind.join(', '))
   end
