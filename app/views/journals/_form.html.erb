@@ -1,13 +1,13 @@
 <%= simple_form_for(@journal, remote: true, html: {class: 'form-horizontal condensed' }) do |f| %>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>new entry</h3>
+        <h3><%= @journal.new_record? ? 'new' : 'update' %>  entry</h3>
     </div>
     <div class="modal-body">
-        <%= f.input :person, as: :hidden, input_html: { value: current_user.id } %>
-        <%= f.input :journal_type, collection: @types, value_method: '_id', label_method: 'description' %>
+        <%= f.input :journal_type_id, collection: @types, value_method: '_id', label_method: 'description' %>
         <%= f.input(:entry_on, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
         <%= f.input :tags %>
+        <%= tags_field('journal') %>
         <%= f.input :entry, as: :text, input_html: { rows: 8 } %>
     </div>
     <div class="modal-footer">

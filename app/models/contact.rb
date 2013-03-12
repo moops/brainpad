@@ -9,13 +9,13 @@ class Contact
   field :p_c, as: :phone_cell
   field :ad, as: :address
   field :ct, as: :city
-  field :tg, as: :tags
   field :cm, as: :comments
+  field :tg, as: :tags
 
   belongs_to :person
 
   validates_presence_of :name
 
-  attr_accessible :person, :name, :email, :phone_home, :phone_work, :phone_cell, :address, :city, :tags, :comments
+  attr_accessible :name, :email, :phone_home, :phone_work, :phone_cell, :address, :city, :tags, :comments
 
 end

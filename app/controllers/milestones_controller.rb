@@ -28,6 +28,7 @@ class MilestonesController < ApplicationController
 
   # POST /milestones.js
   def create
+    @milestone = current_user.milestones.build(params[:milestone])
     if @milestone.save
       @milestones = current_user.milestones.desc(:milestone_at).page(params[:page])
       flash[:notice] = "milestone #{@milestone.name} was created."
@@ -36,6 +37,7 @@ class MilestonesController < ApplicationController
 
   # PUT /milestones/1.js
   def update
+    @milestone = current_user.milestones.find(params[:id])
     if @milestone.update_attributes(params[:milestone])
       @milestones = current_user.milestones.desc(:milestone_at).page(params[:page])
       flash[:notice] = "milestone #{@milestone.name} was updated."

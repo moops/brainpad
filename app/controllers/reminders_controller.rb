@@ -4,7 +4,6 @@ class RemindersController < ApplicationController
 
   # GET /reminders
   def index
-    session[:reminder_tags] = get_unique_tags
     @reminders = current_user.reminders.outstanding.asc(:due_on)
     if params[:tag]
       @reminders = @reminders.where(tags: /#{params[:tag]}/)
@@ -27,7 +26,7 @@ class RemindersController < ApplicationController
     @priorities = Lookup.where(:category => 11).all
     @frequencies = Lookup.where(:category => 36).all
     if (params[:reminder_id])
-      @reminders = Reminder.find(params[:reminder_id]).dup
+      @reminder = Reminder.find(params[:reminder_id]).dup
     end
   end
 
@@ -40,7 +39,9 @@ class RemindersController < ApplicationController
 
   # POST /reminders
   def create
+    @reminder = current_user.reminders.build(params[:reminder])
     if @reminder.save
+      current_user.tag('reminder', @reminder.tags)
       flash[:notice] = "reminder #{condense(@reminder.description)} was created."
       redirect_to reminders_path
     end
@@ -48,7 +49,9 @@ class RemindersController < ApplicationController
 
   # PUT /reminders/1
   def update
+    @reminder = current_user.reminders.find(params[:id])
     if @reminder.update_attributes(params[:reminder])
+      current_user.tag('reminder', @reminder.tags)
       flash[:notice] = "reminder #{condense(@reminder.description)} was updated."
       redirect_to reminders_path
     end
@@ -67,19 +70,5 @@ class RemindersController < ApplicationController
       reminder.update_attribute(:done,attr[:done])
     }
     redirect_to reminders_path
-  end
-
-  private
-
-  def get_unique_tags
-    unique_tags = []
-    current_user.reminders.each do |reminder|
-      if reminder.tags
-        reminder.tags.split.each do |tag|
-          unique_tags.push(tag.strip)
-        end
-      end
-    end
-    unique_tags.uniq.sort unless unique_tags.empty?
   end
 end

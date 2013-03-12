@@ -11,5 +11,5 @@ class Journal
 
   validates_presence_of :entry, :entry_on
 
-  attr_accessible :person, :entry, :tags, :entry_on, :journal_type
+  attr_accessible :entry, :tags, :entry_on, :journal_type_id
 end

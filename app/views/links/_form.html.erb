@@ -1,8 +1,8 @@
 <%= simple_form_for(@link, :html => {:class => 'form-horizontal' }) do |f| %>
-    <%= f.input :person, as: :hidden, input_html: { value: current_user.id } %>
     <%= f.input :name %>
     <%= f.input :url %>
     <%= f.input :tags %>
+    <%= tags_field('link') %>
     <%= f.input :comments %>
     <%= f.input(:expires_on, as: :string, input_html: {'data-date-format' => "yyyy-mm-dd"}) %>
     <%= f.input :clicks %>

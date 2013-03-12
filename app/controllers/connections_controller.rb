@@ -1,11 +1,9 @@
 class ConnectionsController < ApplicationController
-  
+
   load_and_authorize_resource
-  
+
   # GET /connections
   def index
-    session[:connection_tags] = get_unique_tags
-    
     @connections = current_user.connections.asc(:name)
     if params[:q]
       @connections = @connections.where(name: /#{params[:q]}/i)
@@ -35,7 +33,9 @@ class ConnectionsController < ApplicationController
 
   # POST /connections.js
   def create
+    @connection = current_user.connections.build(params[:connection])
     if @connection.save
+      current_user.tag('connection', @connection.tags)
       @connections = current_user.connections.asc(:name).page(params[:page])
       flash[:notice] = "connection #{@connection.name} was created."
     end
@@ -43,7 +43,10 @@ class ConnectionsController < ApplicationController
 
   # PUT /connections/1.js
   def update
-    if @connection.update_attributes(params[:connection])
+    @connection = current_user.connections.find(params[:id])
+    p = params[:connection].reject {|k, v| k == 'person' }
+    if @connection.update_attributes(p)
+      current_user.tag('connection', @connection.tags)
       @connections = current_user.connections.asc(:name).page(params[:page])
       flash[:notice] = "connection #{@connection.name} was updated."
     end
@@ -53,19 +56,5 @@ class ConnectionsController < ApplicationController
   def destroy
     @connection.destroy
     redirect_to connections_path
-  end
-  
-  private
-  
-  def get_unique_tags
-    unique_tags = []
-    current_user.connections.each do |connection|
-      if connection.tags
-        connection.tags.split.each do |tag|
-          unique_tags.push(tag.strip)
-        end
-      end
-    end
-    unique_tags.uniq.sort unless unique_tags.empty?
   end
 end

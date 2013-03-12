@@ -1,11 +1,9 @@
 class ContactsController < ApplicationController
-  
+
   load_and_authorize_resource
-  
+
   # GET /contacts
   def index
-    session[:contact_tags] = get_unique_tags
-    
     @contacts = current_user.contacts.asc(:name)
     if params[:q]
       @contacts = @contacts.where(name: /#{params[:q]}/i)
@@ -21,7 +19,7 @@ class ContactsController < ApplicationController
   # GET /contacts/1.js
   def show
   end
-  
+
   # GET /contacts/1/new.js
   def new
     if (params[:contact_id])
@@ -35,7 +33,9 @@ class ContactsController < ApplicationController
 
   # POST /contacts.js
   def create
+    @contact = current_user.contacts.build(params[:contact])
     if @contact.save
+      current_user.tag('contact', @contact.tags)
       @contacts = current_user.contacts.asc(:name).page(params[:page])
       flash[:notice] = "contact #{@contact.name} was created."
     end
@@ -43,7 +43,9 @@ class ContactsController < ApplicationController
 
   # PUT /contacts/1.js
   def update
+    @contact = current_user.contacts.find(params[:id])
     if @contact.update_attributes(params[:contact])
+      current_user.tag('contact', @contact.tags)
       @contacts = current_user.contacts.asc(:name).page(params[:page])
       flash[:notice] = "contact #{@contact.name} was updated."
     end
@@ -53,19 +55,5 @@ class ContactsController < ApplicationController
   def destroy
     @contact.destroy
     redirect_to contacts_path
-  end
-
-  private
-
-  def get_unique_tags
-    unique_tags = []
-    current_user.contacts.each do |contact|
-      if contact.tags
-        contact.tags.split.each do |tag|
-          unique_tags.push(tag.strip)
-        end
-      end
-    end
-    unique_tags.uniq.sort unless unique_tags.empty?
   end
 end

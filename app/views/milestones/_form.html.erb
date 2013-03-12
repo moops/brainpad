@@ -1,10 +1,9 @@
 <%= simple_form_for(@milestone, remote: true, :html => {:class => 'form-horizontal' }) do |f| %>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>new milestone</h3>
+        <h3><%= @milestone.new_record? ? 'new' : 'update' %>  milestone</h3>
     </div>
     <div class="modal-body">
-        <%= f.input :person, as: :hidden, input_html: { value: current_user.id } %>
         <%= f.input :name %>
         <%= f.input(:milestone_at, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
     </div>

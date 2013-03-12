@@ -1,14 +1,14 @@
 <%= simple_form_for(@reminder, :html => {:class => 'form-horizontal condensed' }) do |f| %>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>new reminder</h3>
+        <h3><%= @reminder.new_record? ? 'new' : 'update' %>  reminder</h3>
     </div>
     <div class="modal-body">
-        <%= f.input :person, as: :hidden, input_html: { value: current_user.id } %>
-        <%= f.input :reminder_type, collection: @types, value_method: '_id', label_method: 'description' %>
-        <%= f.input :priority, collection: @priorities, value_method: '_id', label_method: 'description' %>
+        <%= f.input :reminder_type_id, collection: @types, value_method: '_id', label_method: 'description' %>
+        <%= f.input :priority_id, collection: @priorities, value_method: '_id', label_method: 'description' %>
         <%= f.input(:due_on, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
         <%= f.input :tags %>
+        <%= tags_field('reminder', 'reminder_description') %>
         <%= f.input :description, as: :text, input_html: { rows: 3 } %>
         <%= f.input :done, as: :boolean %>
         <fieldset>

@@ -3,18 +3,14 @@ require 'feeds'
 class LinksController < ApplicationController
 
   load_and_authorize_resource
-  
+
   # GET /links
   def index
-    #unless session[:link_tags]
-    #  session[:link_tags] = get_unique_tags
-    #end
-    links = current_user.links if current_user
-
-    @recently_clicked = links.desc(:last_clicked_on).limit(8)
-    @recently_added = links.desc(:created_at).limit(8)
-    @most_often_1 = links.desc(:clicks).limit(8)
-    @random = links.sort_by { rand }[0,8]
+    @links = current_user.links
+    @recently_clicked = @links.desc(:last_clicked_on).limit(8)
+    @recently_added = @links.desc(:created_at).limit(8)
+    @most_often_1 = @links.desc(:clicks).limit(8)
+    @random = @links.sort_by { rand }[0,8]
     @feeds = Feeds.get_feeds
   end
 
@@ -44,6 +40,7 @@ class LinksController < ApplicationController
   def create
     @link.person = current_user if current_user
     if @link.save
+      current_user.tag('link', @link.tags)
       flash[:notice] = 'Link was successfully created.'
       redirect_to links_path
     else
@@ -54,6 +51,7 @@ class LinksController < ApplicationController
   # PUT /links/1
   def update
     if @link.update_attributes(params[:link])
+      current_user.tag('link', @link.tags)
       flash[:notice] = 'Link was successfully updated.'
       redirect_to @link
     else
@@ -86,7 +84,6 @@ class LinksController < ApplicationController
 
   # GET /link/refresh_tags
   def refresh_tags
-    session[:link_tags] = get_unique_tags
     render partial: 'tags'
   end
 
@@ -97,18 +94,4 @@ class LinksController < ApplicationController
     render text: params[:value]
   end
   # end non-restfull inline editors
-
-private
-
-  def get_unique_tags
-    unique_tags = []
-    current_user.links.each do |link|
-      if link.tags
-        link.tags.split.each do |tag|
-          unique_tags.push(tag.strip)
-        end
-      end
-    end
-    unique_tags.uniq.sort unless unique_tags.empty?
-  end
 end

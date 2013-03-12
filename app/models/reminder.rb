@@ -15,7 +15,7 @@ class Reminder
 
   validates_presence_of :description, :due_on
 
-  attr_accessible :person, :description, :tags, :done, :repeat_until, :due_on, :reminder_type, :priority, :frequency
+  attr_accessible :description, :tags, :done, :repeat_until, :due_on, :reminder_type_id, :priority_id, :frequency_id
 
   scope :outstanding, where(done: false)
 

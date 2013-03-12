@@ -4,7 +4,6 @@ class PaymentsController < ApplicationController
   
   # GET /payments
   def index
-    session[:payment_tags] = get_unique_tags
     @payments = current_user.payments.desc(:payment_on)
     if params[:q]
       @payments = @payments.where(name: /#{params[:q]}/i)
@@ -17,7 +16,6 @@ class PaymentsController < ApplicationController
     @payments = @payments.page(params[:page])
   
     @upcoming_payments = Payment.upcoming(current_user)
-    get_stuff_for_form
     @money_summary = Payment.summary(current_user, 31)
     @expenses_by_tag = Payment.expenses_by_tag(current_user, 31)
   end
@@ -41,8 +39,10 @@ class PaymentsController < ApplicationController
 
   # POST /payments
   def create
-    @payment.apply
+    @payment = current_user.payments.build(params[:payment])
     if @payment.save
+      @payment.apply
+      current_user.tag('payment', @payment.tags)
       flash[:notice] = 'payment was created.'
       redirect_to payments_path
     end
@@ -50,10 +50,12 @@ class PaymentsController < ApplicationController
 
   # PUT /payments/1
   def update
+    @payment = current_user.payments.find(params[:id])
     new_amount = params[:payment][:amount].to_f
     @payment.update_amount_and_adjust_account(new_amount)
     params[:payment].delete('amount')
     if @payment.update_attributes(params[:payment])
+      current_user.tag('payment', @payment.tags)
       flash[:notice] = 'payment was updated.'
       redirect_to payments_path
     end
@@ -71,20 +73,6 @@ class PaymentsController < ApplicationController
   def get_stuff_for_form
     @accounts = current_user.accounts.active
     @frequencies = Lookup.where(category: 36).all
-    @tags = Payment.user_tags(current_user)
-  end
-  
-  private
-
-  def get_unique_tags
-    unique_tags = []
-    current_user.payments.each do |payment|
-      if payment.tags
-        payment.tags.split.each do |tag|
-          unique_tags.push(tag.strip)
-        end
-      end
-    end
-    unique_tags.uniq.sort unless unique_tags.empty?
+    @tags = current_user.tags_for('payments')
   end
 end

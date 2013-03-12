@@ -34,6 +34,7 @@ class WorkoutsController < ApplicationController
 
   # POST /workouts
   def create
+    @workout = current_user.workouts.build(params[:workout])
     if @workout.save
       flash[:notice] = 'workout was created.'
       redirect_to workouts_path
@@ -42,6 +43,7 @@ class WorkoutsController < ApplicationController
 
   # PUT /workouts/1
   def update
+    @workout = current_user.workouts.find(params[:id])
     if @workout.update_attributes!(params[:workout])
       flash[:notice] = 'workout was updated.'
       redirect_to workouts_path

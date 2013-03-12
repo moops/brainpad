@@ -24,6 +24,8 @@ class Person
     assoc.has_many :milestones
   end
 
+  embeds_many :tag_lists
+
   has_secure_password
   validates_presence_of :username
   validates_uniqueness_of :username
@@ -65,6 +67,19 @@ class Person
   def active_accounts
     a = accounts.reject { |a| not a.active }
     a.sort_by{|a| a.name }
+  end
+
+  def tag(type, tags)
+    unless tags.blank?
+      l = tag_lists.where(type: type).first || self.tag_lists.build(type: type)
+      l.tags ||= []
+      l.tags = l.tags | tags.split(' ')
+      l.save
+    end
+  end
+  
+  def tags_for(type)
+    (tag_lists.where(type: type).first || tag_lists.new).tags
   end
 
 end

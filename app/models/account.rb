@@ -16,7 +16,7 @@ class Account
 
   validates_presence_of :name, :units, :price
   
-  attr_accessible :person, :name, :url, :price_url, :description, :units, :price, :active
+  attr_accessible :name, :url, :price_url, :description, :units, :price, :active
   
   scope :active, where(active: true)
 

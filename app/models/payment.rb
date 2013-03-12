@@ -15,7 +15,7 @@ class Payment
 
   validates_presence_of :amount, :payment_on
 
-  attr_accessible :person, :amount, :description, :tags, :payment_on, :until, :from_account, :to_account, :frequency
+  attr_accessible :amount, :description, :tags, :payment_on, :until, :from_account, :to_account, :frequency_id
 
   attr_accessor :payment_type
 
@@ -118,18 +118,6 @@ class Payment
 
   def self.days_with_expenses?(user,days)
     user.payments.ne(from_account: nil).between(payment_on: Date.today - days..Date.today + 1).distinct(:payment_on).count
-  end
-
-  def self.user_tags(user)
-    unique_tags = []
-    user.payments.each do |payment|
-      if payment.tags
-        payment.tags.split.each do |tag|
-          unique_tags.push(tag.strip)
-        end
-      end
-    end
-    unique_tags.uniq.sort unless unique_tags.uniq.nil?
   end
 
   def self.expenses_by_tag(user,days)

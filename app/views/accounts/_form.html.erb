@@ -1,10 +1,9 @@
 <%= simple_form_for(@account, :html => {:class => 'form-horizontal' }) do |f| %>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>new account</h3>
+        <h3><%= @account.new_record? ? 'new' : 'update' %>  account</h3>
     </div>
     <div class="modal-body">
-        <%= f.input :person, as: :hidden, input_html: { value: current_user.id } %>
         <%= f.input :name %>
         <%= f.input :units %>
         <%= f.input :price %>

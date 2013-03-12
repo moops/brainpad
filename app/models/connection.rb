@@ -13,6 +13,6 @@ class Connection
 
   validates_presence_of :username, :password, :url
 
-  attr_accessible :person, :name, :username, :password, :url, :description, :tags
+  attr_accessible :name, :username, :password, :url, :description, :tags
 
 end

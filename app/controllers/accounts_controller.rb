@@ -12,6 +12,7 @@ class AccountsController < ApplicationController
 
   # POST /accounts
   def create
+    @account = current_user.accounts.build(params[:account])
     if @account.save
       redirect_to payments_path
     end
@@ -19,6 +20,7 @@ class AccountsController < ApplicationController
 
   # PUT /accounts/1
   def update
+    @account = current_user.accounts.find(params[:id])
     if @account.update_attributes!(params[:account])
       redirect_to payments_path
     end
