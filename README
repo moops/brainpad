@@ -25,7 +25,7 @@ x Mar  1 - fix format (xx/1) for days used and days left
 x Feb 28 - make feeds work again
 x Feb 25 - make datepicker go away on selection
 x Feb 25 - condense form spacing
-- Feb 25 - javascript for payment tags/name
+x Feb 25 - javascript for payment tags/name
 x Feb 25 - text area for workout description, resize text area for journal entry
 x Feb 20 - use common details modal div rather than xxx-show modal div in each module
 x Feb 19 - put search forms into a helper partial

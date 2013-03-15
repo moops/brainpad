@@ -174,6 +174,29 @@ table.data-display td.display-label {
 
 /*
  ************************************************
+ forms
+ ************************************************
+ */
+form.condensed .control-group {
+    margin-bottom: 6px;    
+}
+
+form.condensed legend {
+    margin-bottom: 0px;
+    line-height: 25px;
+}
+
+label.required:after {
+    color: red;
+	font-weight: bold;
+	font-size: 1.5em;
+	line-height: 50%;
+	content: " *";
+	vertical-align: bottom;
+}
+
+/*
+ ************************************************
  other
  ************************************************
  */
@@ -185,23 +208,10 @@ input.milestone-time {
     border: 0px;
 }
 
-form.condensed .control-group {
-    margin-bottom: 6px;    
-}
-
-form.condensed legend {
-    margin-bottom: 0px;
-    line-height: 25px;
-}
-
 img.bar {
 	height: 15px;
 }
 
 .clear {
     clear: both;
-}
-
-.foo{
-    background-color: red;
 }
