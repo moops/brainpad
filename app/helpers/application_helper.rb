@@ -19,7 +19,7 @@ module ApplicationHelper
     tags_of_kind = current_user.tags_for(kind.pluralize) || []
     val  = "<div class=\"control-group select optional\">"
     val += "    <div class=\"controls\">"
-    val +=          select_tag :tag_list, options_for_select(tags_of_kind), include_blank: true, :onchange => 'addTag()'
+    val +=          select_tag :tag_list, options_for_select(tags_of_kind), include_blank: true, onchange: 'addTag()'
     val += "    </div>"
     val += "</div>"
     val += "<script type=\"text/javascript\">"

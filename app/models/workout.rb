@@ -5,11 +5,11 @@ class Workout
   field :loc, as: :location
   field :rc, as: :race
   field :dsc, as: :description
-  field :dur, as: :duration, :type => Integer
-  field :int, as: :intensity, :type => Integer
-  field :wt, as: :weight, :type => Integer
-  field :di, as: :distance, :type => Float
-  field :w_on, as: :workout_on, :type => Date
+  field :dur, as: :duration, type: Integer
+  field :int, as: :intensity, type: Integer
+  field :wt, as: :weight, type: Integer
+  field :di, as: :distance, type: Float
+  field :w_on, as: :workout_on, type: Date
 
   belongs_to :person
   belongs_to :workout_type, class_name: "Lookup"

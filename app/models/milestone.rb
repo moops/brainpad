@@ -3,7 +3,7 @@ class Milestone
   include Mongoid::Timestamps::Short
 
   field :nm, as: :name
-  field :m_at, as: :milestone_at, :type => Date
+  field :m_at, as: :milestone_at, type: Date
 
   belongs_to :person
 

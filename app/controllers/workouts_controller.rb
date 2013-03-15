@@ -19,8 +19,8 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts/new.js
   def new
-    @types = Lookup.where(:category => 2).all
-    @routes = Lookup.where(:category => 25).all
+    @types = Lookup.where(category: 2).all
+    @routes = Lookup.where(category: 25).all
     if (params[:workout_id])
       @workout = Workout.find(params[:workout_id]).dup
     end
@@ -28,8 +28,8 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts/1/edit.js
   def edit
-    @types = Lookup.where(:category => 2).all
-    @routes = Lookup.where(:category => 25).all
+    @types = Lookup.where(category: 2).all
+    @routes = Lookup.where(category: 25).all
   end
 
   # POST /workouts

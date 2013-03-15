@@ -8,6 +8,6 @@ module RemindersHelper
     else
       due_class = ''
     end
-    content_tag(:div, reminder.due_on.strftime("%a %b %d, %y"), :class => due_class)
+    content_tag(:div, reminder.due_on.strftime("%a %b %d, %y"), class: due_class)
   end
 end

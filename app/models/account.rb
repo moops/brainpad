@@ -6,9 +6,9 @@ class Account
   field :url
   field :p_url, as: :price_url
   field :dsc, as: :description
-  field :un, as: :units, :type => Float
-  field :pr, as: :price, :type => Float
-  field :act, as: :active, :type => Boolean
+  field :un, as: :units, type: Float
+  field :pr, as: :price, type: Float
+  field :act, as: :active, type: Boolean
 
   belongs_to :person
   # embeds_many :prices, class_name: 'account_prices'

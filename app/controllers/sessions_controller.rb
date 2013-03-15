@@ -1,10 +1,7 @@
 class SessionsController < ApplicationController
   
-  # GET /sessions/new
+  # GET /sessions/new.js
   def new
-    respond_to do |format|
-      format.js { render :layout => false }
-    end
   end
 
   # login

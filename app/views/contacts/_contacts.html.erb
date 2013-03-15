@@ -18,10 +18,10 @@
                         <%= link_to(contact_path(contact), remote: true, title: "show details") do %>
                             <i class="icon-eye-open"></i>
                         <% end %>
-                        <%= link_to(new_contact_path(:contact_id => contact), remote: true, title: 'copy contact') do %>
+                        <%= link_to(new_contact_path(contact_id: contact), remote: true, title: 'copy contact') do %>
                             <i class="icon-share"></i>
                         <% end %>
-                        <%= link_to(contact_path(contact), :method => :delete, :confirm => "really delete #{contact.name}?") do %>
+                        <%= link_to(contact_path(contact), method: :delete, confirm: "really delete #{contact.name}?") do %>
                             <i class="icon-remove"></i>
                         <% end %>
                     </td>
