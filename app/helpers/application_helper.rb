@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def tags_field(kind, desc_field=nil)
-    tags_of_kind = current_user.tags_for(kind.pluralize) || []
+    tags_of_kind = current_user.tags_for(kind) || []
     val  = "<div class=\"control-group select optional\">"
     val += "    <div class=\"controls\">"
     val +=          select_tag :tag_list, options_for_select(tags_of_kind), include_blank: true, onchange: 'addTag()'
