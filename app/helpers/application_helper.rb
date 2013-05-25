@@ -10,9 +10,13 @@ module ApplicationHelper
   def tag_list(kind)
     tags_of_kind = current_user.tags_for(kind) || []
     tags_of_kind.map! do |tag|
-      link_to(tag, controller: kind, tag: tag)
+      link_to(tag, controller: kind.pluralize, tag: tag)
     end
-    raw(tags_of_kind.join(', '))
+    if (tags_of_kind.empty?)
+      'tags: none'
+    else
+      raw("tags: #{tags_of_kind.join(', ')}")
+    end
   end
 
   def tags_field(kind, desc_field=nil)
