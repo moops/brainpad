@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
   def index
     @payments = current_user.payments.desc(:payment_on)
     if params[:q]
-      @payments = @payments.where(name: /#{params[:q]}/i)
+      @payments = @payments.where(description: /#{params[:q]}/i)
     end
     if params[:tag]
       @payments = @payments.where(tags: /#{params[:tag]}/)
@@ -54,6 +54,8 @@ class PaymentsController < ApplicationController
     new_amount = params[:payment][:amount].to_f
     @payment.update_amount_and_adjust_account(new_amount)
     params[:payment].delete('amount')
+    params[:payment][:from_account] = Account.find(params[:payment][:from_account]) if params[:payment][:from_account]
+    params[:payment][:to_account] = Account.find(params[:payment][:to_account]) if params[:payment][:to_account]
     if @payment.update_attributes(params[:payment])
       current_user.tag('payment', @payment.tags)
       flash[:notice] = 'payment was updated.'
