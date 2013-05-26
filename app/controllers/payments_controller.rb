@@ -10,7 +10,6 @@ class PaymentsController < ApplicationController
     end
     if params[:tag]
       @payments = @payments.where(tags: /#{params[:tag]}/)
-      flash[:notice] = "showing only #{params[:tag]} payments."
       @tag = params[:tag]
     end
     @payments = @payments.page(params[:page])

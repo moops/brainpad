@@ -1,5 +1,6 @@
 <% if (@reminders and !@reminders.empty?) %>
-    <h4>reminders</h4>
+    <span class="list-title">reminders</span>
+    <%= filters_links %>
     <%= form_tag(finish_reminders_path, method: 'put') do %>
         <table class="table table-condensed table-hover">
             <thead>

@@ -1,16 +1,15 @@
 class JournalsController < ApplicationController
-  
+
   load_and_authorize_resource
-  
+
   # GET /journals
-  def index 
+  def index
     @journals = current_user.journals.desc('entry_on')
     if params[:q]
       @journals = @journals.where(entry: /#{params[:q]}/i)
     end
     if params[:tag]
       @journals = @journals.where(tags: /#{params[:tag]}/)
-      flash[:notice] = "showing only entries with: #{params[:tag]}."
       @tag = params[:tag]
     end
     @journals = @journals.page(params[:page])
@@ -19,7 +18,7 @@ class JournalsController < ApplicationController
   # GET /journals/1.js
   def show
   end
-  
+
   # GET /journals/1/new.js
   def new
     @types = Lookup.where(category: 7).all

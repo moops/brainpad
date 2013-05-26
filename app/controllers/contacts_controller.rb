@@ -10,7 +10,6 @@ class ContactsController < ApplicationController
     end
     if params[:tag]
       @contacts = @contacts.where(tags: /#{params[:tag]}/)
-      flash[:notice] = "showing only #{params[:tag]} contacts."
       @tag = params[:tag]
     end
     @contacts = @contacts.page(params[:page])

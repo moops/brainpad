@@ -40,4 +40,14 @@ module ApplicationHelper
     raw val
   end
 
+  def filters_links
+    if params[:tag]
+        "<small>filtered by:</small>
+        <span class=\"filter\">
+            #{params[:tag]}
+            #{link_to('x', :action => :index)}
+        </span>".html_safe
+    end
+  end
+
 end

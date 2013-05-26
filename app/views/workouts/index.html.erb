@@ -19,8 +19,8 @@
     <div class="list-panel">
         <!-- search form -->
         <%= render 'shared/search_form' %>
-       
-        <!-- add and search buttons --> 
+
+        <!-- add and search buttons -->
         <div class="pull-right">
             <%= link_to(new_workout_path, remote: true, :class => "btn btn-primary") do %>
                 <i class="icon-plus icon-white"></i> add
@@ -33,5 +33,6 @@
             <%= render(:partial => 'workouts') %>
         </div>
     </div>
+
     <div class="clear"></div>
 </div> <!-- end .workouts-panel -->

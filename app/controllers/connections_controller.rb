@@ -10,7 +10,6 @@ class ConnectionsController < ApplicationController
     end
     if params[:tag]
       @connections = @connections.where(tags: /#{params[:tag]}/)
-      flash[:notice] = "showing only #{params[:tag]} connections."
       @tag = params[:tag]
     end
     @connections = @connections.page(params[:page])

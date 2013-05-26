@@ -15,7 +15,7 @@
 <!-- search form -->
 <%= render 'shared/search_form' %>
 
-<!-- add and search buttons --> 
+<!-- add and search buttons -->
 <div class="pull-right">
     <%= link_to(new_reminder_path, remote: true, :class => "btn btn-primary") do %>
         <i class="icon-plus icon-white"></i> add
@@ -30,5 +30,5 @@
 </div>
 
 <div class="tag-list">
-    <%= tag_list 'reminders' %>
+    <%= tag_list 'reminder' %>
 </div>
