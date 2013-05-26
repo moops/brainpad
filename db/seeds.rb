@@ -48,19 +48,22 @@ cate  = Person.create({ username: 'cate', password: 'cate_pass', password_confir
 
 adam.links.create({ url: 'http://www.nba.com', name: 'nba', tags: 'sports', comments: 'stupid league', clicks: 15, last_clicked_on: Date.today - 10, expires_on: nil })
 adam.links.create({ url: 'http://www.nhl.com', name: 'nhl', tags: 'sports', comments: 'greedy fuckers', clicks: 5, last_clicked_on: Date.today - 11, expires_on: nil })
+adam.tag('link', 'sports')
 
 adam.contacts.create({ name: 'mom', email: 'lizburke48@hotmail.com', phone_home: '250-347-9021', phone_work: '250-342-6416', address: 'box 100', city: 'radium', tags: 'family', comments: 'makes cookies' })
 adam.contacts.create({ name: 'dad', email: 'jerrylawr@gmail.com', phone_home: '250-344-6584', phone_work: '250-344-6584', address: 'box 200', city: 'golden', tags: 'family', comments: 'makes houses' })
-adam.contacts.create({ name: 'cate', email: 'cate@raceweb,ca', phone_home: '250-658-4719', phone_work: '250-342-6416', address: '1175 gerda', city: 'victoria', tags: 'family', comments: 'makes crafts' })
-adam.contacts.create({ name: 'colin', email: 'colin@raceweb,ca', phone_home: '250-658-4719', phone_work: '250-342-6416', address: '1175 gerda', city: 'victoria', tags: 'family', comments: 'makes trouble' })
-adam.contacts.create({ name: 'quinn', email: 'quinn@raceweb,ca', phone_home: '250-414-0106', phone_work: '250-342-6416', address: '123 paradise st', city: 'victoria', tags: 'family', comments: 'makes nothing' })
-adam.contacts.create({ name: 'else', email: 'else@raceweb,ca', phone_home: '250-414-0106', phone_work: '250-342-6416', address: '123 paradise st', city: 'victoria', tags: 'family', comments: 'makes cookies' })
-adam.contacts.create({ name: 'darby', email: 'darby@raceweb,ca', phone_home: '250-881-2818', phone_work: '250-342-6416', address: '42-330 tyee rd', city: 'victoria', tags: 'dog', comments: 'makes poop' })
-adam.contacts.create({ name: 'chloe', email: 'chloe@raceweb,ca', phone_home: '250-658-4719', phone_work: '250-342-6416', address: 'box 100', city: 'victoria', tags: 'dog', comments: 'makes poop' })
-adam.contacts.create({ name: 'mark', email: 'mark@raceweb,ca', phone_home: '250-686-3325', phone_work: '250-342-6416', address: '123 belton ave', city: 'victoria', tags: 'friend', comments: 'makes music' })
-adam.contacts.create({ name: 'eva', email: 'eva@raceweb,ca', phone_home: '250-514-4727', phone_work: '250-342-6416', address: '123 belton ave', city: 'victoria', tags: 'friend', comments: 'makes dinner' })
-quinn.contacts.create({ name: 'mom', email: 'mom@raceweb,ca', phone_home: '250-414-0106', phone_work: '250-342-6416', address: '123 paradise st', city: 'victoria', tags: 'family', comments: 'makes dinner' })
-quinn.contacts.create({ name: 'dad', email: 'dad@raceweb,ca', phone_home: '250-881-2818', phone_work: '250-342-6416', address: '42-330 tyee rd', city: 'victoria', tags: 'family', comments: 'makes dinner' })
+adam.contacts.create({ name: 'cate', email: 'cate@raceweb.ca', phone_home: '250-658-4719', phone_work: '250-342-6416', address: '1175 gerda', city: 'victoria', tags: 'family', comments: 'makes crafts' })
+adam.contacts.create({ name: 'colin', email: 'colin@raceweb.ca', phone_home: '250-658-4719', phone_work: '250-342-6416', address: '1175 gerda', city: 'victoria', tags: 'family', comments: 'makes trouble' })
+adam.contacts.create({ name: 'quinn', email: 'quinn@raceweb.ca', phone_home: '250-414-0106', phone_work: '250-342-6416', address: '123 paradise st', city: 'victoria', tags: 'family', comments: 'makes nothing' })
+adam.contacts.create({ name: 'else', email: 'else@raceweb.ca', phone_home: '250-414-0106', phone_work: '250-342-6416', address: '123 paradise st', city: 'victoria', tags: 'family', comments: 'makes cookies' })
+adam.contacts.create({ name: 'darby', email: 'darby@raceweb.ca', phone_home: '250-881-2818', phone_work: '250-342-6416', address: '42-330 tyee rd', city: 'victoria', tags: 'dog', comments: 'makes poop' })
+adam.contacts.create({ name: 'chloe', email: 'chloe@raceweb.ca', phone_home: '250-658-4719', phone_work: '250-342-6416', address: 'box 100', city: 'victoria', tags: 'dog', comments: 'makes poop' })
+adam.contacts.create({ name: 'mark', email: 'mark@raceweb.ca', phone_home: '250-686-3325', phone_work: '250-342-6416', address: '123 belton ave', city: 'victoria', tags: 'friend', comments: 'makes music' })
+adam.contacts.create({ name: 'eva', email: 'eva@raceweb.ca', phone_home: '250-514-4727', phone_work: '250-342-6416', address: '123 belton ave', city: 'victoria', tags: 'friend', comments: 'makes dinner' })
+adam.tag('contact', 'family friend dog')
+quinn.contacts.create({ name: 'mom', email: 'mom@raceweb.ca', phone_home: '250-414-0106', phone_work: '250-342-6416', address: '123 paradise st', city: 'victoria', tags: 'family', comments: 'makes dinner' })
+quinn.contacts.create({ name: 'dad', email: 'dad@raceweb.ca', phone_home: '250-881-2818', phone_work: '250-342-6416', address: '42-330 tyee rd', city: 'victoria', tags: 'family', comments: 'makes dinner' })
+quinn.tag('contact', 'family')
 
 run = Lookup.where(category: 2, code: 'run').first._id
 bike = Lookup.where(category: 2, code: 'bike').first._id
@@ -81,16 +84,19 @@ vi1 = adam.payments.create({ from_account: visa, description: 'clothes', tags: '
 vi2 = adam.payments.create({ from_account: visa, description: 'groceries', tags: 'food', amount: 30, payment_on: Date.today - 1 })
 vi3 = adam.payments.create({ to_account: visa, description: 'refund', amount: 30, payment_on: Date.today - 2 })
 tr1 = adam.payments.create({ from_account: chequing, to_account: visa, description: 'bill payment', amount: 30, payment_on: Date.today - 2 })
+adam.tag('payment', 'food entertainment food recreation gift clothes')
 
 default = Lookup.where(category: 7, code: '1').first._id
 j1 = adam.journals.create({ journal_type_id: default, entry: 'first test entry', tags: 'test', entry_on: Date.today - 2 })
 j2 = adam.journals.create({ journal_type_id: default, entry: 'second test entry', tags: 'test', entry_on: Date.today - 3 })
 j3 = adam.journals.create({ journal_type_id: default, entry: 'third test entry', entry_on: Date.today - 4 })
 j4 = adam.journals.create({ journal_type_id: default, entry: 'fourth test entry', entry_on: Date.today - 5 })
+adam.tag('journal', 'test')
 
 con1 = adam.connections.create({ name: 'imdb', username: 'adam@raceweb.ca', password: 'clue', url: 'http://www.imdb.com', description: 'movie stuff', tags: 'movies' })
 con1 = adam.connections.create({ name: 'pandora', username: 'adam@raceweb.ca', password: 'clue', url: 'http://www.pandora.com', description: 'all my music', tags: 'music' })
 con1 = adam.connections.create({ name: 'cibc bank', username: 'adam@raceweb.ca', password: 'super secret', url: 'http://www.cibc.com', description: 'all my money', tags: 'bank' })
+adam.tag('connection', 'movies music bank')
 
 m1 = adam.milestones.create({ name: 'high school', milestone_at: '1987-06-25' })
 m1 = adam.milestones.create({ name: 'quinn born', milestone_at: '1996-03-01' })
@@ -110,6 +116,5 @@ r7 = adam.reminders.create({ description: 'download something', tags: 'home', du
 r8 = adam.reminders.create({ description: 'buy plane tickets', tags: 'home', due_on: Date.today + 2, reminder_type_id: home, priority_id: low })
 r9 = adam.reminders.create({ description: 'pay hydro bill', tags: 'home', due_on: Date.today + 3, reminder_type_id: home, priority_id: high })
 r10 = adam.reminders.create({ description: 'kids to jen\'s house', tags: 'home', due_on: Date.today + 4, reminder_type_id: home, priority_id: low })
+adam.tag('reminder', 'home coop school')
 
-
- 
