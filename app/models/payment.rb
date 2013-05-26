@@ -91,7 +91,7 @@ class Payment
   end
 
   def self.recent_expenses(user, days)
-    user.payments.ne(from_account: nil).gt(payment_on: Date.today - days)
+    user.payments.where(to_account: nil).ne(from_account: nil).gt(payment_on: Date.today - days)
   end
 
   def self.recent_transfers(user, days)
@@ -99,7 +99,7 @@ class Payment
   end
 
   def self.recent_deposits(user, days)
-    user.payments.ne(to_account: nil).gt(payment_on: Date.today - days)
+    user.payments.where(from_account: nil).ne(to_account: nil).gt(payment_on: Date.today - days)
   end
 
   def self.find_recent(user, days)

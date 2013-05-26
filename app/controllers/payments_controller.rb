@@ -39,7 +39,6 @@ class PaymentsController < ApplicationController
   # POST /payments
   def create
     @payment = current_user.payments.build(params[:payment])
-    debugger
     if @payment.save
       @payment.apply
       current_user.tag('payment', @payment.tags)
