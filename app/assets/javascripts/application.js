@@ -8,6 +8,19 @@
 $(function() {
 	$('#nav').spasticNav();
 	$("a.tip").tooltip();
+
+  $('#search-container').on('shown', function () {
+    $('#search-query').focus();
+  });
+
+  $('#login-form').on('shown', function () {
+    $('#username').focus();
+  });
+
+  $('#registration-form').on('shown', function () {
+    $('#person_username').focus();
+  });
+
 });
 function count(id,until) {
   var val = "";
@@ -19,7 +32,7 @@ function count(id,until) {
   var hr = Math.floor((duration % 86400) / 3600);
   var min = Math.floor((duration % 3600) / 60);
   var sec = Math.floor(duration % 60);
-  
+
   if(min < 10) {
     min = "0" + min;
   }
@@ -46,7 +59,7 @@ function count(id,until) {
 // hide success messages after 3 seconds
 window.setTimeout(function() {
     $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove(); 
+        $(this).remove();
     });
 }, 3000);
 
