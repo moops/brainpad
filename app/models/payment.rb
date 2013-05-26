@@ -15,7 +15,7 @@ class Payment
 
   validates_presence_of :amount, :payment_on
 
-  attr_accessible :amount, :description, :tags, :payment_on, :until, :from_account, :to_account, :frequency_id
+  attr_accessible :amount, :description, :tags, :payment_on, :until, :from_account, :to_account, :frequency
 
   attr_accessor :payment_type
 
@@ -53,7 +53,7 @@ class Payment
     # apply it
     apply
   end
-  
+
   def build_repeat
     if frequency and next_due <= Date.today
       # repeating and due
@@ -68,7 +68,7 @@ class Payment
       self.save
     end
   end
-  
+
   def next_due
     freq_code = frequency.code.to_i
     if (freq_code < 15) # daily, weekly or biweekly
@@ -101,14 +101,14 @@ class Payment
   def self.recent_deposits(user, days)
     user.payments.ne(to_account: nil).gt(payment_on: Date.today - days)
   end
-  
+
   def self.find_recent(user, days)
     all = recent_expenses(user, days)
     all += recent_transfers(user, days)
     all += recent_deposits(user, days)
     all.sort!{|x,y| y.payment_on <=> x.payment_on }
   end
-  
+
   def self.upcoming(user)
     user.payments.ne(frequency: nil).each do |p|
       p.build_repeat
@@ -133,13 +133,13 @@ class Payment
     result_array = result_hash.sort{|a,b| b[1]<=>a[1]}
     result_array.first(8)
   end
-  
+
   def self.summary(user,days=31)
     deposits = Payment.recent_deposits(user,days)
     total = 0
     balance = 0
     income = 0
-    
+
     deposits.each do |dep|
       income += dep.amount
     end

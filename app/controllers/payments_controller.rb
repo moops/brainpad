@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
-  
+
   load_and_authorize_resource
-  
+
   # GET /payments
   def index
     @payments = current_user.payments.desc(:payment_on)
@@ -14,7 +14,7 @@ class PaymentsController < ApplicationController
       @tag = params[:tag]
     end
     @payments = @payments.page(params[:page])
-  
+
     @upcoming_payments = Payment.upcoming(current_user)
     @money_summary = Payment.summary(current_user, 31)
     @expenses_by_tag = Payment.expenses_by_tag(current_user, 31)
@@ -23,7 +23,7 @@ class PaymentsController < ApplicationController
   # GET /payments/1.js
   def show
   end
-  
+
   # GET /payments/new.js
   def new
     get_stuff_for_form
@@ -40,6 +40,7 @@ class PaymentsController < ApplicationController
   # POST /payments
   def create
     @payment = current_user.payments.build(params[:payment])
+    debugger
     if @payment.save
       @payment.apply
       current_user.tag('payment', @payment.tags)
@@ -54,8 +55,9 @@ class PaymentsController < ApplicationController
     new_amount = params[:payment][:amount].to_f
     @payment.update_amount_and_adjust_account(new_amount)
     params[:payment].delete('amount')
-    params[:payment][:from_account] = Account.find(params[:payment][:from_account]) if params[:payment][:from_account]
-    params[:payment][:to_account] = Account.find(params[:payment][:to_account]) if params[:payment][:to_account]
+    params[:payment][:from_account] = Account.find(params[:payment][:from_account]) unless params[:payment][:from_account].empty?
+    params[:payment][:to_account] = Account.find(params[:payment][:to_account]) unless params[:payment][:to_account].empty?
+    params[:payment][:frequency] = Lookup.find(params[:payment][:frequency]) unless params[:payment][:frequency].empty?
     if @payment.update_attributes(params[:payment])
       current_user.tag('payment', @payment.tags)
       flash[:notice] = 'payment was updated.'

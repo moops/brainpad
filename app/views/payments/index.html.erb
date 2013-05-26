@@ -26,11 +26,11 @@
         <div id="future-payment-list">
             <%= render partial: 'upcoming' %>
         </div>
-        
+
         <!-- search form -->
         <%= render 'shared/search_form' %>
-       
-        <!-- add and search buttons --> 
+
+        <!-- add and search buttons -->
         <div class="pull-right">
             <%= link_to(new_payment_path, remote: true, :class => "btn btn-primary") do %>
                 <i class="icon-plus icon-white"></i> add
@@ -39,11 +39,11 @@
                 <i class="icon-search icon-white"></i> find
             </button>
         </div>
-        
+
         <div id="payment-list">
             <%= render partial: 'payments' %>
         </div>
-        
+
         <div class="tag-list">
             <%= tag_list 'payments' %>
         </div>
