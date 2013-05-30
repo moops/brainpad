@@ -4,7 +4,7 @@
         <h3><%= @payment.new_record? ? 'new' : 'update' %>  payment</h3>
     </div>
     <div class="modal-body">
-        <%= f.input(:payment_on, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
+        <%= f.input :payment_on, as: :calendar %>
         <%= f.input :from_account, collection: @accounts, value_method: '_id', label_method: 'name' %>
         <%= f.input :to_account, collection: @accounts, value_method: '_id', label_method: 'name' %>
         <%= f.input :amount %>
@@ -14,7 +14,7 @@
         <fieldset>
             <legend>schedule</legend>
                 <%= f.input :frequency, collection: @frequencies, value_method: '_id', label_method: 'description' %>
-                <%= f.input(:until, as: :string, input_html: {class: 'calendar', 'data-date-format' => "yyyy-mm-dd"}) %>
+                <%= f.input :until, as: :calendar %>
         </fieldset>
     </div>
     <div class="modal-footer">

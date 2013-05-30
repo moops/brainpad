@@ -1,2 +1,5 @@
 $('#workout-form').html("<%= escape_javascript(render(:partial => 'form')) %>").modal('show');
-$('#workout_workout_on').datepicker();
+$('#workout_workout_on').datetimepicker({
+    format: 'yyyy-MM-dd',
+    pickTime: false
+});

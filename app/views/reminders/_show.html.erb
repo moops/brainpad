@@ -10,7 +10,7 @@
             <tr>
                 <td class="display-label">priority</td><td><%= @reminder.priority.description if @reminder.priority %></td></tr>
             <tr>
-                <td class="display-label">due</td><td><%= @reminder.due_on.strftime("%a %b %d, %y") %></td></tr>
+                <td class="display-label">due</td><td><%= @reminder.due_at.strftime("%a %b %d, %y") %></td></tr>
             <tr>
                 <td class="display-label">tags</td><td><%= @reminder.tags %></td></tr>
             <tr>

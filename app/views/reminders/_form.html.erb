@@ -6,7 +6,7 @@
     <div class="modal-body">
         <%= f.input :reminder_type_id, collection: @types, value_method: '_id', label_method: 'description' %>
         <%= f.input :priority_id, collection: @priorities, value_method: '_id', label_method: 'description' %>
-        <%= f.input(:due_on, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
+        <%= f.input :due_at, as: :calendar %>
         <%= f.input :tags %>
         <%= tags_field('reminder', 'reminder_description') %>
         <%= f.input :description, as: :text, input_html: { rows: 3 } %>
@@ -14,7 +14,7 @@
         <fieldset>
             <legend>schedule</legend>
             <%= f.input :frequency, collection: @frequencies, value_method: '_id', label_method: 'description' %>
-            <%= f.input(:repeat_until, as: :string, input_html: {class: 'calendar', 'data-date-format' => "yyyy-mm-dd"}) %>
+            <%= f.input :repeat_until, as: :calendar %>
         </fieldset>
     </div>
     <div class="modal-footer">

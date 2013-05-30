@@ -2,16 +2,16 @@ require 'pg'
 
 puts 'import.rb is running'
 
-conn = PG.connect( host: 'localhost', port: '5432', dbname: 'brainpad_production', user: 'postgres', password: '' ) 
+conn = PG.connect( host: 'localhost', port: '5432', dbname: 'brainpad_production', user: 'postgres', password: '' )
 
 # lookups
 count = 0
-conn.exec( "SELECT * FROM lookups" ) do |result| 
+conn.exec( "SELECT * FROM lookups" ) do |result|
   result.each do |row|
     l = Lookup.create!(
       _id: row['id'],
       category: row['category'],
-      code: row['code'], 
+      code: row['code'],
       description: row['description'])
     count += 1
     # puts l.inspect
@@ -21,7 +21,7 @@ puts "inserted #{count} lookups..."
 
 # people
 count = 0
-conn.exec( "SELECT * FROM people" ) do |result| 
+conn.exec( "SELECT * FROM people" ) do |result|
   result.each do |row|
     p = Person.create!(
       _id: row['id'],
@@ -43,7 +43,7 @@ Person.all.each do |person|
 
   # accounts
   count = 0
-  conn.exec( "SELECT * FROM accounts WHERE person_id = #{person.id}" ) do |result| 
+  conn.exec( "SELECT * FROM accounts WHERE person_id = #{person.id}" ) do |result|
     result.each do |row|
       a = Account.new(
         _id: row['id'],
@@ -88,7 +88,7 @@ Person.all.each do |person|
 
   # contacts
   count = 0
-  conn.exec( "SELECT * FROM contacts WHERE person_id = #{person.id}" ) do |result| 
+  conn.exec( "SELECT * FROM contacts WHERE person_id = #{person.id}" ) do |result|
     result.each do |row|
       c = Contact.create!(
         person: person,
@@ -109,7 +109,7 @@ Person.all.each do |person|
 
   # journals
   count = 0
-  conn.exec( "SELECT * FROM journals WHERE person_id = #{person.id}" ) do |result| 
+  conn.exec( "SELECT * FROM journals WHERE person_id = #{person.id}" ) do |result|
     result.each do |row|
       j = Journal.create!(
         person: person,
@@ -124,7 +124,7 @@ Person.all.each do |person|
 
   # links
   count = 0
-  conn.exec( "SELECT * FROM links WHERE person_id = #{person.id}" ) do |result| 
+  conn.exec( "SELECT * FROM links WHERE person_id = #{person.id}" ) do |result|
     result.each do |row|
       l = Link.create!(
         person: person,
@@ -149,7 +149,7 @@ Person.all.each do |person|
 
   # payments
   count = 0
-  conn.exec( "SELECT * FROM payments WHERE person_id = #{person.id}" ) do |result| 
+  conn.exec( "SELECT * FROM payments WHERE person_id = #{person.id}" ) do |result|
     result.each do |row|
       p = Payment.new(
         person: person,
@@ -163,11 +163,11 @@ Person.all.each do |person|
           # expense
           p.from_account = Account.find(row['account_id'])
           amount = amount.abs
-        else 
+        else
           # deposit
           p.to_account = Account.find(row['account_id'])
         end
-      else 
+      else
         # transfer
         p.from_account = Account.find(row['transfer_from'])
         p.to_account = Account.find(row['account_id'])
@@ -182,7 +182,7 @@ Person.all.each do |person|
 
   # reminders
   count = 0
-  conn.exec( "SELECT * FROM reminders WHERE person_id = #{person.id}" ) do |result| 
+  conn.exec( "SELECT * FROM reminders WHERE person_id = #{person.id}" ) do |result|
     result.each do |row|
       r = Reminder.create!(
         person: person,
@@ -193,7 +193,7 @@ Person.all.each do |person|
         tags: row['tags'],
         done: row['done'],
         repeat_until: row['repeat_until'],
-        due_on: row['due_on'])
+        due_at: row['due_on'])
       count += 1
       # puts r.inspect
     end
@@ -202,7 +202,7 @@ Person.all.each do |person|
 
   # workouts
   count = 0
-  conn.exec( "SELECT * FROM workouts WHERE person_id = #{person.id}" ) do |result| 
+  conn.exec( "SELECT * FROM workouts WHERE person_id = #{person.id}" ) do |result|
     result.each do |row|
       w = Workout.create!(
         person: person,
@@ -221,7 +221,7 @@ Person.all.each do |person|
     end
   end
   puts "inserted #{count} workouts for #{person.username}"
-  
+
 end
 
 

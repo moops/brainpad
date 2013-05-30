@@ -4,7 +4,7 @@ class RemindersController < ApplicationController
 
   # GET /reminders
   def index
-    @reminders = current_user.reminders.outstanding.asc(:due_on)
+    @reminders = current_user.reminders.outstanding.asc(:due_at)
     if params[:tag]
       @reminders = @reminders.where(tags: /#{params[:tag]}/)
       @tag = params[:tag]

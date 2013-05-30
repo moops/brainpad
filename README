@@ -1,13 +1,13 @@
 mongodb
     - set up with instructions from: http://shiftcommathree.com/articles/how-to-install-mongodb-on-os-x
-nav bar 
+nav bar
     - http://net.tutsplus.com/tutorials/html-css-techniques/how-to-build-a-lava-lamp-style-navigation-menu/
     - http://nettuts.s3.amazonaws.com/600_spasticNav/index.html
 client side validations:
     - https://github.com/bcardarella/client_side_validations
-javascript: datepicker 
-    - http://www.eyecon.ro/bootstrap-datepicker/
-    
+javascript: datetimepicker
+    - http://tarruda.github.io/bootstrap-datetimepicker/
+
 build local db from postgres:
     rake db:purge
     rails runner script/import.rb

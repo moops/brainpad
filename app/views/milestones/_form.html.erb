@@ -5,7 +5,7 @@
     </div>
     <div class="modal-body">
         <%= f.input :name %>
-        <%= f.input(:milestone_at, as: :string, input_html: {class: 'calendar', value: Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
+        <%= f.input :milestone_at, as: :calendar %>
     </div>
     <div class="modal-footer">
         <%= f.button :submit, class: 'btn btn-primary' %>

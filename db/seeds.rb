@@ -106,15 +106,15 @@ m1 = adam.milestones.create({ name: 'trip to florida', milestone_at: '2012-03-07
 low  = Lookup.where(category: 11, code: '1').first._id
 high = Lookup.where(category: 11, code: '3').first._id
 home = Lookup.where(category: 16, code: '1').first._id
-r1 = adam.reminders.create({ description: 'weed the garden', tags: 'home', due_on: Date.today, reminder_type_id: home, priority_id: low })
-r2 = adam.reminders.create({ description: 'groceries', tags: 'home', due_on: Date.today, reminder_type_id: home, priority_id: high })
-r3 = adam.reminders.create({ description: 'spending committee meeting', tags: 'coop', due_on: Date.today + 1, reminder_type_id: home, priority_id: low })
-r4 = adam.reminders.create({ description: 'doctor appointment', tags: 'home', due_on: Date.today + 1, reminder_type_id: home, priority_id: high })
-r5 = adam.reminders.create({ description: 'groceries', tags: 'home', due_on: Date.today + 1, reminder_type_id: home, priority_id: low })
-r6 = adam.reminders.create({ description: 'parent teacher meeting', tags: 'school', due_on: Date.today + 2, reminder_type_id: home, priority_id: high })
-r7 = adam.reminders.create({ description: 'download something', tags: 'home', due_on: Date.today + 2, reminder_type_id: home, priority_id: low })
-r8 = adam.reminders.create({ description: 'buy plane tickets', tags: 'home', due_on: Date.today + 2, reminder_type_id: home, priority_id: low })
-r9 = adam.reminders.create({ description: 'pay hydro bill', tags: 'home', due_on: Date.today + 3, reminder_type_id: home, priority_id: high })
-r10 = adam.reminders.create({ description: 'kids to jen\'s house', tags: 'home', due_on: Date.today + 4, reminder_type_id: home, priority_id: low })
+r1 = adam.reminders.create({ description: 'weed the garden', tags: 'home', due_at: Date.today, reminder_type_id: home, priority_id: low })
+r2 = adam.reminders.create({ description: 'groceries', tags: 'home', due_at: Date.today, reminder_type_id: home, priority_id: high })
+r3 = adam.reminders.create({ description: 'spending committee meeting', tags: 'coop', due_at: Date.today + 1, reminder_type_id: home, priority_id: low })
+r4 = adam.reminders.create({ description: 'doctor appointment', tags: 'home', due_at: Date.today + 1, reminder_type_id: home, priority_id: high })
+r5 = adam.reminders.create({ description: 'groceries', tags: 'home', due_at: Date.today + 1, reminder_type_id: home, priority_id: low })
+r6 = adam.reminders.create({ description: 'parent teacher meeting', tags: 'school', due_at: Date.today + 2, reminder_type_id: home, priority_id: high })
+r7 = adam.reminders.create({ description: 'download something', tags: 'home', due_at: Date.today + 2, reminder_type_id: home, priority_id: low })
+r8 = adam.reminders.create({ description: 'buy plane tickets', tags: 'home', due_at: Date.today + 2, reminder_type_id: home, priority_id: low })
+r9 = adam.reminders.create({ description: 'pay hydro bill', tags: 'home', due_at: Date.today + 3, reminder_type_id: home, priority_id: high })
+r10 = adam.reminders.create({ description: 'kids to jen\'s house', tags: 'home', due_at: Date.today + 4, reminder_type_id: home, priority_id: low })
 adam.tag('reminder', 'home coop school')
 
