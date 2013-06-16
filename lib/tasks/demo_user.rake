@@ -23,14 +23,14 @@ task :demo_user => :environment do
   demo.links.create({ url: 'http://twitter.github.com/bootstrap/index.html', name: 'bootstrap', tags: 'dev css', comments: 'twitter css framework', clicks: 15, last_clicked_on: '2013-02-10', expires_on: nil })
   demo.links.create({ url: 'http://www.jquery.com', name: 'jquery', tags: 'dev javascript', comments: 'javascript framework', clicks: 5, last_clicked_on: '2013-02-10', expires_on: nil })
   demo.tag('link', 'sports pictures news cycling movies dev rails css javascript')
-  
+
   demo.contacts.create({ name: 'kermit', email: 'kermit@raceweb.ca', phone_home: '250-347-9021', phone_work: '250-342-6416', address: '123 fake st', city: 'victoria', tags: 'frog friend', comments: 'why does he hang out with that pig?' })
   demo.contacts.create({ name: 'gonzo', email: 'gonzo@raceweb.ca', phone_home: '250-344-6584', phone_work: '250-344-6584', address: '123 sesame st', city: 'victoria', tags: 'family', comments: 'is that thing even a nose?' })
   demo.contacts.create({ name: 'fozzie', email: 'fozzie@raceweb,ca', phone_home: '250-658-4719', phone_work: '250-342-6416', address: '123 fake st', city: 'victoria', tags: 'family', comments: 'just smile and nod when he starts telling jokes' })
   demo.contacts.create({ name: 'floyd', email: 'floyd@raceweb,ca', phone_home: '250-658-4719', phone_work: '250-342-6416', address: '123 fake st', city: 'victoria', tags: 'friend band', comments: 'he hold that band together' })
   demo.contacts.create({ name: 'scooter', email: 'scooter@raceweb,ca', phone_home: '250-414-0106', phone_work: '250-342-6416', address: '123 fake st', city: 'victoria', tags: 'family', comments: 'good helper' })
   demo.tag('contact', 'frog friend family band')
-  
+
   run   = Lookup.where(code: 'run').first._id
   bike  = Lookup.where(code: 'bike').first._id
   swim  = Lookup.where(code: 'swim').first._id
@@ -66,12 +66,12 @@ task :demo_user => :environment do
   j3 = demo.journals.create({ journal_type_id: default, entry: 'third test entry', entry_on: Date.today - 4 })
   j4 = demo.journals.create({ journal_type_id: default, entry: 'fourth test entry', entry_on: Date.today - 5 })
   demo.tag('journal', 'test')
-  
+
   con1 = demo.connections.create({ name: 'imdb', username: 'demo@raceweb.ca', password: 'clue', url: 'http://www.imdb.com', description: 'movie stuff', tags: 'movies' })
   con1 = demo.connections.create({ name: 'pandora', username: 'demo@raceweb.ca', password: 'clue', url: 'http://www.pandora.com', description: 'all my music', tags: 'music' })
   con1 = demo.connections.create({ name: 'cibc bank', username: 'demo@raceweb.ca', password: 'super secret', url: 'http://www.cibc.com', description: 'all my money', tags: 'bank' })
   demo.tag('journal', 'movies music bank')
-  
+
   m1 = demo.milestones.create({ name: 'high school', milestone_at: 3.years.ago })
   m1 = demo.milestones.create({ name: 'trip to mexico', milestone_at: 600.days.ago })
   m1 = demo.milestones.create({ name: 'got muppet show job', milestone_at: 45.days.ago })
@@ -80,16 +80,17 @@ task :demo_user => :environment do
   low  = Lookup.where(category: 11, code: '1').first._id
   high = Lookup.where(category: 11, code: '3').first._id
   home = Lookup.where(category: 16, code: '1').first._id
-  r1 = demo.reminders.create({ description: 'weed the garden', tags: 'home', due_on: Date.today, reminder_type_id: home, priority_id: low })
-  r2 = demo.reminders.create({ description: 'groceries', tags: 'home', due_on: Date.today, reminder_type_id: home, priority_id: high })
-  r3 = demo.reminders.create({ description: 'spending committee meeting', tags: 'coop', due_on: Date.today + 1, reminder_type_id: home, priority_id: low })
-  r4 = demo.reminders.create({ description: 'doctor appointment', tags: 'home', due_on: Date.today + 1, reminder_type_id: home, priority_id: high })
-  r5 = demo.reminders.create({ description: 'groceries', tags: 'home', due_on: Date.today + 1, reminder_type_id: home, priority_id: low })
-  r6 = demo.reminders.create({ description: 'parent teacher meeting', tags: 'school', due_on: Date.today + 2, reminder_type_id: home, priority_id: high })
-  r7 = demo.reminders.create({ description: 'download something', tags: 'home', due_on: Date.today + 2, reminder_type_id: home, priority_id: low })
-  r8 = demo.reminders.create({ description: 'buy plane tickets', tags: 'home', due_on: Date.today + 2, reminder_type_id: home, priority_id: low })
-  r9 = demo.reminders.create({ description: 'pay hydro bill', tags: 'home', due_on: Date.today + 3, reminder_type_id: home, priority_id: high })
-  r10 = demo.reminders.create({ description: 'kids to jen\'s house', tags: 'home', due_on: Date.today + 4, priority_id: home, priority_id: low })
+
+  r1 = demo.reminders.create({ description: 'weed the garden', tags: 'home', due_at: Date.today, reminder_type_id: home, priority_id: low })
+  r2 = demo.reminders.create({ description: 'groceries', tags: 'home', due_at: Date.today, reminder_type_id: home, priority_id: high })
+  r3 = demo.reminders.create({ description: 'spending committee meeting', tags: 'coop', due_at: Date.today + 1, reminder_type_id: home, priority_id: low })
+  r4 = demo.reminders.create({ description: 'doctor appointment', tags: 'home', due_at: Date.today + 1, reminder_type_id: home, priority_id: high })
+  r5 = demo.reminders.create({ description: 'groceries', tags: 'home', due_at: Date.today + 1, reminder_type_id: home, priority_id: low })
+  r6 = demo.reminders.create({ description: 'parent teacher meeting', tags: 'school', due_at: Date.today + 2, reminder_type_id: home, priority_id: high })
+  r7 = demo.reminders.create({ description: 'download something', tags: 'home', due_at: Date.today + 2, reminder_type_id: home, priority_id: low })
+  r8 = demo.reminders.create({ description: 'buy plane tickets', tags: 'home', due_at: Date.today + 2, reminder_type_id: home, priority_id: low })
+  r9 = demo.reminders.create({ description: 'pay hydro bill', tags: 'home', due_at: Date.today + 3, reminder_type_id: home, priority_id: high })
+  r10 = demo.reminders.create({ description: 'kids to jen\'s house', tags: 'home', due_at: Date.today + 4, priority_id: home, priority_id: low })
   demo.tag('reminder', 'home coop school')
 
   puts "done demo_user task."

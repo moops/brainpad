@@ -2,7 +2,7 @@
 //= require jquery_ujs
 //= require jquery.easing
 //= require bootstrap
-//= require bootstrap-datepicker
+//= require datetimepicker
 //= require_tree .
 
 $(function() {

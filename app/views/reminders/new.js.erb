@@ -1,3 +1,11 @@
 $('#reminder-form').html("<%= escape_javascript(render(:partial => 'form')) %>").modal('show');
-$('#reminder_due_on').datepicker();
-$('#reminder_repeat_until').datepicker();
+$('#reminder_due_at').datetimepicker({
+    format: 'yyyy-MM-dd hh:mm',
+    pickSeconds: false,
+    startDate: new Date()
+});
+$('#reminder_repeat_until').datetimepicker({
+    format: 'yyyy-MM-dd',
+    pickTime: false,
+    startDate: new Date()
+});

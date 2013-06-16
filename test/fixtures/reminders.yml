@@ -5,7 +5,7 @@ one:
   reminder_type: 17
   frequency:
   repeat_until:
-  due_on: <%= 2.days.from_now.to_s(:db) %>
+  due_at: <%= 2.days.from_now.to_s(:db) %>
   person: adam
 
 two:
@@ -15,9 +15,9 @@ two:
   reminder_type: 17
   frequency:
   repeat_until:
-  due_on: <%= 1.days.from_now.to_s(:db) %>
+  due_at: <%= 1.days.from_now.to_s(:db) %>
   person: adam
-  
+
 three:
   description: test third reminder
   done: false
@@ -25,9 +25,9 @@ three:
   reminder_type: 17
   frequency:
   repeat_until:
-  due_on: <%= 0.days.ago.to_s(:db) %>
+  due_at: <%= 0.days.ago.to_s(:db) %>
   person: adam
-  
+
 four:
   description: test fourth reminder
   done: false
@@ -35,9 +35,9 @@ four:
   reminder_type: 17
   frequency:
   repeat_until:
-  due_on: <%= 1.days.ago.to_s(:db) %>
+  due_at: <%= 1.days.ago.to_s(:db) %>
   person: adam
-  
+
 five:
   description: test fifth reminder
   done: false
@@ -45,5 +45,5 @@ five:
   reminder_type: 18
   frequency:
   repeat_until:
-  due_on: <%= 2.days.ago.to_s(:db) %>
+  due_at: <%= 2.days.ago.to_s(:db) %>
   person: adam
