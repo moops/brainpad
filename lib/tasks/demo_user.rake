@@ -70,7 +70,7 @@ task :demo_user => :environment do
   con1 = demo.connections.create({ name: 'imdb', username: 'demo@raceweb.ca', password: 'clue', url: 'http://www.imdb.com', description: 'movie stuff', tags: 'movies' })
   con1 = demo.connections.create({ name: 'pandora', username: 'demo@raceweb.ca', password: 'clue', url: 'http://www.pandora.com', description: 'all my music', tags: 'music' })
   con1 = demo.connections.create({ name: 'cibc bank', username: 'demo@raceweb.ca', password: 'super secret', url: 'http://www.cibc.com', description: 'all my money', tags: 'bank' })
-  demo.tag('journal', 'movies music bank')
+  demo.tag('connection', 'movies music bank')
 
   m1 = demo.milestones.create({ name: 'high school', milestone_at: 3.years.ago })
   m1 = demo.milestones.create({ name: 'trip to mexico', milestone_at: 600.days.ago })
