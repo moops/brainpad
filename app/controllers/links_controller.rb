@@ -27,7 +27,7 @@ class LinksController < ApplicationController
       flash[:notice] = "#{@link.url} already exists"
       redirect_to links_path
     end
-    @link = Link.new unless @link 
+    @link = Link.new unless @link
     @link.name = params[:name].downcase if params[:name]
     @link.url = params[:url]
   end
