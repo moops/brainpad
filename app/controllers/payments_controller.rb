@@ -4,7 +4,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments
   def index
-    @payments = current_user.payments.desc(:payment_on)
+    @payments = current_user.payments.where(:payment_on.gt => 1.year.ago).desc(:payment_on)
     if params[:q]
       @payments = @payments.where(description: /#{params[:q]}/i)
     end
