@@ -13,7 +13,6 @@ class Workout
   field :w_on, as: :workout_on, type: Date
 
   belongs_to :person
-  belongs_to :workout_type, class_name: "Lookup"
   belongs_to :route, class_name: "Lookup"
 
   validates_presence_of :location, :duration, :workout_on

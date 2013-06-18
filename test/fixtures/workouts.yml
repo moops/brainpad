@@ -7,23 +7,23 @@ one:
   intensity: 7
   weight: 200
   distance: 10
-  workout_type: 3
+  tags: run
   workout_on: <%= 2.days.ago.to_s(:db) %>
   person: adam
-  
+
 two:
   location: thetis lake
   race:
-  route: 
+  route:
   description: with the pih group
   duration: 65
   intensity: 7
   weight: 199
   distance: 14
-  workout_type: 3
+  tags: run
   workout_on: <%= 5.days.ago.to_s(:db) %>
   person: adam
-  
+
 three:
   location: elk lake
   race:
@@ -33,19 +33,19 @@ three:
   intensity: 4
   weight: 200
   distance: 106
-  workout_type: 4
+  tags: bike
   workout_on: <%= 6.days.ago.to_s(:db) %>
   person: adam
-  
+
 four:
   location: crystal pool
   race:
-  route: 
+  route:
   description: swim after work
   duration: 60
   intensity: 8
-  weight: 
+  weight:
   distance: 2.5
-  workout_type: 5
+  tags: swim
   workout_on: <%= 8.days.ago.to_s(:db) %>
   person: quinn

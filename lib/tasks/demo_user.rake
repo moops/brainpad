@@ -35,9 +35,10 @@ task :demo_user => :environment do
   bike  = Lookup.where(code: 'bike').first._id
   swim  = Lookup.where(code: 'swim').first._id
   other = Lookup.where(code: 'other').first._id
-  w1 = demo.workouts.create({ location: 'thetis', duration: 60, distance: 10, intensity: 5, workout_type_id: run, workout_on: '2013-02-01', weight: 165, description: 'easy run around thetis' })
-  w2 = demo.workouts.create({ location: 'elk lake', duration: 60, distance: 10, intensity: 5, workout_type_id: run, workout_on: '2013-02-02', weight: 168, description: 'easy run around elk lake' })
-  w3 = demo.workouts.create({ location: 'goose', duration: 60, distance: 40, intensity: 5, workout_type_id: bike, workout_on: '2013-02-03', description: 'easy ride on the goose' })
+  w1 = demo.workouts.create({ location: 'thetis', duration: 60, distance: 10, intensity: 5, tags: 'run', workout_on: '2013-02-01', weight: 165, description: 'easy run around thetis' })
+  w2 = demo.workouts.create({ location: 'elk lake', duration: 60, distance: 10, intensity: 5, tags: 'run', workout_on: '2013-02-02', weight: 168, description: 'easy run around elk lake' })
+  w3 = demo.workouts.create({ location: 'goose', duration: 60, distance: 40, intensity: 5, tags: 'bike', workout_on: '2013-02-03', description: 'easy ride on the goose' })
+  demo.tag('workout', 'run bike')
 
   chequing = demo.accounts.create({ name: 'chequing', price: 1, units: 1000, active: true })
   savings  = demo.accounts.create({ name: 'savings', price: 1, units: 200, active: true })
