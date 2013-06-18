@@ -7,6 +7,9 @@ class Lookup
 
   has_one :person
 
+
+  has_one :workout, as: :workout_type
+
   attr_accessible :_id, :category, :code, :description
 
 end

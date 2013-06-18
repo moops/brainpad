@@ -11,7 +11,7 @@
             <% @workouts.each do |workout| %>
                 <tr>
                     <td><%= link_to(workout.workout_on.strftime("%a %b %d, %y"), edit_workout_path(workout), remote: true) %></td>
-                    <td><%= workout.workout_type.description if workout.workout_type %></td>
+                    <td><%= workout.tags %></td>
                     <td>
                         <% if workout.route %>
                             <a href="http://www.gmap-pedometer.com/?r=<%= workout.route.code %>" target="_blank">

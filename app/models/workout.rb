@@ -5,6 +5,7 @@ class Workout
   field :loc, as: :location
   field :rc, as: :race
   field :dsc, as: :description
+  field :tg, as: :tags
   field :dur, as: :duration, type: Integer
   field :int, as: :intensity, type: Integer
   field :wt, as: :weight, type: Integer
@@ -17,7 +18,7 @@ class Workout
 
   validates_presence_of :location, :duration, :workout_on
 
-  attr_accessible :location, :race, :description, :duration, :intensity, :weight, :distance, :workout_on, :workout_type_id, :route_id
+  attr_accessible :location, :race, :description, :tags, :duration, :intensity, :weight, :distance, :workout_on, :route_id
 
   def self.recent_workouts(user, days)
     user.workouts.where(:workout_on.gte => Date.today - days)
@@ -27,24 +28,28 @@ class Workout
     user.workouts.and({:workout_on.gte => Date.today - days}, {:workout_on.lt => Date.today + 1}).distinct(:workout_on).count
   end
 
-  def self.workout_duration_by_type(user,days)
-    types = Hash.new
+  def self.workout_duration_by_tag(user,days)
+    report = Hash.new
     total_duration = 0
     workouts = recent_workouts(user,days)
     workouts.each do |w|
-      if w.workout_type
-        total_duration += w.duration 
-        if types.has_key?(w.workout_type.description)
-           types[w.workout_type.description]['duration'] += w.duration
-        else
-          types[w.workout_type.description] = { 'duration' => w.duration }
+      if w.tags
+        total_duration += w.duration
+        #TODO individual tag not all tags
+        tags_list = w.tags.split(' ')
+        tags_list.each do |tag|
+          if report.has_key?(tag)
+             report[tag]['duration'] += w.duration
+          else
+            report[tag] = { 'duration' => w.duration }
+          end
         end
       end
     end
-    types.values.each do |type|
-      type['percentage'] = ((type['duration']/total_duration.to_f) * 100).to_i || 1
+    report.values.each do |tag|
+      tag['percentage'] = ((tag['duration']/total_duration.to_f) * 100).to_i || 1
     end
-    types.sort{|a,b| b[1]['duration']<=>a[1]['duration']}
+    report.sort{|a,b| b[1]['duration']<=>a[1]['duration']}
   end
 
   def self.summary(user,days)

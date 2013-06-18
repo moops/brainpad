@@ -4,7 +4,8 @@
         <h3><%= @workout.new_record? ? 'new' : 'update' %>  workout</h3>
     </div>
     <div class="modal-body">
-        <%= f.input :workout_type_id, collection: @types, value_method: '_id', label_method: 'description' %>
+        <%= f.input :tags %>
+        <%= tags_field('workout', 'workout_description') %>
         <%= f.input :location %>
         <%= f.input :race %>
         <%= f.input :route_id, collection: @routes, value_method: '_id', label_method: 'description' %>

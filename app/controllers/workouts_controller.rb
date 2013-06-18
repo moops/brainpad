@@ -1,16 +1,20 @@
 class WorkoutsController < ApplicationController
-  
+
   load_and_authorize_resource
-  
+
   # GET /workouts
-  def index    
+  def index
     @workouts = current_user.workouts.desc(:workout_on)
+    if params[:tag]
+      @workouts = @workouts.where(tags: /#{params[:tag]}/)
+      @tag = params[:tag]
+    end
     if params[:q]
       @workouts = @workouts.where(location: /#{params[:q]}/i)
     end
     @workouts = @workouts.page(params[:page])
     @workout_summary = Workout.summary(current_user,31)
-    @workout_duration_by_type = Workout.workout_duration_by_type(current_user,31)
+    @workout_duration_by_tag = Workout.workout_duration_by_tag(current_user,31)
   end
 
   # GET /workouts/1.js
@@ -36,6 +40,7 @@ class WorkoutsController < ApplicationController
   def create
     @workout = current_user.workouts.build(params[:workout])
     if @workout.save
+      current_user.tag('workout', @workout.tags)
       flash[:notice] = 'workout was created.'
       redirect_to workouts_path
     end
@@ -45,6 +50,7 @@ class WorkoutsController < ApplicationController
   def update
     @workout = current_user.workouts.find(params[:id])
     if @workout.update_attributes!(params[:workout])
+      current_user.tag('workout', @workout.tags)
       flash[:notice] = 'workout was updated.'
       redirect_to workouts_path
     end
