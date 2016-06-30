@@ -1,4 +1,4 @@
-<%= simple_form_for(@contact, remote: true, :html => {:class => 'form-horizontal condensed' }) do |f| %>
+<%= form_for(@contact, remote: true, :html => {:class => 'form-horizontal condensed' }) do |f| %>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3><%= @contact.new_record? ? 'new' : 'update' %>  contact</h3>

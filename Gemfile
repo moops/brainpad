@@ -14,8 +14,7 @@ group :test do
   gem 'factory_girl_rails'
 end
 
-gem 'pg'
-gem 'mongoid'                 # mongodb driver
+gem 'mongoid', '~> 4.0.0'     # mongodb driver
 gem 'bson_ext'                # for mongodb
 gem 'kaminari'                # pagination
 gem 'bcrypt-ruby'             # password encryption
