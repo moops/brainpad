@@ -1,12 +1,12 @@
 source 'http://rubygems.org'
-ruby '1.9.3'
+ruby '2.2.3'
 
-gem 'rails', '3.2.12'
+gem 'rails', '4.2.5'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
   gem 'bootstrap-sass'
 end
 
@@ -23,6 +23,6 @@ gem 'cancan'                  # authorization
 gem 'jquery-rails'            # unobtrusive javascript
 gem 'simple_form'             # form builder
 gem 'twilio-ruby'             # sms sending
-gem 'debugger', group: [:development, :test]
+gem 'byebug', group: [:development, :test]
 
 gem 'mongo_session_store-rails3'
