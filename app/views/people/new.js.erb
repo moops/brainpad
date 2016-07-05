@@ -1,4 +1,4 @@
-$('#registration-form').html("<%= escape_javascript(render(:partial => 'form')) %>").modal('show');
+$('#modal-dialog').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
 $('#person_born_on').datetimepicker({
     format: 'yyyy-MM-dd',
     pickTime: false

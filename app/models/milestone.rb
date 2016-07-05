@@ -9,10 +9,8 @@ class Milestone
 
   validates_presence_of :name, :milestone_at
 
-  attr_accessible :name, :milestone_at
-
   def self.next_milestone(person_id)
     Milestone.gt(milestone_at: Time.now).asc('milestone_at').first
   end
-  
+
 end

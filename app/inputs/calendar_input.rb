@@ -1,6 +1,6 @@
 class CalendarInput < SimpleForm::Inputs::StringInput
 
-  def input
+  def input(wrapper_options)
     @input_type = 'text'
     " <div id=\"#{object_name}_#{attribute_name}\" class=\"input-append\">" +
           super +

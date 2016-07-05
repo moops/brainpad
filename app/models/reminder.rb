@@ -15,9 +15,7 @@ class Reminder
 
   validates_presence_of :description, :due_at
 
-  attr_accessible :description, :tags, :done, :repeat_until, :due_at, :reminder_type_id, :priority_id, :frequency
-
-  scope :outstanding, where(done: false)
+  scope :outstanding, ->{ where(done: false) }
 
   def done?
     !(done == 0 or done == 'f')

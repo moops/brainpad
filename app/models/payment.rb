@@ -15,8 +15,6 @@ class Payment
 
   validates_presence_of :amount, :payment_on
 
-  attr_accessible :amount, :description, :tags, :payment_on, :until, :from_account, :to_account, :frequency
-
   attr_accessor :payment_type
 
   def account_name

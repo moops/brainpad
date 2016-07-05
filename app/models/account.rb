@@ -15,10 +15,8 @@ class Account
   embeds_many :account_prices, store_as: 'prices'
 
   validates_presence_of :name, :units, :price
-  
-  attr_accessible :name, :url, :price_url, :description, :units, :price, :active
-  
-  scope :active, where(active: true)
+
+  scope :active, ->{ where(active: true) }
 
   def balance
     units * price

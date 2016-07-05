@@ -29,7 +29,6 @@ class Person
   has_secure_password
   validates_presence_of :username
   validates_uniqueness_of :username
-  attr_accessible :username, :password, :password_confirmation, :born_on, :authority, :email, :banking_url, :map_center, :phone
 
   ROLES = %w[admin user]
 
@@ -48,7 +47,7 @@ class Person
   def role_symbols
     roles.map(&:to_sym)
   end
-  
+
   def age_in_days
     Date.today - born_on
   end
@@ -60,7 +59,7 @@ class Person
   end
 
   def days_left
-    #based on 84 year life expectancy 
+    #based on 84 year life expectancy
     (born_on>>(84*12)) - Date.today
   end
 
@@ -77,7 +76,7 @@ class Person
       l.save
     end
   end
-  
+
   def tags_for(type)
     (tag_lists.where(type: type).first || tag_lists.new).tags
   end

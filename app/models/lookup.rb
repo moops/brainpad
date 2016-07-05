@@ -6,7 +6,4 @@ class Lookup
   field :dsc, as: :description
 
   has_one :person
-
-  attr_accessible :_id, :category, :code, :description
-
 end

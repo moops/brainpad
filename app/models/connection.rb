@@ -1,7 +1,7 @@
 class Connection
   include Mongoid::Document
   include Mongoid::Timestamps::Short
-  
+
   field :nm, as: :name
   field :un, as: :username
   field :pw, as: :password
@@ -12,7 +12,4 @@ class Connection
   belongs_to :person
 
   validates_presence_of :username, :password, :url
-
-  attr_accessible :name, :username, :password, :url, :description, :tags
-
 end

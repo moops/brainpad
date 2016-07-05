@@ -14,8 +14,6 @@ class Link
 
   validates_presence_of :url, :name
 
-  attr_accessible :url, :name, :tags, :comments, :clicks, :last_clicked_on, :expires_on
-
   def description
     self.name + (self.comments ? " - #{self.comments}" : '')
   end

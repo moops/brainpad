@@ -17,8 +17,6 @@ class Workout
 
   validates_presence_of :location, :duration, :workout_on
 
-  attr_accessible :location, :race, :description, :tags, :duration, :intensity, :weight, :distance, :workout_on, :route_id
-
   def self.recent_workouts(user, days)
     user.workouts.where(:workout_on.gte => Date.today - days)
   end

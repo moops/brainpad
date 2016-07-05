@@ -15,7 +15,4 @@ class Contact
   belongs_to :person
 
   validates_presence_of :name
-
-  attr_accessible :name, :email, :phone_home, :phone_work, :phone_cell, :address, :city, :tags, :comments
-
 end
