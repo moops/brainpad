@@ -1,18 +1,22 @@
-<%= simple_form_for(@account, html: {class: 'form-horizontal' }) do |f| %>
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3><%= @account.new_record? ? 'new' : 'update' %>  account</h3>
-    </div>
-    <div class="modal-body">
-        <%= f.input :name %>
-        <%= f.input :units %>
-        <%= f.input :price %>
-        <%= f.input :active, as: :boolean %>
-        <%= f.input :description %>
-        <%= f.input :url %>
-        <%= f.input :price_url %>
-    </div>
-    <div class="modal-footer">
-        <%= f.button :submit, class: 'btn btn-primary' %>
-    </div>
-<% end %>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <%= simple_form_for(@account, html: { class: 'form-horizontal condensed' }) do |f| %>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3><%= @account.new_record? ? 'new' : 'update' %> account</h3>
+            </div>
+            <div class="modal-body">
+                <%= f.input :name %>
+                <%= f.input :units %>
+                <%= f.input :price %>
+                <%= f.input :active, as: :boolean %>
+                <%= f.input :description %>
+                <%= f.input :url %>
+                <%= f.input :price_url %>
+            </div>
+            <div class="modal-footer">
+                <%= f.button :submit, class: 'btn btn-primary' %>
+            </div>
+        <% end %>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

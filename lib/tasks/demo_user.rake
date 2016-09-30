@@ -6,7 +6,7 @@ task :demo_user => :environment do
   demo.destroy if demo
 
   demo  = Person.create({ username: 'demo', password: 'demo', password_confirmation: 'demo', born_on: 20.years.ago, authority: '2', email: 'demo@raceweb.ca', map_center: '48.468141,-123.358612', phone: '+12508812818' })
-
+  demo.save
   demo.links.create({ url: 'http://www.nba.com', name: 'nba', tags: 'sports', comments: 'gets worse every year', clicks: 15, last_clicked_on: '2013-02-01', expires_on: nil })
   demo.links.create({ url: 'http://www.nhl.com', name: 'nhl', tags: 'sports', comments: 'boycotting', clicks: 5, last_clicked_on: '2013-02-10', expires_on: nil })
   demo.links.create({ url: 'http://www.imgur.com', name: 'imgur', tags: 'pictures', comments: 'pictures for everything', clicks: 5, last_clicked_on: '2013-02-10', expires_on: nil })
@@ -91,7 +91,7 @@ task :demo_user => :environment do
   r7 = demo.reminders.create({ description: 'download something', tags: 'home', due_at: Date.today + 2, reminder_type_id: home, priority_id: low })
   r8 = demo.reminders.create({ description: 'buy plane tickets', tags: 'home', due_at: Date.today + 2, reminder_type_id: home, priority_id: low })
   r9 = demo.reminders.create({ description: 'pay hydro bill', tags: 'home', due_at: Date.today + 3, reminder_type_id: home, priority_id: high })
-  r10 = demo.reminders.create({ description: 'kids to jen\'s house', tags: 'home', due_at: Date.today + 4, priority_id: home, priority_id: low })
+  r10 = demo.reminders.create({ description: 'kids to jen\'s house', tags: 'home', due_at: Date.today + 4, reminder_type_id: home, priority_id: low })
   demo.tag('reminder', 'home coop school')
 
   puts "done demo_user task."

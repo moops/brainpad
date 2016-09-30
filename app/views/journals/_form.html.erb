@@ -1,16 +1,47 @@
-<%= simple_form_for(@journal, remote: true, html: {class: 'form-horizontal condensed' }) do |f| %>
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3><%= @journal.new_record? ? 'new' : 'update' %>  entry</h3>
-    </div>
-    <div class="modal-body">
-        <%= f.input :journal_type_id, collection: @types, value_method: '_id', label_method: 'description' %>
-        <%= f.input :entry_on, as: :calendar %>
-        <%= f.input :tags %>
-        <%= tags_field('journal') %>
-        <%= f.input :entry, as: :text, input_html: { rows: 8 } %>
-    </div>
-    <div class="modal-footer">
-        <%= f.button :submit, class: 'btn btn-primary' %>
-    </div>
-<% end %>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <%= form_for(@journal, remote: true) do |f| %>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3><%= @journal.new_record? ? 'new' : 'update' %> entry</h3>
+            </div>
+            <div class="modal-body">
+                <%# f.input :journal_type_id, collection: @types, value_method: '_id', label_method: 'description' %>
+                <div class="form-group row">
+                    <label for="journal_journal_type_id" class="col-sm-2 control-label">type</label>
+                    <div class="col-sm-10">
+                        <%= f.select(:journal_type_id, options_from_collection_for_select(@types, :id, :description), {}, { class: 'form-control' }) %>
+                    </div>
+                </div>
+                <%# f.input :entry_on, as: :calendar %>
+                <div class="form-group row">
+                    <label for="journal_entry_on" class="col-sm-2 control-label">when</label>
+                    <div class="col-sm-10">
+                        <%= f.text_field :entry_on, class: 'form-control' %>
+                    </div>
+                </div>
+                <%# f.input :tags %>
+                <div class="form-group row">
+                    <label for="journal_tags" class="col-sm-2 control-label">tags</label>
+                    <div class="col-sm-10">
+                        <%= f.text_field :tags, class: 'form-control' %>
+                        <%= tags_field('journal') %>
+                    </div>
+                </div>
+                <%# f.input :entry, as: :text, input_html: { rows: 8 } %>
+                <div class="form-group row">
+                    <label for="journal_entry" class="col-sm-2 control-label">entry</label>
+                    <div class="col-sm-10">
+                        <%= f.text_area :entry, class: 'form-control' %>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a class="btn btn-link" data-dismiss="modal">cancel</a>
+                    <%= f.button @journal.new_record? ? 'save' : 'update', class: 'btn btn-primary' %>
+                </div>
+            </div>
+        <% end %>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

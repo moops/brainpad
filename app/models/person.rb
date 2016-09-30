@@ -12,16 +12,16 @@ class Person
   field :pwd, as: :password_digest
   field :ph, as: :phone
 
-  with_options dependent: :destroy do |assoc|
-    assoc.has_many :accounts
-    assoc.has_many :payments
-    assoc.has_many :connections
-    assoc.has_many :contacts
-    assoc.has_many :journals
-    assoc.has_many :links
-    assoc.has_many :reminders
-    assoc.has_many :workouts
-    assoc.has_many :milestones
+  with_options dependent: :destroy do |person|
+    person.has_many :accounts
+    person.has_many :payments
+    person.has_many :connections
+    person.has_many :contacts
+    person.has_many :journals
+    person.has_many :links
+    person.has_many :reminders
+    person.has_many :workouts
+    person.has_many :milestones
   end
 
   embeds_many :tag_lists

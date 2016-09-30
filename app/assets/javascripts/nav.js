@@ -1,5 +1,5 @@
-(function($) {
-
+$(function() {
+	console.log('nav.js');
 	$.fn.spasticNav = function(options) {
 
 		options = $.extend({
@@ -42,7 +42,7 @@
 					}
 				);
 			}, function() {
-				// mouse out	
+				// mouse out
 				reset = setTimeout(function() {
 					blob.animate({
 						width : currentPageItem.outerWidth(),
@@ -52,4 +52,4 @@
 			});
 		}); // end each
 	};
-})(jQuery);
+});

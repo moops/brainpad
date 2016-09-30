@@ -1,5 +1,4 @@
 class WorkoutsController < ApplicationController
-
   load_and_authorize_resource
 
   # GET /workouts
@@ -38,7 +37,7 @@ class WorkoutsController < ApplicationController
 
   # POST /workouts
   def create
-    @workout = current_user.workouts.build(params[:workout])
+    @workout = current_user.workouts.build(workout_params)
     if @workout.save
       current_user.tag('workout', @workout.tags)
       flash[:notice] = 'workout was created.'
@@ -49,7 +48,7 @@ class WorkoutsController < ApplicationController
   # PUT /workouts/1
   def update
     @workout = current_user.workouts.find(params[:id])
-    if @workout.update_attributes!(params[:workout])
+    if @workout.update_attributes!(workout_params)
       current_user.tag('workout', @workout.tags)
       flash[:notice] = 'workout was updated.'
       redirect_to workouts_path
@@ -60,5 +59,12 @@ class WorkoutsController < ApplicationController
   def destroy
     @workout.destroy
     redirect_to workouts_path
+  end
+
+  private
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def workout_params
+    params.require(:workout).permit(:location, :race, :description, :tags, :duration, :intensity, :weight, :distance, :workout_on, :route_id)
   end
 end

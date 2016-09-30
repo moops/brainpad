@@ -6,7 +6,7 @@
                 <h3><%= @person.new_record? ? 'sign up' : 'update profile' %></h3>
             </div>
             <div class="modal-body">
-                <%= f.input :roles, as: :hidden, input_html: { value: '[user]' } %>
+                <%# f.input :roles, as: :hidden, input_html: { value: '[user]' } %>
                 <%= f.input :username %>
                 <%= f.input :password %>
                 <%= f.input :password_confirmation %>

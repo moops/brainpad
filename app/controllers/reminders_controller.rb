@@ -39,7 +39,7 @@ class RemindersController < ApplicationController
 
   # POST /reminders
   def create
-    @reminder = current_user.reminders.build(params[:reminder])
+    @reminder = current_user.reminders.build(reminder_params)
     if @reminder.save
       current_user.tag('reminder', @reminder.tags)
       flash[:notice] = "reminder #{condense(@reminder.description)} was created."
@@ -50,7 +50,7 @@ class RemindersController < ApplicationController
   # PUT /reminders/1
   def update
     @reminder = current_user.reminders.find(params[:id])
-    if @reminder.update_attributes(params[:reminder])
+    if @reminder.update_attributes(reminder_params)
       current_user.tag('reminder', @reminder.tags)
       flash[:notice] = "reminder #{condense(@reminder.description)} was updated."
       redirect_to reminders_path
@@ -70,5 +70,12 @@ class RemindersController < ApplicationController
       reminder.update_attribute(:done,attr[:done])
     }
     redirect_to reminders_path
+  end
+
+  private
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def reminder_params
+    params.require(:reminder).permit(:description, :tags, :done, :repeat_until, :due_at, :reminder_type_id, :priority_id, :frequency)
   end
 end

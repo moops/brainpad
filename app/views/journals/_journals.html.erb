@@ -15,13 +15,13 @@
                     <td><%= journal.entry[0,60] %></td>
                     <td class="actions">
                         <%= link_to(journal_path(journal), remote: true, title: "show details") do %>
-                            <i class="icon-eye-open"></i>
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         <% end %>
-                        <%= link_to(new_journal_path(:journal_id => journal), remote: true, title: 'copy entry') do %>
-                            <i class="icon-share"></i>
+                        <%= link_to(new_journal_path(journal_id: journal), remote: true, title: 'copy entry') do %>
+                            <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
                         <% end %>
-                        <%= link_to(journal_path(journal), :method => :delete, :confirm => "really delete entry?") do %>
-                            <i class="icon-remove"></i>
+                        <%= link_to(journal_path(journal), method: :delete, data: { confirm: 'really delete entry?' }) do %>
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         <% end %>
                     </td>
                 </tr>

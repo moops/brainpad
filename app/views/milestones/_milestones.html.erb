@@ -13,15 +13,15 @@
                     <td>
                         <input class="milestone-time" id="<%= milestone.id %>"/>
                         <script type="text/javascript">
-    				        count('<%= milestone.id %>', '<%= milestone.milestone_at %>');
-    				    </script>
-    				</td>
+                            count('<%= milestone.id %>', '<%= milestone.milestone_at %>');
+                        </script>
+                    </td>
                     <td class="actions">
                         <%= link_to(new_milestone_path(:milestone_id => milestone), remote: true, title: "copy #{milestone.name}") do %>
-                            <i class="icon-share"></i>
+                            <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
                         <% end %>
                         <%= link_to(milestone_path(milestone), :method => :delete, :confirm => "really delete #{milestone.name}?") do %>
-                            <i class="icon-remove"></i>
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         <% end %>
                     </td>
                 </tr>

@@ -1,23 +1,27 @@
-<%= simple_form_for(@payment, :html => {:class => 'form-horizontal condensed' }) do |f| %>
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3><%= @payment.new_record? ? 'new' : 'update' %>  payment</h3>
-    </div>
-    <div class="modal-body">
-        <%= f.input :payment_on, as: :calendar %>
-        <%= f.input :from_account, collection: @accounts, value_method: '_id', label_method: 'name' %>
-        <%= f.input :to_account, collection: @accounts, value_method: '_id', label_method: 'name' %>
-        <%= f.input :amount %>
-        <%= f.input :tags %>
-        <%= tags_field('payment', 'payment_description') %>
-        <%= f.input :description %>
-        <fieldset>
-            <legend>schedule</legend>
-                <%= f.input :frequency, collection: @frequencies, value_method: '_id', label_method: 'description' %>
-                <%= f.input :until, as: :calendar %>
-        </fieldset>
-    </div>
-    <div class="modal-footer">
-        <%= f.button :submit, class: 'btn btn-primary' %>
-    </div>
-<% end %>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <%= simple_form_for(@payment, html: { class: 'form-horizontal condensed' }) do |f| %>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3><%= @payment.new_record? ? 'new' : 'update' %> payment</h3>
+            </div>
+            <div class="modal-body">
+                <%= f.input :payment_on, as: :calendar %>
+                <%= f.input :from_account, collection: @accounts, value_method: '_id', label_method: 'name' %>
+                <%= f.input :to_account, collection: @accounts, value_method: '_id', label_method: 'name' %>
+                <%= f.input :amount %>
+                <%= f.input :tags %>
+                <%= tags_field('payment', 'payment_description') %>
+                <%= f.input :description %>
+                <fieldset>
+                    <legend>schedule</legend>
+                        <%= f.input :frequency, collection: @frequencies, value_method: '_id', label_method: 'description' %>
+                        <%= f.input :until, as: :calendar %>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <%= f.button :submit, class: 'btn btn-primary' %>
+            </div>
+        <% end %>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

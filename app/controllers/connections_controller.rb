@@ -32,7 +32,7 @@ class ConnectionsController < ApplicationController
 
   # POST /connections.js
   def create
-    @connection = current_user.connections.build(params[:connection])
+    @connection = current_user.connections.build(connection_params)
     if @connection.save
       current_user.tag('connection', @connection.tags)
       @connections = current_user.connections.asc(:name).page(params[:page])
@@ -43,7 +43,7 @@ class ConnectionsController < ApplicationController
   # PUT /connections/1.js
   def update
     @connection = current_user.connections.find(params[:id])
-    p = params[:connection].reject {|k, v| k == 'person' }
+    p = connection_params.reject {|k, _v| k == 'person' }
     if @connection.update_attributes(p)
       current_user.tag('connection', @connection.tags)
       @connections = current_user.connections.asc(:name).page(params[:page])
@@ -55,5 +55,12 @@ class ConnectionsController < ApplicationController
   def destroy
     @connection.destroy
     redirect_to connections_path
+  end
+
+  private
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def connection_params
+    params.require(:connection).permit(:name, :username, :password, :url, :description, :tags)
   end
 end

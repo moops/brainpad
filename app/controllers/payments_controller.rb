@@ -38,7 +38,7 @@ class PaymentsController < ApplicationController
 
   # POST /payments
   def create
-    @payment = current_user.payments.build(params[:payment])
+    @payment = current_user.payments.build(payment_params)
     if @payment.save
       @payment.apply
       current_user.tag('payment', @payment.tags)
@@ -56,7 +56,7 @@ class PaymentsController < ApplicationController
     params[:payment][:from_account] = Account.find(params[:payment][:from_account]) unless params[:payment][:from_account].empty?
     params[:payment][:to_account] = Account.find(params[:payment][:to_account]) unless params[:payment][:to_account].empty?
     params[:payment][:frequency] = Lookup.find(params[:payment][:frequency]) unless params[:payment][:frequency].empty?
-    if @payment.update_attributes(params[:payment])
+    if @payment.update_attributes(payment_params)
       current_user.tag('payment', @payment.tags)
       flash[:notice] = 'payment was updated.'
       redirect_to payments_path
@@ -76,5 +76,12 @@ class PaymentsController < ApplicationController
     @accounts = current_user.accounts.active
     @frequencies = Lookup.where(category: 36).all
     @tags = current_user.tags_for('payments')
+  end
+
+  private
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def payment_params
+    params.require(:payment).permit(:amount, :description, :tags, :payment_on, :until, :from_account, :to_account, :frequency)
   end
 end

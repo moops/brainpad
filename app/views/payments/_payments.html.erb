@@ -30,6 +30,6 @@
         </tbody>
     </table>
     <%= paginate @payments %>
-<% elsif (@payments.empty? and !params[:q].empty?) %>
+<% elsif (@payments.empty? && params[:q].present?) %>
     you searched for <%= params[:q] %> but you didn't find anything
 <% end %>

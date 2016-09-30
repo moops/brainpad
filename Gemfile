@@ -28,7 +28,7 @@ gem 'mongoid', :path => './vendor/mongoid'
 gem 'bson_ext'                # for mongodb
 gem 'kaminari'  # pagination
 gem 'bcrypt'                  # password encryption
-gem 'cancan'                  # authorization
+gem 'cancancan'               # authorization
 gem 'jquery-rails'            # unobtrusive javascript
 gem 'simple_form'             # form builder
 gem 'twilio-ruby'             # sms sending

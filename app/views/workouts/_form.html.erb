@@ -1,22 +1,26 @@
-<%= simple_form_for(@workout, :html => {:class => 'form-horizontal condensed' }) do |f| %>
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3><%= @workout.new_record? ? 'new' : 'update' %>  workout</h3>
-    </div>
-    <div class="modal-body">
-        <%= f.input :tags %>
-        <%= tags_field('workout', 'workout_description') %>
-        <%= f.input :location %>
-        <%= f.input :race %>
-        <%= f.input :route_id, collection: @routes, value_method: '_id', label_method: 'description' %>
-        <%= f.input :workout_on, as: :calendar %>
-        <%= f.input :distance %>
-        <%= f.input :duration %>
-        <%= f.input :intensity, collection: (1..10).to_a %>
-        <%= f.input :weight %>
-        <%= f.input :description, as: :text, input_html: { :rows => 5 } %>
-    </div>
-    <div class="modal-footer">
-        <%= f.button :submit, class: 'btn btn-primary' %>
-    </div>
-<% end %>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <%= simple_form_for(@workout, html: { class: 'form-horizontal condensed' }) do |f| %>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3><%= @workout.new_record? ? 'new' : 'update' %> workout</h3>
+            </div>
+            <div class="modal-body">
+                <%= f.input :tags %>
+                <%= tags_field('workout', 'workout_description') %>
+                <%= f.input :location %>
+                <%= f.input :race %>
+                <%= f.input :route_id, collection: @routes, value_method: '_id', label_method: 'description' %>
+                <%= f.input :workout_on, as: :calendar %>
+                <%= f.input :distance %>
+                <%= f.input :duration %>
+                <%= f.input :intensity, collection: (1..10).to_a %>
+                <%= f.input :weight %>
+                <%= f.input :description, as: :text, input_html: { :rows => 5 } %>
+            </div>
+            <div class="modal-footer">
+                <%= f.button :submit, class: 'btn btn-primary' %>
+            </div>
+        <% end %>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
