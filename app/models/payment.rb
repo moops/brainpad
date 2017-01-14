@@ -9,9 +9,9 @@ class Payment
   field :un, as: :until, type: Date
 
   belongs_to :person
-  belongs_to :from_account, class_name: 'Account'
-  belongs_to :to_account, class_name: 'Account'
-  belongs_to :frequency, class_name: "Lookup"
+  belongs_to :from_account, class_name: 'Account', optional: true
+  belongs_to :to_account, class_name: 'Account', optional: true
+  belongs_to :frequency, class_name: "Lookup", optional: true
 
   validates_presence_of :amount, :payment_on
 

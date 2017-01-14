@@ -73,9 +73,6 @@ quinn.tag('contact', 'family')
 run = Lookup.where(category: 2, code: 'run').first._id
 bike = Lookup.where(category: 2, code: 'bike').first._id
 w1 = adam.workouts.create({ location: 'thetis', duration: 60, distance: 10, intensity: 5, tags: 'run', workout_on: Date.today - 1, description: 'easy run around thetis' })
-puts w1.new_record?
-puts w1.errors.inspect
-puts w1.inspect
 w2 = adam.workouts.create({ location: 'elk lake', duration: 60, distance: 10, intensity: 5, tags: 'run', workout_on: Date.today - 2, description: 'easy run around elk lake' })
 w3 = adam.workouts.create({ location: 'goose', duration: 60, distance: 40, intensity: 5, tags: 'bike', workout_on: Date.today - 4, description: 'easy ride on the goose' })
 adam.tag('workout', 'run bike')
@@ -84,9 +81,6 @@ chequing = adam.accounts.create({ name: 'chequing', price: 1, units: 1000, activ
 savings  = adam.accounts.create({ name: 'savings', price: 1, units: 200, active: true })
 visa     = adam.accounts.create({ name: 'visa', price: 1, units: -200, active: true })
 ch1 = adam.payments.create({ from_account: chequing, description: 'groceries', tags: 'food', amount: 10, payment_on: Date.today })
-puts ch1.new_record?
-puts ch1.errors.inspect
-puts ch1.inspect
 ch2 = adam.payments.create({ from_account: chequing, description: 'movie', tags: 'entertainment', amount: 10, payment_on: Date.today - 1 })
 ch3 = adam.payments.create({ to_account: chequing, description: 'salary', amount: 1000, payment_on: Date.today - 2 })
 sa1 = adam.payments.create({ from_account: savings, description: 'groceries', tags: 'food', amount: 20, payment_on: Date.today })
@@ -119,9 +113,6 @@ low  = Lookup.where(category: 11, code: '1').first._id
 high = Lookup.where(category: 11, code: '3').first._id
 home = Lookup.where(category: 16, code: '1').first._id
 r1 = adam.reminders.create({ description: 'weed the garden', tags: 'home', due_at: Date.today, reminder_type_id: home, priority_id: low })
-puts r1.new_record?
-puts r1.errors.inspect
-puts r1.inspect
 r2 = adam.reminders.create({ description: 'groceries', tags: 'home', due_at: Date.today, reminder_type_id: home, priority_id: high })
 r3 = adam.reminders.create({ description: 'spending committee meeting', tags: 'coop', due_at: Date.today + 1, reminder_type_id: home, priority_id: low })
 r4 = adam.reminders.create({ description: 'doctor appointment', tags: 'home', due_at: Date.today + 1, reminder_type_id: home, priority_id: high })

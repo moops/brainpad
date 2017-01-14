@@ -9,9 +9,9 @@ class Reminder
   field :d_at, as: :due_at, type: DateTime
 
   belongs_to :person
-  belongs_to :reminder_type, class_name: 'Lookup'
-  belongs_to :priority, class_name: 'Lookup'
-  belongs_to :frequency, class_name: 'Lookup'
+  belongs_to :reminder_type, class_name: 'Lookup', optional: true
+  belongs_to :priority, class_name: 'Lookup', optional: true
+  belongs_to :frequency, class_name: 'Lookup', optional: true
 
   validates_presence_of :description, :due_at
 

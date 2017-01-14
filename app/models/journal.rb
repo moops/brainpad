@@ -7,7 +7,7 @@ class Journal
   field :e_on, as: :entry_on, type: Date
 
   belongs_to :person
-  belongs_to :journal_type, class_name: "Lookup"
+  belongs_to :journal_type, class_name: "Lookup", optional: true
 
   validates_presence_of :entry, :entry_on
 end
