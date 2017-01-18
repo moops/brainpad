@@ -1,6 +1,2 @@
 $('#reminder-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
-flatpickr(".flatpickr", {
-  enableTime: true,
-  allowInput: true,
-  defaultDate: new Date()
-});
+flatpickr('.datetime-picker', { enableTime: true, allowInput: true, defaultDate: new Date() });

@@ -1,5 +1,2 @@
 $('#journal-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
-flatpickr(".flatpickr", {
-  allowInput: true,
-  defaultDate: new Date()
-});
+flatpickr('.date-picker', { allowInput: true, defaultDate: new Date() });

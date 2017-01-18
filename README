@@ -25,7 +25,7 @@ restore production db:
 
 2017
 - client side validation
-- payment accounts
+x jan 18 payment accounts
 - controller tests
 - unit tests
 - library tests
