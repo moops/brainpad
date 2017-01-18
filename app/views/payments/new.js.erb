@@ -1,4 +1,8 @@
 $('#payment-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
-flatpickr(".flatpickr", {
+flatpickr('.flatpickr', {
+  allowInput: true,
+  defaultDate: new Date()
+});
+flatpickr(".until", {
   allowInput: true
 });
