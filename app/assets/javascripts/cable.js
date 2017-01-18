@@ -6,7 +6,6 @@
 //= require_tree ./channels
 
 (function() {
-	console.log('cable.js');
   this.App || (this.App = {});
 
   App.cable = ActionCable.createConsumer();

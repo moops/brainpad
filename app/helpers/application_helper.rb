@@ -10,7 +10,7 @@ module ApplicationHelper
   def tag_list(kind)
     tags_of_kind = current_user.tags_for(kind) || []
     tags_of_kind.map! do |tag|
-      link_to(tag, controller: kind.pluralize, tag: tag)
+      link_to(tag, "#{kind.pluralize}?tag=#{tag}")
     end
     if (tags_of_kind.empty?)
       'tags: none'
@@ -19,35 +19,31 @@ module ApplicationHelper
     end
   end
 
-  def tags_field(kind, desc_field=nil)
+  def tags_field(kind, desc_field = nil)
     tags_of_kind = current_user.tags_for(kind) || []
-    val  = "<div class=\"form-group row\">"
-    val += "    <div class=\"col-sm-12\">"
-    val +=          select_tag :tag_list, options_for_select(tags_of_kind), include_blank: true, onchange: 'addTag()', class: 'form-control'
-    val += "    </div>"
+    val =  "<div class=\"col-sm-12\">"
+    val +=    select_tag(:tag_list, options_for_select(tags_of_kind), include_blank: true, onchange: 'addTag()', class: 'form-control')
     val += "</div>"
     val += "<script type=\"text/javascript\">"
-    val += "    function addTag() {"
-    val += "        var sel_tag = $('#tag_list').val();"
-    val += "        $('##{kind}_tags').val($('##{kind}_tags').val() + ' ' + sel_tag);"
+    val += "  function addTag() {"
+    val += "    var sel_tag = $('#tag_list').val();"
+    val += "    $('##{kind}_tags').val($('##{kind}_tags').val() + ' ' + sel_tag);"
     unless desc_field.blank?
-      val += "        if ('' == $('##{desc_field}').val()) {"
-      val += "            $('##{desc_field}').val(sel_tag);"
-      val += "        }"
+      val += "    if ('' == $('##{desc_field}').val()) {"
+      val += "      $('##{desc_field}').val(sel_tag);"
+      val += "    }"
     end
-    val += "    }"
+    val += "  }"
     val += "</script>"
     raw val
   end
 
   def filters_links
-    if params[:tag]
-        "<small>filtered by:</small>
-        <span class=\"filter\">
-            #{params[:tag]}
-            #{link_to('x', :action => :index)}
-        </span>".html_safe
-    end
+    return unless params[:tag]
+    "<small>filtered by:</small>
+    <span class=\"filter\">
+      #{params[:tag]}
+      #{link_to('x', action: :index)}
+    </span>".html_safe
   end
-
 end

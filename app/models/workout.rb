@@ -16,6 +16,7 @@ class Workout
   belongs_to :route, class_name: "Lookup", optional: true
 
   validates_presence_of :location, :duration, :workout_on
+  paginates_per 10
 
   def self.recent_workouts(user, days)
     user.workouts.where(:workout_on.gte => Date.today - days)
@@ -38,7 +39,7 @@ class Workout
           if report.has_key?(tag)
              report[tag]['duration'] += w.duration
           else
-            report[tag] = { 'duration' => w.duration }
+            report[tag] = { duration: w.duration }
           end
         end
       end

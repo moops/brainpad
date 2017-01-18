@@ -6,7 +6,13 @@ nav bar
 client side validations:
     - https://github.com/bcardarella/client_side_validations
 javascript: datetimepicker
-    - http://tarruda.github.io/bootstrap-datetimepicker/
+    - http://tarruda.github.io/bootstrap-datetimepicker/  ** removed **
+javascript: date/time picker
+    - https://chmln.github.io/flatpickr/
+reddit client
+    - https://github.com/avinashbot/redd
+    - https://www.reddit.com/prefs/apps client_id Ivqp2IcwAX6iRg, secret AgOmxJCCHslT9KMa3UW1KONzc_o
+    - https://github.com/reddit/reddit/wiki/OAuth2
 
 build local db from postgres:
     rake db:purge

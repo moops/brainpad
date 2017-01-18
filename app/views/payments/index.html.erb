@@ -3,63 +3,53 @@
 <div id="payment-form" class="modal fade"></div>
 
 <% if @money_summary %>
-    <div class="payment-dashboard">
-        <div class="item">last 30 days:</div>
-        <div class="item"><div class="data"><%= number_to_currency @money_summary[:net_change] %></div>net change</div>
-        <div class="item"><div class="data"><%= number_to_currency @money_summary[:per_day] %></div>per day</div>
-        <div class="item"><div class="data"><%= @money_summary[:buy_nothing_days] %></div>buy nothing days</div>
-        <div class="item"><div class="data"><%= number_to_currency @money_summary[:balance] %></div>net worth</div>
-        <div class="clear"></div>
-    </div> <!-- end .dashboard -->
+  <div class="payment-dashboard">
+    <div class="item">last 30 days:</div>
+    <div class="item"><div class="data"><%= number_to_currency @money_summary[:net_change] %></div>net change</div>
+    <div class="item"><div class="data"><%= number_to_currency @money_summary[:per_day] %></div>per day</div>
+    <div class="item"><div class="data"><%= @money_summary[:buy_nothing_days] %></div>buy nothing days</div>
+    <div class="item"><div class="data"><%= number_to_currency @money_summary[:balance] %></div>net worth</div>
+    <div class="clear"></div>
+  </div> <!-- end .dashboard -->
 <% end %>
 
 <div class="payments-panel">
-    <div class="reports-panel">
-        <div class="btn-group" data-toggle="buttons-radio">
-          <button type="button" class="btn btn-primary btn-show-top-tags active">top tags</button>
-          <button type="button" class="btn btn-primary btn-show-accounts">accounts</button>
-        </div>
-	    <%= render 'accounts' %>
-	    <%= render 'expenses_by_tag' %>
+  <div class="reports-panel">
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button type="button" class="btn btn-primary btn-show-top-tags active">top tags</button>
+        <button type="button" class="btn btn-primary btn-show-accounts">accounts</button>
+      </div>
+    <%= render 'accounts' %>
+    <%= render 'expenses_by_tag' %>
+  </div>
+  <div class="list-panel">
+    <div id="future-payment-list">
+      <%= render partial: 'upcoming' %>
     </div>
-    <div class="list-panel">
-        <div id="future-payment-list">
-            <%= render partial: 'upcoming' %>
-        </div>
 
-        <!-- search form -->
-        <%= render 'shared/search_form' %>
+    <%= render partial: 'shared/search_form' %>
+    <%= render partial: 'shared/control_buttons', locals: { new_record_path: new_payment_path } %>
 
-        <!-- add and search buttons -->
-        <div class="pull-right">
-            <%= link_to(new_payment_path, remote: true, :class => "btn btn-primary") do %>
-                <i class="icon-plus icon-white"></i> add
-            <% end %>
-            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#search-container">
-                <i class="icon-search icon-white"></i> find
-            </button>
-        </div>
-
-        <div id="payment-list">
-            <%= render partial: 'payments' %>
-        </div>
-
-        <div class="tag-list">
-            <%= tag_list 'payment' %>
-        </div>
+    <div id="payment-list">
+      <%= render partial: 'payments' %>
     </div>
-    <div class="clear"></div>
+
+    <div class="tag-list">
+      <%= tag_list 'payment' %>
+    </div>
+  </div>
+  <div class="clear"></div>
 </div> <!-- end .payments-panel -->
 
 <script type="text/javascript">
-    $(function() {
-        $('.btn-show-accounts').click(function() {
-            $('#payments-accounts').show();
-            $('#payments-top-tags').hide();
-        });
-        $('.btn-show-top-tags').click(function() {
-            $('#payments-accounts').hide();
-            $('#payments-top-tags').show();
-        });
-    })
+  $(function() {
+    $('.btn-show-accounts').click(function() {
+      $('#payments-accounts').show();
+      $('#payments-top-tags').hide();
+    });
+    $('.btn-show-top-tags').click(function() {
+      $('#payments-accounts').hide();
+      $('#payments-top-tags').show();
+    });
+  })
 </script>

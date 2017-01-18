@@ -6,7 +6,6 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
-  # gem 'bootstrap-sass'
 end
 
 group :test do
@@ -22,16 +21,14 @@ group :development do
   gem 'pry-byebug'
 end
 
-# gem 'mongoid'#, '~> 5.1.0'     # mongodb driver
-# gem 'mongoid', git: 'https://github.com/estolfo/mongoid.git', branch: 'MONGOID-4218-rails-5'
-gem 'mongoid', :path => './vendor/mongoid'
+gem 'mongoid', '~> 6.0.0'     # mongodb driver
 gem 'bson_ext'                # for mongodb
-gem 'kaminari'  # pagination
+gem 'kaminari'                # pagination
+gem 'kaminari-mongoid'
 gem 'bcrypt'                  # password encryption
 gem 'cancancan'               # authorization
 gem 'jquery-rails'            # unobtrusive javascript
-gem 'simple_form'             # form builder
 gem 'twilio-ruby'             # sms sending
 gem 'puma'
 
-# gem 'mongo_session_store-rails3'
+gem 'redd'                    # test reddit client

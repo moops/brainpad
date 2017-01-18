@@ -14,6 +14,7 @@ class Payment
   belongs_to :frequency, class_name: "Lookup", optional: true
 
   validates_presence_of :amount, :payment_on
+  paginates_per 15
 
   attr_accessor :payment_type
 

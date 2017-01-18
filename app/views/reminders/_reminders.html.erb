@@ -1,38 +1,28 @@
 <% if (@reminders and !@reminders.empty?) %>
-    <span class="list-title">reminders</span>
-    <%= filters_links %>
-    <%= form_tag(finish_reminders_path, method: 'put') do %>
-        <table class="table table-condensed table-hover">
-            <thead>
-                <tr>
-                    <th>date</th><th>type</th><th>priority</th><th>description</th><th>actions</th><th>done</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @reminders.each do |reminder| %>
-                    <tr>
-                        <td><%= due_with_class(reminder) %></td>
-                        <td><%= reminder.reminder_type.description if reminder.reminder_type %></td>
-                        <td><%= reminder.priority.description if reminder.priority %></td>
-                        <td><%= link_to(condense(reminder.description, 40), edit_reminder_path(reminder), remote: true) %></td>
-                        <td class="actions">
-                            <%= link_to(reminder_path(reminder), remote: true, title: 'show details') do %>
-                                <i class="icon-eye-open"></i>
-                            <% end %>
-                            <%= link_to(new_reminder_path(:reminder_id => reminder), :remote => true, :title => "copy #{condense(reminder.description)}") do %>
-                                <i class="icon-share"></i>
-                            <% end %>
-                            <%= link_to(reminder_path(reminder), :method => :delete, :confirm => "really delete #{condense(reminder.description)} reminder?", :title => 'delete reminder') do %>
-                                <i class="icon-remove"></i>
-                            <% end %>
-                        </td>
-                        <td width="5%"><%= check_box_tag("reminder[#{reminder.id.to_s}][done]", "1", reminder.done==1) %></td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-        <div class="pull-right"><%= submit_tag('done', :class => 'btn') %></div>
-        <div class="clear"></div>
-    <% end %>
-    <%= paginate @reminders %>
+  <span class="list-title">reminders</span>
+  <%= filters_links %>
+  <%= form_tag(finish_reminders_path, method: 'put') do %>
+    <table class="table table-condensed table-hover">
+      <thead>
+        <tr><th>date</th><th>type</th><th>priority</th><th>description</th><th>actions</th><th>done</th></tr>
+      </thead>
+      <tbody>
+        <% @reminders.each do |reminder| %>
+          <tr>
+            <td><%= due_with_class(reminder) %></td>
+            <td><%= reminder.reminder_type.description if reminder.reminder_type %></td>
+            <td><%= reminder.priority.description if reminder.priority %></td>
+            <td><%= link_to(condense(reminder.description, 40), edit_reminder_path(reminder), remote: true) %></td>
+            <td class="actions text-nowrap">
+              <%= render partial: 'shared/action_links', locals: { path: reminder_path(reminder), copy_path: new_reminder_path(reminder_id: reminder), label: condense(reminder.description) } %>
+            </td>
+            <td width="5%"><%= check_box_tag("reminder[#{reminder.id.to_s}][done]", "1", reminder.done==1) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="pull-right"><%= submit_tag('done', class: 'btn') %></div>
+    <div class="clear"></div>
+  <% end %>
+  <%= paginate @reminders %>
 <% end %>

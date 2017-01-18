@@ -1,11 +1,5 @@
-$('#reminder-form').html("<%= escape_javascript(render(:partial => 'form')) %>").modal('show');
-$('#reminder_due_at').datetimepicker({
-    format: 'yyyy-MM-dd hh:mm',
-    pickSeconds: false,
-    startDate: new Date()
-});
-$('#reminder_repeat_until').datetimepicker({
-    format: 'yyyy-MM-dd',
-    pickTime: false,
-    startDate: new Date()
+$('#reminder-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+flatpickr(".flatpickr", {
+  enableTime: true,
+  allowInput: true
 });

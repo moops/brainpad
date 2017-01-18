@@ -1,8 +1,13 @@
+<!-- search form -->
 <div id="search-container" class="<%= 'collapse' unless (params[:q]) %>">
-    <%= form_tag({action: 'index'}, method: 'get', class: 'form-search') do %>
-        <div class="input-append">
-            <%= text_field_tag(:q, h(params[:q]), id: 'search-query', class: 'input-medium search-query') %>
-            <%= submit_tag('search', class: 'btn') %>
-        </div>
-    <% end %>
+  <%= form_tag({action: 'index'}, method: 'get', class: 'form-inline') do %>
+    <div class="input-group">
+      <%= text_field_tag(:q, h(params[:q]), id: 'search-query', class: 'form-control input-sm') %>
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-info btn-sm">
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+      </span>
+    </div>
+  <% end %>
 </div>

@@ -1,26 +1,86 @@
 <div class="modal-dialog">
-    <div class="modal-content">
-        <%= simple_form_for(@workout, html: { class: 'form-horizontal condensed' }) do |f| %>
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3><%= @workout.new_record? ? 'new' : 'update' %> workout</h3>
-            </div>
-            <div class="modal-body">
-                <%= f.input :tags %>
-                <%= tags_field('workout', 'workout_description') %>
-                <%= f.input :location %>
-                <%= f.input :race %>
-                <%= f.input :route_id, collection: @routes, value_method: '_id', label_method: 'description' %>
-                <%= f.input :workout_on, as: :calendar %>
-                <%= f.input :distance %>
-                <%= f.input :duration %>
-                <%= f.input :intensity, collection: (1..10).to_a %>
-                <%= f.input :weight %>
-                <%= f.input :description, as: :text, input_html: { :rows => 5 } %>
-            </div>
-            <div class="modal-footer">
-                <%= f.button :submit, class: 'btn btn-primary' %>
-            </div>
-        <% end %>
-    </div><!-- /.modal-content -->
+  <div class="modal-content">
+    <%= form_for(@workout, html: { class: 'form-horizontal' }) do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3><%= @workout.new_record? ? 'new' : 'update' %> workout</h3>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="tags" class="col-sm-2 control-label">tags</label>
+          <div class="col-sm-6">
+            <%= f.text_field :tags, class: 'form-control' %>
+          </div>
+          <div class="col-sm-4">
+            <%= tags_field('workout', 'workout_description') %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="location" class="col-sm-2 control-label">location</label>
+          <div class="col-sm-10">
+            <%= f.text_field :location, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="race" class="col-sm-2 control-label">race</label>
+          <div class="col-sm-10">
+            <%= f.text_field :race, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="route" class="col-sm-2 control-label">route</label>
+          <div class="col-sm-10">
+          <%= f.collection_select(:route_id, @routes, :id, :description, { prompt: true }, class: 'form-control') %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="workout_on" class="col-sm-2 control-label">workout_on</label>
+          <div class="col-sm-10">
+            <%= f.text_field :workout_on, class: 'form-control flatpickr' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="distance" class="col-sm-2 control-label">distance</label>
+          <div class="col-sm-10">
+            <%= f.text_field :distance, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="duration" class="col-sm-2 control-label">duration</label>
+          <div class="col-sm-10">
+            <%= f.text_field :duration, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="intensity" class="col-sm-2 control-label">intensity</label>
+          <div class="col-sm-10">
+            <%= f.text_field :intensity, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="weight" class="col-sm-2 control-label">weight</label>
+          <div class="col-sm-10">
+            <%= f.text_field :weight, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description" class="col-sm-2 control-label">description</label>
+          <div class="col-sm-10">
+            <%= f.text_field :description, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= f.button :submit, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
+
+<div class="form-group">
+  <label for="intensity" class="col-sm-2 control-label">intensity</label>
+  <div class="col-sm-10">
+    <input type="date" name="bday">
+  </div>
+</div>
+

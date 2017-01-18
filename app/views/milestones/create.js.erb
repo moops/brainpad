@@ -1,6 +1,6 @@
 <% if @milestone.valid? %>
-	$('#milestone-form').modal('hide');
-	$('#milestone-list').html("<%= escape_javascript(render(:partial => 'milestones')) %>");
+  $('#milestone-form').modal('hide');
+  $('#milestone-list').html("<%= escape_javascript(render(partial: 'milestones')) %>");
 <% else %>
-	$('#milestone-form').html("<%= escape_javascript(render(:partial => 'form')) %>").modal('show');
+  $('#milestone-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
 <% end %>

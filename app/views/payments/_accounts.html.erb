@@ -1,36 +1,36 @@
 <div id="payments-accounts" class="box hide">
-	<div class="boxhead">accounts</div>
-	<div class="boxcontent">
-	    <table class="table table-condensed">
-            <tbody>
-		        <% current_user.accounts.active.each do |account| %>
-    		        <tr>
-                        <td>
-                            <% if account.url && !account.url.empty? %>
-                                <%= link_to account.name, account.url, target: '_blank' %>
-                            <% else %>
-                                <%= account.name %>
-                            <% end %></td>
-                        <td>
-                            <% if account.price_url && account.price_url.length > 0 %>
-                                <%= link_to number_to_currency(account.balance), account.price_url, target: '_blank' %>
-                            <% else %>
-                                <%= number_to_currency account.balance %>
-                            <% end %></td>
-                        <td>
-                            <%= link_to(edit_account_path(account), remote: true, :class => 'actions') do %>
-                                <i class="icon-edit"></i>
-                            <% end %>
-                        </td>
-                    </tr>
-                <% end %>
-		    </tbody>
-		</table>
-        <div class="pull-right">
-            <%= link_to(new_account_path, remote: true, :class => 'btn btn-small') do %>
-                <i class="icon-plus"></i>
-            <% end %>
-        </div>
-        <div class="clear"></div>
-	</div>
+  <div class="boxhead">accounts</div>
+  <div class="boxcontent">
+    <table class="table table-condensed">
+      <tbody>
+        <% current_user.accounts.active.each do |account| %>
+          <tr>
+            <td>
+              <% if account.url && !account.url.empty? %>
+                <%= link_to account.name, account.url, target: '_blank' %>
+              <% else %>
+                <%= account.name %>
+              <% end %></td>
+            <td>
+              <% if account.price_url && account.price_url.length > 0 %>
+                <%= link_to number_to_currency(account.balance), account.price_url, target: '_blank' %>
+              <% else %>
+                <%= number_to_currency account.balance %>
+              <% end %></td>
+            <td>
+              <%= link_to(edit_account_path(account), remote: true, class: 'actions') do %>
+                <i class="glyphicon glyphicon-edit"></i>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <div class="pull-right">
+      <%= link_to(new_account_path, remote: true, class: 'btn btn-small') do %>
+          <i class="glyphicon glyphicon-plus"></i>
+      <% end %>
+    </div>
+    <div class="clear"></div>
+  </div>
 </div> <!-- end .box -->

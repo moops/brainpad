@@ -1,5 +1,4 @@
 $(function() {
-	console.log('nav.js');
 	$.fn.spasticNav = function(options) {
 
 		options = $.extend({

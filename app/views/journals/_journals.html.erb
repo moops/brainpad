@@ -1,32 +1,24 @@
 <% if (@journals and !@journals.empty?) %>
-    <span class="list-title">entries</span>
-    <%= filters_links %>
-    <table class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th>date</th><th>type</th><th>entry</th><th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @journals.each do |journal| %>
-                <tr>
-                    <td><%= link_to(journal.entry_on.strftime("%a %b %d, %y"), edit_journal_path(journal), remote: true) %></td>
-                    <td><%= journal.journal_type.description if journal.journal_type %></td>
-                    <td><%= journal.entry[0,60] %></td>
-                    <td class="actions">
-                        <%= link_to(journal_path(journal), remote: true, title: "show details") do %>
-                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                        <% end %>
-                        <%= link_to(new_journal_path(journal_id: journal), remote: true, title: 'copy entry') do %>
-                            <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
-                        <% end %>
-                        <%= link_to(journal_path(journal), method: :delete, data: { confirm: 'really delete entry?' }) do %>
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        <% end %>
-                    </td>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
-    <%= paginate @journals %>
+  <span class="list-title">entries</span>
+  <%= filters_links %>
+  <table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <th>date</th><th>type</th><th>entry</th><th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @journals.each do |journal| %>
+        <tr>
+          <td><%= link_to(journal.entry_on.strftime("%a %b %d, %y"), edit_journal_path(journal), remote: true, class: 'tip', data: { toggle: 'tooltip' }, title: "edit entry") %></td>
+          <td><%= journal.journal_type.description if journal.journal_type %></td>
+          <td><%= journal.entry[0,60] %></td>
+          <td class="actions text-nowrap">
+            <%= render partial: 'shared/action_links', locals: { path: journal_path(journal), copy_path: new_journal_path(journal_id: journal), label: 'entry' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @journals %>
 <% end %>

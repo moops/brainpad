@@ -54,7 +54,7 @@ class ConnectionsController < ApplicationController
   # DELETE /connections/1
   def destroy
     @connection.destroy
-    redirect_to connections_path
+    redirect_to(connections_path, format: 'html')
   end
 
   private

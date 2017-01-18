@@ -1,45 +1,44 @@
 <% if (@links and @links.size > 0) %>
 
-<table width="100% cellpadding="2" cellspacing="0" class="searchResult">
-    <tr>
-        <th>name</th>
-        <th>tags</th>
-        <th>last clicked</th>
-        <th>clicks</th>
-        <th>url</th>
-        <th>&nbsp;</th></tr>
+  <table width="100%" cellpadding="2" cellspacing="0" class="searchResult">
+    <tr><th>name</th><th>tags</th><th>last clicked</th><th>clicks</th><th>url</th><th>&nbsp;</th><tr>
 
-    <% @links.each_with_index { |cur_link,i| %> 
-    
-    <% highlight = i.modulo(2).nonzero? ? "#dddddd" : "#ffffff" %>
-        
-    <tr class="<%= i.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
+    <% @links.each_with_index do |cur_link, i| %>
+
+      <% highlight = i.modulo(2).nonzero? ? "#dddddd" : "#ffffff" %>
+
+      <tr class="<%= i.modulo(2).nonzero? ? "dataOn" : "dataOff" %>">
         <td>
-            <%= inline_edit("name_#{i.to_s}", cur_link.name, "/links/update_field/#{cur_link.id}", 12, highlight, 'name') %></td>
+          <%= inline_edit("name_#{i.to_s}", cur_link.name, "/links/update_field/#{cur_link.id}", 12, highlight, 'name') %>
+        </td>
         <td>
-            <%= inline_edit("tag_#{i.to_s}", cur_link.tags, "/links/update_field/#{cur_link.id}", 25, highlight, 'tags') %></td>
-            
+          <%= inline_edit("tag_#{i.to_s}", cur_link.tags, "/links/update_field/#{cur_link.id}", 25, highlight, 'tags') %>
+        </td>
+
         <% if cur_link.last_clicked_on %>
-            <td>
-                <%= inline_edit("clicked_#{i.to_s}", cur_link.last_clicked_on.strftime(DATE_FORMAT), "/links/update_field/#{cur_link.id}", 12, highlight, 'last_clicked_on') %></td>
+          <td>
+            <%= inline_edit("clicked_#{i.to_s}", cur_link.last_clicked_on.strftime(DATE_FORMAT), "/links/update_field/#{cur_link.id}", 12, highlight, 'last_clicked_on') %>
+          </td>
         <% else %>
-            <td>never</td>
+          <td>never</td>
         <% end %>
-        
+
         <td>
-            <%= inline_edit("clicks_#{i.to_s}", cur_link.clicks, "/links/update_field/#{cur_link.id}", 4, highlight, 'clicks') %></td>
+          <%= inline_edit("clicks_#{i.to_s}", cur_link.clicks, "/links/update_field/#{cur_link.id}", 4, highlight, 'clicks') %>
+        </td>
         <td>
-            <% display = cur_link.url[0,25] + (cur_link.url.length > 25 ? '...' : '') %>
-            <%= inline_edit("url_#{i.to_s}", display, "/links/update_field/#{cur_link.id}", 25, highlight, 'url') %></td>
-        
-        <td><%= link_to(image_tag('delete.png', :size => '15x15', :border => 0), 
-                    link_path(cur_link), :method => :delete,
-                    :confirm => "really delete #{cur_link.name}?") %></td></tr>
-    <% } %>             
-</table>
+          <% display = cur_link.url[0,25] + (cur_link.url.length > 25 ? '...' : '') %>
+          <%= inline_edit("url_#{i.to_s}", display, "/links/update_field/#{cur_link.id}", 25, highlight, 'url') %>
+        </td>
+        <td>
+          <%= link_to(image_tag('delete.png', size: '15x15', border: 0), link_path(cur_link), method: :delete, confirm: "really delete #{cur_link.name}?") %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 
 <% else %>
-    no links found
+  no links found
 <% end %>
-        
-<%= will_paginate @links %>
+
+<%= paginate @links %>

@@ -10,4 +10,5 @@ class Journal
   belongs_to :journal_type, class_name: "Lookup", optional: true
 
   validates_presence_of :entry, :entry_on
+  paginates_per 15
 end

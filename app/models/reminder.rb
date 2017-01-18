@@ -14,6 +14,7 @@ class Reminder
   belongs_to :frequency, class_name: 'Lookup', optional: true
 
   validates_presence_of :description, :due_at
+  paginates_per 5
 
   scope :outstanding, ->{ where(done: false) }
 

@@ -1,27 +1,71 @@
 <div class="modal-dialog">
-    <div class="modal-content">
-        <%= simple_form_for(@payment, html: { class: 'form-horizontal condensed' }) do |f| %>
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3><%= @payment.new_record? ? 'new' : 'update' %> payment</h3>
+  <div class="modal-content">
+    <%= form_for(@payment, html: { class: 'form-horizontal' }) do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3><%= @payment.new_record? ? 'new' : 'update' %> payment</h3>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="payment_on" class="col-sm-2 control-label">payment_on</label>
+          <div class="col-sm-10">
+            <%= f.text_field :payment_on, class: 'form-control flatpickr' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="from_account" class="col-sm-2 control-label">from</label>
+          <div class="col-sm-10">
+            <%= f.input :from_account, collection: @accounts, value_method: '_id', label_method: 'name' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="to_account" class="col-sm-2 control-label">to</label>
+          <div class="col-sm-10">
+            <%= f.input :to_account, collection: @accounts, value_method: '_id', label_method: 'name' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="amount" class="col-sm-2 control-label">amount</label>
+          <div class="col-sm-10">
+            <%= f.text_field :amount, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="tags" class="col-sm-2 control-label">tags</label>
+          <div class="col-sm-6">
+            <%= f.text_field :tags, class: 'form-control' %>
+          </div>
+          <div class="col-sm-4">
+            <%= tags_field('payment', 'payment_description') %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description" class="col-sm-2 control-label">description</label>
+          <div class="col-sm-10">
+            <%= f.text_field :description, class: 'form-control' %>
+          </div>
+        </div>
+
+        <fieldset>
+          <legend>schedule</legend>
+          <div class="form-group">
+            <label for="frequency" class="col-sm-2 control-label">frequency</label>
+            <div class="col-sm-10">
+              <%= f.text_field :frequency, collection: @frequencies, value_method: '_id', label_method: 'description' %>
             </div>
-            <div class="modal-body">
-                <%= f.input :payment_on, as: :calendar %>
-                <%= f.input :from_account, collection: @accounts, value_method: '_id', label_method: 'name' %>
-                <%= f.input :to_account, collection: @accounts, value_method: '_id', label_method: 'name' %>
-                <%= f.input :amount %>
-                <%= f.input :tags %>
-                <%= tags_field('payment', 'payment_description') %>
-                <%= f.input :description %>
-                <fieldset>
-                    <legend>schedule</legend>
-                        <%= f.input :frequency, collection: @frequencies, value_method: '_id', label_method: 'description' %>
-                        <%= f.input :until, as: :calendar %>
-                </fieldset>
+          </div>
+          <div class="form-group">
+            <label for="until" class="col-sm-2 control-label">until</label>
+            <div class="col-sm-10">
+              <%= f.text_field :until, collection: @frequencies, value_method: '_id', label_method: 'description' %>
             </div>
-            <div class="modal-footer">
-                <%= f.button :submit, class: 'btn btn-primary' %>
-            </div>
-        <% end %>
-    </div><!-- /.modal-content -->
+          </div>
+        </fieldset>
+      </div>
+      <div class="modal-footer">
+        <%= f.button :submit, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
+

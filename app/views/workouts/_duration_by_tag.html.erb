@@ -1,9 +1,9 @@
 <div class="box">
-	<div class="boxhead">workout duration</div>
-	<div class="boxcontent">
-		<% @workout_duration_by_tag.each do |w| %>
-			<%= "#{w[0]} #{(Time.mktime(0)+(w[1]['duration']*60)).strftime("%H:%M")} [#{w[1]['percentage']}%]" %><br/>
-			<%= image_tag('redbar.gif', :width => "#{(w[1]['percentage']*1.5).to_i}", :class => 'bar') %><br/>
-		<% end %>
-	</div>
+  <div class="boxhead">workout duration</div>
+  <div class="boxcontent">
+    <% @workout_duration_by_tag.each do |w| %>
+      <%= "#{w[0]} #{(Time.mktime(0)+(w[1]['duration']*60)).strftime("%H:%M")} [#{w[1]['percentage']}%]" %><br/>
+      <%= image_tag('redbar.gif', width: "#{(w[1]['percentage']*1.5).to_i}", class: 'bar') %><br/>
+    <% end %>
+  </div>
 </div> <!-- end box -->

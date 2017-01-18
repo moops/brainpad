@@ -2,33 +2,23 @@
 <div id="reminder-form" class="modal fade"></div>
 
 <% if @reminder_summary %>
-    <div class="reminder-dashboard">
-        <div class="item">last 30 days:</div>
-        <div class="item"><div class="data"><%= @reminder_summary[:created] %></div>created</div>
-        <div class="item"><div class="data"><%= @reminder_summary[:completed] %></div>completed</div>
-        <div class="item"><div class="data"><%= number_to_percentage(@reminder_summary[:completion_rate], :precision => 0) %></div>rate</div>
-        <div class="item"><div class="data"><%= @reminder_summary[:on_time] %></div>on time</div>
-        <div class="clear"></div>
-    </div> <!-- end .dashboard -->
+  <div class="reminder-dashboard">
+    <div class="item">last 30 days:</div>
+    <div class="item"><div class="data"><%= @reminder_summary[:created] %></div>created</div>
+    <div class="item"><div class="data"><%= @reminder_summary[:completed] %></div>completed</div>
+    <div class="item"><div class="data"><%= number_to_percentage(@reminder_summary[:completion_rate], precision: 0) %></div>rate</div>
+    <div class="item"><div class="data"><%= @reminder_summary[:on_time] %></div>on time</div>
+    <div class="clear"></div>
+  </div> <!-- end .dashboard -->
 <% end %>
 
-<!-- search form -->
-<%= render 'shared/search_form' %>
-
-<!-- add and search buttons -->
-<div class="pull-right">
-    <%= link_to(new_reminder_path, remote: true, :class => "btn btn-primary") do %>
-        <i class="icon-plus icon-white"></i> add
-    <% end %>
-    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#search-container">
-        <i class="icon-search icon-white"></i> find
-    </button>
-</div>
+<%= render partial: 'shared/search_form' %>
+<%= render partial: 'shared/control_buttons', locals: { new_record_path: new_reminder_path } %>
 
 <div id="reminder-list" class="data-list">
-    <%= render(:partial => 'reminders') %>
+  <%= render partial: 'reminders' %>
 </div>
 
 <div class="tag-list">
-    <%= tag_list 'reminder' %>
+  <%= tag_list 'reminder' %>
 </div>

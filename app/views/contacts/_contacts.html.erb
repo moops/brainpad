@@ -1,34 +1,26 @@
 <% if (@contacts and @contacts.size > 0) %>
-    <span class="list-title">contacts</span>
-    <%= filters_links %>
-    <table class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th>name</th><th>email</th><th>home</th><th>work</th><th>cell</th><th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @contacts.each do |contact| %>
-                <tr>
-                    <td><%= link_to(contact.name, edit_contact_path(contact), remote: true) %></td>
-                    <td><a href="mailto:<%= contact.email %>"><%= contact.email %></a></td>
-                    <td><%= contact.phone_home %></td>
-                    <td><%= contact.phone_work %></td>
-                    <td><%= contact.phone_cell %></td>
-                    <td class="actions">
-                        <%= link_to(contact_path(contact), remote: true, title: "show details") do %>
-                            <i class="icon-eye-open"></i>
-                        <% end %>
-                        <%= link_to(new_contact_path(contact_id: contact), remote: true, title: 'copy contact') do %>
-                            <i class="icon-share"></i>
-                        <% end %>
-                        <%= link_to(contact_path(contact), method: :delete, confirm: "really delete #{contact.name}?") do %>
-                            <i class="icon-remove"></i>
-                        <% end %>
-                    </td>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
-    <%= paginate @contacts %>
+  <span class="list-title">contacts</span>
+  <%= filters_links %>
+  <table class="table table-condensed table-hover">
+    <thead>
+      <tr><th>name</th><th>email</th><th>home</th><th>work</th><th>cell</th><th>actions</th></tr>
+    </thead>
+    <tbody>
+      <% @contacts.each do |contact| %>
+        <tr>
+          <td>
+            <%= link_to(contact.name, edit_contact_path(contact), remote: true, class: 'tip', data: { toggle: 'tooltip' }, title: "edit #{contact.name}") %>
+          </td>
+          <td><%= mail_to(contact.email, nil, class: 'tip', data: { toggle: 'tooltip' }, title: "email #{contact.name}") %></td>
+          <td><%= contact.phone_home %></td>
+          <td><%= contact.phone_work %></td>
+          <td><%= contact.phone_cell %></td>
+          <td class="actions text-nowrap">
+            <%= render partial: 'shared/action_links', locals: { path: contact_path(contact), copy_path: new_contact_path(contact_id: contact), label: contact.name } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @contacts %>
 <% end %>

@@ -1,0 +1,9 @@
+<%= link_to(path, class: 'tip', data: { remote: true, toggle: 'tooltip' }, title: 'show details') do %>
+  <i class="glyphicon glyphicon-eye-open"></i>
+<% end %>
+<%= link_to(copy_path, class: 'tip', data: { remote: true, toggle: 'tooltip' }, title: "copy #{label}") do %>
+  <i class="glyphicon glyphicon-share"></i>
+<% end %>
+<%= link_to(path, method: :delete, class: 'tip', data: { toggle: 'tooltip', confirm: "really delete #{label}?" }, title: "delete #{label}") do %>
+  <i class="glyphicon glyphicon-remove"></i>
+<% end %>

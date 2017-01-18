@@ -1,22 +1,13 @@
 <!-- hidden elements -->
 <div id="journal-form" class="modal fade"></div>
 
-<!-- search form -->
-<%= render 'shared/search_form' %>
-
-<div class="pull-right">
-    <%= link_to(new_journal_path, remote: true, :class => "btn btn-primary") do %>
-        <i class="icon-plus icon-white"></i> add
-    <% end %>
-    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#search-container">
-        <i class="icon-search icon-white"></i> find
-    </button>
-</div>
+<%= render partial: 'shared/search_form' %>
+<%= render partial: 'shared/control_buttons', locals: { new_record_path: new_journal_path } %>
 
 <div id="journal-list" class="data-list">
-    <%= render(:partial => 'journals') %>
+  <%= render partial: 'journals' %>
 </div>
 
 <div class="tag-list">
-    <%= tag_list 'journal' %>
+  <%= tag_list 'journal' %>
 </div>

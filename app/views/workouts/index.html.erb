@@ -2,37 +2,28 @@
 <div id="workout-form" class="modal fade"></div>
 
 <% if @workout_summary %>
-    <div class="workout-dashboard">
-        <div class="item">last 30 days:</div>
-        <div class="item"><div class="data"><%= @workout_summary[:workout_days] %></div>workout days</div>
-        <div class="item"><div class="data"><%= @workout_summary[:mileage] %></div>km</div>
-        <div class="item"><div class="data"><%= @workout_summary[:duration] %></div>hours</div>
-        <div class="item"><div class="data"><%= @workout_summary[:weight_range] %></div>weight</div>
-        <div class="clear"></div>
-    </div> <!-- end .dashboard -->
+  <div class="workout-dashboard">
+    <div class="item">last 30 days:</div>
+    <div class="item"><div class="data"><%= @workout_summary[:workout_days] %></div>workout days</div>
+    <div class="item"><div class="data"><%= @workout_summary[:mileage] %></div>km</div>
+    <div class="item"><div class="data"><%= @workout_summary[:duration] %></div>hours</div>
+    <div class="item"><div class="data"><%= @workout_summary[:weight_range] %></div>weight</div>
+    <div class="clear"></div>
+  </div> <!-- end .dashboard -->
 <% end %>
 
 <div class="workouts-panel">
-    <div class="reports-panel" id="duration-by-tag">
-	    <%= render 'duration_by_tag' %>
-    </div>
-    <div class="list-panel">
-        <!-- search form -->
-        <%= render 'shared/search_form' %>
+  <div class="reports-panel" id="duration-by-tag">
+    <%= render 'duration_by_tag' %>
+  </div>
+  <div class="list-panel">
+    <%= render partial: 'shared/search_form' %>
+    <%= render partial: 'shared/control_buttons', locals: { new_record_path: new_workout_path } %>
 
-        <!-- add and search buttons -->
-        <div class="pull-right">
-            <%= link_to(new_workout_path, remote: true, :class => "btn btn-primary") do %>
-                <i class="icon-plus icon-white"></i> add
-            <% end %>
-            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#search-container">
-                <i class="icon-search icon-white"></i> find
-            </button>
-        </div>
-        <div id="workout-list">
-            <%= render(:partial => 'workouts') %>
-        </div>
+    <div id="workout-list" class="data-list">
+      <%= render partial: 'workouts' %>
     </div>
+  </div>
 
-    <div class="clear"></div>
+  <div class="clear"></div>
 </div> <!-- end .workouts-panel -->

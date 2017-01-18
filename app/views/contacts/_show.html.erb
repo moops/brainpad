@@ -1,28 +1,46 @@
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>contact details</h3>
-</div>
-<div class="modal-body">
-    <table class="table table-condensed data-display">
-        <tbody>
-            <tr>
-                <td class="display-label">name</td><td><%= @contact.name %></td></tr>
-            <tr>
-                <td class="display-label">email</td><td><%= @contact.email %></td></tr>
-            <tr>
-                <td class="display-label">home</td><td><%= @contact.phone_home %></td></tr>
-            <tr>
-                <td class="display-label">work</td><td><%= @contact.phone_work %></td></tr>
-            <tr>
-                <td class="display-label">cell</td><td><%= @contact.phone_cell %></td></tr>
-            <tr>
-                <td class="display-label">address</td><td><%= @contact.address %></td></tr>
-            <tr>
-                <td class="display-label">city</td><td><%= @contact.city %></td></tr>
-            <tr>
-                <td class="display-label">tags</td><td><%= @contact.tags %></td></tr>
-            <tr>
-                <td class="display-label">comments</td><td colspan="3"><%= @contact.comments %></td></tr>
-        <tbody>
-    </table>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>contact details</h3>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-5 display-label">name</div>
+        <div class="col-md-7"><%= @contact.name %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 display-label">email</div>
+        <div class="col-md-7"><%= @contact.email %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 display-label">home phone</div>
+        <div class="col-md-7"><%= @contact.phone_home %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 display-label">work phone</div>
+        <div class="col-md-7"><%= @contact.phone_work %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 display-label">cell phone</div>
+        <div class="col-md-7"><%= @contact.phone_cell %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 display-label">address</div>
+        <div class="col-md-7"><%= @contact.address %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 display-label">city</div>
+        <div class="col-md-7"><%= @contact.city %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 display-label">tags</div>
+        <div class="col-md-7"><%= @contact.tags %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-5 display-label">comments</div>
+        <div class="col-md-7"><%= @contact.comments %></div>
+      </div>
+    </div>
+  </div>
 </div>

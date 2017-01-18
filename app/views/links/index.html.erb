@@ -1,57 +1,56 @@
-<div class="accordion" id="foobar">
-    <div class="accordion-group box">
-        <div class="accordion-heading boxhead">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#foobar" href="#collapse-links">links</a>
-        </div>
-        <div id="collapse-links" class="accordion-body collapse in">
-            <div class="accordion-inner">
-                <div class="container">
-                    <div class="row">
-                        <div class="span1"></div>
-                        <div class="span3">
-                            <h4>often</h4>
-                            <ul><%= render @most_often_1 %></ul>
-                        </div>
-                        <div class="span2">
-                            <h4>recent</h4>
-                            <ul><%= render @recently_clicked %></ul>
-                        </div>
-                        <div class="span2">
-                            <h4>new</h4>
-                            <ul><%= render @recently_added %></ul>
-                        </div>
-                        <div class="span2">
-                            <h4>random</h4>
-                            <ul><%= render @random %></ul>
-                        </div>
-                    </div> <!-- end .row -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="accordion-group box">
-        <div class="accordion-heading boxhead">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#foobar" href="#collapse-feeds">feeds</a>
-        </div>
-        <div id="collapse-feeds" class="accordion-body collapse">
-            <div class="accordion-inner">
-                <div class="container">
-                    <div class="row">
-                        <div class="span1"></div>
-                        <%= render partial: 'feed', locals: { feed: @feeds[0] } if @feeds[0] %>
-                        <%= render partial: 'feed', locals: { feed: @feeds[1] } if @feeds[1] %>
-                    </div> <!-- end .row -->
-                    <div class="row">
-                        <div class="span1"></div>
-                        <%= render partial: 'feed', locals: { feed: @feeds[2] } if @feeds[2] %>
-                        <%= render partial: 'feed', locals: { feed: @feeds[3] } if @feeds[3] %>
-                    </div> <!-- end .row -->
-                </div> <!-- end .container -->
-            </div>
-        </div>
-    </div>
-</div>
+<div>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#links" data-toggle="tab">links</a></li>
+    <li><a href="#reddit" data-toggle="tab">reddit</a></li>
+    <li><a href="#feeds" data-toggle="tab">feeds</a></li>
+  </ul>
 
-<div class="tag-list">
-    <%= tag_list 'links' %>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="links">
+      <div class="row">
+        <div class="col-sm-3">
+          <h4>often</h4>
+          <ul class="links-list"><%= render @most_often_1 %></ul>
+        </div>
+        <div class="col-sm-3">
+          <h4>recent</h4>
+          <ul class="links-list"><%= render @recently_clicked %></ul>
+        </div>
+        <div class="col-sm-3">
+          <h4>new</h4>
+          <ul class="links-list"><%= render @recently_added %></ul>
+        </div>
+        <div class="col-sm-3">
+          <h4>random</h4>
+          <ul class="links-list"><%= render @random %></ul>
+        </div>
+        <div class="tag-list">
+          <%= tag_list 'link' %>
+        </div>
+      </div>
+      <% if @tagged_links %>
+        <div class="row">
+          <div class="col-sm-12">
+            <%= filters_links %>
+            <ul class="horizontal-links-list"><%= render @tagged_links %></ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="reddit">
+      reddit content
+    </div>
+    <div class="tab-pane" id="feeds">
+      <div class="row">
+        <%= render partial: 'feed', locals: { feed: @feeds[0] } if @feeds[0] %>
+        <%= render partial: 'feed', locals: { feed: @feeds[1] } if @feeds[1] %>
+      </div> <!-- end .row -->
+      <div class="row">
+        <%= render partial: 'feed', locals: { feed: @feeds[2] } if @feeds[2] %>
+        <%= render partial: 'feed', locals: { feed: @feeds[3] } if @feeds[3] %>
+      </div> <!-- end .row -->
+    </div>
+  </div>
 </div>

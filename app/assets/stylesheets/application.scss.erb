@@ -1,13 +1,13 @@
 //@import "slate"; //bootstrap theme
 @import "bootstrap";
 // @import "bootstrap-responsive";
-@import "datetimepicker";
+@import "flatpickr";
 @import "workouts";
 @import "reminders";
 @import "payments";
 
 body {
-    background-image: url(<%= asset_path('grgrad.gif') %>) repeat-x;
+  background-image: url(<%= asset_path('grgrad.gif') %>) repeat-x;
 }
 
 /*
@@ -16,55 +16,55 @@ body {
  ************************************************
  */
 ul, li {
-    margin: 0; padding: 0;
+  margin: 0; padding: 0;
 }
 
 #blob {
-    //border-right: 1px solid #0059ec;
-    //border-left: 1px solid #0059ec;
-    position: absolute;
-    top: 0;
-    z-index : 1;
-   /*
-    background: #0b2b61;
-    background: -moz-linear-gradient(top, #0b2b61, #1153c0);
-    background: -webkit-gradient(linear, left top, left bottom, from(#0b2b61), to(#1153c0));
-    background: -moz-linear-gradient(top, #0b2b61, #1153c0);
-    background: -webkit-gradient(linear, left top, left bottom, from(#0b2b61), to(#1153c0));
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-box-shadow: 2px 3px 10px #011331;
-    -webkit-box-shadow: 2px 3px 10px #011331;
-    */
-    background: #ff9933;
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(40%,#f45d00), color-stop(100%,#ff9933));
-    background: -webkit-linear-gradient(-45deg, #f45d00 40%, #ff9933 100%);
-    background: -moz-linear-gradient(-45deg, #f45d00 40%, #ff9933 100%);
-    background: -o-linear-gradient(-45deg, #f45d00 40%, #ff9933 100%);
-    border-radius: 6px;
-    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+  //border-right: 1px solid #0059ec;
+  //border-left: 1px solid #0059ec;
+  position: absolute;
+  top: 0;
+  z-index : 1;
+ /*
+  background: #0b2b61;
+  background: -moz-linear-gradient(top, #0b2b61, #1153c0);
+  background: -webkit-gradient(linear, left top, left bottom, from(#0b2b61), to(#1153c0));
+  background: -moz-linear-gradient(top, #0b2b61, #1153c0);
+  background: -webkit-gradient(linear, left top, left bottom, from(#0b2b61), to(#1153c0));
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-box-shadow: 2px 3px 10px #011331;
+  -webkit-box-shadow: 2px 3px 10px #011331;
+  */
+  background: #ff9933;
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(40%,#f45d00), color-stop(100%,#ff9933));
+  background: -webkit-linear-gradient(-45deg, #f45d00 40%, #ff9933 100%);
+  background: -moz-linear-gradient(-45deg, #f45d00 40%, #ff9933 100%);
+  background: -o-linear-gradient(-45deg, #f45d00 40%, #ff9933 100%);
+  border-radius: 6px;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
 }
 
 #nav {
-    position: relative;
-    background: #333;
-    float: left;
+  position: relative;
+  background: #333;
+  float: left;
 }
 
 #nav li {
-    float: left;
-    list-style: none;
-    border-right: 1px solid #4a4a4a;
-    border-left: 1px solid black;
+  float: left;
+  list-style: none;
+  border-right: 1px solid #4a4a4a;
+  border-left: 1px solid black;
 }
 
 #nav li a {
-    color: #e3e3e3;
-    position: relative;
-    z-index: 2;
-    float: left;
-    text-decoration: none;
-    padding: 10px 15px;
+  color: #e3e3e3;
+  position: relative;
+  z-index: 2;
+  float: left;
+  text-decoration: none;
+  padding: 10px 15px;
 }
 
 /*
@@ -73,12 +73,12 @@ ul, li {
  ************************************************
  */
 div.modal form {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 // bootstrap datepicker dropdown fix for appearing in modal divs
 div.datepicker.dropdown-menu {
-    z-index: 1051;
+  z-index: 1051;
 }
 
 // input hover background for milestone time
@@ -86,8 +86,8 @@ div.datepicker.dropdown-menu {
   background-color: whitesmoke;
 }
 
-input.search-query {
-    height: 17px;
+.form-group {
+  margin-bottom: 10px;
 }
 
 /*
@@ -96,32 +96,18 @@ input.search-query {
  ************************************************
  */
 #container {
-    margin: auto;
-    width: 920px;
+  margin: auto;
+  width: 920px;
 }
 
 #nav {
-    margin: auto;
-    width:100%;
-    margin-bottom: 20px;
+  margin: auto;
+  width:100%;
+  margin-bottom: 20px;
 }
 
 .data-list {
-    margin-top: 20px;
-}
-
-footer {
-    margin: auto;
-    width: 920px;
-    font-size: .9em;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    padding: 5px;
-    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-}
-
-footer .footer-search form {
-    display: inline;
+  margin-top: 20px;
 }
 
 /*
@@ -130,22 +116,22 @@ footer .footer-search form {
  ************************************************
  */
 .box {
-    border: 1px solid #f93;
-    border-radius: 6px;
-    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-    margin-bottom: 20px;
+  border: 1px solid #f93;
+  border-radius: 6px;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+  margin-bottom: 20px;
 }
 
 .boxhead {
-    border-bottom: 1px solid #bbb;
-    background-color: #ddd;
-    font-weight: bold;
-    padding: 5px 5px 5px 35px;
-    border-radius: 6px 6px 0px 0px;
+  border-bottom: 1px solid #bbb;
+  background-color: #ddd;
+  font-weight: bold;
+  padding: 5px 5px 5px 35px;
+  border-radius: 6px 6px 0px 0px;
 }
 
 .boxcontent {
-    padding: 10px;
+  padding: 10px;
 }
 
 /*
@@ -154,26 +140,26 @@ footer .footer-search form {
  ************************************************
  */
 td.actions {
-    width: 80px;
+  width: 80px;
 }
 
 td.actions i {
-    opacity: 0.4;
-    padding-left: 8px;
+  opacity: 0.4;
+  padding-left: 8px;
 }
 
 td.actions i:hover {
-    opacity: 1.0;
-    padding-left: 8px;
+  opacity: 1.0;
+  padding-left: 8px;
 }
 
 table.data-display td {
-    border-top: 0;
+  border-top: 0;
 }
 
-table.data-display td.display-label {
-    text-align: right;
-    font-weight: bold;
+.display-label {
+  text-align: right;
+  font-weight: bold;
 }
 
 /*
@@ -182,16 +168,16 @@ table.data-display td.display-label {
  ************************************************
  */
 form.condensed .control-group {
-    margin-bottom: 6px;
+  margin-bottom: 6px;
 }
 
 form.condensed legend {
-    margin-bottom: 0px;
-    line-height: 25px;
+  margin-bottom: 0px;
+  line-height: 25px;
 }
 
 label.required:after {
-    color: red;
+  color: red;
 	font-weight: bold;
 	font-size: 1.5em;
 	line-height: 50%;
@@ -205,11 +191,11 @@ label.required:after {
  ************************************************
  */
 div.alert strong {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 input.milestone-time {
-    border: 0px;
+  border: 0px;
 }
 
 img.bar {
@@ -217,22 +203,67 @@ img.bar {
 }
 
 .clear {
-    clear: both;
+  clear: both;
 }
 
 .filter {
-    background-color: #EEEEEE;
-    border: 1px solid #AAAAAA;
-    border-radius: 5px 5px 5px 5px;
-    font-size: 12px;
-    margin-bottom: 10px;
-    margin-right: 5px;
-    padding: 2px 8px;
+  background-color: #EEEEEE;
+  border: 1px solid #AAAAAA;
+  border-radius: 5px 5px 5px 5px;
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  padding: 2px 8px;
 }
 
 span.list-title {
-    display: inline;
-    margin-right: 0.5em;
-    font-size: 1.5em;
-    font-weight: bold;
+  display: inline;
+  margin-right: 0.5em;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.links-list {
+  list-style-position: inside;
+}
+
+.horizontal-links-list li {
+  display: inline;
+}
+
+/*
+ ************************************************
+ footer
+ ************************************************
+ */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* make room for footer height */
+  margin-bottom: 80px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+}
+
+.footer-content {
+  width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: .9em;
+  padding: 5px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+}
+
+.footer-links {
+  padding-bottom: 8px;
 }

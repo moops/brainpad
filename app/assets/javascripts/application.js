@@ -2,28 +2,31 @@
 //= require jquery_ujs
 //= require jquery.easing
 //= require bootstrap
-//= require datetimepicker
+//= require flatpickr
 //= require_tree .
 
 $(function() {
-  console.log('application.js 1');
   $('#nav').spasticNav();
   $("a.tip").tooltip();
 
-  $('#search-container').on('shown', function () {
+  $('#search-container').on('shown.bs.collapse', function () {
     $('#search-query').focus();
   });
 
-  $('#login-form').on('shown', function () {
+  $('#login-form').on('shown.bs.collapse', function () {
     $('#username').focus();
   });
 
-  $('#registration-form').on('shown', function () {
+  $('#registration-form').on('shown.bs.collapse', function () {
     $('#person_username').focus();
   });
 
+  flatpickr(".flatpickr", {
+    enableTime: true,
+    allowInput: true
+  });
+
   // google analytics
-  console.log('application.js 2');
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -31,7 +34,6 @@ $(function() {
 
   ga('create', 'UA-83838015-1', 'auto');
   ga('send', 'pageview');
-  console.log('application.js 3. sending event');
   ga('send', 'event', { 'eventCategory': 'raceweb-cat', 'eventAction': 'raceweb-action', 'eventValue': 'raceweb-val' });
 });
 

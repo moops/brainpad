@@ -1,32 +1,30 @@
 <% if (@milestones and !@milestones.empty?) %>
-    <h4>milestones</h4>
-    <table class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th>description</th><th>when</th><th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @milestones.each do |milestone| %>
-                <tr>
-                    <td><%= link_to(milestone.name, edit_milestone_path(milestone), remote: true) %></td>
-                    <td>
-                        <input class="milestone-time" id="<%= milestone.id %>"/>
-                        <script type="text/javascript">
-                            count('<%= milestone.id %>', '<%= milestone.milestone_at %>');
-                        </script>
-                    </td>
-                    <td class="actions">
-                        <%= link_to(new_milestone_path(:milestone_id => milestone), remote: true, title: "copy #{milestone.name}") do %>
-                            <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
-                        <% end %>
-                        <%= link_to(milestone_path(milestone), :method => :delete, :confirm => "really delete #{milestone.name}?") do %>
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        <% end %>
-                    </td>
-                </tr>
+  <h4>milestones</h4>
+  <table class="table table-condensed table-hover">
+    <thead>
+      <tr><th>description</th><th>when</th><th>actions</th></tr>
+    </thead>
+    <tbody>
+      <% @milestones.each do |milestone| %>
+        <tr>
+          <td><%= link_to(milestone.name, edit_milestone_path(milestone), remote: true) %></td>
+          <td>
+            <input class="milestone-time" id="<%= milestone.id %>"/>
+            <script type="text/javascript">
+                count('<%= milestone.id %>', '<%= milestone.milestone_at %>');
+            </script>
+          </td>
+          <td class="actions text-nowrap">
+            <%= link_to(new_milestone_path(milestone_id: milestone), class: 'tip', data: { toggle: 'tooltip', remote: true}, title: "copy #{milestone.name}") do %>
+                <i class="glyphicon glyphicon-share"></i>
             <% end %>
-        </tbody>
-    </table>
-    <%= paginate @milestones %>
+            <%= link_to(milestone_path(milestone), method: :delete, class: 'tip', data: { toggle: 'tooltip', confirm: "really delete #{milestone.name}?" }, title: "delete #{milestone.name}?") do %>
+                <i class="glyphicon glyphicon-remove"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @milestones %>
 <% end %>
