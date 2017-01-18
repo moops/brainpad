@@ -1,11 +1,11 @@
 <div class="col-sm-6">
-  <div class="label"><%= feed.channel.title %></div>
-  <ul>
+  <strong><%= feed.channel.title %></strong>
+  <ul class="links-list">
     <% feed.items.each_with_index do |cur_item, i| %>
-      <% if i < 6 %>
+      <% if i < 8 %>
         <li>
           <a href="<%= cur_item.link %>" title="<%= clean_feed_description(cur_item.description) %>" target="_blank">
-            <%= cur_item.title[0,50] if cur_item.title %>
+            <%= link_text_from_feed(cur_item) %>
           </a>
         </li>
       <% end %>

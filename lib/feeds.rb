@@ -5,20 +5,21 @@ module Feeds
 
   def Feeds.get_feeds
     feed_urls = [
-      'http://feeds.feedburner.com/TechCrunch',
-      'http://www.reddit.com/.rss',
+      'http://www.atpworldtour.com/en/media/rss-feed/xml-feed',
       'http://feeds2.feedburner.com/cyclingnews/news',
-      'http://feeds.wired.com/wired/index?format=xml']
+      'http://feeds.feedburner.com/TechCrunch',
+      'https://www.wired.com/feed/']
     feeds = Array.new
     for url in feed_urls
-      puts('url = ' + url)
+      puts "getting feed from #{url}"
       begin
         open(url) do |http|
           response = http.read
           result = RSS::Parser.parse(response, false)
           feeds << result if result
         end
-      rescue
+      rescue Exception => e
+        puts "feed exception: #{e.message}"
       end
     end
     feeds

@@ -12,7 +12,6 @@ class LinksController < ApplicationController
     @most_often_1 = @links.desc(:clicks).limit(8)
     @random = @links.sort_by { rand }[0,8]
     @feeds = Feeds.get_feeds
-    binding.pry
     if params[:tag]
       @tagged_links = @links.where(tags: /#{params[:tag]}/)
       @tag = params[:tag]
