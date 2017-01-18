@@ -17,40 +17,45 @@ class Workout
 
   validates_presence_of :location, :duration, :workout_on
   paginates_per 10
+  INTENSITIES = [
+    ['1 - brisk walk', 1], ['1.5', 1.5], ['2', 2], ['2.5', 2.5], ['3 - very light jog', 3],
+    ['3.5', 3.5], ['4', 4], ['4.5', 4.5], ['5 - standard workout', 5], ['5.5', 5.5], ['6', 6],
+    ['6.5', 6.5], ['7 - something hard', 7], ['7.5', 7.5], ['8 - what am i doing this for?', 8],
+    ['8.5', 8.5], ['9 - blacking out', 9], ['9.5', 9.5], ['10 - heart\'s about to explode', 10]
+  ].freeze
 
   def self.recent_workouts(user, days)
     user.workouts.where(:workout_on.gte => Date.today - days)
   end
 
-  def self.days_with_workouts?(user,days)
+  def self.days_with_workouts?(user, days)
     user.workouts.and({:workout_on.gte => Date.today - days}, {:workout_on.lt => Date.today + 1}).distinct(:workout_on).count
   end
 
-  def self.workout_duration_by_tag(user,days)
+  def self.workout_duration_by_tag(user, days)
     report = Hash.new
     total_duration = 0
     workouts = recent_workouts(user,days)
     workouts.each do |w|
-      if w.tags
-        total_duration += w.duration
-        #TODO individual tag not all tags
-        tags_list = w.tags.split(' ')
-        tags_list.each do |tag|
-          if report.has_key?(tag)
-             report[tag]['duration'] += w.duration
-          else
-            report[tag] = { duration: w.duration }
-          end
+      next unless w.tags
+      total_duration += w.duration
+      #TODO individual tag not all tags
+      tags_list = w.tags.split(' ')
+      tags_list.each do |tag|
+        if report.has_key?(tag)
+           report[tag][:duration] += w.duration
+        else
+          report[tag] = { duration: w.duration }
         end
       end
     end
     report.values.each do |tag|
-      tag['percentage'] = ((tag['duration']/total_duration.to_f) * 100).to_i || 1
+      tag[:percentage] = ((tag[:duration]/total_duration.to_f) * 100).to_i || 1
     end
-    report.sort{|a,b| b[1]['duration']<=>a[1]['duration']}
+    report.sort{|a,b| b[1][:duration]<=>a[1][:duration]}
   end
 
-  def self.summary(user,days)
+  def self.summary(user, days)
     workouts = Workout.recent_workouts(user,days)
     mileage = 0
     duration = 0

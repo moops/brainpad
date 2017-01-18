@@ -1,8 +1,12 @@
 <%= form_for(@link, html: { class: 'form-horizontal' } ) do |f| %>
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label">name</label>
-    <div class="col-sm-10">
+    <div class="col-sm-4">
       <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <label for="clicks" class="col-sm-2 control-label">clicks</label>
+    <div class="col-sm-4">
+      <%= f.text_field :clicks, class: 'form-control' %>
     </div>
   </div>
   <div class="form-group">
@@ -21,27 +25,19 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="expires_on" class="col-sm-2 control-label">expires</label>
+    <div class="col-sm-4">
+      <%= f.text_field :expires_on, class: 'form-control date-picker' %>
+    </div>
+    <label for="last_clicked_on" class="col-sm-2 control-label">last clicked</label>
+    <div class="col-sm-4">
+      <%= f.text_field :last_clicked_on, class: 'form-control datetime-picker' %>
+    </div>
+  </div>
+  <div class="form-group">
     <label for="comments" class="col-sm-2 control-label">comments</label>
     <div class="col-sm-10">
-      <%= f.text_field :comments, class: 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="expires_on" class="col-sm-2 control-label">expires</label>
-    <div class="col-sm-10">
-      <%= f.text_field :expires_on, class: 'form-control flatpickr' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="clicks" class="col-sm-2 control-label">clicks</label>
-    <div class="col-sm-10">
-      <%= f.text_field :clicks, class: 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="last_clicked_on" class="col-sm-2 control-label">last clicked</label>
-    <div class="col-sm-10">
-      <%= f.text_field :last_clicked_on, class: 'form-control flatpickr' %>
+      <%= f.text_area :comments, rows: 2, class: 'form-control' %>
     </div>
   </div>
   <div class="form-group">

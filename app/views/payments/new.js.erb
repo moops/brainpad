@@ -1,8 +1,3 @@
 $('#payment-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
-flatpickr('.flatpickr', {
-  allowInput: true,
-  defaultDate: new Date()
-});
-flatpickr(".until", {
-  allowInput: true
-});
+flatpickr('.date-picker', { allowInput: true });
+flatpickr('.date-picker-today', { allowInput: true, defaultDate: new Date() });

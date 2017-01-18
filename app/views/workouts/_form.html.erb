@@ -16,71 +16,56 @@
           </div>
         </div>
         <div class="form-group">
+          <label for="workout_on" class="col-sm-2 control-label">workout_on</label>
+          <div class="col-sm-4">
+            <%= f.text_field :workout_on, class: 'form-control datetime-picker-today' %>
+          </div>
           <label for="location" class="col-sm-2 control-label">location</label>
-          <div class="col-sm-10">
+          <div class="col-sm-4">
             <%= f.text_field :location, class: 'form-control' %>
           </div>
         </div>
         <div class="form-group">
           <label for="race" class="col-sm-2 control-label">race</label>
-          <div class="col-sm-10">
+          <div class="col-sm-4">
             <%= f.text_field :race, class: 'form-control' %>
           </div>
-        </div>
-        <div class="form-group">
           <label for="route" class="col-sm-2 control-label">route</label>
-          <div class="col-sm-10">
-          <%= f.collection_select(:route_id, @routes, :id, :description, { prompt: true }, class: 'form-control') %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="workout_on" class="col-sm-2 control-label">workout_on</label>
-          <div class="col-sm-10">
-            <%= f.text_field :workout_on, class: 'form-control flatpickr' %>
+          <div class="col-sm-4">
+          <%= f.collection_select(:route_id, @routes, :id, :description, { include_blank: true }, class: 'form-control') %>
           </div>
         </div>
         <div class="form-group">
           <label for="distance" class="col-sm-2 control-label">distance</label>
-          <div class="col-sm-10">
+          <div class="col-sm-4">
             <%= f.text_field :distance, class: 'form-control' %>
           </div>
-        </div>
-        <div class="form-group">
           <label for="duration" class="col-sm-2 control-label">duration</label>
-          <div class="col-sm-10">
+          <div class="col-sm-4">
             <%= f.text_field :duration, class: 'form-control' %>
           </div>
         </div>
         <div class="form-group">
           <label for="intensity" class="col-sm-2 control-label">intensity</label>
-          <div class="col-sm-10">
-            <%= f.text_field :intensity, class: 'form-control' %>
+          <div class="col-sm-4">
+            <%= f.select :intensity, Workout::INTENSITIES, { include_blank: true }, class: 'form-control' %>
           </div>
-        </div>
-        <div class="form-group">
           <label for="weight" class="col-sm-2 control-label">weight</label>
-          <div class="col-sm-10">
+          <div class="col-sm-4">
             <%= f.text_field :weight, class: 'form-control' %>
           </div>
         </div>
         <div class="form-group">
           <label for="description" class="col-sm-2 control-label">description</label>
           <div class="col-sm-10">
-            <%= f.text_field :description, class: 'form-control' %>
+            <%= f.text_area :description, rows: 3, class: 'form-control' %>
           </div>
         </div>
       </div>
       <div class="modal-footer">
+        <a class="btn btn-link" data-dismiss="modal">cancel</a>
         <%= f.button :submit, class: 'btn btn-primary' %>
       </div>
     <% end %>
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
-
-<div class="form-group">
-  <label for="intensity" class="col-sm-2 control-label">intensity</label>
-  <div class="col-sm-10">
-    <input type="date" name="bday">
-  </div>
-</div>
-

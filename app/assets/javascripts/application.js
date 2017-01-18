@@ -21,10 +21,8 @@ $(function() {
     $('#person_username').focus();
   });
 
-  flatpickr(".flatpickr", {
-    enableTime: true,
-    allowInput: true
-  });
+  flatpickr(".date-picker", { allowInput: true });
+  flatpickr(".datetime-picker", { enableTime: true, allowInput: true });
 
   // google analytics
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

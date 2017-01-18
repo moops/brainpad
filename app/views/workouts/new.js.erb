@@ -1,4 +1,2 @@
 $('#workout-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
-flatpickr(".flatpickr", {
-  allowInput: true
-});
+flatpickr('.datetime-picker-today', { enableTime: true, allowInput: true, defaultDate: new Date() });

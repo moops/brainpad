@@ -23,6 +23,13 @@ restore production db:
     heroku run rake db:purge
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
+2017
+- client side validation
+- payment accounts
+- controller tests
+- unit tests
+- library tests
+
 2013
 x Mar  1 - fix format (xx/1) for days used and days left
 - Mar  1 - add component to datepicker fields
