@@ -21,7 +21,7 @@ class JournalsController < ApplicationController
 
   # GET /journals/1/new.js
   def new
-    @types = Lookup.where(category: 7).all
+    @types = Lookup.where(category: 7).order_by(description: :asc)
     if (params[:journal_id])
       @journal = Journal.find(params[:journal_id]).dup
     end
@@ -29,7 +29,7 @@ class JournalsController < ApplicationController
 
   # GET /journals/1/edit.js
   def edit
-    @types = Lookup.where(category: 7).all
+    @types = Lookup.where(category: 7).order_by(description: :asc)
   end
 
   # POST /journals.js

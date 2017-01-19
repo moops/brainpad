@@ -24,8 +24,14 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
+- change workut routes from lookups to a new model
+x jan 19 - hotkeys (ctrl-a add record, ctrl-f find)
+x jan 19 - focus on best field when new record modal opens
+- populate lookups controls for edit record modal
+x jan 19 - sort lookups in dropdowns
+x jan 19 - sort tags
 - client side validation
-x jan 18 payment accounts
+x jan 18 - payment accounts
 - controller tests
 - unit tests
 - library tests

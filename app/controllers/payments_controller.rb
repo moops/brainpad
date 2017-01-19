@@ -56,6 +56,7 @@ class PaymentsController < ApplicationController
     params[:payment][:from_account] = Account.find(params[:payment][:from_account]) unless params[:payment][:from_account].empty?
     params[:payment][:to_account] = Account.find(params[:payment][:to_account]) unless params[:payment][:to_account].empty?
     params[:payment][:frequency] = Lookup.find(params[:payment][:frequency]) unless params[:payment][:frequency].empty?
+    binding.pry
     if @payment.update_attributes(payment_params)
       current_user.tag('payment', @payment.tags)
       flash[:notice] = 'payment was updated.'
@@ -73,9 +74,8 @@ class PaymentsController < ApplicationController
   private
 
   def get_stuff_for_form
-    @accounts = current_user.accounts.active
+    @accounts = current_user.accounts.active.order_by(name: :asc)
     @frequencies = Lookup.where(category: 36).all
-    @tags = current_user.tags_for('payments')
   end
 
   private

@@ -3,7 +3,7 @@
 //= require jquery.easing
 //= require bootstrap
 //= require flatpickr
-//= require_tree .
+//= require nav
 
 $(function() {
   $('#nav').spasticNav();

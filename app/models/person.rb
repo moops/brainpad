@@ -78,7 +78,7 @@ class Person
   end
 
   def tags_for(type)
-    (tag_lists.where(type: type).first || tag_lists.new).tags
+    (tag_lists.where(type: type).first || tag_lists.new).tags.sort
   end
 
 end

@@ -22,9 +22,9 @@ class RemindersController < ApplicationController
 
   # GET /reminders/new.js
   def new
-    @types = Lookup.where(category: 16).all
-    @priorities = Lookup.where(category: 11).all
-    @frequencies = Lookup.where(category: 36).all
+    @types = Lookup.where(category: 16).order_by(description: :asc)
+    @priorities = Lookup.where(category: 11).order_by(code: :asc)
+    @frequencies = Lookup.where(category: 36).order_by(code: :asc)
     if (params[:reminder_id])
       @reminder = Reminder.find(params[:reminder_id]).dup
     end
@@ -32,9 +32,9 @@ class RemindersController < ApplicationController
 
   # GET /reminders/1/edit.js
   def edit
-    @types = Lookup.where(category: 16).all
-    @priorities = Lookup.where(category: 11).all
-    @frequencies = Lookup.where(category: 36).all
+    @types = Lookup.where(category: 16).order_by(description: :asc)
+    @priorities = Lookup.where(category: 11).order_by(code: :asc)
+    @frequencies = Lookup.where(category: 36).order_by(code: :asc)
   end
 
   # POST /reminders
