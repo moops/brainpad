@@ -1,23 +1,25 @@
 require 'test_helper'
 
 class MilestoneTest < ActiveSupport::TestCase
-  
-  test "save without required fields" do
-    a = Milestone.new
-    assert !a.save, 'saved without person'
-    a.person= people(:adam)
+  let(:adam) { Person.find_by(username: 'adam') }
+  let(:next_week) { Milestone.create!(person: adam, name: 'tomorrow', milestone_at: Date.today + 7) }
+  let(:tomorrow) { Milestone.create!(person: adam, name: 'tomorrow', milestone_at: Date.today + 1) }
 
-    assert !a.save, 'saved without name'
-    a.name= 'new milestone'
+  it 'fails to save without required fields' do
+    ms = Milestone.new
+    refute ms.save, 'saved without person'
+    ms.person = adam
 
-    assert !a.save, 'saved without milestone datetime'
-    a.milestone_at= Date.today
+    refute ms.save, 'saved without name'
+    ms.name = 'new milestone'
 
-    assert a.save, 'save with all required fields'
+    refute ms.save, 'saved without milestone datetime'
+    ms.milestone_at = Date.today
+
+    assert ms.save, 'save with all required fields'
   end
-  
-  test "next milestone" do
-    assert Milestone.next_milestone(people(:adam)).eql?(milestones(:tomorrow))
+
+  it 'finds the next milestone' do
+    assert_equal tomorrow, Milestone.next_milestone(adam)
   end
-  
 end

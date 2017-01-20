@@ -1,19 +1,19 @@
 require 'test_helper'
 
 class JournalTest < ActiveSupport::TestCase
-  
-  test "save without required fields" do
-    a = Journal.new
-    assert !a.save, 'saved without person'
-    a.person= people(:adam)
+  let(:adam) { Person.find_by(username: 'adam') }
 
-    assert !a.save, 'saved without entry'
-    a.entry= 'test entry'
-    
-    assert !a.save, 'saved without entry date'
-    a.entry_on= Date.today
+  it 'fails to save without required fields' do
+    journal = Journal.new
+    refute journal.save, 'saved without person'
+    journal.person = adam
 
-    assert a.save, 'save with all required fields'
+    refute journal.save, 'saved without entry'
+    journal.entry = 'test entry'
+
+    refute journal.save, 'saved without entry date'
+    journal.entry_on = Date.today
+
+    assert journal.save, 'save with all required fields'
   end
-  
 end

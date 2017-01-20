@@ -1,19 +1,19 @@
 require 'test_helper'
 
 class ReminderTest < ActiveSupport::TestCase
+  let(:adam) { Person.find_by(username: 'adam') }
 
-  test "save without required fields" do
+  it 'fails to save without required fields' do
     a = Reminder.new
-    assert !a.save, 'saved without person'
-    a.person= people(:adam)
+    refute a.save, 'saved without person'
+    a.person = adam
 
-    assert !a.save, 'saved without description'
-    a.description= 'get something done'
+    refute a.save, 'saved without description'
+    a.description = 'get something done'
 
-    assert !a.save, 'saved without due date'
-    a.due_at= Date.today + 1
+    refute a.save, 'saved without due date'
+    a.due_at = Date.today + 1
 
     assert a.save, 'save with all required fields'
   end
-
 end

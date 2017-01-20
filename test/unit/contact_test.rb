@@ -1,16 +1,16 @@
 require 'test_helper'
 
 class ContactTest < ActiveSupport::TestCase
-  
-  test "save without required fields" do
-    a = Contact.new
-    assert !a.save, 'saved without person'
-    a.person= people(:adam)
+  let(:adam) { Person.find_by(username: 'adam') }
 
-    assert !a.save, 'saved without name'
-    a.name= 'fred flintstone'
+  it 'fails to save without required fields' do
+    con = Contact.new
+    refute con.save, 'saved without person'
+    con.person = adam
 
-    assert a.save, 'save with all required fields'
+    refute con.save, 'saved without name'
+    con.name = 'fred flintstone'
+
+    assert con.save, 'save with all required fields'
   end
-  
 end

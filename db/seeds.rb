@@ -73,8 +73,8 @@ quinn.tag('contact', 'family')
 run = Lookup.where(category: 2, code: 'run').first._id
 bike = Lookup.where(category: 2, code: 'bike').first._id
 w1 = adam.workouts.create({ location: 'thetis', duration: 60, distance: 10, intensity: 5, tags: 'run', workout_on: Date.today - 1, description: 'easy run around thetis' })
-w2 = adam.workouts.create({ location: 'elk lake', duration: 60, distance: 10, intensity: 5, tags: 'run', workout_on: Date.today - 2, description: 'easy run around elk lake' })
-w3 = adam.workouts.create({ location: 'goose', duration: 60, distance: 40, intensity: 5, tags: 'bike', workout_on: Date.today - 4, description: 'easy ride on the goose' })
+w2 = adam.workouts.create({ location: 'elk lake', duration: 60, distance: 10, intensity: 5, tags: 'run', workout_on: Date.today - 4, description: 'easy run around elk lake' })
+w3 = adam.workouts.create({ location: 'goose', duration: 60, distance: 40, intensity: 5, tags: 'bike', workout_on: Date.today - 5, description: 'easy ride on the goose' })
 adam.tag('workout', 'run bike')
 
 chequing = adam.accounts.create({ name: 'chequing', price: 1, units: 1000, active: true })

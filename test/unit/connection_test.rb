@@ -1,22 +1,22 @@
 require 'test_helper'
 
 class ConnectionTest < ActiveSupport::TestCase
-  
-  test "save without required fields" do
-    a = Connection.new
-    assert !a.save, 'saved without person'
-    a.person= people(:adam)
+  let(:adam) { Person.find_by(username: 'adam') }
 
-    assert !a.save, 'saved without username'
-    a.username= 'gmail'
-    
-    assert !a.save, 'saved without password'
-    a.password= 'quinn'
-    
-    assert !a.save, 'saved without url'
-    a.url= 'www.investorsgroup.ca'
+  it 'fails to save without required fields' do
+    con = Connection.new
+    refute con.save, 'saved without person'
+    con.person = adam
 
-    assert a.save, 'save with all required fields'
+    refute con.save, 'saved without username'
+    con.username = 'gmail'
+
+    refute con.save, 'saved without password'
+    con.password = 'quinn'
+
+    refute con.save, 'saved without url'
+    con.url = 'www.investorsgroup.ca'
+
+    assert con.save, 'save with all required fields'
   end
-  
 end

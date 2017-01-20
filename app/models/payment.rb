@@ -30,7 +30,19 @@ class Payment
     return 'expense' if from_account
   end
 
-  def apply(reverse= false)
+  def transfer?
+    type == 'transfer'
+  end
+
+  def deposit?
+    type == 'deposit'
+  end
+
+  def expense?
+    type == 'expense'
+  end
+
+  def apply(reverse = false)
     amt = amount
     amt *= -1 if reverse
     if from_account
@@ -43,13 +55,14 @@ class Payment
     end
   end
 
+  def reverse
+    apply true
+  end
+
   def update_amount_and_adjust_account(new_amount)
-    # reverse it
-    apply(true)
-    # apply new amount
+    reverse
     self.amount = new_amount
     self.save
-    # apply it
     apply
   end
 

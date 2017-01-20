@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class ConnectionsControllerTest < ActionController::TestCase
+class ConnectionsControllerTest < ActionDispatch::IntegrationTest
 
-  test "should get index" do
-    get :index, {}, {'user_id' => people(:adam).to_param}
+  test 'should get index' do
+    get :index, {}, { user_id: people(:adam).to_param }
     assert_response :success
     assert_not_nil assigns(:connections)
   end
