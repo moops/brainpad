@@ -1,6 +1,6 @@
 <% if @journal.valid? %>
-  $('#journal-form').modal('hide');
-  $('#journal-list').html("<%= escape_javascript(render(partial: 'journals')) %>");
+  $('#journal_form').modal('hide');
+  $('#journal_list').html("<%= escape_javascript(render(partial: 'journals')) %>");
 <% else %>
-  $('#journal-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+  $('#journal_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
 <% end %>

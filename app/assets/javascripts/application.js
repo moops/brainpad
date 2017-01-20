@@ -9,20 +9,30 @@ $(function() {
   $('#nav').spasticNav();
   $("a.tip").tooltip();
 
-  $('#search-container').on('shown.bs.collapse', function () {
-    $('#search-query').focus();
+  $('#search_container').on('shown.bs.collapse', function () {
+    $('#search_query').focus();
   });
 
-  $('#login-form').on('shown.bs.collapse', function () {
+  $('#login_form').on('shown.bs.collapse', function () {
     $('#username').focus();
   });
 
-  $('#registration-form').on('shown.bs.collapse', function () {
+  $('#registration_form').on('shown.bs.collapse', function () {
     $('#person_username').focus();
   });
 
-  flatpickr(".date-picker", { allowInput: true });
-  flatpickr(".datetime-picker", { enableTime: true, allowInput: true });
+  // hotkeys
+  function docKeyUp(e) {
+    // ctrl-a - click 'add record' button
+    if (e.ctrlKey && e.keyCode == 65) {
+      $('#new_record_btn').click();
+    }
+    // ctrl-f - click 'find' button
+    if (e.ctrlKey && e.keyCode == 70) {
+      $('#find_btn').click();
+    }
+  }
+  document.addEventListener('keydown', docKeyUp, false);
 
   // google analytics
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -1,6 +1,6 @@
 <!-- hidden elements -->
-<div id="account-form" class="modal fade"></div>
-<div id="payment-form" class="modal fade"></div>
+<div id="account_form" class="modal fade"></div>
+<div id="payment_form" class="modal fade"></div>
 
 <% if @money_summary %>
   <div class="payment-dashboard">
@@ -23,14 +23,14 @@
     <%= render 'expenses_by_tag' %>
   </div>
   <div class="list-panel">
-    <div id="future-payment-list">
+    <div id="future_payment_list">
       <%= render partial: 'upcoming' %>
     </div>
 
     <%= render partial: 'shared/search_form' %>
     <%= render partial: 'shared/control_buttons', locals: { new_record_path: new_payment_path } %>
 
-    <div id="payment-list">
+    <div id="payment_list">
       <%= render partial: 'payments' %>
     </div>
 

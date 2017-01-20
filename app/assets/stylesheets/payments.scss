@@ -46,11 +46,11 @@
 	margin-bottom: 10px;
 }
 
-#payment-list .deposit-amount {
+#payment_list .deposit-amount {
 	font-weight: bold;
 }
 
-#payment-list .transfer-amount {
+#payment_list .transfer-amount {
 	font-style: italic;
 }
 
@@ -60,11 +60,11 @@
  ************************************************
  */
 
-#future-payment-list .table tr:first-child td {
+#future_payment_list .table tr:first-child td {
 	border-top: 0;
 }
 
-#future-payment-list .table {
+#future_payment_list .table {
 	margin-bottom: 0;
 }
 

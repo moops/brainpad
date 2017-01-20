@@ -1,2 +1,6 @@
-$('#journal-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
-flatpickr('.date-picker', { allowInput: true, defaultDate: new Date() });
+$('#journal_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+
+var entryOnCalendar = $('#journal_entry_on').flatpickr({ allowInput: true, defaultDate: new Date() });
+$('#journal_form').on('blur', '#journal_entry_on', function() {
+  window.setTimeout(function() { entryOnCalendar.close(); }, 50);
+});

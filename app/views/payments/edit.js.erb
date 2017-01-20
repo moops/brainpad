@@ -1,3 +1,11 @@
-$('#payment-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
-flatpickr('.date-picker', { allowInput: true });
-flatpickr('.date-picker-today', { allowInput: true });
+$('#payment_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+
+var paymentOnCalendar = $('#payment_payment_on').flatpickr({ allowInput: true });
+$('#payment_form').on('blur', '#payment_payment_on', function() {
+  window.setTimeout(function() { paymentOnCalendar.close(); }, 50);
+});
+
+var untilCalendar = $('#payment_until').flatpickr({ allowInput: true });
+$('#payment_form').on('blur', '#payment_until', function() {
+  window.setTimeout(function() { untilCalendar.close(); }, 50);
+});

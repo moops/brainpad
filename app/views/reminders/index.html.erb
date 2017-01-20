@@ -1,5 +1,5 @@
 <!-- hidden elements -->
-<div id="reminder-form" class="modal fade"></div>
+<div id="reminder_form" class="modal fade"></div>
 
 <% if @reminder_summary %>
   <div class="reminder-dashboard">
@@ -15,7 +15,7 @@
 <%= render partial: 'shared/search_form' %>
 <%= render partial: 'shared/control_buttons', locals: { new_record_path: new_reminder_path } %>
 
-<div id="reminder-list" class="data-list">
+<div id="reminder_list" class="data-list">
   <%= render partial: 'reminders' %>
 </div>
 

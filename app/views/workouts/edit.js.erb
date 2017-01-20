@@ -1,2 +1,6 @@
-$('#workout-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
-flatpickr('.datetime-picker-today', { enableTime: true, allowInput: true });
+$('#workout_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+
+var workoutOnCalendar = $('#workout_workout_on').flatpickr({ allowInput: true, enableTime: true });
+$('#workout_form').on('blur', '#workout_workout_on', function() {
+  window.setTimeout(function() { workoutOnCalendar.close(); }, 50);
+});

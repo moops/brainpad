@@ -1,6 +1,6 @@
 <% if @connection.valid? %>
-	$('#connection-form').modal('hide');
-	$('#connection-list').html("<%= escape_javascript(render(partial: 'connections')) %>");
+	$('#connection_form').modal('hide');
+	$('#connection_list').html("<%= escape_javascript(render(partial: 'connections')) %>");
 <% else %>
-	$('#connection-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+	$('#connection_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
 <% end %>

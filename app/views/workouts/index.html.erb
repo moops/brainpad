@@ -1,5 +1,5 @@
 <!-- hidden elements -->
-<div id="workout-form" class="modal fade"></div>
+<div id="workout_form" class="modal fade"></div>
 
 <% if @workout_summary %>
   <div class="workout-dashboard">
@@ -20,7 +20,7 @@
     <%= render partial: 'shared/search_form' %>
     <%= render partial: 'shared/control_buttons', locals: { new_record_path: new_workout_path } %>
 
-    <div id="workout-list" class="data-list">
+    <div id="workout_list" class="data-list">
       <%= render partial: 'workouts' %>
     </div>
     <div class="tag-list">

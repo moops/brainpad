@@ -1,6 +1,6 @@
 <% if @contact.valid? %>
-	$('#contact-form').modal('hide');
-	$('#contact-list').html("<%= escape_javascript(render(partial: 'contacts')) %>");
+	$('#contact_form').modal('hide');
+	$('#contact_list').html("<%= escape_javascript(render(partial: 'contacts')) %>");
 <% else %>
-	$('#contact-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+	$('#contact_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
 <% end %>

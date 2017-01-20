@@ -1,2 +1,6 @@
-$('#reminder-form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
-flatpickr('.datetime-picker', { enableTime: true, allowInput: true, defaultDate: new Date() });
+$('#reminder_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+
+var dueAtCalendar = $('#reminder_due_at').flatpickr({ allowInput: true, enableTime: true, defaultDate: new Date() });
+$('#reminder_form').on('blur', '#reminder_due_at', function() {
+  window.setTimeout(function() { dueAtCalendar.close(); }, 50);
+});
