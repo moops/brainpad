@@ -2,10 +2,9 @@ require 'feeds'
 
 class LinksController < ApplicationController
 
-  load_and_authorize_resource
-
   # GET /links
   def index
+    authorize Link
     @links = current_user.links
     @recently_clicked = @links.desc(:last_clicked_on).limit(8)
     @recently_added = @links.desc(:created_at).limit(8)
@@ -20,12 +19,15 @@ class LinksController < ApplicationController
 
   # GET /links/1
   def show
+    @link = Link.find(params[:id])
+    authorize @link
     @link.update_attributes(clicks: @link.clicks += 1, last_clicked_on: Time.now)
     redirect_to @link.url.include?("://") ? @link.url : "http://#{@link.url}"
   end
 
   # GET /links/new
   def new
+    authorize Link
     @link = Link.where(url: params[:url]).first if params[:url]
     if @link
       flash[:notice] = "#{@link.url} already exists"
@@ -38,10 +40,14 @@ class LinksController < ApplicationController
 
   # GET /links/1/edit
   def edit
+    @link = Link.find(params[:id])
+    authorize @link
   end
 
   # POST /links
   def create
+    @link = current_user.links.build(link_params)
+    authorize @link
     @link.person = current_user if current_user
     if @link.save
       current_user.tag('link', @link.tags)
@@ -54,6 +60,8 @@ class LinksController < ApplicationController
 
   # PUT /links/1
   def update
+    @link = Link.find(params[:id])
+    authorize @link
     if @link.update_attributes(link_params)
       current_user.tag('link', @link.tags)
       flash[:notice] = 'Link was successfully updated.'
@@ -65,6 +73,8 @@ class LinksController < ApplicationController
 
   # DELETE /links/1
   def destroy
+    @link = Link.find(params[:id])
+    authorize @link
     @link.destroy
     redirect_to links_path
   end
@@ -95,7 +105,6 @@ class LinksController < ApplicationController
 
   private
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def link_params
     params.require(:link).permit(:name, :url, :tags, :comments, :expires_on, :clicks, :last_clicked_on)
   end

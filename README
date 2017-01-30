@@ -24,6 +24,7 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
+x jan 29 - rest of the controller tests (links down)
 x jan 19 - close datetime pickers on blur
 - change workout routes from lookups to a new model
 x jan 19 - hotkeys (ctrl-a add record, ctrl-f find)
@@ -33,7 +34,7 @@ x jan 19 - sort lookups in dropdowns
 x jan 19 - sort tags
 - client side validation
 x jan 18 - payment accounts
-- controller tests
+x jan 25 - controller tests (connection, contact, journal)
 - unit tests
 - library tests
 

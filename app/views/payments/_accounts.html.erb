@@ -3,7 +3,7 @@
   <div class="boxcontent">
     <table class="table table-condensed">
       <tbody>
-        <% current_user.accounts.active.each do |account| %>
+        <% accounts.each do |account| %>
           <tr>
             <td>
               <% if account.url && !account.url.empty? %>

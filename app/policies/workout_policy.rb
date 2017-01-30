@@ -1,0 +1,2 @@
+class WorkoutPolicy < ApplicationPolicy
+end

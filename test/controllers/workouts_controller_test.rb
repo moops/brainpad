@@ -1,43 +1,92 @@
 require 'test_helper'
 
-class WorkoutsControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index, {}, {'user_id' => people(:adam).to_param}
-    assert_response :success
-    assert_not_nil assigns(:workouts)
+class WorkoutsControllerTest < ActionDispatch::IntegrationTest
+
+  describe 'unauthenticated' do
+
+    it 'should not allow index access' do
+      get workouts_path
+      assert_redirected_to root_url
+    end
   end
 
-  test "should create workout" do
-    assert_difference('Workout.count') do
-      post :create, {:workout => { :person => people(:adam), :location => 'elk lake', :duration => 25, :workout_on => Date.today }}, {'user_id' => people(:adam).to_param}
+  describe 'authenticated' do
+
+    before do
+      @user = create(:person)
+      login @user
     end
 
-    assert_redirected_to workouts_path
-  end
-
-  test "should show workout" do
-    get :show, {:id => workouts(:one).to_param}, {'user_id' => people(:adam).to_param}
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, {:id => workouts(:one).to_param}, {'user_id' => people(:adam).to_param}
-    assert_response :success
-  end
-
-  test "should update workout" do
-    put :update, {:id => workouts(:one).to_param, :workout => { }}, {'user_id' => people(:adam).to_param}
-    assert_redirected_to workouts_path
-  end
-
-  test "should destroy workout" do
-    assert_difference('Workout.count', -1) do
-      delete :destroy, {:id => workouts(:one).to_param}, {'user_id' => people(:adam).to_param}
+    after do
+      @user.destroy
     end
 
-    assert_redirected_to workouts_path
+    it 'should not show workouts belonging to others' do
+      # create a workout belonging to a new user
+      another_workout = create(:workout)
+      get workout_path(another_workout)
+      assert_redirected_to root_url
+      # clean up the new workout and person
+      another_workout.person.destroy
+    end
+
+    describe 'with a workout' do
+
+      before do
+        @user_workout = create(:workout, person: @user)
+      end
+
+      after do
+        @user_workout.destroy if @user_workout
+      end
+
+      it 'should get index' do
+        get workouts_path
+        assert_response :success
+        assert_not_nil assigns(:workouts)
+        assert_select 'span.list-title', 'workouts'
+      end
+
+      it 'should show workouts belonging current user' do
+        get workout_path(@user_workout), xhr: true
+        assert_response :success
+        assert_select 'h3', /^workout details.*/
+      end
+
+      it 'should get edit' do
+        get edit_workout_path(@user_workout), xhr: true
+        assert_response :success
+        assert_select 'h3', /^update workout.*/
+      end
+
+      it 'should update workout' do
+        put workout_path(@user_workout), params: { workout: { location: 'foobar' } }
+        @user_workout.reload
+        assert_equal 'foobar', @user_workout.location
+        assert_redirected_to workouts_path
+        # clean up
+        @user_workout.update(location: 'crag x')
+      end
+
+      it 'should destroy workout' do
+        assert_difference('Workout.count', -1) do
+          delete workout_path(@user_workout)
+        end
+        assert_redirected_to workouts_path
+      end
+    end
+
+    it 'should show the new workout form' do
+      get new_workout_path, xhr: true
+      assert_response :success
+    end
+
+    it 'should create workout' do
+      assert_difference('Workout.count') do
+        post workouts_path, xhr: true, params: { workout: { person: @user, location: 'elk lake', duration: 25, workout_on: Date.today } }
+      end
+      assert_redirected_to workouts_path
+    end
+
   end
 end
-
-
-

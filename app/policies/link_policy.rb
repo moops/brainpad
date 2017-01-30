@@ -1,0 +1,2 @@
+class LinkPolicy < ApplicationPolicy
+end

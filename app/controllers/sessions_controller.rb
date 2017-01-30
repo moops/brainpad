@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  
+
   # GET /sessions/new.js
   def new
   end
@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   # login
   # POST /sessions.js
   def create
-    user = Person.where(username: params[:username]).first
+    user = Person.find_by(username: params[:username])
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     end
   end
-  
+
   # logout
   # DELETE /sessions/1
   # DELETE /sessions/1.js

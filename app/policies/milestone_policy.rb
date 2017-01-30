@@ -1,0 +1,2 @@
+class MilestonePolicy < ApplicationPolicy
+end

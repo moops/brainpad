@@ -1,0 +1,2 @@
+class ReminderPolicy < ApplicationPolicy
+end

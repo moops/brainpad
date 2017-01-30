@@ -1,9 +1,9 @@
 class RemindersController < ApplicationController
-
-  load_and_authorize_resource
+  include ApplicationHelper
 
   # GET /reminders
   def index
+    authorize Reminder
     @reminders = current_user.reminders.outstanding.asc(:due_at)
     if params[:tag]
       @reminders = @reminders.where(tags: /#{params[:tag]}/)
@@ -18,6 +18,8 @@ class RemindersController < ApplicationController
 
   # GET /reminders/1.js
   def show
+    @reminder = Reminder.find(params[:id])
+    authorize @reminder
   end
 
   # GET /reminders/new.js
@@ -25,13 +27,13 @@ class RemindersController < ApplicationController
     @types = Lookup.where(category: 16).order_by(description: :asc)
     @priorities = Lookup.where(category: 11).order_by(code: :asc)
     @frequencies = Lookup.where(category: 36).order_by(code: :asc)
-    if (params[:reminder_id])
-      @reminder = Reminder.find(params[:reminder_id]).dup
-    end
+    @reminder = params[:reminder_id] ? Reminder.find(params[:reminder_id]).dup : Reminder.new
   end
 
   # GET /reminders/1/edit.js
   def edit
+    @reminder = Reminder.find(params[:id])
+    authorize @reminder
     @types = Lookup.where(category: 16).order_by(description: :asc)
     @priorities = Lookup.where(category: 11).order_by(code: :asc)
     @frequencies = Lookup.where(category: 36).order_by(code: :asc)
@@ -49,7 +51,8 @@ class RemindersController < ApplicationController
 
   # PUT /reminders/1
   def update
-    @reminder = current_user.reminders.find(params[:id])
+    @reminder = Reminder.find(params[:id])
+    authorize @reminder
     if @reminder.update_attributes(reminder_params)
       current_user.tag('reminder', @reminder.tags)
       flash[:notice] = "reminder #{condense(@reminder.description)} was updated."
@@ -59,6 +62,8 @@ class RemindersController < ApplicationController
 
   # DELETE /reminders/1
   def destroy
+    @reminder = Reminder.find(params[:id])
+    authorize @reminder
     @reminder.destroy
     redirect_to reminders_url
   end
@@ -74,7 +79,6 @@ class RemindersController < ApplicationController
 
   private
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def reminder_params
     params.require(:reminder).permit(:description, :tags, :done, :repeat_until, :due_at, :reminder_type_id, :priority_id, :frequency)
   end

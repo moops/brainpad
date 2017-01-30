@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def tag_list(kind)
-    tags_of_kind = current_user.tags_for(kind) || []
+    tags_of_kind = current_user ? current_user.tags_for(kind) : []
     tags_of_kind.map! do |tag|
       link_to(tag, "#{kind.pluralize}?tag=#{tag}")
     end
@@ -45,5 +45,10 @@ module ApplicationHelper
       #{params[:tag]}
       #{link_to('x', action: :index)}
     </span>".html_safe
+  end
+
+  def condense(content, max = 25)
+    content ||= ''
+    content.length > max ? "#{content[0,max]}..." : content
   end
 end

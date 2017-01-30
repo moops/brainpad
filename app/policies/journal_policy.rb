@@ -1,0 +1,2 @@
+class JournalPolicy < ApplicationPolicy
+end

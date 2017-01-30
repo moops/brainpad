@@ -7,7 +7,7 @@
 
 $(function() {
   $('#nav').spasticNav();
-  $("a.tip").tooltip();
+  $('a.tip').tooltip();
 
   $('#search_container').on('shown.bs.collapse', function () {
     $('#search_query').focus();
@@ -35,7 +35,7 @@ $(function() {
   document.addEventListener('keydown', docKeyUp, false);
 
   // google analytics
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
@@ -56,10 +56,10 @@ function count(id,until) {
   var min = Math.floor((duration % 3600) / 60);
   var sec = Math.floor(duration % 60);
 
-  if(min < 10) {
+  if (min < 10) {
     min = "0" + min;
   }
-  if(sec < 10) {
+  if (sec < 10) {
     sec = "0" + sec;
   }
   if (yrs > 0) {
@@ -79,9 +79,9 @@ function count(id,until) {
   setTimeout("count('" + id + "','" + until + "')", 1000);
 }
 
-// hide success messages after 3 seconds
+// hide messages after 3 seconds
 window.setTimeout(function() {
-    $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove();
-    });
+  $("[class^=alert]").fadeTo(500, 0).slideUp(500, function() {
+    $(this).remove();
+  });
 }, 3000);

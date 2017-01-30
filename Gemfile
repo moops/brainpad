@@ -27,9 +27,10 @@ gem 'bson_ext'                # for mongodb
 gem 'kaminari'                # pagination
 gem 'kaminari-mongoid'
 gem 'bcrypt'                  # password encryption
-gem 'cancancan'               # authorization
+gem 'pundit'                  # authorization
 gem 'jquery-rails'            # unobtrusive javascript
 gem 'twilio-ruby'             # sms sending
 gem 'puma'
+gem 'rails-controller-testing'
 
 gem 'redd'                    # test reddit client

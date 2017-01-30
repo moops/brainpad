@@ -44,17 +44,25 @@ Lookup.create({ category: 36, code: '365', description: 'annualy' })
 Person.delete_all
 adam  = Person.create({ username: 'adam', password: 'adam_pass', password_confirmation: 'adam_pass', born_on: 35.years.ago, authority: '3', email: 'adam@raceweb.ca', map_center: '48.468141,-123.358612', phone: '+12508812818' })
 adam.save
-quinn = Person.create({ username: 'quinn', password: 'quinn_pass', password_confirmation: 'quinn_pass', born_on: 45.years.ago, authority: '3', map_center: '48.468141,-123.358612', phone: '+12508580600' })
+quinn = Person.create({ username: 'quinn', password: 'quinn_pass', password_confirmation: 'quinn_pass', born_on: 25.years.ago, authority: '2', map_center: '48.468141,-123.358612', phone: '+12508580600' })
 quinn.save
-dave  = Person.create({ username: 'dave', password: 'dave_pass', password_confirmation: 'dave_pass', born_on: 55.years.ago, authority: '3', map_center: '48.468141,-123.358612' })
+dave  = Person.create({ username: 'dave', password: 'dave_pass', password_confirmation: 'dave_pass', born_on: 55.years.ago, authority: '2', map_center: '48.468141,-123.358612' })
 dave.save
-cate  = Person.create({ username: 'cate', password: 'cate_pass', password_confirmation: 'cate_pass', born_on: 39.years.ago, authority: '3', map_center: '48.468141,-123.358612', phone: '+12505894719' })
+cate  = Person.create({ username: 'cate', password: 'cate_pass', password_confirmation: 'cate_pass', born_on: 39.years.ago, authority: '2', map_center: '48.468141,-123.358612', phone: '+12505894719' })
 cate.save
 
+#########################################################
+# links
+#########################################################
 adam.links.create({ url: 'http://www.nba.com', name: 'nba', tags: 'sports', comments: 'stupid league', clicks: 15, last_clicked_on: Date.today - 10, expires_on: nil })
 adam.links.create({ url: 'http://www.nhl.com', name: 'nhl', tags: 'sports', comments: 'greedy fuckers', clicks: 5, last_clicked_on: Date.today - 11, expires_on: nil })
 adam.tag('link', 'sports')
+quinn.links.create({ url: 'http://www.steam.com', name: 'steam', tags: 'games', clicks: 0, last_clicked_on: nil, expires_on: nil })
+quinn.tag('link', 'games')
 
+#########################################################
+# contacts
+#########################################################
 adam.contacts.create({ name: 'mom', email: 'lizburke48@hotmail.com', phone_home: '250-347-9021', phone_work: '250-342-6416', address: 'box 100', city: 'radium', tags: 'family', comments: 'makes cookies' })
 adam.contacts.create({ name: 'dad', email: 'jerrylawr@gmail.com', phone_home: '250-344-6584', phone_work: '250-344-6584', address: 'box 200', city: 'golden', tags: 'family', comments: 'makes houses' })
 adam.contacts.create({ name: 'cate', email: 'cate@raceweb.ca', phone_home: '250-658-4719', phone_work: '250-342-6416', address: '1175 gerda', city: 'victoria', tags: 'family', comments: 'makes crafts' })
@@ -70,13 +78,21 @@ quinn.contacts.create({ name: 'mom', email: 'mom@raceweb.ca', phone_home: '250-4
 quinn.contacts.create({ name: 'dad', email: 'dad@raceweb.ca', phone_home: '250-881-2818', phone_work: '250-342-6416', address: '42-330 tyee rd', city: 'victoria', tags: 'family', comments: 'makes dinner' })
 quinn.tag('contact', 'family')
 
+#########################################################
+# workouts
+#########################################################
 run = Lookup.where(category: 2, code: 'run').first._id
 bike = Lookup.where(category: 2, code: 'bike').first._id
 w1 = adam.workouts.create({ location: 'thetis', duration: 60, distance: 10, intensity: 5, tags: 'run', workout_on: Date.today - 1, description: 'easy run around thetis' })
 w2 = adam.workouts.create({ location: 'elk lake', duration: 60, distance: 10, intensity: 5, tags: 'run', workout_on: Date.today - 4, description: 'easy run around elk lake' })
 w3 = adam.workouts.create({ location: 'goose', duration: 60, distance: 40, intensity: 5, tags: 'bike', workout_on: Date.today - 5, description: 'easy ride on the goose' })
 adam.tag('workout', 'run bike')
+w4 = quinn.workouts.create({ location: 'crag x', duration: 60, intensity: 5, tags: 'climb', workout_on: Date.today - 1, description: 'climbed up, fell down' })
+quinn.tag('workout', 'climb')
 
+#########################################################
+# payments
+#########################################################
 chequing = adam.accounts.create({ name: 'chequing', price: 1, units: 1000, active: true })
 savings  = adam.accounts.create({ name: 'savings', price: 1, units: 200, active: true })
 visa     = adam.accounts.create({ name: 'visa', price: 1, units: -200, active: true })
@@ -91,24 +107,44 @@ vi2 = adam.payments.create({ from_account: visa, description: 'groceries', tags:
 vi3 = adam.payments.create({ to_account: visa, description: 'refund', amount: 30, payment_on: Date.today - 2 })
 tr1 = adam.payments.create({ from_account: chequing, to_account: visa, description: 'bill payment', amount: 30, payment_on: Date.today - 2 })
 adam.tag('payment', 'food entertainment recreation gift clothes')
+quinn_savings  = quinn.accounts.create({ name: 'savings', price: 1, units: 100, active: true })
+pay1 = quinn.payments.create({ from_account: quinn_savings, description: 'movie', tags: 'entertainment', amount: 15, payment_on: Date.today })
+quinn.tag('payment', 'entertainment')
 
+#########################################################
+# journals
+#########################################################
 default = Lookup.where(category: 7, code: '1').first._id
 j1 = adam.journals.create({ journal_type: default, entry: 'first test entry', tags: 'test', entry_on: Date.today - 2 })
 j2 = adam.journals.create({ journal_type: default, entry: 'second test entry', tags: 'test', entry_on: Date.today - 3 })
 j3 = adam.journals.create({ journal_type: default, entry: 'third test entry', entry_on: Date.today - 4 })
 j4 = adam.journals.create({ journal_type: default, entry: 'fourth test entry', entry_on: Date.today - 5 })
 adam.tag('journal', 'test')
+j5 = quinn.journals.create({ journal_type: default, entry: 'quinn test entry', entry_on: Date.today - 1 })
+quinn.tag('journal', 'test')
 
+#########################################################
+# connections
+#########################################################
 con1 = adam.connections.create({ name: 'imdb', username: 'adam@raceweb.ca', password: 'clue', url: 'http://www.imdb.com', description: 'movie stuff', tags: 'movies' })
-con1 = adam.connections.create({ name: 'pandora', username: 'adam@raceweb.ca', password: 'clue', url: 'http://www.pandora.com', description: 'all my music', tags: 'music' })
-con1 = adam.connections.create({ name: 'cibc bank', username: 'adam@raceweb.ca', password: 'super secret', url: 'http://www.cibc.com', description: 'all my money', tags: 'bank' })
+con2 = adam.connections.create({ name: 'pandora', username: 'adam@raceweb.ca', password: 'clue', url: 'http://www.pandora.com', description: 'all my music', tags: 'music' })
+con3 = adam.connections.create({ name: 'cibc bank', username: 'adam@raceweb.ca', password: 'super secret', url: 'http://www.cibc.com', description: 'all my money', tags: 'bank' })
 adam.tag('connection', 'movies music bank')
+con4 = quinn.connections.create({ name: 'rbc bank', username: 'quinn@raceweb.ca', password: 'super secret', url: 'http://www.rbc.com', description: 'all my money', tags: 'bank' })
+quinn.tag('connection', 'bank')
 
-m1 = adam.milestones.create({ name: 'high school', milestone_at: '1987-06-25' })
-m1 = adam.milestones.create({ name: 'quinn born', milestone_at: '1996-03-01' })
-m1 = adam.milestones.create({ name: 'else born', milestone_at: '1997-12-19' })
-m1 = adam.milestones.create({ name: 'trip to florida', milestone_at: '2012-03-07' })
+#########################################################
+# milestones
+#########################################################
+m1 = adam.milestones.create({ name: 'high school', milestone_at: Time.now - 30.years })
+m1 = adam.milestones.create({ name: 'quinn born', milestone_at: Time.now - 21.years })
+m1 = adam.milestones.create({ name: 'else born', milestone_at: Time.now - 19.years })
+m1 = adam.milestones.create({ name: 'trip to florida', milestone_at: Time.now - 3.years })
+m1 = quinn.milestones.create({ name: 'climbing trip', milestone_at: Time.now - 1.years })
 
+#########################################################
+# reminders
+#########################################################
 low  = Lookup.where(category: 11, code: '1').first._id
 high = Lookup.where(category: 11, code: '3').first._id
 home = Lookup.where(category: 16, code: '1').first._id
@@ -123,3 +159,5 @@ r8 = adam.reminders.create({ description: 'buy plane tickets', tags: 'home', due
 r9 = adam.reminders.create({ description: 'pay hydro bill', tags: 'home', due_at: Date.today + 3, reminder_type_id: home, priority_id: high })
 r10 = adam.reminders.create({ description: 'kids to jen\'s house', tags: 'home', due_at: Date.today + 4, reminder_type_id: home, priority_id: low })
 adam.tag('reminder', 'home coop school')
+r11 = quinn.reminders.create({ description: 'climbing competition', tags: 'climb', due_at: Time.now + 6.hours, reminder_type_id: home, priority_id: low })
+quinn.tag('reminder', 'climb')

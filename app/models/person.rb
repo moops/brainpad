@@ -48,6 +48,10 @@ class Person
     roles.map(&:to_sym)
   end
 
+  def admin?
+    role?(:admin)
+  end
+
   def age_in_days
     Date.today - born_on
   end
@@ -78,7 +82,8 @@ class Person
   end
 
   def tags_for(type)
-    (tag_lists.where(type: type).first || tag_lists.new).tags.sort
+    t = (tag_lists.where(type: type).first || tag_lists.new).tags
+    t ? t.sort : []
   end
 
 end

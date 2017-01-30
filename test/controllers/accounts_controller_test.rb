@@ -1,45 +1,44 @@
 require 'test_helper'
 
-class AccountsControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:accounts)
+class AccountsControllerTest < ActionDispatch::IntegrationTest
+
+  before do
+    @user = create(:person)
+    @chequing = create(:account, name: 'chequing', person: @user)
+    login @user
   end
 
-  test "should get new" do
-    get :new
+  after do
+    @user.destroy
+    @chequing.destroy if @chequing
+  end
+
+  it 'shows new form' do
+    get new_account_path, xhr: true
     assert_response :success
   end
 
-  test "should create account" do
+  it 'creates an account' do
     assert_difference('Account.count') do
-      post :create, :account => { }
+      post accounts_path, params: { account: { person: @user, name: 'new account', description: 'new account desc', units: 100, price: 1 } }
     end
-
-    assert_redirected_to account_path(assigns(:account))
+    assert_redirected_to accounts_path
   end
 
-  test "should show account" do
-    get :show, :id => accounts(:one).to_param
+  it 'should get edit' do
+    get edit_account_path(@chequing), xhr: true
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, :id => accounts(:one).to_param
-    assert_response :success
+  it 'should update account' do
+    put account_path(@chequing), params: { account: { person: @user, name: 'chequing2' } }
+    assert_redirected_to accounts_path
   end
 
-  test "should update account" do
-    put :update, :id => accounts(:one).to_param, :account => { }
-    assert_redirected_to account_path(assigns(:account))
-  end
-
-  test "should destroy account" do
+  it 'should destroy account' do
     assert_difference('Account.count', -1) do
-      delete :destroy, :id => accounts(:one).to_param
+      delete account_path(@chequing)
     end
-
     assert_redirected_to accounts_path
   end
 end

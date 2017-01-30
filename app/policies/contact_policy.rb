@@ -1,0 +1,2 @@
+class ContactPolicy < ApplicationPolicy
+end
