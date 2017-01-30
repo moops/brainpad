@@ -143,7 +143,7 @@ test:
 production:
   clients:
     default:
-      database: brainpad_test
+      database: brainpad_production
       hosts:
         - localhost:27017
       options:
