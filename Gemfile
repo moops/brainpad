@@ -2,6 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails', '5.0.1'
 
+gem 'bootstrap-sass'
+
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
