@@ -81,7 +81,7 @@ class PaymentsControllerTest < ActionDispatch::IntegrationTest
     end
 
     it 'should create payment' do
-      account = create(:account)
+      account = create(:account, person: @user)
       assert_difference('Payment.count') do
         post payments_path, xhr: true, params: { payment: { person: @user, account: account, amount: 25, payment_on: Date.today } }
       end

@@ -61,6 +61,7 @@ FactoryGirl.define do
   factory :reminder do
     description 'test reminder'
     due_at Time.now + 6.hours
+    person
   end
 
   factory :workout do

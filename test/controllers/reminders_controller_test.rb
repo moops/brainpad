@@ -1,13 +1,10 @@
 require 'test_helper'
 
 class RemindersControllerTest < ActionDispatch::IntegrationTest
-  let(:adam) { Person.find_by(username: 'adam') }
-  let(:adam_entry) { adam.reminders.first }
-  let(:quinn) { Person.find_by(username: 'quinn') }
-  let(:quinn_entry) { quinn.reminders.first }
 
-  describe 'unauthenticated user test' do
-    it 'should not allow index access while unauthenticated' do
+  describe 'unauthenticated' do
+
+    it 'should not allow index access' do
       get reminders_path
       assert_redirected_to root_url
     end
@@ -15,54 +12,76 @@ class RemindersControllerTest < ActionDispatch::IntegrationTest
 
   describe 'authenticated' do
 
-    before do
-      login quinn
+   before do
+      @user = create(:person)
+      login @user
     end
 
-    it 'should get index' do
-      get reminders_path
-      assert_response :success
-      assert_not_nil assigns(:reminders)
-      assert_select 'span.list-title', 'reminders'
+    after do
+      @user.destroy
     end
 
     it 'should not show reminders belonging to others' do
-      get reminder_path(adam_entry)
+      # create a reminder belonging to a new user
+      another_reminder = create(:reminder)
+      get reminder_path(another_reminder)
       assert_redirected_to root_url
+      # clean up the new reminder and person
+      another_reminder.person.destroy
     end
 
-    it 'should show reminders belonging current user' do
-      get reminder_path(quinn_entry), xhr: true
+    describe 'with a reminder' do
+
+      before do
+        @user_reminder = create(:reminder, person: @user)
+      end
+
+      after do
+        @user_reminder.destroy if @user_reminder
+      end
+
+      it 'should get index' do
+        get reminders_path
+        assert_response :success
+        assert_not_nil assigns(:reminders)
+        assert_select 'span.list-title', 'reminders'
+      end
+
+      it 'should show reminders belonging current user' do
+        get reminder_path(@user_reminder), xhr: true
+        assert_response :success
+        assert_select 'h3', /^reminder details.*/
+      end
+
+      it 'should get edit' do
+        get edit_reminder_path(@user_reminder), xhr: true
+        assert_response :success
+        assert_select 'h3', /^update reminder.*/
+      end
+
+      it 'should update reminder' do
+        put reminder_path(@user_reminder), xhr: true, params: { reminder: { description: 'foobar' } }
+        @user_reminder.reload
+        assert_equal 'foobar', @user_reminder.description
+        assert_redirected_to reminders_path
+      end
+
+      it 'should destroy reminder' do
+        assert_difference('Reminder.count', -1) do
+          delete reminder_path(@user_reminder)
+        end
+        assert_redirected_to reminders_path
+      end
+    end
+
+    it 'should show the new connection form' do
+      get new_connection_path, xhr: true
       assert_response :success
-      assert_select 'h3', /^reminder details.*/
     end
 
     it 'should create reminder' do
       assert_difference('Reminder.count') do
-        post reminders_path, xhr: true, params: { reminder: { person: quinn, description: 'test entry', due_at: Time.now + 18.hours } }
-      end
-      assert_redirected_to reminders_path
-    end
-
-    it 'should get edit' do
-      get edit_reminder_path(quinn_entry), xhr: true
-      assert_response :success
-      assert_select 'h3', /^update reminder.*/
-    end
-
-    it 'should update reminder' do
-      put reminder_path(quinn_entry), xhr: true, params: { reminder: { description: 'foobar' } }
-      quinn_entry.reload
-      assert_equal 'foobar', quinn_entry.description
-      assert_redirected_to reminders_path
-      # clean up
-      quinn_entry.update(description: 'climbing competition')
-    end
-
-    it 'should destroy reminder' do
-      destroyable = quinn.reminders.create(description: 'destroyable reminder', due_at: Time.now + 2.hours)
-      assert_difference('Reminder.count', -1) do
-        delete reminder_path(destroyable)
+        post reminders_path, xhr: true, params: { reminder: { person: @user, description: 'test entry', due_at: Time.now + 18.hours } }
       end
       assert_redirected_to reminders_path
     end

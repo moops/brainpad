@@ -8,6 +8,7 @@ class PeopleControllerTest < ActionDispatch::IntegrationTest
       someone = create(:person)
       get edit_person_path(someone)
       assert_redirected_to root_url
+      someone.destroy
     end
 
     it 'allows signup' do
@@ -47,6 +48,7 @@ class PeopleControllerTest < ActionDispatch::IntegrationTest
       other = create(:person)
       get edit_person_path(other), xhr: true
       assert_select 'div', /.*You are not authorized to perform this action.*/
+      other.destroy
     end
 
     it 'allows editing of current user' do
@@ -75,6 +77,7 @@ class PeopleControllerTest < ActionDispatch::IntegrationTest
         delete person_path(other)
       end
       assert_redirected_to root_url
+      other.destroy
     end
   end
 
