@@ -24,6 +24,9 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
+- get workouts from strava
+x jan 30 - figure out db backup to S3
+- figure out DNS
 - stub the feeds for the links controller test
 x jan 29 - rest of the controller tests (links down)
 x jan 19 - close datetime pickers on blur
@@ -36,7 +39,7 @@ x jan 19 - sort tags
 - client side validation
 x jan 18 - payment accounts
 x jan 25 - controller tests (connection, contact, journal)
-- unit tests
+x jan 21 - unit tests
 - library tests
 
 2013
