@@ -1,1 +1,1 @@
-GIT_REVISION = `git log --pretty=format:'%h - %ar' -n 1`
+GIT_REVISION = `git log --pretty=format:'%h - %ai' -n 1`
