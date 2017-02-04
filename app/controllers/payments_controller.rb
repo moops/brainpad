@@ -61,9 +61,10 @@ class PaymentsController < ApplicationController
     new_amount = params[:payment][:amount].to_f
     @payment.update_amount_and_adjust_account(new_amount)
     params[:payment].delete('amount')
-    params[:payment][:from_account] = Account.find(params[:payment][:from_account]) if params[:payment][:from_account]
-    params[:payment][:to_account] = Account.find(params[:payment][:to_account]) if params[:payment][:to_account]
-    params[:payment][:frequency] = Lookup.find(params[:payment][:frequency]) if params[:payment][:frequency]
+    params[:payment][:from_account] = Account.find(params[:payment][:from_account]) unless params[:payment][:from_account].blank?
+    params[:payment][:to_account] = Account.find(params[:payment][:to_account]) unless params[:payment][:to_account].blank?
+    params[:payment][:frequency] = Lookup.find(params[:payment][:frequency]) unless params[:payment][:frequency].blank?
+
     if @payment.update_attributes(payment_params)
       current_user.tag('payment', @payment.tags)
       flash[:notice] = 'payment was updated.'

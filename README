@@ -24,9 +24,17 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
+x feb 03 - make tags_field helper into a partial
+x feb 03 - open links in a new tab
+x feb 03 - add sorting and formatting to tag list of links
+x feb 03 - update payment (maybe others) is redirecting to show rather than index
+x feb 03 - flatpickr calendar not updating text input
+x feb 03 - onchange of payment tag dropdown adding tags. should wait until value is selected (changed to onblur)
+x feb 03 - return key not submitting form (add payment, maybe others) (return in textarea may not work now)
+x jan 31 - change server time zone
 - get workouts from strava
 x jan 30 - figure out db backup to S3
-- figure out DNS
+x feb 01 - figure out DNS
 - stub the feeds for the links controller test
 x jan 29 - rest of the controller tests (links down)
 x jan 19 - close datetime pickers on blur

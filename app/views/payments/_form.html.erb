@@ -38,7 +38,8 @@
             <%= f.text_field :tags, class: 'form-control' %>
           </div>
           <div class="col-sm-4">
-            <%= tags_field('payment', 'payment_description') %>
+            <%= render partial: 'shared/tags_field', locals: { kind: 'payment', desc_field: 'payment_description' } %>
+            <%# tags_field('payment', 'payment_description') %>
           </div>
         </div>
 

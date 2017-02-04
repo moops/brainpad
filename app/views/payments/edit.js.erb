@@ -2,10 +2,10 @@ $('#payment_form').html("<%= escape_javascript(render(partial: 'form')) %>").mod
 
 var paymentOnCalendar = $('#payment_payment_on').flatpickr({ allowInput: true });
 $('#payment_form').on('blur', '#payment_payment_on', function() {
-  window.setTimeout(function() { paymentOnCalendar.close(); }, 50);
+  window.setTimeout(function() { paymentOnCalendar.close(); }, 250);
 });
 
 var untilCalendar = $('#payment_until').flatpickr({ allowInput: true });
 $('#payment_form').on('blur', '#payment_until', function() {
-  window.setTimeout(function() { untilCalendar.close(); }, 50);
+  window.setTimeout(function() { untilCalendar.close(); }, 250);
 });

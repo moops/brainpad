@@ -2,5 +2,5 @@ $('#journal_form').html("<%= escape_javascript(render(partial: 'form')) %>").mod
 
 var entryOnCalendar = $('#journal_entry_on').flatpickr({ allowInput: true, defaultDate: new Date() });
 $('#journal_form').on('blur', '#journal_entry_on', function() {
-  window.setTimeout(function() { entryOnCalendar.close(); }, 50);
+  window.setTimeout(function() { entryOnCalendar.close(); }, 250);
 });

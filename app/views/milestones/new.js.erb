@@ -2,5 +2,5 @@ $('#milestone_form').html("<%= escape_javascript(render(partial: 'form')) %>").m
 
 var milestoneAtCalendar = $('#milestone_milestone_at').flatpickr({ allowInput: true, enableTime: true });
 $('#milestone_form').on('blur', '#milestone_milestone_at', function() {
-  window.setTimeout(function() { milestoneAtCalendar.close(); }, 50);
+  window.setTimeout(function() { milestoneAtCalendar.close(); }, 250);
 });

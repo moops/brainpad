@@ -23,6 +23,10 @@ $(function() {
 
   // hotkeys
   function docKeyUp(e) {
+    // submit the form if return key in form
+    if (e.keyCode == 13) {
+      $(e.target).parents('form').submit();
+    }
     // ctrl-a - click 'add record' button
     if (e.ctrlKey && e.keyCode == 65) {
       $('#new_record_btn').click();

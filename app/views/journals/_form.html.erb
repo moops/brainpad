@@ -28,7 +28,8 @@
             <%= f.text_field :tags, class: 'form-control' %>
           </div>
           <div class="col-sm-4">
-            <%= tags_field('journal') %>
+            <%= render partial: 'shared/tags_field', locals: { kind: 'journal', desc_field: nil } %>
+            <%# tags_field('journal') %>
           </div>
         </div>
       </div>

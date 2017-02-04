@@ -38,7 +38,8 @@
             <%= f.text_field :tags, class: 'form-control' %>
           </div>
           <div class="col-sm-4">
-            <%= tags_field('reminder', 'reminder_description') %>
+            <%= render partial: 'shared/tags_field', locals: { kind: 'reminder', desc_field: 'reminder_description' } %>
+            <%# tags_field('reminder', 'reminder_description') %>
           </div>
         </div>
       </div>

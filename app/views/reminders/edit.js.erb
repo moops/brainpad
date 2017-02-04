@@ -2,5 +2,5 @@ $('#reminder_form').html("<%= escape_javascript(render(partial: 'form')) %>").mo
 
 var dueAtCalendar = $('#reminder_due_at').flatpickr({ allowInput: true, enableTime: true });
 $('#reminder_form').on('blur', '#reminder_due_at', function() {
-  window.setTimeout(function() { dueAtCalendar.close(); }, 50);
+  window.setTimeout(function() { dueAtCalendar.close(); }, 250);
 });

@@ -36,7 +36,8 @@
             <%= f.text_field :tags, class: 'form-control' %>
           </div>
           <div class="col-sm-4">
-            <%= tags_field('connection') %>
+            <%= render partial: 'shared/tags_field', locals: { kind: 'connection', desc_field: nil } %>
+            <%# tags_field('connection') %>
           </div>
         </div>
         <div class="form-group">

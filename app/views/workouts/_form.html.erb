@@ -12,7 +12,8 @@
             <%= f.text_field :tags, class: 'form-control' %>
           </div>
           <div class="col-sm-4">
-            <%= tags_field('workout', 'workout_description') %>
+            <%= render partial: 'shared/tags_field', locals: { kind: 'workout', desc_field: 'workout_description' } %>
+            <%# tags_field('workout', 'workout_description') %>
           </div>
         </div>
         <div class="form-group">

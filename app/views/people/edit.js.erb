@@ -2,5 +2,5 @@ $('#modal_dialog').html("<%= escape_javascript(render(partial: 'form')) %>").mod
 
 var bornOnCalendar = $('#person_born_on').flatpickr({ allowInput: true });
 $('#modal_dialog').on('blur', '#person_born_on', function() {
-  window.setTimeout(function() { bornOnCalendar.close(); }, 50);
+  window.setTimeout(function() { bornOnCalendar.close(); }, 250);
 });

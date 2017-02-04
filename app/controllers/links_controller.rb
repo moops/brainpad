@@ -8,11 +8,11 @@ class LinksController < ApplicationController
     @links = current_user.links
     @recently_clicked = @links.desc(:last_clicked_on).limit(8)
     @recently_added = @links.desc(:created_at).limit(8)
-    @most_often_1 = @links.desc(:clicks).limit(8)
+    @most_often = @links.desc(:clicks).limit(8)
     @random = @links.sort_by { rand }[0,8]
     @feeds = Feeds.get_feeds
     if params[:tag]
-      @tagged_links = @links.where(tags: /#{params[:tag]}/)
+      @tagged_links = @links.where(tags: /#{params[:tag]}/).order(name: :desc)
       @tag = params[:tag]
     end
   end

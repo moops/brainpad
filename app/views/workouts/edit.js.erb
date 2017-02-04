@@ -2,5 +2,5 @@ $('#workout_form').html("<%= escape_javascript(render(partial: 'form')) %>").mod
 
 var workoutOnCalendar = $('#workout_workout_on').flatpickr({ allowInput: true, enableTime: true });
 $('#workout_form').on('blur', '#workout_workout_on', function() {
-  window.setTimeout(function() { workoutOnCalendar.close(); }, 50);
+  window.setTimeout(function() { workoutOnCalendar.close(); }, 250);
 });
