@@ -54,11 +54,12 @@
         <div class="col-sm-12 text-center">
           <a href="javascript:location.href='http://brainpad.raceweb.ca/links/new?url='+encodeURIComponent(location.href)+'&name='+encodeURIComponent(document.title)" class="tip" title="drag this link to the bookmarks bar and use it to add links">poster</a> <strong>||</strong>
           logged in as <%= current_user.username %> <strong>||</strong>
-          <%= link_to('profile', edit_person_path(current_user), {remote: true, title: 'change my deets', class: 'tip'}) %> <strong>||</strong>
-          <%= link_to('log out', logout_path, {title: 'get me out of here', class: 'tip'}) %> ||
+          <%= link_to('profile', edit_person_path(current_user), { remote: true, title: 'change my deets', class: 'tip' }) %> <strong>||</strong>
+          <%= link_to('log out', logout_path, { title: 'get me out of here', class: 'tip' }) %> ||
           <%= "you've used #{current_user.age_in_days.to_i} days and have #{current_user.days_left.to_i} left." if current_user.born_on %> <strong>||</strong>
           <a href="mailto:info@raceweb.ca">info@raceweb.ca</a> <strong>||</strong>
-          &copy <%= Date.today.year %> raceweb.ca
+          &copy <%= Date.today.year %> raceweb.ca <strong>||</strong>
+          <%= link_to('rev', '#', { title: GIT_REVISION, class: 'tip' }) %>
 
         </div>
       </div>
