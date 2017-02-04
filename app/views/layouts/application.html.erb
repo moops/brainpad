@@ -59,7 +59,8 @@
           <%= "you've used #{current_user.age_in_days.to_i} days and have #{current_user.days_left.to_i} left." if current_user.born_on %> <strong>||</strong>
           <a href="mailto:info@raceweb.ca">info@raceweb.ca</a> <strong>||</strong>
           &copy <%= Date.today.year %> raceweb.ca <strong>||</strong>
-          <%= link_to('rev', '#', { title: GIT_REVISION, class: 'tip' }) %>
+          <%= link_to('rev', '#', { title: GIT_REVISION, class: 'tip' }) %> <strong>||</strong>
+          <%= link_to('who', '#', { title: WHOAMI, class: 'tip' })
 
         </div>
       </div>
