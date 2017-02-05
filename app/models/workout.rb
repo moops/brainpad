@@ -7,10 +7,11 @@ class Workout
   field :dsc, as: :description
   field :tg, as: :tags
   field :dur, as: :duration, type: Integer
-  field :int, as: :intensity, type: Integer
+  field :int, as: :intensity, type: Float
   field :wt, as: :weight, type: Integer
   field :di, as: :distance, type: Float
   field :w_on, as: :workout_on, type: Date
+  field :st, as: :strava_id
 
   belongs_to :person
   belongs_to :route, class_name: "Lookup", optional: true

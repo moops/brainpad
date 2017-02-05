@@ -13,6 +13,9 @@ reddit client
     - https://github.com/avinashbot/redd
     - https://www.reddit.com/prefs/apps client_id Ivqp2IcwAX6iRg, secret AgOmxJCCHslT9KMa3UW1KONzc_o
     - https://github.com/reddit/reddit/wiki/OAuth2
+strava
+    - gem https://github.com/jaredholdcroft/strava-api-v3
+    - api http://strava.github.io/api/
 
 build local db from postgres:
     rake db:purge
@@ -24,6 +27,7 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
+- refactor strava rake task to a library and call from controller
 x feb 03 - add git revision to footer
 x feb 03 - make tags_field helper into a partial
 x feb 03 - open links in a new tab
@@ -33,7 +37,7 @@ x feb 03 - flatpickr calendar not updating text input
 x feb 03 - onchange of payment tag dropdown adding tags. should wait until value is selected (changed to onblur)
 x feb 03 - return key not submitting form (add payment, maybe others) (return in textarea may not work now)
 x jan 31 - change server time zone
-- get workouts from strava
+x feb 03 - get workouts from strava
 x jan 30 - figure out db backup to S3
 x feb 01 - figure out DNS
 - stub the feeds for the links controller test

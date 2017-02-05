@@ -1,0 +1,1 @@
+STRAVA_ACCESS_TOKEN = 'fill_me_in'.freeze

@@ -1,8 +1,14 @@
+# require 'strava/api/v3'
+
 class WorkoutsController < ApplicationController
 
   # GET /workouts
   def index
     authorize Workout
+    # fill in recent workouts from strava activities
+    # TODO how far back do we look in the strava stream? 20 for now
+    Brainpad::StravaLib.import_for(current_user, 20)
+
     @workouts = current_user.workouts.desc(:workout_on)
     if params[:tag]
       @workouts = @workouts.where(tags: /#{params[:tag]}/)
@@ -68,6 +74,6 @@ class WorkoutsController < ApplicationController
   private
 
   def workout_params
-    params.require(:workout).permit(:location, :race, :description, :tags, :duration, :intensity, :weight, :distance, :workout_on, :route_id)
+    params.require(:workout).permit(:location, :race, :description, :tags, :duration, :intensity, :weight, :distance, :workout_on, :route_id, :strava_id)
   end
 end

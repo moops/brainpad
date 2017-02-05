@@ -36,3 +36,4 @@ gem 'puma'
 gem 'rails-controller-testing'
 
 gem 'redd'                    # test reddit client
+gem 'strava-api-v3'           # strava access
