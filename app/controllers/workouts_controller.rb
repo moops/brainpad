@@ -7,7 +7,8 @@ class WorkoutsController < ApplicationController
     authorize Workout
     # fill in recent workouts from strava activities
     # TODO how far back do we look in the strava stream? 20 for now
-    Brainpad::StravaLib.import_for(current_user, 20)
+    created_from_strava = Brainpad::StravaLib.import_for(current_user, 20)
+    flash[:notice] = "created #{created_from_strava} new workouts from strava" if created_from_strava > 0
 
     @workouts = current_user.workouts.desc(:workout_on)
     if params[:tag]

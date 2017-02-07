@@ -1,1 +1,1 @@
-STRAVA_ACCESS_TOKEN = 'fill_me_in'.freeze
+STRAVA_ACCESS_TOKEN = '16afadbe9ef5c6720240edb434860bde32c575ab'.freeze

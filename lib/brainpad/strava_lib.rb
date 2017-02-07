@@ -18,8 +18,8 @@ module Brainpad
         break if Workout.find_by(strava_id: strava_id)
 
         detailed_activity = @client.retrieve_an_activity(strava_id)
-        existing = Workout.find_by(strava_id: strava_id)
-        if existing
+        existing = Workout.where(strava_id: strava_id)
+        if existing.count > 0
           p "workout found with #{strava_id}"
           existing_count += 1
         else
@@ -30,6 +30,7 @@ module Brainpad
       end
       p "created #{created_count} workouts."
       p "#{existing_count} workouts already existed."
+      created_count
     end
 
     private
