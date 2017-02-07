@@ -7,7 +7,6 @@ module Brainpad
       @client = Strava::Api::V3::Client.new(access_token: STRAVA_ACCESS_TOKEN)
       activities = @client.list_athlete_activities(per_page: page_size)
       created_count = 0
-      existing_count = 0
       activities.each do |w|
         strava_id = w['id']
 
@@ -15,21 +14,15 @@ module Brainpad
         # the activities are sorted by recent first so as soon as we find one we already have,
         # we'll also have all older activities. if the sorting ever changes, change the next
         # line to `next` instead of `break`
-        break if Workout.find_by(strava_id: strava_id)
+        existing = Workout.where(strava_id: strava_id)
+        break if existing.count > 0
 
         detailed_activity = @client.retrieve_an_activity(strava_id)
-        existing = Workout.where(strava_id: strava_id)
-        if existing.count > 0
-          p "workout found with #{strava_id}"
-          existing_count += 1
-        else
-          p "create a workout for strava_id: #{strava_id}"
-          create_workout_for(person, params_for(detailed_activity))
-          created_count += 1
-        end
+        p "create a workout for strava_id: #{strava_id}"
+        create_workout_for(person, params_for(detailed_activity))
+        created_count += 1
       end
       p "created #{created_count} workouts."
-      p "#{existing_count} workouts already existed."
       created_count
     end
 
