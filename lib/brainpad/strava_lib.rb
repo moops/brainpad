@@ -15,7 +15,7 @@ module Brainpad
         # we'll also have all older activities. if the sorting ever changes, change the next
         # line to `next` instead of `break`
         existing = Workout.where(strava_id: strava_id)
-        break if existing.count > 0
+        next if existing.count > 0
 
         detailed_activity = @client.retrieve_an_activity(strava_id)
         p "create a workout for strava_id: #{strava_id}"

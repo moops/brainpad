@@ -17,6 +17,10 @@ strava
     - gem https://github.com/jaredholdcroft/strava-api-v3
     - api http://strava.github.io/api/
 
+    Client ID:  16009
+    Client Secret:  c837791d2aee63ca9594a8ee91c8e3a1cb154039
+    Access Token: 16afadbe9ef5c6720240edb434860bde32c575ab
+
 build local db from postgres:
     rake db:purge
     rails runner script/import.rb
@@ -27,6 +31,7 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
+
 x feb 07 - refactor strava rake task to a library and call from controller
 x feb 03 - add git revision to footer
 x feb 03 - make tags_field helper into a partial
