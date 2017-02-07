@@ -27,7 +27,7 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
-- refactor strava rake task to a library and call from controller
+x feb 07 - refactor strava rake task to a library and call from controller
 x feb 03 - add git revision to footer
 x feb 03 - make tags_field helper into a partial
 x feb 03 - open links in a new tab
