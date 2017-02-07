@@ -79,7 +79,7 @@ module Brainpad
     end
 
     def self.location_for(strava_activity)
-      location_match = /loc\[(.*)\]/.match(strava_activity['description'])
+      location_match = /loc\[(.*?)\]/.match(strava_activity['description'])
       return location_match[1] if location_match
       'unknown'
     end
