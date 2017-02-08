@@ -14,7 +14,7 @@ class Reminder
   belongs_to :frequency, class_name: 'Lookup', optional: true
 
   validates_presence_of :description, :due_at
-  paginates_per 5
+  paginates_per 8
 
   scope :outstanding, ->{ where(done: false) }
 
@@ -23,23 +23,23 @@ class Reminder
   end
 
   def self.todays(user)
-    user.reminders.where(due_at: Date.today, done: false)
+    user.reminders.where(done: false, :due_at.gte => Time.zone.now.beginning_of_day, :due_at.lte => Time.zone.now.end_of_day)
   end
 
   def self.recent(user, days)
     user.reminders.gt(due_at: Date.today - (days + 1))
   end
 
-  def self.describe_due(user, on=Date.today)
+  def self.describe_due(user, at = Time.zone.now)
     summary = "due today:\n"
-    user.reminders.where(due_at: on, done: false).each do |r|
+    user.reminders.where(done: false, :due_at.gte => at.beginning_of_day, :due_at.lte => at.end_of_day).each do |r|
       summary << "- #{r.priority.description} " if r.priority
       summary << "- #{r.description}\n"
     end
     summary
   end
 
-  def self.summary(user,days)
+  def self.summary(user, days)
     reminders = Reminder.recent(user,days)
     created = reminders.length
     completed = 0
