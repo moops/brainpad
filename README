@@ -31,6 +31,12 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
+- refactor sms_controller to lib
+- recieve texts from twilio, reminders done, create rest in sms_controller
+- reduce redundancy of s3 backups
+- remove old backups on the first of the month (new cron?, in the backup script?)
+x feb 09 - recieve texts from twilio, create reminders
+- git post-recieve hook to deploy on push to production (link to instructions in aws_notes.md)
 x feb 07 - fix twillio daily reminder sending
 x feb 07 - refactor strava rake task to a library and call from controller
 x feb 03 - add git revision to footer
