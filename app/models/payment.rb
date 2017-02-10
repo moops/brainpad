@@ -170,4 +170,8 @@ class Payment
       balance: balance
     }
   end
+
+  def to_s
+    "#{amount} #{account_name} :: #{description}"
+  end
 end

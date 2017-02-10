@@ -14,7 +14,7 @@ class Workout
   field :st, as: :strava_id
 
   belongs_to :person
-  belongs_to :route, class_name: "Lookup", optional: true
+  belongs_to :route, class_name: 'Lookup', optional: true
 
   validates_presence_of :location, :duration, :workout_on
   paginates_per 10
@@ -74,5 +74,9 @@ class Workout
       mileage: (mileage*10).ceil/10.0, # tenths of kms
       duration: (duration/60*10).ceil/10.0 # minutes to tenths of hours
     }
+  end
+
+  def to_s
+    "#{tags} #{distance} - #{location}"
   end
 end

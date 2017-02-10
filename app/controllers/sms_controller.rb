@@ -33,27 +33,51 @@ class SmsController < ApplicationController
   end
 
   def parse_workout(person, body)
-    p 'parse_workout'
+    m = /^\w+\s+(?<tags>\w+)\s+(?<location>.*)\s+duration:\s+(?<duration>.*)\s+distance:\s+(?<distance>.*)\s+intensity:\s+(?<intensity>.*)\s+on:\s+(?<workout_on>.*)$/.match(body)
+    attributes = attributes_for(m)
+    # parse the workout_on
+    attributes[:workout_on] = parse_time(attributes[:workout_on])
+    workout = person.workouts.create(attributes)
+    logger.info "created workout[#{workout}]"
   end
 
   def parse_journal(person, body)
-    p 'parse_journal'
+    m = /^\w+\s+(?<entry>.*)\s+on:\s+(?<entry_on>.*)$/.match(body)
+    attributes = attributes_for(m)
+    # parse the entry_on
+    attributes[:entry_on] = parse_time(attributes[:entry_on])
+    journal = person.journals.create(attributes)
+    logger.info "created journal entry[#{journal.entry[0,30]}]"
   end
 
   def parse_payment(person, body)
-    'parse_payment'
+    m = /^\w+\s+\$(?<amount>\d.?\d{0,2})\s+(?<description>.*)\s+from:\s+(?<from_account>.*)\s+on:\s+(?<payment_on>.*)$/.match(body)
+    attributes = attributes_for(m)
+    # find the from account
+    attributes[:from_account] = person.accounts.find_by(name: /#{attributes[:from_account]}/) if attributes[:from_account]
+    # parse the payment_on
+    attributes[:payment_on] = parse_time(attributes[:payment_on])
+    payment = person.payments.create(attributes)
+    logger.info "created payment[#{payment}]"
   end
 
   def parse_time(time)
+    return unless time
     case time.downcase
-      when 'today'
+      when 'now'
         Time.zone.now
+      when 'today'
+        Date.today
       when 'tomorrow'
-        Time.zone.now + 1.days
+        Date.today + 1.days
       when 'yesterday'
-        Time.zone.now - 1.days
+        Date.today - 1.days
       else
         Time.parse(time)
     end
+  end
+
+  def attributes_for(match)
+    Hash[match.names.collect { |n| [n.to_sym, match[n]] }]
   end
 end
