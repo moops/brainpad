@@ -51,7 +51,7 @@ class SmsController < ApplicationController
   end
 
   def parse_payment(person, body)
-    m = /^\w+\s+\$(?<amount>\d.?\d{0,2})\s+(?<description>.*)\s+from:\s+(?<from_account>.*)\s+on:\s+(?<payment_on>.*)$/.match(body)
+    m = /^\w+\s+\$(?<amount>\d+(\.\d{1,2})?)\s+(?<description>.*)\s+from:\s+(?<from_account>.*)\s+on:\s+(?<payment_on>.*)/.match(body)
     attributes = attributes_for(m)
     # find the from account
     attributes[:from_account] = person.accounts.find_by(name: /#{attributes[:from_account]}/) if attributes[:from_account]
