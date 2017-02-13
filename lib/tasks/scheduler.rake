@@ -11,7 +11,7 @@ task :send_reminders => :environment do
     unless Reminder.todays(person).empty?
       # Create and send an SMS message
       p "sending sms to #{person.username} (#{person.phone})..."
-      client.account.sms.messages.create(
+      client.account.messages.create(
         from: TWILIO_CONFIG['from'],
         to: person.phone,
         body: Reminder.describe_due(person)
