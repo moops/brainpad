@@ -4,8 +4,19 @@ class SmsController < ApplicationController
   def create
     person = Person.find_by(phone: params[:From])
     head :unprocessable_entity unless person
-    create_something(person, params[:Body])
-    head :created
+    msg = ''
+    begin
+      record = create_something(person, params[:Body])
+      msg = record.new_record? ? "failed to create #{record.class.name.downcase}" : "created #{record.class.name.downcase}"
+    rescue StandardError => e
+      msg = "failed to create anything: #{e.message}"
+    end
+
+    twiml = Twilio::TwiML::Response.new do |r|
+      logger.info msg
+      r.Message msg
+    end
+    render xml: twiml.text
   end
 
   private
@@ -28,8 +39,7 @@ class SmsController < ApplicationController
   def parse_reminder(person, body)
     m = /^\w+\s+(.*)(do:\s+(.*))$/.match(body)
     due_at = parse_time(m[3])
-    reminder = person.reminders.create(description: m[1].strip, due_at: due_at)
-    logger.info "created reminder[#{reminder.description}]"
+    person.reminders.create(description: m[1].strip, due_at: due_at)
   end
 
   def parse_workout(person, body)
@@ -37,8 +47,7 @@ class SmsController < ApplicationController
     attributes = attributes_for(m)
     # parse the workout_on
     attributes[:workout_on] = parse_time(attributes[:workout_on])
-    workout = person.workouts.create(attributes)
-    logger.info "created workout[#{workout}]"
+    person.workouts.create(attributes)
   end
 
   def parse_journal(person, body)
@@ -46,8 +55,7 @@ class SmsController < ApplicationController
     attributes = attributes_for(m)
     # parse the entry_on
     attributes[:entry_on] = parse_time(attributes[:entry_on])
-    journal = person.journals.create(attributes)
-    logger.info "created journal entry[#{journal.entry[0,30]}]"
+    person.journals.create(attributes)
   end
 
   def parse_payment(person, body)
@@ -59,7 +67,7 @@ class SmsController < ApplicationController
     attributes[:payment_on] = parse_time(attributes[:payment_on])
     payment = person.payments.create(attributes)
     payment.apply
-    logger.info "created payment[#{payment}]"
+    payment
   end
 
   def parse_time(time)

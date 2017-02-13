@@ -11,4 +11,8 @@ class Journal
 
   validates_presence_of :entry, :entry_on
   paginates_per 15
+
+  def to_s
+    entry[0,30]
+  end
 end
