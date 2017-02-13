@@ -58,6 +58,7 @@ class SmsController < ApplicationController
     # parse the payment_on
     attributes[:payment_on] = parse_time(attributes[:payment_on])
     payment = person.payments.create(attributes)
+    payment.apply
     logger.info "created payment[#{payment}]"
   end
 
