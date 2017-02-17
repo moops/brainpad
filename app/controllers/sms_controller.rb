@@ -37,7 +37,7 @@ class SmsController < ApplicationController
   end
 
   def parse_reminder(person, body)
-    m = /^\w+\s+(.*)(do:\s+(.*))$/.match(body)
+    m = /^\w+\s+(.*)(on:\s+(.*))$/.match(body)
     due_at = parse_time(m[3])
     person.reminders.create(description: m[1].strip, due_at: due_at)
   end
