@@ -31,10 +31,11 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
+x feb 22 - add tags to sms payment creation
 x feb 13 - add sms reply with status of object creation
 x feb 10 - receive texts from twilio, reminders done, create rest in sms_controller
 x feb 09 - reduce redundancy of s3 backups
-- remove old backups on the first of the month (new cron?, in the backup script?) ie. `aws s3 rm s3://raceweb-brainpad/file.zip`
+x feb 22 - remove old backups on the first of the month (new cron?, in the backup script?) ie. `aws s3 rm s3://raceweb-brainpad/file.zip`
 x feb 09 - recieve texts from twilio, create reminders
 - git post-recieve hook to deploy on push to production (link to instructions in aws_notes.md)
 x feb 07 - fix twillio daily reminder sending

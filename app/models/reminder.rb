@@ -56,4 +56,8 @@ class Reminder
       completion_rate: created > 0 ? (completed.to_f / created.to_f) * 100 : 0
     }
   end
+
+  def to_s
+    "#{due_at} - #{description}"
+  end
 end

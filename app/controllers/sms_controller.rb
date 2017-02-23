@@ -7,7 +7,7 @@ class SmsController < ApplicationController
     msg = ''
     begin
       record = create_something(person, params[:Body])
-      msg = record.new_record? ? "failed to create #{record.class.name.downcase}" : "created #{record.class.name.downcase}"
+      msg = record.new_record? ? "failed to create #{record.class.name.downcase}" : "created #{record.class.name.downcase} - #{record}"
     rescue StandardError => e
       msg = "failed to create anything: #{e.message}"
     end
@@ -59,7 +59,7 @@ class SmsController < ApplicationController
   end
 
   def parse_payment(person, body)
-    m = /^\w+\s+\$(?<amount>\d+(\.\d{1,2})?)\s+(?<description>.*)\s+from:\s+(?<from_account>.*)\s+on:\s+(?<payment_on>.*)/.match(body)
+    m = /^\w+\s+(?<tags>[\w-]+)\s+\$(?<amount>\d+(\.\d{1,2})?)\s+(?<description>.*)\s+from:\s+(?<from_account>.*)\s+on:\s+(?<payment_on>.*)/.match(body)
     attributes = attributes_for(m)
     # find the from account
     attributes[:from_account] = person.accounts.find_by(name: /#{attributes[:from_account]}/) if attributes[:from_account]
