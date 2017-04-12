@@ -3,7 +3,7 @@ class ConnectionsController < ApplicationController
   # GET /connections
   def index
     authorize Connection
-    @connections = policy_scope(Connection).asc(:name)
+    @connections = current_user.connections.asc(:name)
     if params[:q]
       @connections = @connections.where(name: /#{params[:q]}/i)
     end

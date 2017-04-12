@@ -31,6 +31,7 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
+x apr 12 - connections are not filtered by user
 x feb 22 - add tags to sms payment creation
 x feb 13 - add sms reply with status of object creation
 x feb 10 - receive texts from twilio, reminders done, create rest in sms_controller
@@ -51,7 +52,7 @@ x feb 03 - return key not submitting form (add payment, maybe others) (return in
 x jan 31 - change server time zone
 x feb 03 - get workouts from strava
 x jan 30 - figure out db backup to S3
-x feb 01 - figure out DNS
+x feb 01 - figure out DNS for ec2
 - stub the feeds for the links controller test
 x jan 29 - rest of the controller tests (links down)
 x jan 19 - close datetime pickers on blur
