@@ -5,7 +5,7 @@ class ConnectionsController < ApplicationController
     authorize Connection
     @connections = current_user.connections.asc(:name)
     if params[:q]
-      @connections = @connections.where(name: /#{params[:q]}/i)
+      @connections = @connections.or({ name: /#{params[:q]}/i }, { description: /#{params[:q]}/i })
     end
     if params[:tag]
       @connections = @connections.where(tags: /#{params[:tag]}/)
