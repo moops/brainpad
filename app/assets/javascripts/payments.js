@@ -1,11 +1,15 @@
 $(function() {
   $('.btn-show-accounts').click(function() {
-    $('#payments_accounts').show();
-    $('#payments_top_tags').hide();
+    $(this).addClass('active');
+    $('.btn-show-top-tags').removeClass('active');
+    $('#payments-accounts').removeClass('d-none');
+    $('#payments-top-tags').addClass('d-none');;
   });
   $('.btn-show-top-tags').click(function() {
-    $('#payments_accounts').hide();
-    $('#payments_top_tags').show();
+    $(this).addClass('active');
+    $('.btn-show-accounts').removeClass('active');
+    $('#payments-accounts').addClass('d-none');
+    $('#payments-top-tags').removeClass('d-none');
   });
 
   $('#payment_form').on('shown.bs.modal', function () {

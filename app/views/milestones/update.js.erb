@@ -1,6 +1,8 @@
 <% if @milestone.valid? %>
-	$('#milestone_form').modal('hide');
-	$('#milestone_list').html("<%= escape_javascript(render(partial: 'milestones')) %>");
+	$('#modal-dialog').modal('hide');
+	$('#milestone-list').html("<%= escape_javascript(render(partial: 'milestones')) %>");
+  addMessage('success', '<%= flash[:notice] %>');
+  <% flash.discard(:notice) %>
 <% else %>
-	$('#milestone_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+	$('#modal-dialog').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
 <% end %>

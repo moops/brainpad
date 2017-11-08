@@ -1,2 +1,1 @@
-GIT_REVISION = `git --git-dir=/home/ubuntu/brainpad log --pretty=format:'%h - %ai' -n 1`
-WHOAMI = "who: #{`whoami`}, dir: #{`pwd`}"
+GIT_REVISION = "git: #{`git log --pretty=format:'%h - %ai' -n 1`}, who: #{`whoami`}, dir: #{`pwd`}".freeze

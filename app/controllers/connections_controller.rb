@@ -1,11 +1,13 @@
 class ConnectionsController < ApplicationController
+  before_action :set_connection, only: %i[show edit update destroy]
 
   # GET /connections
+  # GET /connections.json
   def index
     authorize Connection
     @connections = current_user.connections.asc(:name)
     if params[:q]
-      @connections = @connections.or({ name: /#{params[:q]}/i }, { description: /#{params[:q]}/i })
+      @connections = @connections.or({ name: /#{params[:q]}/i }, description: /#{params[:q]}/i)
     end
     if params[:tag]
       @connections = @connections.where(tags: /#{params[:tag]}/)
@@ -15,20 +17,19 @@ class ConnectionsController < ApplicationController
   end
 
   # GET /connections/1.js
+  # GET /connections/1.json
   def show
-    @connection = Connection.find(params[:id])
     authorize @connection
   end
 
   # GET /connections/new.js
   def new
-    @connection = (params[:connection_id]) ? Connection.find(params[:connection_id]).dup : Connection.new
+    @connection = params[:connection_id] ? Connection.find(params[:connection_id]).dup : Connection.new
     authorize @connection
   end
 
   # GET /connections/1/edit.js
   def edit
-    @connection = Connection.find(params[:id])
     authorize @connection
   end
 
@@ -45,9 +46,8 @@ class ConnectionsController < ApplicationController
 
   # PUT /connections/1.js
   def update
-    @connection = current_user.connections.find(params[:id])
     authorize @connection
-    p = connection_params.reject {|k, _v| k == 'person' }
+    p = connection_params.reject { |k, _v| k == 'person' }
     if @connection.update_attributes(p)
       current_user.tag('connection', @connection.tags)
       @connections = current_user.connections.asc(:name).page(params[:page])
@@ -57,13 +57,16 @@ class ConnectionsController < ApplicationController
 
   # DELETE /connections/1
   def destroy
-    @connection = Connection.find(params[:id])
     authorize @connection
     @connection.destroy
     redirect_to(connections_path, format: 'html')
   end
 
   private
+
+  def set_connection
+    @connection = Connection.find(params[:id])
+  end
 
   def connection_params
     params.require(:connection).permit(:name, :username, :password, :url, :description, :tags)

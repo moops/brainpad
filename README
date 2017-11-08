@@ -31,6 +31,10 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
+- nov 07 - fix bulk finish of reminders
+x nov 07 - fix width of calendar header
+x nov 07 - put search field in same line as buttons
+x nov 06 - combine footer 'rev' and 'who' into one tooltip
 x sep 06 - add description to search field for connections
 x apr 12 - connections are not filtered by user
 x feb 22 - add tags to sms payment creation

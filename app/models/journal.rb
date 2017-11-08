@@ -7,12 +7,13 @@ class Journal
   field :e_on, as: :entry_on, type: Date
 
   belongs_to :person
-  belongs_to :journal_type, class_name: "Lookup", optional: true
+  belongs_to :journal_type, class_name: 'Lookup', optional: true
 
-  validates_presence_of :entry, :entry_on
+  validates :entry, presence: true
+  validates :entry_on, presence: true
   paginates_per 15
 
   def to_s
-    entry[0,30]
+    entry[0, 30]
   end
 end

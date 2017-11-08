@@ -1,66 +1,74 @@
-<div class="modal-dialog">
-  <div class="modal-content">
-    <%= form_for(@payment, html: { class: 'form-horizontal' }) do |f| %>
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3><%= @payment.new_record? ? 'new' : 'update' %> payment</h3>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="payment_on" class="col-sm-2 control-label">date</label>
-          <div class="col-sm-4">
-            <%= f.text_field :payment_on, class: 'form-control' %>
-          </div>
-          <label for="amount" class="col-sm-2 control-label">amount</label>
-          <div class="col-sm-4">
-            <%= f.text_field :amount, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="from_account" class="col-sm-2 control-label">from</label>
-          <div class="col-sm-4">
-            <%= f.collection_select(:from_account, @accounts, :id, :name, { include_blank: true }, class: 'form-control') %>
-          </div>
-          <label for="to_account" class="col-sm-2 control-label">to</label>
-          <div class="col-sm-4">
-            <%= f.collection_select(:to_account, @accounts, :id, :name, { include_blank: true }, class: 'form-control') %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="description" class="col-sm-2 control-label">description</label>
-          <div class="col-sm-10">
-            <%= f.text_field :description, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="tags" class="col-sm-2 control-label">tags</label>
-          <div class="col-sm-6">
-            <%= f.text_field :tags, class: 'form-control' %>
-          </div>
-          <div class="col-sm-4">
-            <%= render partial: 'shared/tags_field', locals: { kind: 'payment', desc_field: 'payment_description' } %>
-            <%# tags_field('payment', 'payment_description') %>
-          </div>
-        </div>
-
-        <fieldset>
-          <legend>schedule</legend>
-          <div class="form-group">
-            <label for="frequency" class="col-sm-2 control-label">frequency</label>
-            <div class="col-sm-4">
-              <%= f.collection_select(:frequency, @frequencies, :id, :description, { include_blank: true }, class: 'form-control') %>
+<%= form_with(model: @payment, local: true) do |f| %>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><%= @payment.new_record? ? 'new' : 'update' %> payment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <label for="until" class="col-sm-2 control-label">until</label>
-            <div class="col-sm-4">
-              <%= f.text_field :until, class: 'form-control' %>
-            </div>
-          </div>
-        </fieldset>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-link" data-dismiss="modal">cancel</a>
-        <%= f.button :submit, class: 'btn btn-primary' %>
-      </div>
-    <% end %>
-  </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+            <div class="modal-body">
+                <div class="container">
+                    <div class="form-group row">
+                        <%= f.label(:payment_on, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:payment_on, id: 'payment-on', class: 'form-control') %>
+                        </div>
+                        <%= f.label(:amount, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:amount, class: 'form-control focus') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:from_account, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.collection_select(:from_account, @accounts, :id, :name, { include_blank: true }, class: 'form-control') %>
+                        </div>
+                        <%= f.label(:to_account, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.collection_select(:to_account, @accounts, :id, :name, { include_blank: true }, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:description, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-10">
+                            <%= f.text_field(:description, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:tags, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-6 pr-0">
+                            <%= f.text_field(:tags, id: 'payment-tags', class: 'form-control') %>
+                        </div>
+                        <div class="col-sm-4 pl-0">
+                            <%= render partial: 'shared/tags_field', locals: { kind: 'payment', desc_field: nil } %>
+                        </div>
+                    </div>
+                    <fieldset>
+                        <legend>schedule</legend>
+                        <div class="form-group row">
+                            <%= f.label(:frequency, class: 'col-sm-2 col-form-label text-right') %>
+                            <div class="col-sm-10">
+                                <%= f.collection_select(:frequency, @frequencies, :id, :description, { include_blank: true }, class: 'form-control') %>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <%= f.label(:until, class: 'col-sm-2 col-form-label text-right') %>
+                            <div class="col-sm-10">
+                                <%= f.text_field(:until, id: 'payment-until', class: 'form-control') %>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div> <!-- end .modal-body -->
+            <div class="modal-footer">
+                <div class="form-group row text-right">
+                    <div class="col">
+                        <%= link_to('cancel', '#', data: { dismiss: 'modal' }) %>
+                        <%= f.submit class: 'btn btn-primary' %>
+                    </div>
+                </div>
+            </div> <!-- end .modal-footer -->
+        </div> <!-- end .modal-content -->
+    </div> <!-- end .modal-dialog -->
+<% end %>

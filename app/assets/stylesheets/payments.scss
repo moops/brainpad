@@ -1,57 +1,39 @@
 .payment-dashboard {
-	margin: auto;
-	margin-bottom: 20px;
-	border: 1px solid #f93;
-	background-color: #ddd;
-	border-radius: 6px;
-	box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+  margin-bottom: 20px;
+  border: 1px solid #f93;
+  background-color: #ddd;
+  border-radius: 4px;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
 }
 
 .payment-dashboard .item {
-	width: 17%;
-	padding: 10px;
-	float: left;
-	color: #666;
+  width: 17%;
+  padding: 10px;
+  float: left;
+  color: #666;
 }
 
 .payment-dashboard .item .data {
-	font-weight: bold;
-	font-size: 1.5em;
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
-.payments-panel {
-	width: 100%;
-}
 
-.payments-panel .reports-panel {
-	width: 23%;
-	float: left;
-}
-
-.payments-panel .list-panel {
-	width: 74%;
-	float: left;
-	margin-left: 3%;
-}
 
 .reports-panel .table td i {
-    opacity: 0.4;
+  opacity: 0.4;
 }
 
 .reports-panel .table td i:hover {
     opacity: 1.0;
 }
 
-.payments-panel .reports-panel .btn-group {
-	margin-bottom: 10px;
+.deposit-amount {
+  font-weight: bold;
 }
 
-#payment_list .deposit-amount {
-	font-weight: bold;
-}
-
-#payment_list .transfer-amount {
-	font-style: italic;
+.transfer-amount {
+  font-style: italic;
 }
 
 /*
@@ -60,18 +42,11 @@
  ************************************************
  */
 
-#future_payment_list .table tr:first-child td {
-	border-top: 0;
+#future-payment-list .table tr:first-child td {
+  border-top: 0;
 }
 
-#future_payment_list .table {
-	margin-bottom: 0;
-}
-
-.reports-panel .table {
-	margin-bottom: 0;
-}
-
-.reports-panel .table tr:first-child td {
-	border-top: 0;
+.btn-group > button.active {
+  background: pink;
+  border: 2px solid yellow;
 }

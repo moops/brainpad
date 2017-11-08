@@ -1,6 +1,8 @@
 <% if @contact.valid? %>
-  $('#contact_form').modal('hide');
-  $('#contact_list').html("<%= escape_javascript(render(partial: 'contacts')) %>");
+  $('#modal-dialog').modal('hide');
+  $('#contact-list').html("<%= escape_javascript(render(partial: 'contacts')) %>");
+  addMessage('success', '<%= flash[:notice] %>');
+  <% flash.discard(:notice) %>
 <% else %>
-  $('#contact_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+  $('#modal-dialog').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
 <% end %>

@@ -1,13 +1,9 @@
-<!-- hidden elements -->
-<div id="connection_form" class="modal fade"></div>
+<%= render partial: 'shared/data_list_header', locals: { title: 'connections', new_record_path: new_connection_path } %>
 
-<%= render partial: 'shared/search_form' %>
-<%= render partial: 'shared/control_buttons', locals: { new_record_path: new_connection_path } %>
-
-<div id="connection_list" class="data-list">
-  <%= render(partial: 'connections') %>
+<div id="connection-list" class="data-list">
+  <%= render(partial: 'connections') if @connections.present? %>
 </div>
 
 <div class="tag-list">
-  <%= tag_list 'connection' %>
+    <%= tag_list 'connection' %>
 </div>

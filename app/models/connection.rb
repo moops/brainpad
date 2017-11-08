@@ -11,6 +11,8 @@ class Connection
 
   belongs_to :person
 
-  validates_presence_of :username, :password, :url
+  validates :username, presence: true
+  validates :password, presence: true
+  validates :url, presence: true
   paginates_per 15
 end

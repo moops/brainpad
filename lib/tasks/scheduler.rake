@@ -1,14 +1,14 @@
-desc "This task is called by the Heroku scheduler add-on"
+desc 'This task is called by the Heroku scheduler add-on'
 
-task :send_reminders => :environment do
+task send_reminders: :environment do
   # Instantiate a Twilio client
   client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
 
   p '##########################################################'
-  p "sending reminders for #{Date.today}"
+  p "sending reminders for #{Time.zone.today}"
   p '##########################################################'
   Person.ne(phone: nil).each do |person|
-    unless Reminder.todays(person).empty?
+    if Reminder.todays(person).present?
       # Create and send an SMS message
       p "sending sms to #{person.username} (#{person.phone})..."
       client.account.messages.create(
@@ -20,5 +20,5 @@ task :send_reminders => :environment do
       p "nothing due for #{person.username}..."
     end
   end
-  p "done send_reminders."
+  p 'done send_reminders.'
 end

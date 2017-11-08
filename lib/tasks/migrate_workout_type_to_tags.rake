@@ -3,34 +3,30 @@
 # to move the data, workout_type needs to be deleted from the code (from both
 # workout and lookup)
 
-desc "migrate workout.type to workout.tags for each user"
+desc 'migrate workout.type to workout.tags for each user'
 
-task :migrate_workout_type_to_tags => :environment do
+task migrate_workout_type_to_tags: :environment do
   Person.all.each do |user|
     puts "processing #{user.workouts.size} workouts for #{user.username}..."
     if user.workouts
       user.workouts.each do |workout|
-        #set the new tags field based on the existing workout_type
-        if workout.workout_type and 'other'.eql?(workout.workout_type.description)
-          #if the type is 'other' look into the description
-          if workout.location.include?('home')
-            workout.tags = 'home'
-          elsif workout.description.include?('tennis')
-            workout.tags = 'tennis'
-          elsif workout.description.include?('soccer')
-            workout.tags = 'soccer'
-          else
-            workout.tags = 'other'
-          end
+        # set the new tags field based on the existing workout_type
+        if workout.workout_type && 'other'.eql?(workout.workout_type.description)
+          # if the type is 'other' look into the description
+          workout.tags = if workout.location.include?('home')
+                           'home'
+                         elsif workout.description.include?('tennis')
+                           'tennis'
+                         elsif workout.description.include?('soccer')
+                           'soccer'
+                         else
+                           'other'
+                         end
         else
-          if workout.workout_type
-            workout.tags = workout.workout_type.description
-          else
-            workout.tags = 'other'
-          end
+          workout.tags = workout.workout_type ? workout.workout_type.description : 'other'
         end
         workout.save
-        user.tag('workout', workout.tags) unless workout.tags.blank?
+        user.tag('workout', workout.tags) if workout.tags.present?
       end
     end
     count = user.tags_for('workout') ? user.tags_for('workout').count : 0

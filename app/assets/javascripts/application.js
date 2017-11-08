@@ -1,53 +1,48 @@
-//= require jquery
-//= require jquery_ujs
+//= require rails-ujs
+//= require jquery3
 //= require jquery.easing
+//= require popper
 //= require bootstrap
 //= require flatpickr
-//= require nav
+//= require_tree .
 
 $(function() {
   $('#nav').spasticNav();
   $('a.tip').tooltip();
 
-  $('#search_container').on('shown.bs.collapse', function () {
-    $('#search_query').focus();
+  // focus
+  $('#modal-dialog').on('shown.bs.modal', function () {
+    $('.focus').focus();
   });
 
-  $('#login_form').on('shown.bs.collapse', function () {
-    $('#username').focus();
-  });
-
-  $('#registration_form').on('shown.bs.collapse', function () {
-    $('#person_username').focus();
+  $('#search-container').on('shown.bs.collapse', function () {
+    $('#search-query').focus();
   });
 
   // hotkeys
-  function docKeyUp(e) {
+  document.addEventListener('keydown', function(e) {
     // submit the form if return key in form
     if (e.keyCode == 13) {
       $(e.target).parents('form').submit();
     }
     // ctrl-a - click 'add record' button
     if (e.ctrlKey && e.keyCode == 65) {
-      $('#new_record_btn').click();
+      $('#new-record-btn')[0].click();
     }
     // ctrl-f - click 'find' button
     if (e.ctrlKey && e.keyCode == 70) {
-      $('#find_btn').click();
+      $('#find-btn').click();
     }
-  }
-  document.addEventListener('keydown', docKeyUp, false);
-
-  // google analytics
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-83838015-1', 'auto');
-  ga('send', 'pageview');
-  ga('send', 'event', { 'eventCategory': 'raceweb-cat', 'eventAction': 'raceweb-action', 'eventValue': 'raceweb-val' });
+  }, false);
 });
+
+function addMessage(kind, message) {
+  var foo = $('<div class="alert col-12 alert-dismissible alert-success">' +
+    '  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+    '  <strong>' + kind + '</strong>: ' + message +
+    '</div>');
+  $('#messages').append(foo);
+}
 
 function count(id,until) {
   var val = "";
@@ -84,8 +79,8 @@ function count(id,until) {
 }
 
 // hide messages after 3 seconds
-window.setTimeout(function() {
+window.setInterval(function() {
   $("[class^=alert]").fadeTo(500, 0).slideUp(500, function() {
     $(this).remove();
   });
-}, 3000);
+}, 5000);

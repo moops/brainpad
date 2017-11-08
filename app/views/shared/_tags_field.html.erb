@@ -1,11 +1,9 @@
 <% tags_of_kind = current_user.tags_for(kind) || [] %>
-<div class="col-sm-12">
-  <%= select_tag(:tag_list, options_for_select(tags_of_kind), include_blank: true, onchange: 'addTag()', class: 'form-control') %>
-</div>
+<%= select_tag(:tag_list, options_for_select(tags_of_kind), include_blank: true, onchange: 'addTag()', class: 'form-control') %>
 <script type="text/javascript">
   function addTag() {
     var sel_tag = $('#tag_list').val();
-    $('#<%= kind %>_tags').val($('#<%= kind %>_tags').val() + ' ' + sel_tag);
+    $('#<%= kind %>-tags').val($('#<%= kind %>-tags').val() + ' ' + sel_tag);
     <% unless desc_field.blank? %>
     if ('' == $('#<%= desc_field %>').val()) {
       $('#<%= desc_field %>').val(sel_tag);

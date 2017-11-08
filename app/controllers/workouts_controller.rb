@@ -1,6 +1,7 @@
 # require 'strava/api/v3'
 
 class WorkoutsController < ApplicationController
+  before_action :set_workout, only: %i[show edit update destroy]
 
   # GET /workouts
   def index
@@ -15,17 +16,14 @@ class WorkoutsController < ApplicationController
       @workouts = @workouts.where(tags: /#{params[:tag]}/)
       @tag = params[:tag]
     end
-    if params[:q]
-      @workouts = @workouts.where(location: /#{params[:q]}/i)
-    end
+    @workouts = @workouts.where(location: /#{params[:q]}/i) if params[:q]
     @workouts = @workouts.page(params[:page])
-    @workout_summary = Workout.summary(current_user,31)
-    @workout_duration_by_tag = Workout.workout_duration_by_tag(current_user,31)
+    @workout_summary = Workout.summary(current_user, 31)
+    @workout_duration_by_tag = Workout.workout_duration_by_tag(current_user, 31)
   end
 
   # GET /workouts/1.js
   def show
-    @workout = Workout.find(params[:id])
     authorize @workout
   end
 
@@ -37,7 +35,6 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts/1/edit.js
   def edit
-    @workout = Workout.find(params[:id])
     authorize @workout
     @routes = Lookup.where(category: 25).all
   end
@@ -55,7 +52,6 @@ class WorkoutsController < ApplicationController
 
   # PUT /workouts/1
   def update
-    @workout = Workout.find(params[:id])
     authorize @workout
     if @workout.update_attributes!(workout_params)
       current_user.tag('workout', @workout.tags)
@@ -66,7 +62,6 @@ class WorkoutsController < ApplicationController
 
   # DELETE /workouts/1
   def destroy
-    @workout = Workout.find(params[:id])
     authorize @workout
     @workout.destroy
     redirect_to workouts_path
@@ -74,7 +69,14 @@ class WorkoutsController < ApplicationController
 
   private
 
+  def set_workout
+    @workout = Workout.find(params[:id])
+  end
+
   def workout_params
-    params.require(:workout).permit(:location, :race, :description, :tags, :duration, :intensity, :weight, :distance, :workout_on, :route_id, :strava_id)
+    params.require(:workout).permit(
+      :location, :race, :description, :tags, :duration, :intensity, :weight, :distance, :workout_on, :route_id,
+      :strava_id
+    )
   end
 end

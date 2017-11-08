@@ -1,49 +1,51 @@
-<%= form_for(@link, html: { class: 'form-horizontal' } ) do |f| %>
-  <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">name</label>
-    <div class="col-sm-4">
-      <%= f.text_field :name, class: 'form-control' %>
+<%= form_with(model: @link) do |f| %>
+    <div class="container">
+        <div class="form-group row">
+            <%= f.label(:name, class: 'col-sm-2 col-form-label text-right') %>
+            <div class="col-sm-4">
+                <%= f.text_field(:name, class: 'form-control', autofocus: true) %>
+            </div>
+            <%= f.label(:clicks, class: 'col-sm-2 col-form-label text-right') %>
+            <div class="col-sm-4">
+                <%= f.text_field(:clicks, class: 'form-control') %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <%= f.label(:url, class: 'col-sm-2 col-form-label text-right') %>
+            <div class="col-sm-10">
+                <%= f.text_field(:url, class: 'form-control') %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <%= f.label(:tags, class: 'col-sm-2 col-form-label text-right') %>
+            <div class="col-sm-6 pr-0">
+                <%= f.text_field(:tags, id: 'link-tags', class: 'form-control') %>
+            </div>
+            <div class="col-sm-4 pl-0">
+                <%= render partial: 'shared/tags_field', locals: { kind: 'link', desc_field: nil } %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <%= f.label(:expires_on, 'Expires', class: 'col-sm-2 col-form-label text-right') %>
+            <div class="col-sm-4">
+                <%= f.text_field(:expires_on, id: 'expires-on', class: 'form-control') %>
+            </div>
+            <%= f.label(:last_clicked_on, 'Last Click', id: 'link-clicked-on', class: 'col-sm-2 col-form-label text-right') %>
+            <div class="col-sm-4">
+                <%= f.text_field(:last_clicked_on, id: 'last-clicked-on', class: 'form-control') %>
+            </div>
+        </div>
+        <div class="form-group row">
+            <%= f.label(:comments, class: 'col-sm-2 col-form-label text-right') %>
+            <div class="col-sm-10">
+                <%= f.text_area(:comments, class: 'form-control') %>
+            </div>
+        </div>
+        <div class="form-group row text-right">
+            <div class="col">
+                <%= link_to('cancel', '#', data: { dismiss: 'modal' }) %>
+                <%= f.submit class: 'btn btn-primary' %>
+            </div>
+        </div>
     </div>
-    <label for="clicks" class="col-sm-2 control-label">clicks</label>
-    <div class="col-sm-4">
-      <%= f.text_field :clicks, class: 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="url" class="col-sm-2 control-label">url</label>
-    <div class="col-sm-10">
-      <%= f.text_field :url, class: 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="tags" class="col-sm-2 control-label">tags</label>
-    <div class="col-sm-6">
-      <%= f.text_field :tags, class: 'form-control' %>
-    </div>
-    <div class="col-sm-4">
-      <%= render partial: 'shared/tags_field', locals: { kind: 'link', desc_field: nil } %>
-      <%# tags_field('link') %>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="expires_on" class="col-sm-2 control-label">expires</label>
-    <div class="col-sm-4">
-      <%= f.text_field :expires_on, class: 'form-control date-picker' %>
-    </div>
-    <label for="last_clicked_on" class="col-sm-2 control-label">last clicked</label>
-    <div class="col-sm-4">
-      <%= f.text_field :last_clicked_on, class: 'form-control datetime-picker' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="comments" class="col-sm-2 control-label">comments</label>
-    <div class="col-sm-10">
-      <%= f.text_area :comments, rows: 2, class: 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-10 col-sm-offset-2">
-      <%= f.button :submit, class: 'btn btn-primary' %>
-    </div>
-  </div>
 <% end %>

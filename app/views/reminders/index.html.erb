@@ -1,24 +1,26 @@
-<!-- hidden elements -->
-<div id="reminder_form" class="modal fade"></div>
-
 <% if @reminder_summary %>
-  <div class="reminder-dashboard">
-    <div class="item">last 30 days:</div>
-    <div class="item"><div class="data"><%= @reminder_summary[:created] %></div>created</div>
-    <div class="item"><div class="data"><%= @reminder_summary[:completed] %></div>completed</div>
-    <div class="item"><div class="data"><%= number_to_percentage(@reminder_summary[:completion_rate], precision: 0) %></div>rate</div>
-    <div class="item"><div class="data"><%= @reminder_summary[:on_time] %></div>on time</div>
-    <div class="clear"></div>
-  </div> <!-- end .dashboard -->
+    <div class="row">
+        <div class="col-12 reminder-dashboard">
+            <div class="item">last 30 days:</div>
+            <div class="item"><div class="data"><%= @reminder_summary[:created] %></div>created</div>
+            <div class="item"><div class="data"><%= @reminder_summary[:completed] %></div>completed</div>
+            <div class="item"><div class="data"><%= number_to_percentage(@reminder_summary[:completion_rate], precision: 0) %></div>rate</div>
+            <div class="item"><div class="data"><%= @reminder_summary[:on_time] %></div>on time</div>
+            <div class="clear"></div>
+        </div> <!-- end .reminder-dashboard -->
+    </div>
 <% end %>
 
-<%= render partial: 'shared/search_form' %>
-<%= render partial: 'shared/control_buttons', locals: { new_record_path: new_reminder_path } %>
+<div class="row">
+    <div class="col-12">
+        <%= render partial: 'shared/data_list_header', locals: { title: 'reminders', new_record_path: new_reminder_path } %>
 
-<div id="reminder_list" class="data-list">
-  <%= render partial: 'reminders' %>
-</div>
+        <div class="data-list">
+            <%= render partial: 'reminders' if @reminders.present? %>
+        </div>
 
-<div class="tag-list">
-  <%= tag_list 'reminder' %>
+        <div class="tag-list">
+            <%= tag_list 'reminder' %>
+        </div>
+    </div>
 </div>

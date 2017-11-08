@@ -1,6 +1,8 @@
 class RemindersController < ApplicationController
   include ApplicationHelper
 
+  before_action :set_reminder, only: %i[show edit update destroy]
+
   # GET /reminders
   def index
     authorize Reminder
@@ -9,16 +11,13 @@ class RemindersController < ApplicationController
       @reminders = @reminders.where(tags: /#{params[:tag]}/)
       @tag = params[:tag]
     end
-    if params[:q]
-      @reminders = @reminders.where(description: /#{params[:q]}/i)
-    end
+    @reminders = @reminders.where(description: /#{params[:q]}/i) if params[:q]
     @reminders = @reminders.page(params[:page])
-    @reminder_summary = Reminder.summary(current_user,31)
+    @reminder_summary = Reminder.summary(current_user, 31)
   end
 
   # GET /reminders/1.js
   def show
-    @reminder = Reminder.find(params[:id])
     authorize @reminder
   end
 
@@ -70,16 +69,22 @@ class RemindersController < ApplicationController
 
   # POST /reminders/finish
   def finish
-    params[:reminder].each { |reminder_id, attr|
+    params[:reminder].each do |reminder_id, attr|
       reminder = Reminder.find(reminder_id)
-      reminder.update_attribute(:done,attr[:done])
-    }
+      reminder.update(:done, attr[:done])
+    end
     redirect_to reminders_path
   end
 
   private
 
+  def set_reminder
+    @reminder = Reminder.find(params[:id])
+  end
+
   def reminder_params
-    params.require(:reminder).permit(:description, :tags, :done, :repeat_until, :due_at, :reminder_type_id, :priority_id, :frequency)
+    params.require(:reminder).permit(
+      :description, :tags, :done, :repeat_until, :due_at, :reminder_type_id, :priority_id, :frequency
+    )
   end
 end

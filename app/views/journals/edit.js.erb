@@ -1,6 +1,6 @@
-$('#journal_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+$('#modal-dialog').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
 
-var entryOnCalendar = $('#journal_entry_on').flatpickr({ allowInput: true });
-$('#journal_form').on('blur', '#journal_entry_on', function() {
+var entryOnCalendar = $('#entry-on').flatpickr({ allowInput: true });
+$('#modal-dialog').on('blur', '#entry-on', function() {
   window.setTimeout(function() { entryOnCalendar.close(); }, 250);
 });

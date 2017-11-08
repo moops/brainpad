@@ -1,8 +1,7 @@
 class SessionsController < ApplicationController
 
   # GET /sessions/new.js
-  def new
-  end
+  def new; end
 
   # login
   # POST /sessions.js
@@ -24,6 +23,6 @@ class SessionsController < ApplicationController
   # DELETE /sessions/1.js
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, notice: "Logged out!"
+    redirect_to root_url, notice: 'Logged out!'
   end
 end

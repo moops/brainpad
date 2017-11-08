@@ -3,6 +3,7 @@
 @import "workouts";
 @import "reminders";
 @import "payments";
+@import "foobar";
 
 body {
   background-image: url(<%= asset_path('grgrad.gif') %>) repeat-x;
@@ -85,7 +86,29 @@ div.datepicker.dropdown-menu {
 }
 
 .form-group {
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.container-fluid, .col-12 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.last-col {
+  padding-right: 0px;
+}
+
+.first-col {
+  padding-left: 0px
+}
+
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.card {
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
 }
 
 /*
@@ -93,7 +116,7 @@ div.datepicker.dropdown-menu {
  containers
  ************************************************
  */
-#container {
+#content {
   margin: auto;
   width: 920px;
 }
@@ -108,28 +131,29 @@ div.datepicker.dropdown-menu {
   margin-top: 20px;
 }
 
+footer {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-size: .9em;
+  padding: 1.2em;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
 /*
  ************************************************
  boxes
  ************************************************
  */
-.box {
-  border: 1px solid #f93;
-  border-radius: 6px;
-  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-  margin-bottom: 20px;
+.card-body {
+  padding: 0.25rem;
 }
 
-.boxhead {
-  border-bottom: 1px solid #bbb;
-  background-color: #ddd;
-  font-weight: bold;
-  padding: 5px 5px 5px 35px;
-  border-radius: 6px 6px 0px 0px;
-}
-
-.boxcontent {
-  padding: 10px;
+.card-body .container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
 }
 
 /*
@@ -205,18 +229,16 @@ img.bar {
 }
 
 .filter {
-  background-color: #EEEEEE;
-  border: 1px solid #AAAAAA;
-  border-radius: 5px 5px 5px 5px;
+  background-color: #eee;
+  border: 1px solid #aaa;
+  border-radius: 4px;
   font-size: 12px;
   margin-bottom: 10px;
   margin-right: 5px;
   padding: 2px 8px;
 }
 
-span.list-title {
-  display: inline;
-  margin-right: 0.5em;
+.list-title {
   font-size: 1.5em;
   font-weight: bold;
 }
@@ -237,37 +259,10 @@ span.list-title {
 
 /*
  ************************************************
- footer
+  icon links
  ************************************************
  */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  /* make room for footer height */
-  margin-bottom: 80px;
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 80px;
-}
-
-.footer-content {
-  width: 920px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: .9em;
-  padding: 5px;
-  border: 1px solid #bbb;
-  border-radius: 6px;
-  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-}
-
-.footer-links {
-  padding-bottom: 8px;
+ a:link [class^="icon-"], a:visited [class^="icon-"], a:hover, a:active [class^="icon-"] {
+  text-decoration: none;
+  color: #333;
 }

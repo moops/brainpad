@@ -1,25 +1,20 @@
-<% if (@payments and !@payments.empty?) %>
-  <span class="list-title">transactions</span>
-  <%= filters_links %>
-  <table class="table table-condensed table-hover">
+<%= filters_links %>
+<table class="table table-sm table-hover">
     <thead>
-      <tr><th>description</th><th>amount</th><th>account</th><th>date</th><th>actions</th></tr>
+        <tr><th>description</th><th>amount</th><th>account</th><th>date</th><th>actions</th></tr>
     </thead>
     <tbody>
-      <% @payments.each do |payment| %>
+        <% @payments.each do |payment| %>
         <tr>
-          <td><%= link_to(condense(payment.description), edit_payment_path(payment), remote: true) %></td>
-          <td><div class="<%= "#{payment.type}-amount" %>"><%= number_to_currency payment.amount %></div></td>
-          <td><%= payment.account_name %></td>
-          <td><%= payment.payment_on.strftime("%a %b %d, %y") %></td>
-          <td class="actions text-nowrap">
-            <%= render partial: 'shared/action_links', locals: { path: payment_path(payment), copy_path: new_payment_path(payment_id: payment), label: condense(payment.description) } %>
-          </td>
+            <td><%= link_to(condense(payment.description), edit_payment_path(payment), remote: true) %></td>
+            <td><div class="<%= "#{payment.type}-amount" %>"><%= number_to_currency payment.amount %></div></td>
+            <td><%= payment.account_name %></td>
+            <td><%= payment.payment_on.strftime("%a %b %d, %y") %></td>
+            <td class="actions text-nowrap">
+                <%= render partial: 'shared/action_links', locals: { path: payment_path(payment), copy_path: new_payment_path(payment_id: payment), label: condense(payment.description) } %>
+            </td>
         </tr>
-      <% end %>
+        <% end %>
     </tbody>
-  </table>
-  <%= paginate @payments %>
-<% elsif (@payments.empty? && params[:q].present?) %>
-  you searched for <%= params[:q] %> but you didn't find anything
-<% end %>
+</table>
+<%= paginate @payments %>

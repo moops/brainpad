@@ -1,42 +1,39 @@
-<!-- hidden elements -->
-<div id="account_form" class="modal fade"></div>
-<div id="payment_form" class="modal fade"></div>
-
 <% if @money_summary %>
-  <div class="payment-dashboard">
-    <div class="item">last 30 days:</div>
-    <div class="item"><div class="data"><%= number_to_currency @money_summary[:net_change] %></div>net change</div>
-    <div class="item"><div class="data"><%= number_to_currency @money_summary[:per_day] %></div>per day</div>
-    <div class="item"><div class="data"><%= @money_summary[:buy_nothing_days] %></div>buy nothing days</div>
-    <div class="item"><div class="data"><%= number_to_currency @money_summary[:balance] %></div>net worth</div>
-    <div class="clear"></div>
-  </div> <!-- end .dashboard -->
+    <div class="row">
+        <div class="col-12 payment-dashboard">
+            <div class="item">last 30 days:</div>
+            <div class="item"><div class="data"><%= number_to_currency @money_summary[:net_change] %></div>net change</div>
+            <div class="item"><div class="data"><%= number_to_currency @money_summary[:per_day] %></div>per day</div>
+            <div class="item"><div class="data"><%= @money_summary[:buy_nothing_days] %></div>buy nothing days</div>
+            <div class="item"><div class="data"><%= number_to_currency @money_summary[:balance] %></div>net worth</div>
+            <div class="clear"></div>
+        </div> <!-- end .payment-dashboard -->
+    </div>
 <% end %>
 
-<div class="payments-panel">
-  <div class="reports-panel">
-      <div class="btn-group" data-toggle="buttons-radio">
-        <button type="button" class="btn btn-primary btn-show-top-tags active">top tags</button>
-        <button type="button" class="btn btn-primary btn-show-accounts">accounts</button>
-      </div>
-    <%= render partial: 'accounts', locals: { accounts: @accounts } %>
-    <%= render 'expenses_by_tag' %>
-  </div>
-  <div class="list-panel">
-    <div id="future_payment_list">
-      <%= render partial: 'upcoming' %>
-    </div>
+<div class="row">
+    <div class="col-3 first-col reports-panel">
+        <div class="btn-group mb-2">
+            <button type="button" class="btn btn-primary btn-show-top-tags active">top tags</button>
+            <button type="button" class="btn btn-primary btn-show-accounts">accounts</button>
+        </div>
 
-    <%= render partial: 'shared/search_form' %>
-    <%= render partial: 'shared/control_buttons', locals: { new_record_path: new_payment_path } %>
-
-    <div id="payment_list">
-      <%= render partial: 'payments' %>
+        <%= render partial: 'accounts', locals: { accounts: @accounts } %>
+        <%= render 'expenses_by_tag' %>
     </div>
+    <div class="col-9 last-col list-panel">
+        <%= render partial: 'upcoming' if @upcoming_payments.present? %>
+        <%= render partial: 'shared/data_list_header', locals: { title: 'transactions', new_record_path: new_payment_path } %>
+        <div class="data-list">
+            <% if @payments.present? %>
+                <%= render partial: 'payments' %>
+            <% elsif (@payments.empty? && params[:q].present?) %>
+                you searched for <%= params[:q] %> but you didn't find anything
+            <% end %>
+        </div>
 
-    <div class="tag-list">
-      <%= tag_list 'payment' %>
-    </div>
-  </div>
-  <div class="clear"></div>
-</div> <!-- end .payments-panel -->
+        <div class="tag-list">
+            <%= tag_list 'payment' %>
+        </div>
+    </div> <!-- end .list-panel -->
+</div> <!-- end .row -->

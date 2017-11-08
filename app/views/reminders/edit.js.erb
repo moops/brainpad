@@ -1,6 +1,3 @@
-$('#reminder_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+$('#modal-dialog').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
 
-var dueAtCalendar = $('#reminder_due_at').flatpickr({ allowInput: true, enableTime: true });
-$('#reminder_form').on('blur', '#reminder_due_at', function() {
-  window.setTimeout(function() { dueAtCalendar.close(); }, 250);
-});
+var dueAtCalendar = $('#due-at').flatpickr({ allowInput: true, enableTime: true });

@@ -1,32 +1,29 @@
-<!-- hidden elements -->
-<div id="workout_form" class="modal fade"></div>
-
 <% if @workout_summary %>
-  <div class="workout-dashboard">
-    <div class="item">last 30 days:</div>
-    <div class="item"><div class="data"><%= @workout_summary[:workout_days] %></div>workout days</div>
-    <div class="item"><div class="data"><%= @workout_summary[:mileage] %></div>km</div>
-    <div class="item"><div class="data"><%= @workout_summary[:duration] %></div>hours</div>
-    <div class="item"><div class="data"><%= @workout_summary[:weight_range] %></div>weight</div>
-    <div class="clear"></div>
-  </div> <!-- end .dashboard -->
+    <div class="row">
+        <div class="col workout-dashboard">
+            <div class="item">last 30 days:</div>
+            <div class="item"><div class="data"><%= @workout_summary[:workout_days] %></div>workout days</div>
+            <div class="item"><div class="data"><%= @workout_summary[:mileage] %></div>km</div>
+            <div class="item"><div class="data"><%= @workout_summary[:duration] %></div>hours</div>
+            <div class="item"><div class="data"><%= @workout_summary[:weight_range] %></div>weight</div>
+            <div class="clear"></div>
+        </div> <!-- end .workout-dashboard -->
+    </div>
 <% end %>
 
-<div class="workouts-panel">
-  <div class="reports-panel" id="duration-by-tag">
-    <%= render 'duration_by_tag' %>
-  </div>
-  <div class="list-panel">
-    <%= render partial: 'shared/search_form' %>
-    <%= render partial: 'shared/control_buttons', locals: { new_record_path: new_workout_path } %>
-
-    <div id="workout_list" class="data-list">
-      <%= render partial: 'workouts' %>
+<div class="row">
+    <div class="col-3 first-col reports-panel">
+        <%= render 'duration_by_tag' %>
     </div>
-    <div class="tag-list">
-      <%= tag_list 'workout' %>
-    </div>
-  </div><!-- end .list-panel -->
+    <div class="col-9 last-col list-panel">
 
-  <div class="clear"></div>
-</div> <!-- end .workouts-panel -->
+        <%= render partial: 'shared/data_list_header', locals: { title: 'workouts', new_record_path: new_workout_path } %>
+
+        <div class="data-list">
+            <%= render partial: 'workouts' if @workouts.present? %>
+        </div>
+        <div class="tag-list">
+            <%= tag_list 'workout' %>
+        </div>
+    </div> <!-- end .list-panel -->
+</div> <!-- end .row -->

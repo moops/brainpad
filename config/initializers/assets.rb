@@ -10,4 +10,6 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( google-analytics.js )
 
-Rails.application.config.assets.precompile += %w( payments.js workouts.js reminders.js journals.js connections.js contacts.js milestones.js *.svg *.eot *.woff *.woff2 *.ttf )
+Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
+Rails.application.config.assets.precompile << %w[icons payments.js workouts.js reminders.js journals.js connections.js contacts.js milestones.js links.js]

@@ -14,9 +14,11 @@ class Account
   # embeds_many :prices, class_name: 'account_prices'
   embeds_many :account_prices, store_as: 'prices'
 
-  validates_presence_of :name, :units, :price
+  validates :name, presence: true
+  validates :units, presence: true
+  validates :price, presence: true
 
-  scope :active, ->{ where(active: true) }
+  scope :active, -> { where(active: true) }
 
   def balance
     units * price

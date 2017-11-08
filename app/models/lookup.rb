@@ -5,5 +5,5 @@ class Lookup
   field :code
   field :dsc, as: :description
 
-  has_one :person
+  has_one :person, dependent: :destroy
 end

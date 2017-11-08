@@ -6,5 +6,4 @@ class AccountPrice
   field :price_on, type: Date
 
   embedded_in :account
-
 end

@@ -1,26 +1,23 @@
-<% if (@contacts and @contacts.size > 0) %>
-  <span class="list-title">contacts</span>
-  <%= filters_links %>
-  <table class="table table-condensed table-hover">
+<%= filters_links %>
+<table class="table table-sm table-hover">
     <thead>
-      <tr><th>name</th><th>email</th><th>home</th><th>work</th><th>cell</th><th>actions</th></tr>
+        <tr><th>name</th><th>email</th><th>home</th><th>work</th><th>cell</th><th>actions</th></tr>
     </thead>
     <tbody>
-      <% @contacts.each do |contact| %>
+        <% @contacts.each do |contact| %>
         <tr>
-          <td>
-            <%= link_to(contact.name, edit_contact_path(contact), remote: true, class: 'tip', data: { toggle: 'tooltip' }, title: "edit #{contact.name}") %>
-          </td>
-          <td><%= mail_to(contact.email, nil, class: 'tip', data: { toggle: 'tooltip' }, title: "email #{contact.name}") %></td>
-          <td><%= contact.phone_home %></td>
-          <td><%= contact.phone_work %></td>
-          <td><%= contact.phone_cell %></td>
-          <td class="actions text-nowrap">
-            <%= render partial: 'shared/action_links', locals: { path: contact_path(contact), copy_path: new_contact_path(contact_id: contact), label: contact.name } %>
-          </td>
+            <td>
+              <%= link_to(contact.name, edit_contact_path(contact), remote: true, class: 'tip', data: { toggle: 'tooltip' }, title: "edit #{contact.name}") %>
+            </td>
+            <td><%= mail_to(contact.email, nil, class: 'tip', data: { toggle: 'tooltip' }, title: "email #{contact.name}") %></td>
+            <td><%= contact.phone_home %></td>
+            <td><%= contact.phone_work %></td>
+            <td><%= contact.phone_cell %></td>
+            <td class="actions text-nowrap">
+                <%= render partial: 'shared/action_links', locals: { path: contact_path(contact), copy_path: new_contact_path(contact_id: contact), label: contact.name } %>
+            </td>
         </tr>
-      <% end %>
+        <% end %>
     </tbody>
-  </table>
-  <%= paginate @contacts %>
-<% end %>
+</table>
+<%= paginate @contacts %>

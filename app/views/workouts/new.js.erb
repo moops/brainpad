@@ -1,6 +1,6 @@
-$('#workout_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+$('#modal-dialog').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
 
-var workoutOnCalendar = $('#workout_workout_on').flatpickr({ allowInput: true, enableTime: true, defaultDate: new Date() });
-$('#workout_form').on('blur', '#workout_workout_on', function() {
+var workoutOnCalendar = $('#workout-on').flatpickr({ allowInput: true, defaultDate: new Date() });
+$('#modal-dialog').on('blur', '#workout-on', function() {
   window.setTimeout(function() { workoutOnCalendar.close(); }, 250);
 });

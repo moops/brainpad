@@ -12,9 +12,10 @@ class Link
 
   belongs_to :person
 
-  validates_presence_of :url, :name
+  validates :url, presence: true
+  validates :name, presence: true
 
   def description
-    self.name + (self.comments ? " - #{self.comments}" : '')
+    name + (comments ? " - #{comments}" : '')
   end
 end

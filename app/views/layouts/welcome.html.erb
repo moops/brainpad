@@ -15,22 +15,23 @@
 </head>
 
 <body>
-
-    <div id="modal_dialog" class="modal fade"></div>
-
-    <div id="container">
-        <% flash.each do |key, value| %>
-            <div class="alert alert-block alert-<%= key == :notice ? "success" : key %>" data-dismiss="alert">
-                <a class="close">×</a>
-                <h4 class="alert-heading"><%= key.capitalize %>:</h4>
-                <%= value %>
+    <div id="content">
+        <div class="container-fluid">
+            <!-- messages -->
+            <div id="messages" class="row">
+                <% flash.each do |name, msg| %>
+                    <div class="alert col-12 alert-dismissible alert-<%= name == 'notice' ? 'success' : name %>">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong><%= name %></strong>: <%= msg %>
+                    </div>
+                <% end %>
             </div>
-        <% end %>
-        <!-- main content -->
-        <div id="content">
-    		<%= yield %>
-    	</div>
-        <!-- end main content -->
-    </div> <!-- end #container-->
+            <!-- main content -->
+            <%= yield %>
+        </div> <!-- end .container-fluid -->
+    </div> <!-- end #content-->
+
+    <!-- hidden modal forms -->
+    <div id="modal-dialog" class="modal"></div>
 </body>
 </html>

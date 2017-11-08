@@ -1,72 +1,79 @@
-<div class="modal-dialog">
-  <div class="modal-content">
-    <%= form_for(@workout, html: { class: 'form-horizontal' }) do |f| %>
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3><%= @workout.new_record? ? 'new' : 'update' %> workout</h3>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="tags" class="col-sm-2 control-label">tags</label>
-          <div class="col-sm-6">
-            <%= f.text_field :tags, class: 'form-control' %>
-          </div>
-          <div class="col-sm-4">
-            <%= render partial: 'shared/tags_field', locals: { kind: 'workout', desc_field: 'workout_description' } %>
-            <%# tags_field('workout', 'workout_description') %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="workout_on" class="col-sm-2 control-label">workout_on</label>
-          <div class="col-sm-4">
-            <%= f.text_field :workout_on, class: 'form-control' %>
-          </div>
-          <label for="location" class="col-sm-2 control-label">location</label>
-          <div class="col-sm-4">
-            <%= f.text_field :location, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="race" class="col-sm-2 control-label">race</label>
-          <div class="col-sm-4">
-            <%= f.text_field :race, class: 'form-control' %>
-          </div>
-          <label for="route" class="col-sm-2 control-label">route</label>
-          <div class="col-sm-4">
-          <%= f.collection_select(:route_id, @routes, :id, :description, { include_blank: true }, class: 'form-control') %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="distance" class="col-sm-2 control-label">distance</label>
-          <div class="col-sm-4">
-            <%= f.text_field :distance, class: 'form-control' %>
-          </div>
-          <label for="duration" class="col-sm-2 control-label">duration</label>
-          <div class="col-sm-4">
-            <%= f.text_field :duration, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="intensity" class="col-sm-2 control-label">intensity</label>
-          <div class="col-sm-4">
-            <%= f.select :intensity, Workout::INTENSITIES, { include_blank: true }, class: 'form-control' %>
-          </div>
-          <label for="weight" class="col-sm-2 control-label">weight</label>
-          <div class="col-sm-4">
-            <%= f.text_field :weight, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="description" class="col-sm-2 control-label">description</label>
-          <div class="col-sm-10">
-            <%= f.text_area :description, rows: 3, class: 'form-control' %>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-link" data-dismiss="modal">cancel</a>
-        <%= f.button :submit, class: 'btn btn-primary' %>
-      </div>
-    <% end %>
-  </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+<%= form_with(model: @workout, local: true) do |f| %>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><%= @workout.new_record? ? 'new' : 'update' %> workout</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="form-group row">
+                        <%= f.label(:tags, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-6 pr-0">
+                            <%= f.text_field(:tags, id: 'workout-tags', class: 'form-control focus') %>
+                        </div>
+                        <div class="col-sm-4 pl-0">
+                            <%= render partial: 'shared/tags_field', locals: { kind: 'workout', desc_field: nil } %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:workout_on, 'On', class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:workout_on, id: 'workout-on', class: 'form-control') %>
+                        </div>
+                        <%= f.label(:location, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                          <%= f.text_field(:location, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:race, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:race, class: 'form-control') %>
+                        </div>
+                        <%= f.label(:route, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                          <%= f.collection_select(:route_id, @routes, :id, :description, { include_blank: true }, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:distance, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:distance, class: 'form-control') %>
+                        </div>
+                        <%= f.label(:duration, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                          <%= f.text_field(:duration, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:intensity, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.select(:intensity, Workout::INTENSITIES, { include_blank: true }, class: 'form-control') %>
+                        </div>
+                        <%= f.label(:weight, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                          <%= f.text_field(:weight, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:description, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-10">
+                            <%= f.text_area(:description, rows: 3, class: 'form-control') %>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end .modal-body -->
+            <div class="modal-footer">
+                <div class="form-group row text-right">
+                    <div class="col">
+                        <%= link_to('cancel', '#', data: { dismiss: 'modal' }) %>
+                        <%= f.submit class: 'btn btn-primary' %>
+                    </div>
+                </div>
+            </div> <!-- end .modal-footer -->
+        </div> <!-- end .modal-content -->
+    </div> <!-- end .modal-dialog -->
+<% end %>

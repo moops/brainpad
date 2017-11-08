@@ -14,6 +14,6 @@ class Contact
 
   belongs_to :person
 
-  validates_presence_of :name
+  validates :name, presence: true
   paginates_per 15
 end

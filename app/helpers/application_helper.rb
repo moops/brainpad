@@ -1,10 +1,9 @@
 module ApplicationHelper
-
   def inline_edit(element, display, url, size, highlight, field)
     val  = "<span id=\"#{element}\">#{display}</span>\n"
     val += "<script type=\"text/javascript\">\n"
     val += "    new Ajax.InPlaceEditor('#{element}', '#{url}', {okControl:false, size:#{size}, highlightColor:\"#bbbbbb\", highlightEndColor:\"#{highlight}\", callback: function(form, value) { return 'field=#{field}&value='+encodeURIComponent(value)} });\n"
-    val += "</script>\n"
+    val + "</script>\n"
   end
 
   def tag_list(kind)
@@ -12,7 +11,7 @@ module ApplicationHelper
     tags_of_kind.map! do |tag|
       link_to(tag, "#{kind.pluralize}?tag=#{tag}")
     end
-    if (tags_of_kind.empty?)
+    if tags_of_kind.empty?
       'tags: none'
     else
       raw("tags: #{tags_of_kind.join(', ')}")
@@ -30,6 +29,6 @@ module ApplicationHelper
 
   def condense(content, max = 25)
     content ||= ''
-    content.length > max ? "#{content[0,max]}..." : content
+    content.length > max ? "#{content[0, max]}..." : content
   end
 end

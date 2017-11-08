@@ -1,6 +1,8 @@
 <% if @connection.valid? %>
-  $('#connection_form').modal('hide');
-  $('#connection_list').html("<%= escape_javascript(render(partial: 'connections')) %>");
+  $('#modal-dialog').modal('hide');
+  $('#connection-list').html("<%= escape_javascript(render(partial: 'connections')) %>");
+  addMessage('success', '<%= flash[:notice] %>');
+  <% flash.discard(:notice) %>
 <% else %>
-  $('#connection_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+  $('#modal-dialog').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
 <% end %>

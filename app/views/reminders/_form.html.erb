@@ -1,52 +1,59 @@
-<div class="modal-dialog">
-  <div class="modal-content">
-    <%= form_for(@reminder, html: { class: 'form-horizontal' }) do |f| %>
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3><%= @reminder.new_record? ? 'new' : 'update' %> reminder</h3>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="description" class="col-sm-2 control-label">description</label>
-          <div class="col-sm-10">
-            <%= f.text_area :description, rows: 3, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="reminder_type_id" class="col-sm-2 control-label">type</label>
-          <div class="col-sm-4">
-            <%= f.collection_select(:reminder_type_id, @types, :id, :description, { prompt: true }, class: 'form-control') %>
-          </div>
-          <label for="priority_id" class="col-sm-2 control-label">priority</label>
-          <div class="col-sm-4">
-            <%= f.collection_select(:priority_id, @priorities, :id, :description, { prompt: true }, class: 'form-control') %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="due_at" class="col-sm-2 control-label">due</label>
-          <div class="col-sm-4">
-            <%= f.text_field :due_at, class: 'form-control' %>
-          </div>
-          <label for="email" class="col-sm-2 control-label">done</label>
-          <div class="col-sm-1">
-            <%= f.check_box :done, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="tags" class="col-sm-2 control-label">tags</label>
-          <div class="col-sm-6">
-            <%= f.text_field :tags, class: 'form-control' %>
-          </div>
-          <div class="col-sm-4">
-            <%= render partial: 'shared/tags_field', locals: { kind: 'reminder', desc_field: 'reminder_description' } %>
-            <%# tags_field('reminder', 'reminder_description') %>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-link" data-dismiss="modal">cancel</a>
-        <%= f.button :submit, class: 'btn btn-primary' %>
-      </div>
-    <% end %>
-  </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+<%= form_with(model: @reminder, local: true) do |f| %>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><%= @reminder.new_record? ? 'new' : 'update' %> reminder</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="form-group row">
+                        <%= f.label(:description, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-10">
+                            <%= f.text_area(:description, rows: 3, class: 'form-control focus') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:reminder_type_id, 'Type', class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.collection_select(:reminder_type_id, @types, :id, :description, { prompt: true }, class: 'form-control') %>
+                        </div>
+                        <%= f.label(:priority_id, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.collection_select(:priority_id, @types, :id, :description, { prompt: true }, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:due_at, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:due_at, id: 'due-at', class: 'form-control') %>
+                        </div>
+                        <%= f.label(:done, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.check_box :done, class: 'form-control' %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:tags, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-6 pr-0">
+                            <%= f.text_field(:tags, id: 'reminder-tags', class: 'form-control') %>
+                        </div>
+                        <div class="col-sm-4 pl-0">
+                            <%= render partial: 'shared/tags_field', locals: { kind: 'reminder', desc_field: nil } %>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end .modal-body -->
+            <div class="modal-footer">
+                <div class="form-group row text-right">
+                    <div class="col">
+                        <%= link_to('cancel', '#', data: { dismiss: 'modal' }) %>
+                        <%= f.submit class: 'btn btn-primary' %>
+                    </div>
+                </div>
+            </div> <!-- end .modal-footer -->
+        </div> <!-- end .modal-content -->
+    </div> <!-- end .modal-dialog -->
+<% end %>

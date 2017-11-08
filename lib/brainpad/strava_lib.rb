@@ -2,7 +2,6 @@ require 'strava/api/v3'
 
 module Brainpad
   class StravaLib
-
     def self.import_for(person, page_size = 100)
       @client = Strava::Api::V3::Client.new(access_token: STRAVA_ACCESS_TOKEN)
       activities = @client.list_athlete_activities(per_page: page_size)
@@ -18,24 +17,22 @@ module Brainpad
         next if existing.count > 0
 
         detailed_activity = @client.retrieve_an_activity(strava_id)
-        p "create a workout for strava_id: #{strava_id}"
+        Rails.logger.info "create a workout for strava_id: #{strava_id}"
         create_workout_for(person, params_for(detailed_activity))
         created_count += 1
       end
-      p "created #{created_count} workouts."
+      Rails.logger.info "created #{created_count} workouts."
       created_count
     end
-
-    private
 
     def self.create_workout_for(person, params)
       new_workout = Workout.new(params)
       new_workout.person = person
       new_workout.save
       if new_workout.valid?
-        p "created: #{new_workout.description[0..30]}"
+        Rails.logger.info "created: #{new_workout.description[0..30]}"
       else
-        p "failed to create: #{new_workout.errors.inspect}"
+        Rails.logger.info "failed to create: #{new_workout.errors.inspect}"
       end
     end
 

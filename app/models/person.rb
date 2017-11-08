@@ -27,10 +27,9 @@ class Person
   embeds_many :tag_lists
 
   has_secure_password
-  validates_presence_of :username
-  validates_uniqueness_of :username
+  validates :username, presence: true, uniqueness: true
 
-  ROLES = %w[admin user]
+  ROLES = %w[admin user].freeze
 
   def roles=(roles)
     self.authority = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
@@ -53,37 +52,35 @@ class Person
   end
 
   def age_in_days
-    Date.today - born_on
+    Time.zone.today - born_on
   end
 
   def age_in_years
-    y = Date.today.year - born_on.year
-    y -= 1 if (Date.today.yday < born_on.yday)
+    y = Time.zone.today.year - born_on.year
+    y -= 1 if Time.zone.today.yday < born_on.yday
     y
   end
 
   def days_left
-    #based on 84 year life expectancy
-    (born_on>>(84*12)) - Date.today
+    # based on 84 year life expectancy
+    (born_on >> (84 * 12)) - Time.zone.today
   end
 
   def active_accounts
     a = accounts.reject { |a| not a.active }
-    a.sort_by{|a| a.name }
+    a.sort_by(&:name)
   end
 
   def tag(type, tags)
-    unless tags.blank?
-      l = tag_lists.where(type: type).first || self.tag_lists.build(type: type)
-      l.tags ||= []
-      l.tags = l.tags | tags.split(' ')
-      l.save
-    end
+    return if tags.blank?
+    l = tag_lists.find_by(type: type) || tag_lists.build(type: type)
+    l.tags ||= []
+    l.tags = l.tags | tags.split(' ')
+    l.save
   end
 
   def tags_for(type)
-    t = (tag_lists.where(type: type).first || tag_lists.new).tags
+    t = (tag_lists.find_by(type: type) || tag_lists.new).tags
     t ? t.sort : []
   end
-
 end

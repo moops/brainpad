@@ -1,54 +1,54 @@
 <div class="modal-dialog">
-  <div class="modal-content">
-    <%= form_for(@account, html: { class: 'form-horizontal condensed' }) do |f| %>
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3><%= @account.new_record? ? 'new' : 'update' %> account</h3>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="name" class="col-sm-2 control-label">name</label>
-          <div class="col-sm-7">
-            <%= f.text_field :name, class: 'form-control' %>
-          </div>
-          <label for="active" class="col-sm-2 control-label">active</label>
-          <div class="col-sm-1">
-            <%= f.check_box :active, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="units" class="col-sm-2 control-label">units</label>
-          <div class="col-sm-4">
-            <%= f.text_field :units, class: 'form-control' %>
-          </div>
-          <label for="price" class="col-sm-2 control-label">price</label>
-          <div class="col-sm-4">
-            <%= f.text_field :price, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="description" class="col-sm-2 control-label">description</label>
-          <div class="col-sm-10">
-            <%= f.text_field :description, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="url" class="col-sm-2 control-label">url</label>
-          <div class="col-sm-10">
-            <%= f.text_field :url, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="price_url" class="col-sm-2 control-label">price url</label>
-          <div class="col-sm-10">
-            <%= f.text_field :price_url, class: 'form-control' %>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-link" data-dismiss="modal">cancel</a>
-        <%= f.button :submit, class: 'btn btn-primary' %>
-      </div>
-    <% end %>
-  </div><!-- /.modal-content -->
+    <div class="modal-content">
+        <%= form_for(@account, html: { class: 'form-horizontal condensed' }) do |f| %>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3><%= @account.new_record? ? 'new' : 'update' %> account</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <%= f.label(:name, class: 'col-sm-2 col-form-label text-right') %>
+                    <div class="col-sm-7">
+                        <%= f.text_field :name, class: 'form-control focus' %>
+                    </div>
+                    <%= f.label(:active, class: 'col-sm-2 col-form-label text-right') %>
+                    <div class="col-sm-1">
+                        <%= f.check_box :active, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label(:units, class: 'col-sm-2 col-form-label text-right') %>
+                    <div class="col-sm-4">
+                        <%= f.text_field :units, class: 'form-control' %>
+                    </div>
+                    <%= f.label(:price, class: 'col-sm-2 col-form-label text-right') %>
+                    <div class="col-sm-4">
+                        <%= f.text_field :price, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label(:description, class: 'col-sm-2 col-form-label text-right') %>
+                    <div class="col-sm-10">
+                        <%= f.text_field :description, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label(:url, class: 'col-sm-2 col-form-label text-right') %>
+                    <div class="col-sm-10">
+                        <%= f.text_field :url, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label(:price_url, class: 'col-sm-2 col-form-label text-right') %>
+                    <div class="col-sm-10">
+                        <%= f.text_field :price_url, class: 'form-control' %>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <%= link_to('cancel', '#', data: { dismiss: 'modal' }) %>
+                <%= f.button :submit, class: 'btn btn-primary' %>
+            </div>
+        <% end %>
+    </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

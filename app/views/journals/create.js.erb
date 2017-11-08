@@ -1,6 +1,8 @@
 <% if @journal.valid? %>
-  $('#journal_form').modal('hide');
-  $('#journal_list').html("<%= escape_javascript(render(partial: 'journals')) %>");
+  $('#modal-dialog').modal('hide');
+  $('#journal-list').html("<%= escape_javascript(render(partial: 'journals')) %>");
+  addMessage('success', '<%= flash[:notice] %>');
+  <% flash.discard(:notice) %>
 <% else %>
-  $('#journal_form').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
+  $('#modal-dialog').html("<%= escape_javascript(render(partial: 'form')) %>").modal('show');
 <% end %>

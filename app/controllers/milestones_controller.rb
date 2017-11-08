@@ -1,30 +1,27 @@
 class MilestonesController < ApplicationController
+  before_action :set_milestone, only: %i[show edit update destroy]
 
   # GET /milestones
   def index
     authorize Milestone
     @milestones = current_user.milestones.desc(:milestone_at)
-    if params[:q]
-      @milestones = @milestones.where(name: /#{params[:q]}/i)
-    end
+    @milestones = @milestones.where(name: /#{params[:q]}/i) if params[:q]
     @milestones = @milestones.page(params[:page])
   end
 
   # GET /milestones/1.js
   def show
-    @milestone = Milestone.find(params[:id])
     authorize @milestone
   end
 
   # GET /milestones/1/new.js
   def new
-    @milestone = (params[:milestone_id]) ? Milestone.find(params[:milestone_id]).dup : Milestone.new
+    @milestone = params[:milestone_id] ? Milestone.find(params[:milestone_id]).dup : Milestone.new
     authorize @milestone
   end
 
   # GET /milestones/1/edit.js
   def edit
-    @milestone = Milestone.find(params[:id])
     authorize @milestone
   end
 
@@ -40,7 +37,6 @@ class MilestonesController < ApplicationController
 
   # PUT /milestones/1.js
   def update
-    @milestone = Milestone.find(params[:id])
     authorize @milestone
     if @milestone.update_attributes(milestone_params)
       @milestones = current_user.milestones.desc(:milestone_at).page(params[:page])
@@ -50,13 +46,16 @@ class MilestonesController < ApplicationController
 
   # DELETE /milestones/1
   def destroy
-    @milestone = Milestone.find(params[:id])
     authorize @milestone
     @milestone.destroy
     redirect_to milestones_url
   end
 
   private
+
+  def set_milestone
+    @milestone = Milestone.find(params[:id])
+  end
 
   def milestone_params
     params.require(:milestone).permit(:name, :milestone_at)

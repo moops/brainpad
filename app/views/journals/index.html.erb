@@ -1,11 +1,7 @@
-<!-- hidden elements -->
-<div id="journal_form" class="modal fade"></div>
+<%= render partial: 'shared/data_list_header', locals: { title: 'entries', new_record_path: new_journal_path } %>
 
-<%= render partial: 'shared/search_form' %>
-<%= render partial: 'shared/control_buttons', locals: { new_record_path: new_journal_path } %>
-
-<div id="journal_list" class="data-list">
-  <%= render partial: 'journals' %>
+<div id="journal-list' class="data-list">
+  <%= render partial: 'journals' if @journals.present? %>
 </div>
 
 <div class="tag-list">

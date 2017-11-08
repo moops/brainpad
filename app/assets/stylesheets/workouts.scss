@@ -1,35 +1,19 @@
 .workout-dashboard {
-	margin: auto;
-	margin-bottom: 20px;
-	border: 1px solid #bbb;
-	background: #ddd;
-	border-radius: 6px;
-	box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+  margin-bottom: 20px;
+  border: 1px solid #bbb;
+  background: #ddd;
+  border-radius: 4px;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
 }
 
 .workout-dashboard .item {
-	width: 17%;
-	padding: 10px;
-	float: left;
-	color: #666;
+  width: 17%;
+  padding: 10px;
+  float: left;
+  color: #666;
 }
 
 .workout-dashboard .item .data {
-	font-weight: bold;
-	font-size: 1.5em;
-}
-
-.workouts-panel {
-	width: 100%;
-}
-
-.workouts-panel .reports-panel {
-	width: 20%;
-	float: left;
-}
-
-.workouts-panel .list-panel {
-	width: 77%;
-	float: left;
-	margin-left: 3%;
+  font-weight: bold;
+  font-size: 1.5em;
 }

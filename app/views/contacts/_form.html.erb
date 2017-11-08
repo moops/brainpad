@@ -1,66 +1,69 @@
-<div class="modal-dialog">
-  <div class="modal-content">
-    <%= form_for(@contact, remote: true, html: { class: 'form-horizontal' }) do |f| %>
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3><%= @contact.new_record? ? 'new' : 'update' %> contact</h3>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="name" class="col-sm-2 control-label">name</label>
-          <div class="col-sm-10">
-            <%= f.text_field :name, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="address" class="col-sm-2 control-label">address</label>
-          <div class="col-sm-10">
-            <%= f.text_field :address, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="city" class="col-sm-2 control-label">city</label>
-          <div class="col-sm-10">
-            <%= f.text_field :city, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="tags" class="col-sm-2 control-label">tags</label>
-          <div class="col-sm-6">
-            <%= f.text_field :tags, class: 'form-control' %>
-          </div>
-          <div class="col-sm-4">
-            <%= render partial: 'shared/tags_field', locals: { kind: 'contact', desc_field: nil } %>
-            <%# tags_field('contact') %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="comments" class="col-sm-2 control-label">comments</label>
-          <div class="col-sm-10">
-            <%= f.text_field :comments, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="email" class="col-sm-2 control-label">email</label>
-          <div class="col-sm-10">
-            <%= f.email_field :email, class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="phone_home" class="col-sm-2 control-label">phone 1</label>
-          <div class="col-sm-4">
-            <%= f.text_field :phone_home, class: 'form-control' %>
-          </div>
-          <label for="phone_work" class="col-sm-2 control-label">phone 2</label>
-          <div class="col-sm-4">
-            <%= f.text_field :phone_work, class: 'form-control' %>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-link" data-dismiss="modal">cancel</a>
-        <%= f.button :submit, class: 'btn btn-primary' %>
-      </div>
-    <% end %>
-  </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+<%= form_with(model: @contact) do |f| %>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><%= @contact.new_record? ? 'new' : 'update' %> contact</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="form-group row">
+                        <%= f.label(:name, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-10">
+                            <%= f.text_field(:name, class: 'form-control focus') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:email, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-10">
+                            <%= f.text_field(:email, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:address, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:address, class: 'form-control') %>
+                        </div>
+                        <%= f.label(:city, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:city, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:phone_home, 'Phone home', class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:phone_home, class: 'form-control') %>
+                        </div>
+                        <%= f.label(:phone_work, 'work', class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:phone_work, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:tags, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-6 pr-0">
+                            <%= f.text_field(:tags, id: 'contact-tags', class: 'form-control') %>
+                        </div>
+                        <div class="col-sm-4 pl-0">
+                            <%= render partial: 'shared/tags_field', locals: { kind: 'contact', desc_field: nil } %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:comments, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-10">
+                            <%= f.text_field(:comments, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row text-right">
+                        <div class="col">
+                            <%= link_to('cancel', '#', data: { dismiss: 'modal' }) %>
+                            <%= f.submit class: 'btn btn-primary' %>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end .modal-body -->
+        </div> <!-- end .modal-content -->
+    </div> <!-- end .modal-dialog -->
+<% end %>

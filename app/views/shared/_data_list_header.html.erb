@@ -1,0 +1,24 @@
+<div class="d-flex justify-content-between mb-1">
+    <span class="list-title"><%= title %></span>
+    <!-- spacer -->
+    <span style="width: 100%"></span>
+    <!-- search form -->
+    <span id="search-container" class="mr-1 <%= 'collapse' unless (params[:q]) %>">
+        <%= form_tag({action: 'index'}, method: 'get', class: 'form-inline') do %>
+            <div class="input-group">
+                <%= text_field_tag(:q, h(params[:q]), id: 'search-query', class: 'form-control input-sm', style: 'width: 10em') %>
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-info btn-sm"><span class="icon-search"></span></button>
+                </span>
+            </div>
+        <% end %>
+    </span>
+    <!-- find  button -->
+    <button type="button" id="find-btn" class="btn btn-info mr-1" data-toggle="collapse" data-target="#search-container">
+        <span class="icon-search"></span> find
+    </button>
+    <!-- add button -->
+    <%= link_to(new_record_path, remote: true, class: 'btn btn-primary', id: 'new-record-btn') do %>
+        <span class="icon-plus" style="color: white"></span> add
+    <% end %>
+</div>

@@ -1,6 +1,6 @@
 namespace :strava do
   desc 'prepare workouts that aren\'t from strava'
-  task :prepare => :environment do
+  task prepare: :environment do
     Workout.each do |workout|
       workout.update(strava_id: 'none') unless workout.strava_id
     end

@@ -1,6 +1,7 @@
 require 'feeds'
 
 class LinksController < ApplicationController
+  before_action :set_link, only: %i[show edit update destroy]
 
   # GET /links
   def index
@@ -10,7 +11,7 @@ class LinksController < ApplicationController
     @recently_added = @links.desc(:created_at).limit(8)
     @most_often = @links.desc(:clicks).limit(8)
     @random = @links.sort_by { rand }[0,8]
-    @feeds = Feeds.get_feeds
+    @feeds = Feeds.get
     if params[:tag]
       @tagged_links = @links.where(tags: /#{params[:tag]}/).order(name: :desc)
       @tag = params[:tag]
@@ -19,10 +20,9 @@ class LinksController < ApplicationController
 
   # GET /links/1
   def show
-    @link = Link.find(params[:id])
     authorize @link
-    @link.update_attributes(clicks: @link.clicks += 1, last_clicked_on: Time.now)
-    redirect_to @link.url.include?("://") ? @link.url : "http://#{@link.url}"
+    @link.update_attributes(clicks: @link.clicks += 1, last_clicked_on: Time.zone.now)
+    redirect_to @link.url.include?('://') ? @link.url : "http://#{@link.url}"
   end
 
   # GET /links/new
@@ -31,16 +31,15 @@ class LinksController < ApplicationController
     @link = Link.where(url: params[:url]).first if params[:url]
     if @link
       flash[:notice] = "#{@link.url} already exists"
-      redirect_to links_path and return
+      redirect_to links_path && return
     end
-    @link = Link.new unless @link
+    @link ||= Link.new
     @link.name = params[:name].downcase if params[:name]
     @link.url = params[:url]
   end
 
   # GET /links/1/edit
   def edit
-    @link = Link.find(params[:id])
     authorize @link
   end
 
@@ -60,7 +59,6 @@ class LinksController < ApplicationController
 
   # PUT /links/1
   def update
-    @link = Link.find(params[:id])
     authorize @link
     if @link.update_attributes(link_params)
       current_user.tag('link', @link.tags)
@@ -73,7 +71,6 @@ class LinksController < ApplicationController
 
   # DELETE /links/1
   def destroy
-    @link = Link.find(params[:id])
     authorize @link
     @link.destroy
     redirect_to links_path
@@ -98,12 +95,16 @@ class LinksController < ApplicationController
   # non-restfull inline editors
   def update_field
     link = Link.find(params[:id])
-    link.update_attribute(params[:field], params[:value])
+    link.update(params[:field], params[:value])
     render text: params[:value]
   end
   # end non-restfull inline editors
 
   private
+
+  def set_link
+    @link = Link.find(params[:id])
+  end
 
   def link_params
     params.require(:link).permit(:name, :url, :tags, :comments, :expires_on, :clicks, :last_clicked_on)

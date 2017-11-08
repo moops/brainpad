@@ -1,11 +1,10 @@
-<div id="payments_top_tags" class="box">
-	<div class="boxhead">expenses by tag</div>
-	<div class="boxcontent">
-		<% @expenses_by_tag.each do |e| %>
-      <% percentage = ((e[1] / @money_summary[:total]) * 100).to_i.to_s %>
-      <%= "#{e[0]} #{number_to_currency(e[1])} [#{percentage}%]" %><br/>
-      <% percentage = '1' if percentage.eql?'0' %>
-      <%= image_tag('redbar.gif', width: "#{percentage.to_i * 2}", class: 'bar') %><br/>
-    <% end %>
-	</div>
-</div> <!-- end .box -->
+<div id="payments-top-tags" class="card">
+    <div class="card-header"><h5>expenses by tag</h5></div>
+    <div class="card-body">
+        <% @expenses_by_tag.each do |e| %>
+            <% percentage = ((e[1] / @money_summary[:total]) * 100).to_i.to_s %>
+            <%= "#{e[0]} #{number_to_currency(e[1])} [#{percentage}%]" %><br/>
+            <%= image_tag('redbar.gif', width: "#{percentage.to_i * 2}", class: 'bar') %><br/>
+        <% end %>
+    </div>
+</div>

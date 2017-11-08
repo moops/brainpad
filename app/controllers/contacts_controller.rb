@@ -1,12 +1,11 @@
 class ContactsController < ApplicationController
+  before_action :set_contact, only: %i[show edit update destroy]
 
   # GET /contacts
   def index
     authorize Contact
     @contacts = current_user.contacts.asc(:name)
-    if params[:q]
-      @contacts = @contacts.where(name: /#{params[:q]}/i)
-    end
+    @contacts = @contacts.where(name: /#{params[:q]}/i) if params[:q]
     if params[:tag]
       @contacts = @contacts.where(tags: /#{params[:tag]}/)
       @tag = params[:tag]
@@ -16,19 +15,17 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1.js
   def show
-    @contact = Contact.find(params[:id])
     authorize @contact
   end
 
   # GET /contacts/1/new.js
   def new
-    @contact = (params[:contact_id]) ? Contact.find(params[:contact_id]).dup : Contact.new
+    @contact = params[:contact_id] ? Contact.find(params[:contact_id]).dup : Contact.new
     authorize @contact
   end
 
   # GET /contacts/1/edit.js
   def edit
-    @contact = Contact.find(params[:id])
     authorize @contact
   end
 
@@ -45,7 +42,6 @@ class ContactsController < ApplicationController
 
   # PUT /contacts/1.js
   def update
-    @contact = current_user.contacts.find(params[:id])
     authorize @contact
     if @contact.update_attributes(contact_params)
       current_user.tag('contact', @contact.tags)
@@ -56,7 +52,6 @@ class ContactsController < ApplicationController
 
   # DELETE /contacts/1
   def destroy
-    @contact = Contact.find(params[:id])
     authorize @contact
     @contact.destroy
     redirect_to contacts_path
@@ -64,7 +59,13 @@ class ContactsController < ApplicationController
 
   private
 
+  def set_contact
+    @contact = Contact.find(params[:id])
+  end
+
   def contact_params
-    params.require(:contact).permit(:name, :email, :phone_home, :phone_work, :phone_cell, :address, :city, :tags, :comments)
+    params.require(:contact).permit(
+      :name, :email, :phone_home, :phone_work, :phone_cell, :address, :city, :tags, :comments
+    )
   end
 end

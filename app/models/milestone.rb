@@ -7,11 +7,11 @@ class Milestone
 
   belongs_to :person
 
-  validates_presence_of :name, :milestone_at
+  validates :name, presence: true
+  validates :milestone_at, presence: true
   paginates_per 15
 
-  def self.next_milestone(person_id)
-    Milestone.gt(milestone_at: Time.now).asc('milestone_at').first
+  def self.next_milestone(_person_id)
+    Milestone.gt(milestone_at: Time.zone.now).asc('milestone_at').first
   end
-
 end

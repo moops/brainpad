@@ -1,4 +1,5 @@
 class PeopleController < ApplicationController
+  before_action :set_person, only: %i[show edit update destroy]
 
   # GET /people/new.js
   def new
@@ -7,25 +8,24 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit.js
   def edit
-    @person = Person.find(params[:id])
     authorize @person
   end
 
-  # POST /people.js
+  # POST /people
   def create
     @person = Person.new(person_params)
-    @person.roles=(['user'])
+    @person.roles = ['user']
     respond_to do |format|
       if @person.save
-        format.html {
+        format.html do
           session[:user_id] = @person.id
           redirect_to links_path, notice: "welcome #{@person.username}, thank you for signing up!"
-        }
+        end
         format.json { render action: 'show', status: :created, location: @person }
         format.js { p 'good js request'; render action: 'new', notice: "js welcome #{@person.username}, thank you for signing up!" }
       else
-        format.js { render action: 'new', notice: "#{@person.errors.messages}" }
-        format.html { render action: 'new', notice: "#{@person.errors.messages}" }
+        format.js { render action: 'new', notice: @person.errors.messages.to_s }
+        format.html { render action: 'new', notice: @person.errors.messages.to_s }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
     end
@@ -33,7 +33,6 @@ class PeopleController < ApplicationController
 
   # PUT /people/1.js
   def update
-    @person = Person.find(params[:id])
     authorize @person
     if @person.update_attributes(person_params)
       redirect_to links_path, notice: "#{@person.username}'s profile updated."
@@ -44,13 +43,16 @@ class PeopleController < ApplicationController
 
   # DELETE /people/1
   def destroy
-    @person = Person.find(params[:id])
     authorize @person
     @person.destroy
     redirect_to root_url, notice: "#{@person.username} removed"
   end
 
   private
+
+  def set_person
+    @person = Person.find(params[:id])
+  end
 
   def person_params
     params.require(:person).permit(

@@ -1,13 +1,12 @@
 class PaymentsController < ApplicationController
+  before_action :set_payment, only: %i[show edit update destroy]
 
   # GET /payments
   def index
     authorize Payment
     @payments = current_user.payments.where(:payment_on.gt => 1.year.ago).desc(:payment_on)
     @accounts = current_user.accounts.active
-    if params[:q]
-      @payments = @payments.where(description: /#{params[:q]}/i)
-    end
+    @payments = @payments.where(description: /#{params[:q]}/i) if params[:q]
     if params[:tag]
       @payments = @payments.where(tags: /#{params[:tag]}/)
       @tag = params[:tag]
@@ -21,25 +20,21 @@ class PaymentsController < ApplicationController
 
   # GET /payments/1.js
   def show
-    @payment = Payment.find(params[:id])
     authorize @payment
   end
 
   # GET /payments/new.js
   def new
-    @payment = (params[:payment_id]) ? Payment.find(params[:payment_id]).dup : Payment.new
+    @payment = params[:payment_id] ? Payment.find(params[:payment_id]).dup : Payment.new
     authorize @payment
-    get_stuff_for_form
-    if (params[:payment_id])
-      @payment = Payment.find(params[:payment_id]).dup
-    end
+    stuff_for_form
+    @payment = Payment.find(params[:payment_id]).dup if params[:payment_id]
   end
 
   # GET /payments/1/edit.js
   def edit
-    @payment = Payment.find(params[:id])
     authorize @payment
-    get_stuff_for_form
+    stuff_for_form
   end
 
   # POST /payments
@@ -56,14 +51,13 @@ class PaymentsController < ApplicationController
 
   # PUT /payments/1
   def update
-    @payment = Payment.find(params[:id])
     authorize @payment
     new_amount = params[:payment][:amount].to_f
     @payment.update_amount_and_adjust_account(new_amount)
     params[:payment].delete('amount')
-    params[:payment][:from_account] = Account.find(params[:payment][:from_account]) unless params[:payment][:from_account].blank?
-    params[:payment][:to_account] = Account.find(params[:payment][:to_account]) unless params[:payment][:to_account].blank?
-    params[:payment][:frequency] = Lookup.find(params[:payment][:frequency]) unless params[:payment][:frequency].blank?
+    params[:payment][:from_account] = Account.find(params[:payment][:from_account]) if params[:payment][:from_account].present?
+    params[:payment][:to_account] = Account.find(params[:payment][:to_account]) if params[:payment][:to_account].present?
+    params[:payment][:frequency] = Lookup.find(params[:payment][:frequency]) if params[:payment][:frequency].present?
 
     if @payment.update_attributes(payment_params)
       current_user.tag('payment', @payment.tags)
@@ -74,7 +68,6 @@ class PaymentsController < ApplicationController
 
   # DELETE /payments/1
   def destroy
-    @payment = Payment.find(params[:id])
     authorize @payment
     @payment.apply(true)
     @payment.destroy
@@ -83,12 +76,14 @@ class PaymentsController < ApplicationController
 
   private
 
-  def get_stuff_for_form
+  def stuff_for_form
     @accounts = current_user.accounts.active.order_by(name: :asc)
     @frequencies = Lookup.where(category: 36).all
   end
 
-  private
+  def set_payment
+    @payment = Payment.find(params[:id])
+  end
 
   def payment_params
     params.require(:payment).permit(:amount, :description, :tags, :payment_on, :until, :from_account, :to_account, :frequency)
