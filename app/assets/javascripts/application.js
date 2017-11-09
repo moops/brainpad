@@ -23,7 +23,10 @@ $(function() {
   document.addEventListener('keydown', function(e) {
     // submit the form if return key in form
     if (e.keyCode == 13) {
+      console.log('return key', $(e.target).parents('form'));
       $(e.target).parents('form').submit();
+      e.preventDefault();
+      return false;
     }
     // ctrl-a - click 'add record' button
     if (e.ctrlKey && e.keyCode == 65) {

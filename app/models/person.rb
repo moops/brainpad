@@ -67,7 +67,7 @@ class Person
   end
 
   def active_accounts
-    a = accounts.reject { |a| not a.active }
+    a = accounts.select(&:active)
     a.sort_by(&:name)
   end
 

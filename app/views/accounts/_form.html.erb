@@ -1,54 +1,62 @@
-<div class="modal-dialog">
-    <div class="modal-content">
-        <%= form_for(@account, html: { class: 'form-horizontal condensed' }) do |f| %>
+<%= form_with(model: @account, local: true) do |f| %>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3><%= @account.new_record? ? 'new' : 'update' %> account</h3>
+                <h5 class="modal-title"><%= @account.new_record? ? 'new' : 'update' %> account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <%= f.label(:name, class: 'col-sm-2 col-form-label text-right') %>
-                    <div class="col-sm-7">
-                        <%= f.text_field :name, class: 'form-control focus' %>
+                <div class="container">
+                    <div class="form-group row">
+                        <%= f.label(:name, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:name, class: 'form-control focus') %>
+                        </div>
+                        <%= f.label(:active, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.check_box(:active, id: 'account_active', class: 'form-control') %>
+                        </div>
                     </div>
-                    <%= f.label(:active, class: 'col-sm-2 col-form-label text-right') %>
-                    <div class="col-sm-1">
-                        <%= f.check_box :active, class: 'form-control' %>
+                    <div class="form-group row">
+                        <%= f.label(:units, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:units, class: 'form-control') %>
+                        </div>
+                        <%= f.label(:price, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-4">
+                            <%= f.text_field(:price, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:description, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-10">
+                            <%= f.text_field(:description, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:url, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-10">
+                            <%= f.text_field(:url, class: 'form-control') %>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <%= f.label(:price_url, class: 'col-sm-2 col-form-label text-right') %>
+                        <div class="col-sm-10">
+                            <%= f.text_field(:price_url, class: 'form-control') %>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <%= f.label(:units, class: 'col-sm-2 col-form-label text-right') %>
-                    <div class="col-sm-4">
-                        <%= f.text_field :units, class: 'form-control' %>
-                    </div>
-                    <%= f.label(:price, class: 'col-sm-2 col-form-label text-right') %>
-                    <div class="col-sm-4">
-                        <%= f.text_field :price, class: 'form-control' %>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <%= f.label(:description, class: 'col-sm-2 col-form-label text-right') %>
-                    <div class="col-sm-10">
-                        <%= f.text_field :description, class: 'form-control' %>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <%= f.label(:url, class: 'col-sm-2 col-form-label text-right') %>
-                    <div class="col-sm-10">
-                        <%= f.text_field :url, class: 'form-control' %>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <%= f.label(:price_url, class: 'col-sm-2 col-form-label text-right') %>
-                    <div class="col-sm-10">
-                        <%= f.text_field :price_url, class: 'form-control' %>
-                    </div>
-                </div>
-            </div>
+            </div> <!-- end .modal-body -->
             <div class="modal-footer">
-                <%= link_to('cancel', '#', data: { dismiss: 'modal' }) %>
-                <%= f.button :submit, class: 'btn btn-primary' %>
-            </div>
-        <% end %>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+                <div class="form-group row text-right">
+                    <div class="col">
+                        <%= link_to('cancel', '#', data: { dismiss: 'modal' }) %>
+                        <%= f.submit class: 'btn btn-primary' %>
+                    </div>
+                </div>
+            </div> <!-- end .modal-footer -->
+        </div> <!-- end .modal-content -->
+    </div> <!-- end .modal-dialog -->
+<% end %>

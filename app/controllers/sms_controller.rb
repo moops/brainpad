@@ -23,16 +23,16 @@ class SmsController < ApplicationController
 
   def create_something(person, body)
     case body.partition(' ').first.downcase
-      when 'reminder'
-        parse_reminder(person, body)
-      when 'workout'
-        parse_workout(person, body)
-      when 'journal'
-        parse_journal(person, body)
-      when 'payment'
-        parse_payment(person, body)
-      else
-        logger.info "not sure what to create with:[#{body}]"
+    when 'reminder'
+      parse_reminder(person, body)
+    when 'workout'
+      parse_workout(person, body)
+    when 'journal'
+      parse_journal(person, body)
+    when 'payment'
+      parse_payment(person, body)
+    else
+      logger.info "not sure what to create with:[#{body}]"
     end
   end
 
@@ -73,16 +73,16 @@ class SmsController < ApplicationController
   def parse_time(time)
     return unless time
     case time.downcase
-      when 'now'
-        Time.zone.now
-      when 'today'
-        Date.today
-      when 'tomorrow'
-        Date.today + 1.days
-      when 'yesterday'
-        Date.today - 1.days
-      else
-        Time.parse(time)
+    when 'now'
+      Time.zone.now
+    when 'today'
+      Time.zone.today
+    when 'tomorrow'
+      Time.zone.today + 1.day
+    when 'yesterday'
+      Time.zone.today - 1.day
+    else
+      Time.zone.parse(time)
     end
   end
 

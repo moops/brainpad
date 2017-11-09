@@ -50,13 +50,13 @@ class WorkoutsControllerTest < ActionDispatch::IntegrationTest
       it 'should show workouts belonging current user' do
         get workout_path(@user_workout), xhr: true
         assert_response :success
-        assert_select 'h3', /^workout details.*/
+        assert_select 'h5', /^workout details.*/
       end
 
       it 'should get edit' do
         get edit_workout_path(@user_workout), xhr: true
         assert_response :success
-        assert_select 'h3', /^update workout.*/
+        assert_select 'h5', /^update workout.*/
       end
 
       it 'should update workout' do

@@ -50,13 +50,13 @@ class ConnectionsControllerTest < ActionDispatch::IntegrationTest
       it 'should show connections belonging current user' do
         get connection_path(@user_connection), xhr: true
         assert_response :success
-        assert_select 'h3', /^connection details.*/
+        assert_select 'h5', /^connection details.*/
       end
 
       it 'should get edit' do
         get edit_connection_path(@user_connection), xhr: true
         assert_response :success
-        assert_select 'h3', /^update connection.*/
+        assert_select 'h5', /^update connection.*/
       end
 
       it 'should update connection' do

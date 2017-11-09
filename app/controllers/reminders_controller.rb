@@ -71,7 +71,7 @@ class RemindersController < ApplicationController
   def finish
     params[:reminder].each do |reminder_id, attr|
       reminder = Reminder.find(reminder_id)
-      reminder.update(:done, attr[:done])
+      reminder.update_attribute(:done, attr[:done])
     end
     redirect_to reminders_path
   end

@@ -31,7 +31,10 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
-- nov 07 - fix bulk finish of reminders
+- nov 08 - update payment - accounts not populated in form
+- nov 08 - return key submitting twice
+x nov 08 - account form needs updating
+x nov 07 - fix bulk finish of reminders
 x nov 07 - fix width of calendar header
 x nov 07 - put search field in same line as buttons
 x nov 06 - combine footer 'rev' and 'who' into one tooltip

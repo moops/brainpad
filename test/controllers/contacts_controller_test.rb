@@ -50,13 +50,13 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
       it 'should show contacts belonging current user' do
         get contact_path(@user_contact), xhr: true
         assert_response :success
-        assert_select 'h3', /^contact details.*/
+        assert_select 'h5', /^contact details.*/
       end
 
       it 'should get edit' do
         get edit_contact_path(@user_contact), xhr: true
         assert_response :success
-        assert_select 'h3', /^update contact.*/
+        assert_select 'h5', /^update contact.*/
       end
 
       it 'should update contact' do

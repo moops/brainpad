@@ -50,13 +50,13 @@ class PaymentsControllerTest < ActionDispatch::IntegrationTest
       it 'should show payments belonging current user' do
         get payment_path(@user_payment), xhr: true
         assert_response :success
-        assert_select 'h3', /^transaction details.*/
+        assert_select 'h5', /^transaction details.*/
       end
 
       it 'should get edit' do
         get edit_payment_path(@user_payment), xhr: true
         assert_response :success
-        assert_select 'h3', /^update payment.*/
+        assert_select 'h5', /^update payment.*/
       end
 
       it 'should update payment' do

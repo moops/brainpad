@@ -1,14 +1,12 @@
 <div class="col-sm-6">
-  <strong><%= feed.channel.title %></strong>
-  <ul class="links-list">
-    <% feed.items.each_with_index do |cur_item, i| %>
-      <% if i < 8 %>
-        <li>
-          <a href="<%= cur_item.link %>" title="<%= clean_feed_description(cur_item.description) %>" target="_blank">
-            <%= link_text_from_feed(cur_item) %>
-          </a>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
-</div> <!-- end .span3 -->
+    <strong><%= feed.channel.title %></strong>
+    <ul class="links-list">
+        <% feed.items.each_with_index do |cur_item, i| %>
+            <% if i < 8 %>
+                <li>
+                    <%= link_to(link_text_from_feed(cur_item), cur_item.link, title: clean_feed_description(cur_item.description), target: '_blank') %>
+                </li>
+            <% end %>
+        <% end %>
+    </ul>
+</div> <!-- end .col-sm-6 -->

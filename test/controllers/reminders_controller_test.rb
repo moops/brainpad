@@ -50,13 +50,13 @@ class RemindersControllerTest < ActionDispatch::IntegrationTest
       it 'should show reminders belonging current user' do
         get reminder_path(@user_reminder), xhr: true
         assert_response :success
-        assert_select 'h3', /^reminder details.*/
+        assert_select 'h5', /^reminder details.*/
       end
 
       it 'should get edit' do
         get edit_reminder_path(@user_reminder), xhr: true
         assert_response :success
-        assert_select 'h3', /^update reminder.*/
+        assert_select 'h5', /^update reminder.*/
       end
 
       it 'should update reminder' do

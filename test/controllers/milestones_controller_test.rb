@@ -50,7 +50,7 @@ class MilestonesControllerTest < ActionDispatch::IntegrationTest
       it 'should get edit' do
         get edit_milestone_path(@user_milestone), xhr: true
         assert_response :success
-        assert_select 'h3', /^update milestone.*/
+        assert_select 'h5', /^update milestone.*/
       end
 
       it 'should update milestone' do

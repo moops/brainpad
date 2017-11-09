@@ -49,13 +49,13 @@ class JournalsControllerTest < ActionDispatch::IntegrationTest
       it 'should show journals belonging current user' do
         get journal_path(@user_entry), xhr: true
         assert_response :success
-        assert_select 'h3', /^entry details.*/
+        assert_select 'h5', /^entry details.*/
       end
 
       it 'should get edit' do
         get edit_journal_path(@user_entry), xhr: true
         assert_response :success
-        assert_select 'h3', /^update journal.*/
+        assert_select 'h5', /^update entry.*/
       end
 
       it 'should update journal' do

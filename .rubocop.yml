@@ -1,9 +1,12 @@
 AllCops:
-  Excludes:
+  Exclude:
     - db/schema.rb
     - bin/**
     - test/**/*
     - spec/**/*
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
 Metrics/LineLength:
   Max: 120
 Metrics/AbcSize:

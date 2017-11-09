@@ -1,5 +1,4 @@
 class AccountsController < ApplicationController
-
   # GET /accounts/new.js
   def new
     @account = Account.new
@@ -17,7 +16,7 @@ class AccountsController < ApplicationController
     @account = current_user.accounts.build(account_params)
     authorize @account
     if @account.save
-      redirect_to accounts_path
+      redirect_to payments_path
     end
   end
 
@@ -26,7 +25,7 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     authorize @account
     if @account.update_attributes!(account_params)
-      redirect_to accounts_path
+      redirect_to payments_path
     end
   end
 

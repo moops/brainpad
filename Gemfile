@@ -16,7 +16,7 @@ gem 'jquery-rails'            # unobtrusive javascript
 gem 'json'                    # json api
 gem 'kaminari'                # pagination
 gem 'kaminari-mongoid'
-gem 'mongoid', '~> 6.0.0'     # mongodb
+gem 'mongoid'                 # mongodb
 gem 'pundit'                  # authorization
 gem 'sass-rails'
 gem 'uglifier'                # javascript compressor
@@ -24,10 +24,10 @@ gem 'uglifier'                # javascript compressor
 # external apis
 gem 'redd'                    # test reddit client
 gem 'strava-api-v3'           # strava access
-# gem 'twilio-ruby'             # sms sending
+gem 'twilio-ruby'             # sms sending
 
 group :test do
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'minitest-spec-rails'
   gem 'rails-controller-testing' # not sure if this is needed anymore
 end
@@ -38,6 +38,6 @@ group :development do
   gem 'pry-byebug'
   gem 'rubocop', require: false
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  # gem 'spring'
+  # gem 'spring-watcher-listen', '~> 2.0.0'
 end

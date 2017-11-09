@@ -1,56 +1,56 @@
 <div>
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li class="active"><a href="#links" data-toggle="tab">links</a></li>
-    <li><a href="#reddit" data-toggle="tab">reddit</a></li>
-    <li><a href="#feeds" data-toggle="tab">feeds</a></li>
-  </ul>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item"><a href="#links" class="nav-link active" data-toggle="tab">links</a></li>
+        <li class="nav-item"><a href="#reddit" class="nav-link" data-toggle="tab">reddit</a></li>
+        <li class="nav-item"><a href="#feeds" class="nav-link" data-toggle="tab">feeds</a></li>
+    </ul>
 
   <!-- Tab panes -->
-  <div class="tab-content">
-    <div class="tab-pane active" id="links">
-      <div class="row">
-        <div class="col-sm-3">
-          <h4>often</h4>
-          <ul class="links-list"><%= render @most_often %></ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="links">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h4>often</h4>
+                    <ul class="links-list"><%= render @most_often %></ul>
+                </div>
+                <div class="col-sm-3">
+                    <h4>recent</h4>
+                    <ul class="links-list"><%= render @recently_clicked %></ul>
+                </div>
+                <div class="col-sm-3">
+                    <h4>new</h4>
+                    <ul class="links-list"><%= render @recently_added %></ul>
+                </div>
+                <div class="col-sm-3">
+                    <h4>random</h4>
+                    <ul class="links-list"><%= render @random %></ul>
+                </div>
+                <div class="tag-list">
+                    <%= tag_list 'link' %>
+                </div>
+            </div> <!-- end .row -->
+            <% if @tagged_links %>
+            <div class="row">
+                <div class="col-sm-12">
+                    <%= filters_links %>
+                    <ul class="horizontal-links-list"><%= render @tagged_links %></ul>
+                </div>
+            </div> <!-- end .row -->
+            <% end %>
         </div>
-        <div class="col-sm-3">
-          <h4>recent</h4>
-          <ul class="links-list"><%= render @recently_clicked %></ul>
+        <div class="tab-pane" id="reddit">
+            reddit content
         </div>
-        <div class="col-sm-3">
-          <h4>new</h4>
-          <ul class="links-list"><%= render @recently_added %></ul>
+        <div class="tab-pane" id="feeds">
+            <div class="row">
+                <%= render partial: 'feed', locals: { feed: @feeds[0] } if @feeds[0] %>
+                <%= render partial: 'feed', locals: { feed: @feeds[1] } if @feeds[1] %>
+            </div> <!-- end .row -->
+            <div class="row">
+                <%= render partial: 'feed', locals: { feed: @feeds[2] } if @feeds[2] %>
+                <%= render partial: 'feed', locals: { feed: @feeds[3] } if @feeds[3] %>
+            </div> <!-- end .row -->
         </div>
-        <div class="col-sm-3">
-          <h4>random</h4>
-          <ul class="links-list"><%= render @random %></ul>
-        </div>
-        <div class="tag-list">
-          <%= tag_list 'link' %>
-        </div>
-      </div>
-      <% if @tagged_links %>
-        <div class="row">
-          <div class="col-sm-12">
-            <%= filters_links %>
-            <ul class="horizontal-links-list"><%= render @tagged_links %></ul>
-          </div>
-        </div>
-      <% end %>
     </div>
-    <div class="tab-pane" id="reddit">
-      reddit content
-    </div>
-    <div class="tab-pane" id="feeds">
-      <div class="row">
-        <%= render partial: 'feed', locals: { feed: @feeds[0] } if @feeds[0] %>
-        <%= render partial: 'feed', locals: { feed: @feeds[1] } if @feeds[1] %>
-      </div> <!-- end .row -->
-      <div class="row">
-        <%= render partial: 'feed', locals: { feed: @feeds[2] } if @feeds[2] %>
-        <%= render partial: 'feed', locals: { feed: @feeds[3] } if @feeds[3] %>
-      </div> <!-- end .row -->
-    </div>
-  </div>
 </div>

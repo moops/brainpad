@@ -14,7 +14,7 @@ class PeopleControllerTest < ActionDispatch::IntegrationTest
     it 'allows signup' do
       get new_person_path, xhr: true
       assert_response :success
-      assert_select 'h3', /^sign up.*/
+      assert_select 'h5', /^sign up.*/
     end
 
     it 'creates a new person' do
@@ -41,7 +41,7 @@ class PeopleControllerTest < ActionDispatch::IntegrationTest
     it 'allows signup' do
       get new_person_path, xhr: true
       assert_response :success
-      assert_select 'h3', /^sign up.*/
+      assert_select 'h5', /^sign up.*/
     end
 
     it 'denies editing of others' do
@@ -54,7 +54,7 @@ class PeopleControllerTest < ActionDispatch::IntegrationTest
     it 'allows editing of current user' do
       get edit_person_path(@user), xhr: true
       assert_response :success
-      assert_select 'h3', /^update profile.*/
+      assert_select 'h5', /^update profile.*/
     end
 
     it 'updates current user' do
@@ -97,7 +97,7 @@ class PeopleControllerTest < ActionDispatch::IntegrationTest
     it 'allows editing of other user' do
       get edit_person_path(@other), xhr: true
       assert_response :success
-      assert_select 'h3', /^update profile.*/
+      assert_select 'h5', /^update profile.*/
     end
 
     it 'allows admin to destroy another user' do
