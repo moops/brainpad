@@ -12,11 +12,11 @@ class SmsController < ApplicationController
       msg = "failed to create anything: #{e.message}"
     end
 
-    twiml = Twilio::TwiML::Response.new do |r|
-      logger.info msg
-      r.Message msg
+    response = Twilio::TwiML::MessagingResponse.new
+    response.message do |message|
+      message.body(msg)
     end
-    render xml: twiml.text
+    render xml: response
   end
 
   private
