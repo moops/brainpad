@@ -1,6 +1,6 @@
 <%= render partial: 'shared/data_list_header', locals: { title: 'entries', new_record_path: new_journal_path } %>
 
-<div id="journal-list' class="data-list">
+<div id="journal-list" class="data-list">
   <%= render partial: 'journals' if @journals.present? %>
 </div>
 
