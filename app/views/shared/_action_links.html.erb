@@ -4,6 +4,10 @@
 <%= link_to(copy_path, class: 'tip', data: { remote: true, toggle: 'tooltip' }, title: "copy #{label}") do %>
     <span class="icon-copy"></span>
 <% end %>
-<%= link_to(path, method: :delete, class: 'tip', data: { toggle: 'tooltip', confirm: "really delete #{label}?" }, title: "delete #{label}") do %>
-    <span class="icon-delete"></span>
+<% if allow_delete %>
+    <%= link_to(path, method: :delete, class: 'tip', data: { toggle: 'tooltip', confirm: "really delete #{label}?" }, title: "delete #{label}") do %>
+        <span class="icon-delete"></span>
+    <% end %>
+<% else %>
+    <span class="icon-delete" style="color: #ccc"></span>
 <% end %>

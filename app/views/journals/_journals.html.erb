@@ -10,7 +10,7 @@
             <td><%= journal.journal_type.description if journal.journal_type %></td>
             <td><%= journal.entry[0,60] %></td>
             <td class="actions text-nowrap">
-                <%= render partial: 'shared/action_links', locals: { path: journal_path(journal), copy_path: new_journal_path(journal_id: journal), label: 'entry' } %>
+                <%= render partial: 'shared/action_links', locals: { path: journal_path(journal), copy_path: new_journal_path(journal_id: journal), label: 'entry', allow_delete: true } %>
             </td>
         </tr>
     <% end %>

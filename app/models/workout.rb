@@ -21,10 +21,10 @@ class Workout
   validates :workout_on, presence: true
   paginates_per 10
   INTENSITIES = [
-    ['1 - brisk walk', 1], ['1.5', 1.5], ['2', 2], ['2.5', 2.5], ['3 - very light jog', 3],
-    ['3.5', 3.5], ['4', 4], ['4.5', 4.5], ['5 - standard workout', 5], ['5.5', 5.5], ['6', 6],
-    ['6.5', 6.5], ['7 - something hard', 7], ['7.5', 7.5], ['8 - what am i doing this for?', 8],
-    ['8.5', 8.5], ['9 - blacking out', 9], ['9.5', 9.5], ['10 - heart\'s about to explode', 10]
+    ['1 - brisk walk', 1.0], ['1.5', 1.5], ['2', 2.0], ['2.5', 2.5], ['3 - very light jog', 3.0],
+    ['3.5', 3.5], ['4', 4.0], ['4.5', 4.5], ['5 - standard workout', 5.0], ['5.5', 5.5], ['6', 6.0],
+    ['6.5', 6.5], ['7 - something hard', 7.0], ['7.5', 7.5], ['8 - what am i doing this for?', 8.0],
+    ['8.5', 8.5], ['9 - blacking out', 9.0], ['9.5', 9.5], ['10 - heart\'s about to explode', 10.0]
   ].freeze
 
   def self.recent_workouts(user, days)

@@ -14,7 +14,7 @@
             <td><%= contact.phone_work %></td>
             <td><%= contact.phone_cell %></td>
             <td class="actions text-nowrap">
-                <%= render partial: 'shared/action_links', locals: { path: contact_path(contact), copy_path: new_contact_path(contact_id: contact), label: contact.name } %>
+                <%= render partial: 'shared/action_links', locals: { path: contact_path(contact), copy_path: new_contact_path(contact_id: contact), label: contact.name, allow_delete: true } %>
             </td>
         </tr>
         <% end %>

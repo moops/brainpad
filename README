@@ -31,8 +31,11 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
+x nov 09 - workout delete not doing anything
+x nov 09 - twilio gem update
+x nov 09 - workout from strava not populating intensity
 - nov 08 - update payment - accounts not populated in form
-- nov 08 - return key submitting twice
+- nov 08 - return key submitting twice for remote forms
 x nov 08 - account form needs updating
 x nov 07 - fix bulk finish of reminders
 x nov 07 - fix width of calendar header
