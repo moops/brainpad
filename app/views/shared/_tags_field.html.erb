@@ -4,7 +4,7 @@
   function addTag() {
     var sel_tag = $('#tag_list').val();
     $('#<%= kind %>-tags').val($('#<%= kind %>-tags').val() + ' ' + sel_tag);
-    <% unless desc_field.blank? %>
+    <% if desc_field.present? %>
     if ('' == $('#<%= desc_field %>').val()) {
       $('#<%= desc_field %>').val(sel_tag);
     }
