@@ -31,6 +31,8 @@ restore production db:
     mongorestore -h linus.mongohq.com:10088 -d app12234116 -u heroku -p <password> ~/Desktop/brainpad.bson/brainpad_development
 
 2017
+- nov 30 - reminder priority drop down showing types
+- nov 29 - add remove tag rake task
 x nov 29 - payment select tag not populating empty description
 x nov 09 - workout delete not doing anything
 x nov 09 - twilio gem update
