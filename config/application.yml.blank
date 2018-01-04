@@ -1,0 +1,7 @@
+development:
+  REPO_PATH: asdasdasd
+production:
+  S3_KEY:
+  S3_SECRET:
+  RAILS_SERVE_STATIC_FILES: foo
+  SECRET_KEY_BASE:

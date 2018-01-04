@@ -13,3 +13,4 @@ tmp
 !.elasticbeanstalk/*.global.yml
 
 _backup_data
+config/application.yml
